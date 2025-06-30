@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Rock
+  - HandCollider
+  - PickAxe_Right
+  - PickAxe_Left
+  - Dirt_Parent
+  - NonTileErea
+  - BeamCollider
+  - PlazmaBallCollider
+  - Beam_S
+  - Beam_PH
+  - ElectricitySplash
+  - Dynamite
+  - OnlyExplosion
+  - LightningSplash
+  - Flower
+  - Fire
+  - MinePopUp
+  - CircleShoot
+  - BigRock
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - Pickaxe
+  - Hammer
+  - Collider2
+  - Rock
+  - BigRock
+  - Pickaxe2
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
