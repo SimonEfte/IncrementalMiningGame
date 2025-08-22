@@ -4,11 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class TheEnding : MonoBehaviour
+public class TheEnding : MonoBehaviour, IDataPersistence
 {
     public GameObject EndSessionBtn, xpFrame, timeFrame, materialFrame, potionsFrame;
     public SetRockScreen rockScreenScript;
     public MainMenu mainMenuScripT;
+    public Achievements achScript;
+    public TheAnvil anvilScript;
 
     //THE ENDING
     //1. Once the rock is fully mined, 3 diamonds will pop up. They should each start at the rock position, then 1 should move to the left, then one to the middle then one to the right.
@@ -35,15 +37,40 @@ public class TheEnding : MonoBehaviour
 
     public float craftingTime;
 
+    public static bool isEndingCompleted;
+
+    public static float gameMusicFullVolume, endingMusicFillVolume;
+
+    public GameObject mainMenuSettingsBtn, flags;
+
+    public GameObject endingButton;
+
     private void Awake()
     {
+        gameMusicFullVolume = 0.565f;
+        endingMusicFillVolume = 0.8f;
+
         craftingTime = 3;
+
+        creditsBlackFrame.SetActive(false);
+        StartCoroutine(Wait());
+    }
+
+    IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(0.8f);
+        if(isEndingCompleted == true)
+        {
+            endingButton.SetActive(false);
+        }
     }
 
     private void Update()
     {
         if(broken == false && bigRockBroken == true)
         {
+            diamondCount = 0;
+            Cursor.visible = true;
             broken = true;
 
             StartCoroutine(DiamondAnims());
@@ -53,6 +80,7 @@ public class TheEnding : MonoBehaviour
     #region Diamond and craft btn animations
     IEnumerator DiamondAnims()
     {
+        yield return new WaitForSeconds(0.45f);
         endingStuff.SetActive(true);
 
         cursorCollider.SetActive(false);
@@ -62,28 +90,41 @@ public class TheEnding : MonoBehaviour
         diamond1.gameObject.SetActive(true);
         diamond1.Play();
         StartCoroutine(FloatGameObject(diamond1.gameObject));
-        yield return new WaitForSeconds(0.45f);
+        yield return new WaitForSeconds(1.1f);
         diamond3.gameObject.SetActive(true);
         diamond3.Play();
         StartCoroutine(FloatGameObject(diamond3.gameObject));
-        yield return new WaitForSeconds(0.45f);
+        yield return new WaitForSeconds(1.1f);
         diamond2.gameObject.SetActive(true);
         diamond2.Play();
         StartCoroutine(FloatGameObject(diamond2.gameObject));
 
-        yield return new WaitForSeconds(0.45f);
+        yield return new WaitForSeconds(0.9f);
 
         craftButton.gameObject.SetActive(true);
         craftButton.Play();
 
+        yield return new WaitForSeconds(0.233f);
+        audioManager.Play("CardPop");
         blockScreen.SetActive(false);
+
     }
     #endregion
 
     #region Float diamonds
+
+    int diamondCount;
+
     public IEnumerator FloatGameObject(GameObject objectToFloat)
     {
+        audioManager.Play("EndingWoosh");
+
         yield return new WaitForSeconds(0.417f);
+
+        diamondCount += 1;
+        if(diamondCount == 1) { audioManager.Play("DiamodSound1"); }
+        if (diamondCount == 2) { audioManager.Play("DiamodSound2"); }
+        if (diamondCount == 3) { audioManager.Play("DiamodSound3"); }
 
         Vector3 initialScale = objectToFloat.transform.localScale;
         Vector3 initialPosition = objectToFloat.transform.localPosition;
@@ -150,6 +191,9 @@ public class TheEnding : MonoBehaviour
     #region Crafting
     public void PressCraftPickaxe()
     {
+        //audioManager.Play("Crafting...");
+        audioManager.Play("Merge");
+
         Cursor.visible = true;
         SetRockScreen.isInMiningSession = false;
         TheAnvil.pickaxe14_crafted = true;
@@ -170,10 +214,11 @@ public class TheEnding : MonoBehaviour
     {
         craftingCompleted = false;
 
-        audioManager.Play("Crafting...");
+        //audioManager.Play("Crafting...");
 
         craftingFrame.SetActive(true);
         outLineCircle.SetActive(true);
+        craftingText.text = LocalizationScript.crafting;
         craftingText.gameObject.SetActive(true);
         craftingCircle.gameObject.SetActive(true);
 
@@ -195,7 +240,7 @@ public class TheEnding : MonoBehaviour
             {
                 dotTimer = 0f;
                 dotCount = (dotCount + 1) % 4;
-                craftingText.text = "Crafting" + new string('.', dotCount);
+                craftingText.text = LocalizationScript.crafting + new string('.', dotCount);
             }
 
             yield return null;
@@ -212,6 +257,9 @@ public class TheEnding : MonoBehaviour
 
     private void OnCraftingComplete()
     {
+        audioManager.Play("CraftingDone");
+        audioManager.Play("FinishedCrafting");
+
         StartCoroutine(RollCredits());
         craftedParticle.gameObject.SetActive(true);
         craftedParticle.Play();
@@ -285,29 +333,50 @@ public class TheEnding : MonoBehaviour
 
     IEnumerator RollCredits()
     {
+        endingButton.SetActive(false);
+        flags.transform.localPosition = new Vector2(-426, -431);
+        mainMenuSettingsBtn.SetActive(false);
+
         youCraftedText.SetActive(false); diamondPickaxeIcon.SetActive(false); thankYouForPlayingText.SetActive(false);
 
         creditsBlackFrame.transform.localPosition = new Vector2(0, -2248.18f);
 
-        yield return new WaitForSeconds(2.35f);
-        creditsBlackFrame.SetActive(true);
-
-        youCraftedText.SetActive(true);
-        yield return new WaitForSeconds(0.5f);
-
-        diamondPickaxeIcon.SetActive(true);
-
-        yield return new WaitForSeconds(0.7f);
-        thankYouForPlayingText.SetActive(true);
-
         yield return new WaitForSeconds(1f);
 
-        //StartCoroutine(CreditsToll(creditsBlackFrame, 40f));
-        StartCoroutine(CreditsToll(creditsBlackFrame, 10f));
+        audioManager.Stop("CreditsMusic");
+        audioManager.Play("CreditsMusic");
+        StartCoroutine(SongVolume("CreditsMusic", false, 0.7f, 0, 0.45f, false));
+
+        yield return new WaitForSeconds(0.67f);
+
+        creditsBlackFrame.SetActive(true);
+        audioManager.Play("CardPop");
+        youCraftedText.SetActive(true);
+
+        yield return new WaitForSeconds(1.311f);
+
+        diamondPickaxeIcon.SetActive(true);
+        audioManager.Play("CardPop");
+
+        yield return new WaitForSeconds(1.311f);
+        thankYouForPlayingText.SetActive(true);
+        audioManager.Play("CardPop");
+
+        yield return new WaitForSeconds(2f);
+
+        //5.25 secons before credits roll.
+
+        StartCoroutine(CreditsToll(creditsBlackFrame, 37f));
+        //StartCoroutine(CreditsToll(creditsBlackFrame, 10f));
     }
 
     public IEnumerator CreditsToll(GameObject obj, float duration)
     {
+        isEndingCompleted = true;
+        anvilScript.SetDiamondPickaxeWhite();
+
+        achScript.CheckAch();
+
         Vector3 startPos = obj.transform.localPosition;
         Vector3 endPos = new Vector3(startPos.x, 387f, startPos.z);
 
@@ -333,6 +402,13 @@ public class TheEnding : MonoBehaviour
     #region Scale circle and go back to start screen
     public void GoToMainMenu()
     {
+        audioManager.Play("MainMenuMusic");
+
+        audioManager.Stop("CreditsMusic");
+        //SoundVolumeSet("CreditsMusic", true, 0f, 0.75f, 1, true);
+
+        SoundVolumeSet("MainMenuMusic", false, 0f, gameMusicFullVolume, 0.65f, false);
+
         Cursor.visible = true;
         SetRockScreen.isInEnding = false;
         broken = false;
@@ -350,7 +426,7 @@ public class TheEnding : MonoBehaviour
 
     public GameObject startScreen, startScreenbackground;
 
-    private IEnumerator ScaleCircleCoroutine(bool scaleUp)
+    IEnumerator ScaleCircleCoroutine(bool scaleUp)
     {
         circleObject.SetActive(true);
         transitionBlock.SetActive(true);
@@ -394,6 +470,38 @@ public class TheEnding : MonoBehaviour
     }
     #endregion
 
+    #region Stop or turn up/down music.
+    IEnumerator SongVolume(string name, bool turnDown, float startVolume, float endVolume, float fadeTime, bool stopMusic)
+    {
+        float start = turnDown ? startVolume : endVolume;
+        float end = turnDown ? endVolume : startVolume;
+
+        float time = 0;
+        float fadeTotalTime = fadeTime;
+
+        while (time < fadeTotalTime)
+        {
+            time += Time.unscaledDeltaTime;
+            float newVolume = Mathf.Lerp(start, end, time / fadeTotalTime);
+            audioManager.ChangeVolume(name, newVolume);
+
+            yield return null;
+        }
+
+        audioManager.ChangeVolume(name, end);
+
+        if (stopMusic == true)
+        {
+            audioManager.Stop(name);
+        }
+    }
+
+    public void SoundVolumeSet(string name, bool turnDown, float startVolume, float endVolume, float fadeTime, bool stopMusic)
+    {
+        StartCoroutine(SongVolume(name, turnDown, startVolume, endVolume, fadeTime, stopMusic));
+    }
+    #endregion
+
     public void SetOff()
     {
         Color color = craftingFrame.GetComponent<Image>().color;
@@ -413,5 +521,43 @@ public class TheEnding : MonoBehaviour
 
         startScreen.SetActive(true);
         startScreenbackground.SetActive(true);
+    }
+
+    #region Load Data
+    public void LoadData(GameData data)
+    {
+        isEndingCompleted = data.isEndingCompleted;
+    }
+    #endregion
+
+    #region Save Data
+    public void SaveData(ref GameData data)
+    {
+        data.isEndingCompleted = isEndingCompleted;
+    }
+    #endregion
+
+    public void CopyThis()
+    {
+        //if (spawnCopper_purchased) { }
+        //else { }
+
+        // if (spawnIron_purchased) { }
+        // else {  }
+
+        // if (cobaltSpawn_purchased) { }
+        // else { }
+
+        // if (uraniumSpawn_purchased) { }
+        // else { }
+
+        // if (iridiumSpawn_purchased) { }
+        // else { }
+
+        // if (ismiumSpawn_purchased) { }
+        //  else { }
+
+        //  if (painiteSpawn_purchased) { }
+        //  else { }
     }
 }

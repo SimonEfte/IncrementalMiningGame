@@ -32,36 +32,61 @@ public class SettingsOptions : MonoBehaviour
         {
             saveFullsScreen = PlayerPrefs.GetInt("SaveFullScreen");
         }
-
-        if (saveFullsScreen == 1)
+        
+        if(MobileAndTesting.isMobile == false)
         {
-            fullScreenCheckMark.SetActive(false);
-            Screen.fullScreenMode = FullScreenMode.Windowed;
+            if (saveFullsScreen == 1)
+            {
+                fullScreenCheckMark.SetActive(false);
+                Screen.fullScreenMode = FullScreenMode.Windowed;
+            }
+            else
+            {
+                fullScreenCheckMark.SetActive(true);
+                Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
+            }
+
+            if (!PlayerPrefs.HasKey("ScreenWidth"))
+            {
+                Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
+            }
+            else
+            {
+                saveWidth = PlayerPrefs.GetInt("ScreenWidth");
+                saveHeight = PlayerPrefs.GetInt("ScreenHeight");
+                Screen.SetResolution(saveWidth, saveHeight, Screen.fullScreenMode);
+            }
         }
         else
         {
-            fullScreenCheckMark.SetActive(true);
-            Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
+            Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
         }
 
-        if (!PlayerPrefs.HasKey("ScreenWidth"))
-        {
-            Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
-        }
-        else
-        {
-            saveWidth = PlayerPrefs.GetInt("ScreenWidth");
-            saveHeight = PlayerPrefs.GetInt("ScreenHeight");
-            Screen.SetResolution(saveWidth, saveHeight, Screen.fullScreenMode);
-        }
+       
         #endregion
 
         StartCoroutine(Wait());
     }
 
+    public GameObject fullscreenBtn, flags, mainMenuBTN, settingsFrame;
+
     IEnumerator Wait()
     {
         yield return new WaitForSeconds(1);
+
+        if(MobileAndTesting.isMobile == true)
+        {
+            settingsFrame.transform.localScale = new Vector2(1.43f, 1.43f);
+
+            flags.transform.localPosition = new Vector2(0, -33);
+            flags.transform.localScale = new Vector2(1.6f, 1.6f);
+
+            mainMenuBTN.transform.localPosition = new Vector2(0, -233);
+            mainMenuBTN.transform.localScale = new Vector2(0.8f, 0.8f);
+
+            resolutionDropdown.gameObject.SetActive(false);
+            fullscreenBtn.gameObject.SetActive(false);
+        }
 
         triggerResolution = false;
     }
@@ -156,6 +181,114 @@ public class SettingsOptions : MonoBehaviour
         {
             fullScreenCheckMark.SetActive(true);
             Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
+
+            #region Check index and stuff
+
+            int width = 0;
+            int height = 0;
+
+            int originalWidth = 0;
+            int originalHeight = 0;
+
+            if (resolutionIndexSave == 0)
+            {
+                width = 1024; height = 768; // index 1
+                Screen.SetResolution(width, height, FullScreenMode.FullScreenWindow);
+                originalWidth = 600; originalHeight = 800; // index 0
+            }
+            if (resolutionIndexSave == 1)
+            {
+                width = 600; height = 800; // index 0
+                Screen.SetResolution(width, height, FullScreenMode.FullScreenWindow);
+                originalWidth = 1024; originalHeight = 768; // index 1
+            }
+            if (resolutionIndexSave == 2)
+            {
+                width = 1024; height = 768;
+                Screen.SetResolution(width, height, FullScreenMode.FullScreenWindow);
+                originalWidth = 1280; originalHeight = 720;
+            }
+            if (resolutionIndexSave == 3)
+            {
+                width = 1280; height = 720;
+                Screen.SetResolution(width, height, FullScreenMode.FullScreenWindow);
+                originalWidth = 1280; originalHeight = 800;
+            }
+            if (resolutionIndexSave == 4)
+            {
+                width = 1280; height = 800;
+                Screen.SetResolution(width, height, FullScreenMode.FullScreenWindow);
+                originalWidth = 1280; originalHeight = 1024;
+            }
+            if (resolutionIndexSave == 5)
+            {
+                width = 1280; height = 1024;
+                Screen.SetResolution(width, height, FullScreenMode.FullScreenWindow);
+                originalWidth = 1366; originalHeight = 768;
+            }
+            if (resolutionIndexSave == 6)
+            {
+                width = 1366; height = 768;
+                Screen.SetResolution(width, height, FullScreenMode.FullScreenWindow);
+                originalWidth = 1600; originalHeight = 900;
+            }
+            if (resolutionIndexSave == 7)
+            {
+                width = 1600; height = 900;
+                Screen.SetResolution(width, height, FullScreenMode.FullScreenWindow);
+                originalWidth = 1920; originalHeight = 1080;
+            }
+            if (resolutionIndexSave == 8)
+            {
+                width = 1920; height = 1080;
+                Screen.SetResolution(width, height, FullScreenMode.FullScreenWindow);
+                originalWidth = 1920; originalHeight = 1200;
+            }
+            if (resolutionIndexSave == 9)
+            {
+                width = 1920; height = 1200;
+                Screen.SetResolution(width, height, FullScreenMode.FullScreenWindow);
+                originalWidth = 2560; originalHeight = 1440;
+            }
+            if (resolutionIndexSave == 10)
+            {
+                width = 2560; height = 1440;
+                Screen.SetResolution(width, height, FullScreenMode.FullScreenWindow);
+                originalWidth = 2560; originalHeight = 1600;
+            }
+            if (resolutionIndexSave == 11)
+            {
+                width = 2560; height = 1600;
+                Screen.SetResolution(width, height, FullScreenMode.FullScreenWindow);
+                originalWidth = 2560; originalHeight = 1080;
+            }
+            if (resolutionIndexSave == 12)
+            {
+                width = 2560; height = 1080;
+                Screen.SetResolution(width, height, FullScreenMode.FullScreenWindow);
+                originalWidth = 3440; originalHeight = 1440;
+            }
+            if (resolutionIndexSave == 13)
+            {
+                width = 3440; height = 1440;
+                Screen.SetResolution(width, height, FullScreenMode.FullScreenWindow);
+                originalWidth = 3840; originalHeight = 1440;
+            }
+            if (resolutionIndexSave == 14)
+            {
+                width = 3840; height = 1440;
+                Screen.SetResolution(width, height, FullScreenMode.FullScreenWindow);
+                originalWidth = 3840; originalHeight = 2160;
+            }
+            if (resolutionIndexSave == 15)
+            {
+                width = 3840; height = 2160;
+                Screen.SetResolution(width, height, FullScreenMode.FullScreenWindow);
+                originalWidth = 3840; originalHeight = 2400;
+            }
+
+            Screen.SetResolution(originalWidth, originalHeight, FullScreenMode.FullScreenWindow);
+            #endregion
 
             saveFullsScreen = 0;
             PlayerPrefs.SetInt("SaveFullScreen", saveFullsScreen);

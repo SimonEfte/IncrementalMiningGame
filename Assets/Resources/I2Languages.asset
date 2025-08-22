@@ -1,0 +1,147 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f0b0c553be8edd4682e9180fdd13e37, type: 3}
+  m_Name: I2Languages
+  m_EditorClassIdentifier: 
+  mSource:
+    UserAgreesToHaveItOnTheScene: 0
+    UserAgreesToHaveItInsideThePluginsFolder: 0
+    GoogleLiveSyncIsUptoDate: 1
+    mTerms:
+    - Term: AfacadFlux-ExtraBold SDF
+      TermType: 9
+      Description: 
+      Languages:
+      - AfacadFlux-ExtraBold SDF
+      - AfacadFlux-ExtraBold SDF
+      - AfacadFlux-ExtraBold SDF
+      - AfacadFlux-ExtraBold SDF
+      - AfacadFlux-ExtraBold SDF
+      - JapaneseFont_7
+      - KoreanFont_8
+      - Fonts & Materials/Roboto-Bold SDF
+      - AfacadFlux-ExtraBold SDF
+      - Fonts & Materials/Roboto-Bold SDF
+      - ChineseFont_7
+      Flags: 0000000000000000000000
+      Languages_Touch: []
+    - Term: FredokaOne-Regular SDF
+      TermType: 9
+      Description: 
+      Languages:
+      - FredokaOne-Regular SDF
+      - FredokaOne-Regular SDF
+      - FredokaOne-Regular SDF
+      - FredokaOne-Regular SDF
+      - FredokaOne-Regular SDF
+      - JapaneseFont_7
+      - KoreanFont_8
+      - Fonts & Materials/Roboto-Bold SDF
+      - FredokaOne-Regular SDF
+      - Fonts & Materials/Roboto-Bold SDF
+      - ChineseFont_7
+      Flags: 0000000000000000000000
+      Languages_Touch: []
+    - Term: MenuFonts
+      TermType: 9
+      Description: 
+      Languages:
+      - AfacadFlux-ExtraBold SDF
+      - WALRUSGU SDF
+      - WALRUSGU SDF
+      - WALRUSGU SDF
+      - WALRUSGU SDF
+      - 
+      - 
+      - 
+      - 
+      - 
+      - 
+      Flags: 0000000000000000000000
+      Languages_Touch: []
+    CaseInsensitiveTerms: 0
+    OnMissingTranslation: 1
+    mTerm_AppName: 
+    mLanguages:
+    - Name: English
+      Code: en
+      Flags: 0
+    - Name: French
+      Code: fr
+      Flags: 0
+    - Name: Italian
+      Code: it
+      Flags: 0
+    - Name: German
+      Code: de
+      Flags: 0
+    - Name: Spanish
+      Code: es
+      Flags: 0
+    - Name: Japanese
+      Code: ja
+      Flags: 0
+    - Name: Korean
+      Code: ko
+      Flags: 0
+    - Name: Polish
+      Code: pl
+      Flags: 0
+    - Name: Portuguese (Brazil)
+      Code: pt-BR
+      Flags: 0
+    - Name: Russian
+      Code: ru
+      Flags: 0
+    - Name: Chinese (Simplified)
+      Code: zh-CN
+      Flags: 0
+    IgnoreDeviceLanguage: 0
+    _AllowUnloadingLanguages: 0
+    Google_WebServiceURL: https://script.google.com/macros/s/AKfycbxgIILrGeZ3bLdZc2irw-PEw1kkVHnaKZwdoKf8_4tn5clsSX-i4hl8H4gUa83UlQhE/exec
+    Google_SpreadsheetKey: 1mXhzHmyfKHUm3LKbwydylRtC7lqikz1hKYwkpVgHqBk
+    Google_SpreadsheetName: I2Loc Keep on Mining! Localization
+    Google_LastUpdatedVersion: 
+    Google_Password: change_this
+    GoogleUpdateFrequency: 3
+    GoogleInEditorCheckFrequency: 2
+    GoogleUpdateSynchronization: 1
+    GoogleUpdateDelay: 0
+    Assets:
+    - {fileID: 11400000, guid: 80b8d90dcb9f744a3b722e3f74ae6ed8, type: 2}
+    - {fileID: 11400000, guid: 30f849f00f0f4c847b604fa325d78d66, type: 2}
+    - {fileID: 11400000, guid: 6b1d1d9d239240646ac1adf6c1a1932e, type: 2}
+    - {fileID: 11400000, guid: ad294067491113d4bba588a93183c3ea, type: 2}
+    - {fileID: 11400000, guid: 33e946db544e59449a3c3a0fdc7f07a6, type: 2}
+    - {fileID: 11400000, guid: e2dc4cc731e9abb47b5029ef2afc0a08, type: 2}
+    - {fileID: 11400000, guid: 234de4e32aaaffd4794c36659b074133, type: 2}
+    - {fileID: 11400000, guid: e08caa0cf5431ce49a5833634d8143b0, type: 2}
+    - {fileID: 11400000, guid: a89014b2f4b97644e852a279e615071a, type: 2}
+    - {fileID: 11400000, guid: e26540872bc302b4aa69b672db7c70bb, type: 2}
+    - {fileID: 11400000, guid: 8ee3513bf4fd8cb4f8d0998586005a8b, type: 2}
+    - {fileID: 11400000, guid: 20caa5a8ae585534bb0136771ebbba39, type: 2}
+    - {fileID: 11400000, guid: 753a5120a65c88445aed9a036d705adb, type: 2}
+    - {fileID: 11400000, guid: 42772ce73556bf94c9594550768068a9, type: 2}
+    - {fileID: 11400000, guid: 5d1ef5c68e8ed2e4c8c43bd26b21c624, type: 2}
+    - {fileID: 11400000, guid: c4dff7e404feeb64abd702e35c991b20, type: 2}
+    - {fileID: 11400000, guid: 4bfa6e4fcfb4b2a439665eef50f33318, type: 2}
+    - {fileID: 11400000, guid: e01e5e2115a6581459da75851efd3f0d, type: 2}
+    - {fileID: 11400000, guid: f8b00f0b22f153343adea95558b4e8ea, type: 2}
+    - {fileID: 11400000, guid: 7b838bc99af74b74299951b38eab2478, type: 2}
+    - {fileID: 11400000, guid: d23814709ab1f4c46b25d182f9795ea0, type: 2}
+    - {fileID: 11400000, guid: 021935bdad7ee4c4cba11ccded678dca, type: 2}
+    - {fileID: 11400000, guid: 4a0dfa3db68ac714385dbee396985c4e, type: 2}
+    Spreadsheet_LocalFileName: 
+    Spreadsheet_LocalCSVSeparator: ','
+    Spreadsheet_LocalCSVEncoding: utf-8
+    Spreadsheet_SpecializationAsRows: 1
+    Spreadsheet_SortRows: 1

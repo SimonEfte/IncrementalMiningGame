@@ -61,7 +61,10 @@ public class CheckToolTipOffScreen : MonoBehaviour
 
         if (checkCorners == true)
         {
-            CheckOffScreenEdges();
+            if(MobileAndTesting.isMobile == false)
+            {
+                CheckOffScreenEdges();
+            }
         }
     }
 

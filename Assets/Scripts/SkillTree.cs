@@ -10,6 +10,7 @@ public class SkillTree : MonoBehaviour, IDataPersistence
     public TheMine theMineScript;
     public GoldAndOreMechanics goldAndOreScript;
     public Tutorial tutorialScript;
+    public Achievements achScript;
 
     public GameObject copperBarFrame, ironBarFrame, cobaltBarFrame, uraniumiumBarFrame, ismiumBarFrame, iridiumBarFRame, painiteBarFrame;
 
@@ -21,6 +22,19 @@ public class SkillTree : MonoBehaviour, IDataPersistence
     public AudioManager audioManager;
 
     public GameObject endingButton;
+
+    public GameObject fallingCopper_skillTree, fallingCopper_MainMenu;
+    public GameObject fallingIron_skillTree, fallingIron_MainMenu;
+    public GameObject fallingCobalt_skillTree, fallingCobalt_MainMenu;
+    public GameObject fallingUranium_skillTree, fallingUranium_MainMenu;
+    public GameObject fallingIsmium_skillTree, fallingIsmium_MainMenu;
+    public GameObject fallingIridium_skillTree, fallingIridium_MainMenu;
+    public GameObject fallingPainite_skillTree, fallingPainite_MainMenu;
+
+    public GameObject particleSkillTree;
+
+    public GameObject endlessUpgradesParent, endlessUpgradesPopUp;
+    public static bool hasPressedEndlessOK;
 
     //All upgrades. GameObject variable
     #region ALL GAMEOBJECT VARIBALES
@@ -376,6 +390,221 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
     #endregion
 
+    //All pluss gameobjects
+    #region All pluss gameobjects
+
+    #region Plus XP
+    public GameObject moreXP_1_plus;
+    public GameObject moreXP_2_plus;
+    public GameObject moreXP_3_plus;
+    public GameObject moreXP_4_plus;
+    public GameObject moreXP_5_plus;
+    public GameObject moreXP_6_plus;
+    public GameObject moreXP_7_plus;
+    public GameObject moreXP_8_plus;
+
+    public GameObject talentPointsPerXlevel_1_plus;
+    public GameObject talentPointsPerXlevel_2_plus;
+    public GameObject talentPointsPerXlevel_3_plus;
+    #endregion
+
+    #region Plus projectile
+
+    public GameObject lightningBeamChanceS_1_plus;
+    public GameObject lightningBeamChanceS_2_plus;
+    public GameObject lightningBeamChancePH_1_plus;
+    public GameObject lightningBeamChancePH_2_plus;
+    public GameObject lightningBeamSpawnAnotherOneChance_plus;
+    public GameObject lightningBeamDamage_plus;
+    public GameObject lightningBeamSize_plus;
+    public GameObject lightningSplashes_plus;
+    public GameObject lightningBeamSpawnRock_plus;
+    public GameObject lightningBeamExplosion_plus;
+    public GameObject lightningBeamAddTime_plus;
+
+    public GameObject dynamiteChance_1_plus;
+    public GameObject dynamiteChance_2_plus;
+    public GameObject dynamiteSpawn2SmallChance_plus;
+    public GameObject dynamiteExplosionSize_plus;
+    public GameObject dynamiteDamage_plus;
+    public GameObject dynamiteExplosionSpawnRock_plus;
+    public GameObject dynamiteExplosionAddTimeChance_plus;
+    public GameObject dynamiteExplosionSpawnLightning_plus;
+
+    public GameObject plazmaBallSpawn_1_plus;
+    public GameObject plazmaBallSpawn_2_plus;
+    public GameObject plazmaBallTime_plus;
+    public GameObject plazmaBallSize_plus;
+    public GameObject plazmaBallExplosionChance_plus;
+    public GameObject plazmaBallSpawnSmallChance_plus;
+    public GameObject plazmaBallDamage_plus;
+    public GameObject plazmaBallSpawnPickaxeChance_plus;
+
+    #endregion
+
+    #region Plus rocks
+
+    public GameObject spawnMoreRocks_1_plus;
+    public GameObject spawnMoreRocks_2_plus;
+    public GameObject spawnMoreRocks_3_plus;
+    public GameObject spawnMoreRocks_4_plus;
+    public GameObject spawnMoreRocks_5_plus;
+    public GameObject spawnMoreRocks_6_plus;
+    public GameObject spawnMoreRocks_7_plus;
+    public GameObject spawnMoreRocks_8_plus;
+    public GameObject spawnMoreRocks_9_plus;
+
+    public GameObject moreMeterialsFromRock_1_plus;
+    public GameObject moreMeterialsFromRock_2_plus;
+    public GameObject moreMeterialsFromRock_3_plus;
+    public GameObject moreMeterialsFromRock_4_plus;
+    public GameObject moreMeterialsFromRock_5_plus;
+
+    public GameObject marterialsWorthMore_1_plus;
+    public GameObject marterialsWorthMore_2_plus;
+    public GameObject marterialsWorthMore_3_plus;
+    public GameObject marterialsWorthMore_4_plus;
+    public GameObject marterialsWorthMore_5_plus;
+    public GameObject marterialsWorthMore_6_plus;
+    public GameObject marterialsWorthMore_7_plus;
+    public GameObject marterialsWorthMore_8_plus;
+
+    public GameObject goldChunk_1_plus;
+    public GameObject goldChunk_2_plus;
+    public GameObject goldChunk_3_plus;
+    public GameObject goldChunk_4_plus;
+    public GameObject goldChunk_5__plus;
+    public GameObject fullGold_1_plus;
+    public GameObject fullGold_2_plus;
+    public GameObject fullGold_3_plus;
+
+    public GameObject spawnCopper_plus;
+    public GameObject copperChunk_1_plus;
+    public GameObject copperChunk_2_plus;
+    public GameObject copperChunk_3_plus;
+    public GameObject fullCopper_1_plus;
+    public GameObject fullCopper_2_plus;
+    public GameObject fullCopper_3_plus;
+
+    public GameObject spawnIron_plus;
+    public GameObject ironChunk_1_plus;
+    public GameObject ironChunk_2_plus;
+    public GameObject fullIron_1_plus;
+    public GameObject fullIron_2_plus;
+
+    public GameObject cobaltSpawn_plus;
+    public GameObject cobaltChunk_1_plus;
+    public GameObject fullCobalt_1_plus;
+
+    public GameObject uraniumSpawn_plus;
+    public GameObject uraniumChunk_1_plus;
+    public GameObject fullUranium_1_plus;
+
+    public GameObject ismiumSpawn_plus;
+    public GameObject ismiumChunk_1_plus;
+    public GameObject fullIsmium_1_plus;
+
+    public GameObject iridiumSpawn_plus;
+    public GameObject iridiumChunk_1_plus;
+    public GameObject fullIridium_1_plus;
+
+    public GameObject painiteSpawn_plus;
+    public GameObject painiteChunk_1_plus;
+    public GameObject fullPainite_1_plus;
+
+    #endregion
+
+    #region Plus improved pickaxe and area
+
+    public GameObject improvedPickaxe_1_plus;
+    public GameObject improvedPickaxe_2_plus;
+    public GameObject improvedPickaxe_3_plus;
+    public GameObject improvedPickaxe_4_plus;
+    public GameObject improvedPickaxe_5_plus;
+    public GameObject improvedPickaxe_6_plus;
+
+    public GameObject biggerMiningErea_1_plus;
+    public GameObject biggerMiningErea_2_plus;
+    public GameObject biggerMiningErea_3_plus;
+    public GameObject biggerMiningErea_4_plus;
+    public GameObject shootCircleChance_plus;
+    public GameObject increaseAndDecreaseMinignErea_plus;
+
+    #endregion
+
+    #region Plus spawn rock
+
+    public GameObject spawnRockEveryXrock_1_plus;
+    public GameObject spawnRockEveryXrock_2_plus;
+    public GameObject spawnRockEveryXrock_3_plus;
+
+    public GameObject spawnXRockEveryXSecond_1_plus;
+    public GameObject spawnXRockEveryXSecond_2_plus;
+    public GameObject spawnXRockEveryXSecond_3_plus;
+
+    public GameObject chanceToSpawnRockWhenMined_1_plus;
+    public GameObject chanceToSpawnRockWhenMined_2_plus;
+    public GameObject chanceToSpawnRockWhenMined_3_plus;
+    public GameObject chanceToSpawnRockWhenMined_4_plus;
+    public GameObject chanceToSpawnRockWhenMined_5_plus;
+    public GameObject chanceToSpawnRockWhenMined_6_plus;
+
+    #endregion
+
+    #region Plus spawn pickaxe
+
+    public GameObject chanceToMineRandomRock_1_plus;
+    public GameObject chanceToMineRandomRock_2_plus;
+    public GameObject chanceToMineRandomRock_3_plus;
+    public GameObject chanceToMineRandomRock_4_plus;
+
+    public GameObject spawnPickaxeEverySecond_1_plus;
+    public GameObject spawnPickaxeEverySecond_2_plus;
+    public GameObject spawnPickaxeEverySecond_3_plus;
+
+    #endregion
+
+    #region Plus more time
+
+    public GameObject moreTime_1_plus;
+    public GameObject moreTime_2_plus;
+    public GameObject moreTime_3_plus;
+    public GameObject moreTime_4_plus;
+
+    public GameObject chanceToAdd1SecondEverySecond_plus;
+    public GameObject chanceAdd1SecondEveryRockMined_plus;
+
+    #endregion
+
+    #region Plus double xp and gold
+
+    public GameObject doubleXpGoldChance_1_plus;
+    public GameObject doubleXpGoldChance_2_plus;
+    public GameObject doubleXpGoldChance_3_plus;
+    public GameObject doubleXpGoldChance_4_plus;
+    public GameObject doubleXpGoldChance_5_plus;
+
+    #endregion
+
+    #region Plus misc
+
+    public GameObject allProjectileDoubleDamageChance_plus;
+    public GameObject allProjectileTriggerChance_plus;
+
+    public GameObject pickaxeDoubleDamageChance_1_plus;
+    public GameObject pickaxeDoubleDamageChance_2_plus;
+
+    public GameObject intaMineChance_1_plus;
+    public GameObject intaMineChance_2_plus;
+
+    public GameObject increaseSpawnChanceAllRocks_plus;
+    public GameObject craft2Material_plus;
+    public GameObject finalUpgrade_plus;
+
+    #endregion
+
+
+    #endregion
 
     //146 total upgrades
 
@@ -383,6 +612,8 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
     private void Start()
     {
+        particleSkillTree.SetActive(false);
+
         for (int i = 0; i < lines.Length; i++)
         {
             lines[i].SetActive(false);
@@ -394,25 +625,54 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
     IEnumerator Wait()
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.1f);
+
+        if(MobileAndTesting.isMobile == true)
+        {
+            skillTreeTooltipAnim.enabled = false;
+        }
+
+        if (totalSkillTreeUpgradesPurchased >= 399)
+        {
+            if (hasPressedEndlessOK == true)
+            {
+                endlessUpgradesParent.SetActive(true);
+            }
+            else
+            {
+                endlessUpgradesPopUp.SetActive(true);
+                isInEndlessPopUp = true;
+                endlessUpgradesParent.SetActive(true);
+            }
+        }
+
+        if (spawnCopper_purchased == true) { fallingCopper_skillTree.SetActive(true); fallingCopper_MainMenu.SetActive(true); }
+        if (spawnIron_purchased == true) { fallingIron_skillTree.SetActive(true); fallingIron_MainMenu.SetActive(true); }
+        if (cobaltSpawn_purchased == true) { fallingCobalt_skillTree.SetActive(true); fallingCobalt_MainMenu.SetActive(true); }
+        if (uraniumSpawn_purchased == true) { fallingUranium_skillTree.SetActive(true); fallingUranium_MainMenu.SetActive(true); }
+        if (ismiumSpawn_purchased == true) { fallingIsmium_skillTree.SetActive(true); fallingIsmium_MainMenu.SetActive(true); }
+        if (iridiumSpawn_purchased == true) { fallingIridium_skillTree.SetActive(true); fallingIridium_MainMenu.SetActive(true); }
+        if (painiteSpawn_purchased == true) { fallingPainite_skillTree.SetActive(true); fallingPainite_MainMenu.SetActive(true); }
+
+        yield return new WaitForSeconds(0.1f);
 
         SkillTreePrices();
         CheckUpgrades();
 
-        circleShootChance = 25f;
+        circleShootChance = 30f;
         chanceToAdd1SecEverySec = 9f;
-        chanceToAdd1SecEveryRockMined = 0.4f;
+        chanceToAdd1SecEveryRockMined = 0.075f;
 
         triggerAnotherLighntingChance = 12;
         lightningSplashChance = 17;
         lightningSparkDamage = 15;
-        lightningSpawnRockChance = 5;
+        lightningSpawnRockChance = 24;
         lightningSpawnExplosionChance = 20;
-        lightningAddTimeChance = 1;
+        lightningAddTimeChance = 0.8f;
 
         spawn2DynamiteChance = 10;
-        chanceToSpawnRockFromExplosion = 5;
-        explosionAdd1SecondChance = 1;
+        chanceToSpawnRockFromExplosion = 21;
+        explosionAdd1SecondChance = 0.8f;
         explosionChanceToSpawnLightning = 10;
 
         plazmaballExplosionChance = 17;
@@ -529,225 +789,232 @@ public class SkillTree : MonoBehaviour, IDataPersistence
     //Misc
     public static float doubleDamageChance;
     public static float instaMineChance;
-    
+
+    public static double endlessGold_price, endlessCopper_price, endlessIron_price, endlessCobalt_price, endlessUranium_price, endlessIsmium_price, endlessIridium_price, endlessPainite_price;
+
+    public static int endlessGold_purchaseCount, endlessCopper_purchaseCount, endlessIron_purchaseCount, endlessCobalt_purchaseCount, endlessUranium_purchaseCount, endlessIsmium_purchaseCount, endlessIridium_purchaseCount, endlessPainite_purchaseCount;
+
+    public GameObject endlessGold_pluss, endlessCopper_pluss, endlessIron_pluss, endlessCobalt_pluss, endlessUranium_pluss, endlessIsmium_pluss, endlessIridium_pluss, endlessPainite_pluss;
 
     #region Set all prices
     public void SkillTreePrices()
     {
         #region XP Prices Initialization
-        moreXP_1_price = 10 * LevelMechanics.steamSaleDiscount;
-        moreXP_2_price = 12 * LevelMechanics.steamSaleDiscount;
-        moreXP_3_price = 14 * LevelMechanics.steamSaleDiscount;
-        moreXP_4_price = 23 * LevelMechanics.steamSaleDiscount;
-        moreXP_5_price = 32 * LevelMechanics.steamSaleDiscount;
-        moreXP_6_price = 23 * LevelMechanics.steamSaleDiscount;
-        moreXP_7_price = 34 * LevelMechanics.steamSaleDiscount;
-        moreXP_8_price = 45 * LevelMechanics.steamSaleDiscount;
+        moreXP_1_price = 12 * LevelMechanics.steamSaleDiscount;
+        moreXP_2_price = 125 * LevelMechanics.steamSaleDiscount;
+        moreXP_3_price = 21000 * LevelMechanics.steamSaleDiscount;
+        moreXP_4_price = 600 * LevelMechanics.steamSaleDiscount;
+        moreXP_5_price = 2100 * LevelMechanics.steamSaleDiscount;
+        moreXP_6_price = 4500 * LevelMechanics.steamSaleDiscount;
+        moreXP_7_price = 100000 * LevelMechanics.steamSaleDiscount;
+        moreXP_8_price = 1000000 * LevelMechanics.steamSaleDiscount;
 
-        talentPointsPerXlevel_1_price = 12 * LevelMechanics.steamSaleDiscount;
-        talentPointsPerXlevel_2_price = 23 * LevelMechanics.steamSaleDiscount;
-        talentPointsPerXlevel_3_price = 54 * LevelMechanics.steamSaleDiscount;
+        talentPointsPerXlevel_1_price = 100 * LevelMechanics.steamSaleDiscount;
+        talentPointsPerXlevel_2_price = 1200 * LevelMechanics.steamSaleDiscount;
+        talentPointsPerXlevel_3_price = 1500000 * LevelMechanics.steamSaleDiscount;
         #endregion
 
         #region Lightning, Dynamite, and Plasma Balls Prices Initialization
-        lightningBeamChanceS_1_price = 20 * LevelMechanics.steamSaleDiscount;
-        lightningBeamChanceS_2_price = 22 * LevelMechanics.steamSaleDiscount;
-        lightningBeamChancePH_1_price = 34 * LevelMechanics.steamSaleDiscount;
-        lightningBeamChancePH_2_price = 34 * LevelMechanics.steamSaleDiscount;
-        lightningBeamSpawnAnotherOneChance_price = 46 * LevelMechanics.steamSaleDiscount;
-        lightningBeamDamage_price = 45 * LevelMechanics.steamSaleDiscount;
-        lightningBeamSize_price = 65 * LevelMechanics.steamSaleDiscount;
-        lightningSplashes_price = 65 * LevelMechanics.steamSaleDiscount;
-        lightningBeamSpawnRock_price = 43 * LevelMechanics.steamSaleDiscount;
-        lightningBeamExplosion_price = 53 * LevelMechanics.steamSaleDiscount;
-        lightningBeamAddTime_price = 43 * LevelMechanics.steamSaleDiscount;
+        lightningBeamChanceS_1_price = 500 * LevelMechanics.steamSaleDiscount;
+        lightningBeamChanceS_2_price = 1600 * LevelMechanics.steamSaleDiscount;
+        lightningBeamChancePH_1_price = 200 * LevelMechanics.steamSaleDiscount;
+        lightningBeamChancePH_2_price = 9000 * LevelMechanics.steamSaleDiscount;
+        lightningBeamSpawnAnotherOneChance_price = 95000 * LevelMechanics.steamSaleDiscount;
+        lightningBeamDamage_price = 1000 * LevelMechanics.steamSaleDiscount;
+        lightningBeamSize_price = 1200 * LevelMechanics.steamSaleDiscount;
+        lightningSplashes_price = 20000 * LevelMechanics.steamSaleDiscount;
+        lightningBeamSpawnRock_price = 100000 * LevelMechanics.steamSaleDiscount;
+        lightningBeamExplosion_price = 250000 * LevelMechanics.steamSaleDiscount;
+        lightningBeamAddTime_price = 500000 * LevelMechanics.steamSaleDiscount;
 
-        dynamiteChance_1_price = 64 * LevelMechanics.steamSaleDiscount;
-        dynamiteChance_2_price = 23 * LevelMechanics.steamSaleDiscount;
-        dynamiteSpawn2SmallChance_price = 32 * LevelMechanics.steamSaleDiscount;
-        dynamiteExplosionSize_price = 23 * LevelMechanics.steamSaleDiscount;
-        dynamiteDamage_price = 34 * LevelMechanics.steamSaleDiscount;
-        dynamiteExplosionSpawnRock_price = 54 * LevelMechanics.steamSaleDiscount;
-        dynamiteExplosionAddTimeChance_price = 52 * LevelMechanics.steamSaleDiscount;
-        dynamiteExplosionSpawnLightning_price = 34 * LevelMechanics.steamSaleDiscount;
+        dynamiteChance_1_price = 1000 * LevelMechanics.steamSaleDiscount;
+        dynamiteChance_2_price = 3500 * LevelMechanics.steamSaleDiscount;
+        dynamiteSpawn2SmallChance_price = 2500 * LevelMechanics.steamSaleDiscount;
+        dynamiteExplosionSize_price = 32000 * LevelMechanics.steamSaleDiscount;
+        dynamiteDamage_price = 10000 * LevelMechanics.steamSaleDiscount;
+        dynamiteExplosionSpawnRock_price = 6000 * LevelMechanics.steamSaleDiscount;
+        dynamiteExplosionAddTimeChance_price = 50000 * LevelMechanics.steamSaleDiscount;
+        dynamiteExplosionSpawnLightning_price = 600000 * LevelMechanics.steamSaleDiscount;
 
-        plazmaBallSpawn_1_price = 12 * LevelMechanics.steamSaleDiscount;
-        plazmaBallSpawn_2_price = 34 * LevelMechanics.steamSaleDiscount;
-        plazmaBallTime_price = 12 * LevelMechanics.steamSaleDiscount;
-        plazmaBallSize_price = 35 * LevelMechanics.steamSaleDiscount;
-        plazmaBallExplosionChance_price = 40 * LevelMechanics.steamSaleDiscount;
-        plazmaBallSpawnSmallChance_price = 23 * LevelMechanics.steamSaleDiscount;
-        plazmaBallDamage_price = 21 * LevelMechanics.steamSaleDiscount;
-        plazmaBallSpawnPickaxeChance_price = 32 * LevelMechanics.steamSaleDiscount;
+        plazmaBallSpawn_1_price = 10000 * LevelMechanics.steamSaleDiscount;
+        plazmaBallSpawn_2_price = 22000 * LevelMechanics.steamSaleDiscount;
+        plazmaBallTime_price = 430000 * LevelMechanics.steamSaleDiscount;
+        plazmaBallSize_price = 30000 * LevelMechanics.steamSaleDiscount;
+        plazmaBallExplosionChance_price = 610000 * LevelMechanics.steamSaleDiscount;
+        plazmaBallSpawnSmallChance_price = 100000 * LevelMechanics.steamSaleDiscount;
+        plazmaBallDamage_price = 4600000 * LevelMechanics.steamSaleDiscount;
+        plazmaBallSpawnPickaxeChance_price = 30000 * LevelMechanics.steamSaleDiscount;
         #endregion
 
         #region Spawn more rocks
-        spawnMoreRocks_1_price = 5 * LevelMechanics.steamSaleDiscount;
-        spawnMoreRocks_2_price = 10 * LevelMechanics.steamSaleDiscount;
-        spawnMoreRocks_3_price = 30 * LevelMechanics.steamSaleDiscount;
-        spawnMoreRocks_4_price = 200 * LevelMechanics.steamSaleDiscount;
-        spawnMoreRocks_5_price = 500 * LevelMechanics.steamSaleDiscount;
-        spawnMoreRocks_6_price = 3000 * LevelMechanics.steamSaleDiscount;
-        spawnMoreRocks_7_price = 15000 * LevelMechanics.steamSaleDiscount;
-        spawnMoreRocks_8_price = 500000 * LevelMechanics.steamSaleDiscount;
-        spawnMoreRocks_9_price = 1500000 * LevelMechanics.steamSaleDiscount;
+        spawnMoreRocks_1_price = 3 * LevelMechanics.steamSaleDiscount;
+        spawnMoreRocks_2_price = 6 * LevelMechanics.steamSaleDiscount;
+        spawnMoreRocks_3_price = 15 * LevelMechanics.steamSaleDiscount;
+        spawnMoreRocks_4_price = 25 * LevelMechanics.steamSaleDiscount;
+        spawnMoreRocks_5_price = 350 * LevelMechanics.steamSaleDiscount;
+        spawnMoreRocks_6_price = 3800 * LevelMechanics.steamSaleDiscount;
+        spawnMoreRocks_7_price = 27000 * LevelMechanics.steamSaleDiscount;
+        spawnMoreRocks_8_price = 270000 * LevelMechanics.steamSaleDiscount;
+        spawnMoreRocks_9_price = 350000 * LevelMechanics.steamSaleDiscount;
         #endregion
 
         #region More matertials from rocks
-        moreMeterialsFromRock_1_price = 250 * LevelMechanics.steamSaleDiscount;
-        moreMeterialsFromRock_2_price = 2000 * LevelMechanics.steamSaleDiscount;
-        moreMeterialsFromRock_3_price = 4500 * LevelMechanics.steamSaleDiscount;
-        moreMeterialsFromRock_4_price = 52 * LevelMechanics.steamSaleDiscount;
-        moreMeterialsFromRock_5_price = 74 * LevelMechanics.steamSaleDiscount;
+        moreMeterialsFromRock_1_price = 350 * LevelMechanics.steamSaleDiscount;
+        moreMeterialsFromRock_2_price = 500000 * LevelMechanics.steamSaleDiscount;
+        moreMeterialsFromRock_3_price = 400000 * LevelMechanics.steamSaleDiscount;
+        moreMeterialsFromRock_4_price = 10000 * LevelMechanics.steamSaleDiscount;
+        moreMeterialsFromRock_5_price = 700000 * LevelMechanics.steamSaleDiscount;
         #endregion
 
         #region Material worth more
         marterialsWorthMore_1_price = 100 * LevelMechanics.steamSaleDiscount;
-        marterialsWorthMore_2_price = 7500 * LevelMechanics.steamSaleDiscount;
-        marterialsWorthMore_3_price = 65000 * LevelMechanics.steamSaleDiscount;
-        marterialsWorthMore_5_price = 220000 * LevelMechanics.steamSaleDiscount;
-        marterialsWorthMore_4_price = 4800000 * LevelMechanics.steamSaleDiscount;
-        marterialsWorthMore_6_price = 900000000 * LevelMechanics.steamSaleDiscount;
-        marterialsWorthMore_7_price = 11400000000 * LevelMechanics.steamSaleDiscount;
-        marterialsWorthMore_8_price = 5000000000000 * LevelMechanics.steamSaleDiscount;
+        marterialsWorthMore_2_price = 2000 * LevelMechanics.steamSaleDiscount;
+        marterialsWorthMore_3_price = 3000 * LevelMechanics.steamSaleDiscount;
+        marterialsWorthMore_4_price = 44000 * LevelMechanics.steamSaleDiscount;
+        marterialsWorthMore_5_price = 110000 * LevelMechanics.steamSaleDiscount;
+        marterialsWorthMore_6_price = 5500 * LevelMechanics.steamSaleDiscount;
+        marterialsWorthMore_7_price = 300000 * LevelMechanics.steamSaleDiscount;
+        marterialsWorthMore_8_price = 9000000 * LevelMechanics.steamSaleDiscount;
         #endregion
 
         #region Gold rock spawn
         goldChunk_1_price = 7 * LevelMechanics.steamSaleDiscount;
-        goldChunk_2_price = 23 * LevelMechanics.steamSaleDiscount;
-        goldChunk_3_price = 43 * LevelMechanics.steamSaleDiscount;
-        goldChunk_4_price = 65 * LevelMechanics.steamSaleDiscount;
-        goldChunk_5__price = 67 * LevelMechanics.steamSaleDiscount;
-        fullGold_1_price = 78 * LevelMechanics.steamSaleDiscount;
-        fullGold_2_price = 87 * LevelMechanics.steamSaleDiscount;
-        fullGold_3_price = 99 * LevelMechanics.steamSaleDiscount;
+        goldChunk_2_price = 600 * LevelMechanics.steamSaleDiscount;
+        goldChunk_3_price = 900 * LevelMechanics.steamSaleDiscount;
+        goldChunk_4_price = 7600 * LevelMechanics.steamSaleDiscount;
+        goldChunk_5__price = 250000 * LevelMechanics.steamSaleDiscount;
+        fullGold_1_price = 30 * LevelMechanics.steamSaleDiscount;
+        fullGold_2_price = 220000 * LevelMechanics.steamSaleDiscount;
+        fullGold_3_price = 1700000 * LevelMechanics.steamSaleDiscount;
         #endregion
 
         #region Copper rock spawn
-        spawnCopper_price = 300 * LevelMechanics.steamSaleDiscount;
-        copperChunk_1_price = 32 * LevelMechanics.steamSaleDiscount;
-        copperChunk_2_price = 34 * LevelMechanics.steamSaleDiscount;
-        copperChunk_3_price = 54 * LevelMechanics.steamSaleDiscount;
-        fullCopper_1_price = 57 * LevelMechanics.steamSaleDiscount;
-        fullCopper_2_price = 76 * LevelMechanics.steamSaleDiscount;
-        fullCopper_3_price = 90 * LevelMechanics.steamSaleDiscount;
+        spawnCopper_price = 100 * LevelMechanics.steamSaleDiscount;
+        copperChunk_1_price = 70 * LevelMechanics.steamSaleDiscount;
+        copperChunk_2_price = 2100 * LevelMechanics.steamSaleDiscount;
+        copperChunk_3_price = 15000 * LevelMechanics.steamSaleDiscount;
+        fullCopper_1_price = 90 * LevelMechanics.steamSaleDiscount;
+        fullCopper_2_price = 5500 * LevelMechanics.steamSaleDiscount;
+        fullCopper_3_price = 460000 * LevelMechanics.steamSaleDiscount;
         #endregion
 
         #region Iron rock spawn
-        spawnIron_price = 12 * LevelMechanics.steamSaleDiscount;
-        ironChunk_1_price = 14 * LevelMechanics.steamSaleDiscount;
-        ironChunk_2_price = 23 * LevelMechanics.steamSaleDiscount;
-        fullIron_1_price = 42 * LevelMechanics.steamSaleDiscount;
-        fullIron_2_price = 43 * LevelMechanics.steamSaleDiscount;
+        spawnIron_price = 400 * LevelMechanics.steamSaleDiscount;
+        ironChunk_1_price = 500 * LevelMechanics.steamSaleDiscount;
+        ironChunk_2_price = 500000 * LevelMechanics.steamSaleDiscount;
+        fullIron_1_price = 920 * LevelMechanics.steamSaleDiscount;
+        fullIron_2_price = 1000000 * LevelMechanics.steamSaleDiscount;
         #endregion
 
         #region Cobalt rock spawn
-        cobaltSpawn_price = 32 * LevelMechanics.steamSaleDiscount;
-        cobaltChunk_1_price = 34 * LevelMechanics.steamSaleDiscount;
-        fullCobalt_1_price = 56 * LevelMechanics.steamSaleDiscount;
+        cobaltSpawn_price = 2350 * LevelMechanics.steamSaleDiscount;
+        cobaltChunk_1_price = 3000 * LevelMechanics.steamSaleDiscount;
+        fullCobalt_1_price = 3600 * LevelMechanics.steamSaleDiscount;
         #endregion
 
         #region Uranium rock spawn
-        uraniumSpawn_price = 24 * LevelMechanics.steamSaleDiscount;
-        uraniumChunk_1_price = 56 * LevelMechanics.steamSaleDiscount;
-        fullUranium_1_price = 64 * LevelMechanics.steamSaleDiscount;
+        uraniumSpawn_price = 4000 * LevelMechanics.steamSaleDiscount;
+        uraniumChunk_1_price = 2600 * LevelMechanics.steamSaleDiscount;
+        fullUranium_1_price = 3300 * LevelMechanics.steamSaleDiscount;
         #endregion
 
         #region Ismium rock spawn
-        ismiumSpawn_price = 21 * LevelMechanics.steamSaleDiscount;
-        ismiumChunk_1_price = 22 * LevelMechanics.steamSaleDiscount;
-        fullIsmium_1_price = 34 * LevelMechanics.steamSaleDiscount;
+        ismiumSpawn_price = 140000 * LevelMechanics.steamSaleDiscount;
+        ismiumChunk_1_price = 19000 * LevelMechanics.steamSaleDiscount;
+        fullIsmium_1_price = 23000 * LevelMechanics.steamSaleDiscount;
         #endregion
 
         #region Iridium rock spawn
-        iridiumSpawn_price = 45 * LevelMechanics.steamSaleDiscount;
-        iridiumChunk_1_price = 46 * LevelMechanics.steamSaleDiscount;
-        fullIridium_1_price = 76 * LevelMechanics.steamSaleDiscount;
+        iridiumSpawn_price = 75000 * LevelMechanics.steamSaleDiscount;
+        iridiumChunk_1_price = 25000 * LevelMechanics.steamSaleDiscount;
+        fullIridium_1_price = 33000 * LevelMechanics.steamSaleDiscount;
         #endregion
 
         #region Painite rock spawn
-        painiteSpawn_price = 34 * LevelMechanics.steamSaleDiscount;
-        painiteChunk_1_price = 54 * LevelMechanics.steamSaleDiscount;
-        fullPainite_1_price = 67 * LevelMechanics.steamSaleDiscount;
+        painiteSpawn_price = 1000000 * LevelMechanics.steamSaleDiscount;
+        painiteChunk_1_price = 160000 * LevelMechanics.steamSaleDiscount;
+        fullPainite_1_price = 240000 * LevelMechanics.steamSaleDiscount;
         #endregion
 
-        #region Better Pickaxe and Mining Erea Prices Initialization
-        improvedPickaxe_1_price = 15 * LevelMechanics.steamSaleDiscount;
+        #region Improved pickaxe and Mining Erea Prices Initialization
+        improvedPickaxe_1_price = 11 * LevelMechanics.steamSaleDiscount;
         improvedPickaxe_2_price = 300 * LevelMechanics.steamSaleDiscount;
-        improvedPickaxe_3_price = 6000 * LevelMechanics.steamSaleDiscount;
+        improvedPickaxe_3_price = 400 * LevelMechanics.steamSaleDiscount;
         improvedPickaxe_4_price = 15000 * LevelMechanics.steamSaleDiscount;
-        improvedPickaxe_5_price = 500000 * LevelMechanics.steamSaleDiscount;
-        improvedPickaxe_6_price = 1000000 * LevelMechanics.steamSaleDiscount;
+        improvedPickaxe_5_price = 50000 * LevelMechanics.steamSaleDiscount;
+        improvedPickaxe_6_price = 100000 * LevelMechanics.steamSaleDiscount;
+        #endregion
 
-        biggerMiningErea_1_price = 10 * LevelMechanics.steamSaleDiscount;
+        #region Mining Erea Prices Initialization
+        biggerMiningErea_1_price = 8 * LevelMechanics.steamSaleDiscount;
         biggerMiningErea_2_price = 1000 * LevelMechanics.steamSaleDiscount;
-        biggerMiningErea_3_price = 300 * LevelMechanics.steamSaleDiscount;
-        biggerMiningErea_4_price = 54 * LevelMechanics.steamSaleDiscount;
-        shootCircleChance_price = 21 * LevelMechanics.steamSaleDiscount;
-        increaseAndDecreaseMinignErea_price = 34 * LevelMechanics.steamSaleDiscount;
+        biggerMiningErea_3_price = 230 * LevelMechanics.steamSaleDiscount;
+        biggerMiningErea_4_price = 1000000 * LevelMechanics.steamSaleDiscount;
+        shootCircleChance_price = 125 * LevelMechanics.steamSaleDiscount;
+        increaseAndDecreaseMinignErea_price = 5000 * LevelMechanics.steamSaleDiscount;
         #endregion
 
         #region Chance to Spawn Rock and Spawn Rock X Times Prices Initialization
-        spawnRockEveryXrock_1_price = 21 * LevelMechanics.steamSaleDiscount;
-        spawnRockEveryXrock_2_price = 23 * LevelMechanics.steamSaleDiscount;
-        spawnRockEveryXrock_3_price = 45 * LevelMechanics.steamSaleDiscount;
+        spawnRockEveryXrock_1_price = 500 * LevelMechanics.steamSaleDiscount;
+        spawnRockEveryXrock_2_price = 3000 * LevelMechanics.steamSaleDiscount;
+        spawnRockEveryXrock_3_price = 340000 * LevelMechanics.steamSaleDiscount;
 
-        spawnXRockEveryXSecond_1_price = 34 * LevelMechanics.steamSaleDiscount;
-        spawnXRockEveryXSecond_2_price = 54 * LevelMechanics.steamSaleDiscount;
-        spawnXRockEveryXSecond_3_price = 76 * LevelMechanics.steamSaleDiscount;
+        spawnXRockEveryXSecond_1_price = 75 * LevelMechanics.steamSaleDiscount;
+        spawnXRockEveryXSecond_2_price = 420 * LevelMechanics.steamSaleDiscount;
+        spawnXRockEveryXSecond_3_price = 500000 * LevelMechanics.steamSaleDiscount;
 
-        chanceToSpawnRockWhenMined_1_price = 21 * LevelMechanics.steamSaleDiscount;
-        chanceToSpawnRockWhenMined_2_price = 24 * LevelMechanics.steamSaleDiscount;
-        chanceToSpawnRockWhenMined_3_price = 54 * LevelMechanics.steamSaleDiscount;
-        chanceToSpawnRockWhenMined_4_price = 56 * LevelMechanics.steamSaleDiscount;
-        chanceToSpawnRockWhenMined_5_price = 74 * LevelMechanics.steamSaleDiscount;
-        chanceToSpawnRockWhenMined_6_price = 87 * LevelMechanics.steamSaleDiscount;
+        chanceToSpawnRockWhenMined_1_price = 18 * LevelMechanics.steamSaleDiscount;
+        chanceToSpawnRockWhenMined_2_price = 1000 * LevelMechanics.steamSaleDiscount;
+        chanceToSpawnRockWhenMined_3_price = 27000 * LevelMechanics.steamSaleDiscount;
+        chanceToSpawnRockWhenMined_4_price = 2600 * LevelMechanics.steamSaleDiscount;
+        chanceToSpawnRockWhenMined_5_price = 250 * LevelMechanics.steamSaleDiscount;
+        chanceToSpawnRockWhenMined_6_price = 13000 * LevelMechanics.steamSaleDiscount;
         #endregion
 
         #region Spawn Pickaxes Prices Initialization
-        chanceToMineRandomRock_1_price = 12 * LevelMechanics.steamSaleDiscount;
-        chanceToMineRandomRock_2_price = 22 * LevelMechanics.steamSaleDiscount;
-        chanceToMineRandomRock_3_price = 34 * LevelMechanics.steamSaleDiscount;
-        chanceToMineRandomRock_4_price = 56 * LevelMechanics.steamSaleDiscount;
+        chanceToMineRandomRock_1_price = 50 * LevelMechanics.steamSaleDiscount;
+        chanceToMineRandomRock_2_price = 350 * LevelMechanics.steamSaleDiscount;
+        chanceToMineRandomRock_3_price = 1000 * LevelMechanics.steamSaleDiscount;
+        chanceToMineRandomRock_4_price = 33000 * LevelMechanics.steamSaleDiscount;
 
-        spawnPickaxeEverySecond_1_price = 23 * LevelMechanics.steamSaleDiscount;
-        spawnPickaxeEverySecond_2_price = 45 * LevelMechanics.steamSaleDiscount;
-        spawnPickaxeEverySecond_3_price = 67 * LevelMechanics.steamSaleDiscount;
+        spawnPickaxeEverySecond_1_price = 4000 * LevelMechanics.steamSaleDiscount;
+        spawnPickaxeEverySecond_2_price = 8000 * LevelMechanics.steamSaleDiscount;
+        spawnPickaxeEverySecond_3_price = 6000 * LevelMechanics.steamSaleDiscount;
         #endregion
 
         #region More Time Prices Initialization
-        moreTime_1_price = 21 * LevelMechanics.steamSaleDiscount;
-        moreTime_2_price = 23 * LevelMechanics.steamSaleDiscount;
-        moreTime_3_price = 43 * LevelMechanics.steamSaleDiscount;
-        moreTime_4_price = 56 * LevelMechanics.steamSaleDiscount;
+        moreTime_1_price = 9 * LevelMechanics.steamSaleDiscount;
+        moreTime_2_price = 100 * LevelMechanics.steamSaleDiscount;
+        moreTime_3_price = 1250 * LevelMechanics.steamSaleDiscount;
+        moreTime_4_price = 70000 * LevelMechanics.steamSaleDiscount;
 
-        chanceToAdd1SecondEverySecond_price = 23 * LevelMechanics.steamSaleDiscount;
-        chanceAdd1SecondEveryRockMined_price = 34 * LevelMechanics.steamSaleDiscount;
+        chanceToAdd1SecondEverySecond_price = 800 * LevelMechanics.steamSaleDiscount;
+        chanceAdd1SecondEveryRockMined_price = 9000 * LevelMechanics.steamSaleDiscount;
         #endregion
 
         #region Chance for Double XP and Gold Prices Initialization
-        doubleXpGoldChance_1_price = 21 * LevelMechanics.steamSaleDiscount;
-        doubleXpGoldChance_2_price = 34 * LevelMechanics.steamSaleDiscount;
-        doubleXpGoldChance_3_price = 35 * LevelMechanics.steamSaleDiscount;
-        doubleXpGoldChance_4_price = 45 * LevelMechanics.steamSaleDiscount;
-        doubleXpGoldChance_5_price = 65 * LevelMechanics.steamSaleDiscount;
+        doubleXpGoldChance_1_price = 17 * LevelMechanics.steamSaleDiscount;
+        doubleXpGoldChance_2_price = 10000 * LevelMechanics.steamSaleDiscount;
+        doubleXpGoldChance_3_price = 2900 * LevelMechanics.steamSaleDiscount;
+        doubleXpGoldChance_4_price = 300000 * LevelMechanics.steamSaleDiscount;
+        doubleXpGoldChance_5_price = 1000000 * LevelMechanics.steamSaleDiscount;
         #endregion
 
         #region Misc Prices Initialization
-        allProjectileDoubleDamageChance_price = 21 * LevelMechanics.steamSaleDiscount;
-        allProjectileTriggerChance_price = 34 * LevelMechanics.steamSaleDiscount;
+        allProjectileDoubleDamageChance_price = 1000000 * LevelMechanics.steamSaleDiscount;
+        allProjectileTriggerChance_price = 700000 * LevelMechanics.steamSaleDiscount;
 
         pickaxeDoubleDamageChance_1_price = 56 * LevelMechanics.steamSaleDiscount;
-        pickaxeDoubleDamageChance_2_price = 76 * LevelMechanics.steamSaleDiscount;
+        pickaxeDoubleDamageChance_2_price = 2000000 * LevelMechanics.steamSaleDiscount;
 
-        intaMineChance_1_price = 54 * LevelMechanics.steamSaleDiscount;
-        intaMineChance_2_price = 34 * LevelMechanics.steamSaleDiscount;
+        intaMineChance_1_price = 80 * LevelMechanics.steamSaleDiscount;
+        intaMineChance_2_price = 15000 * LevelMechanics.steamSaleDiscount;
 
-        increaseSpawnChanceAllRocks_price = 54 * LevelMechanics.steamSaleDiscount;
+        increaseSpawnChanceAllRocks_price = 400000 * LevelMechanics.steamSaleDiscount;
 
-        craft2Material_price = 34 * LevelMechanics.steamSaleDiscount;
+        craft2Material_price = 24000000 * LevelMechanics.steamSaleDiscount;
 
-        finalUpgrade_price = 23 * LevelMechanics.steamSaleDiscount;
+        finalUpgrade_price = 1000000 * LevelMechanics.steamSaleDiscount;
         #endregion
     }
     #endregion
@@ -759,6 +1026,2911 @@ public class SkillTree : MonoBehaviour, IDataPersistence
     {
         if (MainMenu.isInUpgrades)
         {
+            #region Set pluss object
+
+            #region XP Upgrade Checks
+
+            #region moreXP_1
+            if (moreXP_1_purchaseCount >= 5)
+            {
+                moreXP_1_plus.SetActive(false);
+            }
+            else
+            {
+
+                if (GoldAndOreMechanics.totalGoldBars >= moreXP_1_price)
+                {
+                    moreXP_1_plus.SetActive(true);
+                }
+                else
+                {
+                    moreXP_1_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region moreXP_2
+            if (moreXP_2_purchaseCount >= 5)
+            {
+                moreXP_2_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalGoldBars >= moreXP_2_price)
+                {
+                    moreXP_2_plus.SetActive(true);
+                }
+                else
+                {
+                    moreXP_2_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region moreXP_3
+            if (moreXP_3_purchaseCount >= 3)
+            {
+                moreXP_3_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalCopperBars >= moreXP_3_price )
+                {
+                    if (spawnCopper_purchased) { moreXP_3_plus.SetActive(true); }
+                    else { moreXP_3_plus.SetActive(false); }
+                }
+                else
+                {
+                    moreXP_3_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region moreXP_4
+            if (moreXP_4_purchaseCount >= 3)
+            {
+                moreXP_4_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalGoldBars >= moreXP_4_price )
+                {
+                    moreXP_4_plus.SetActive(true);
+                }
+                else
+                {
+                    moreXP_4_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region moreXP_5
+            if (moreXP_5_purchaseCount >= 4)
+            {
+                moreXP_5_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalCopperBars >= moreXP_5_price )
+                {
+                    if (spawnCopper_purchased) { moreXP_5_plus.SetActive(true); }
+                    else { moreXP_5_plus.SetActive(false); }
+                }
+                else
+                {
+                    moreXP_5_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region moreXP_6
+            if (moreXP_6_purchaseCount >= 3)
+            {
+                moreXP_6_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalIronBars >= moreXP_6_price )
+                {
+                    if (spawnIron_purchased) { moreXP_6_plus.SetActive(true); }
+                    else { moreXP_6_plus.SetActive(false); }
+                }
+                else
+                {
+                    moreXP_6_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region moreXP_7
+            if (moreXP_7_purchaseCount >= 3)
+            {
+                moreXP_7_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalCobaltBars >= moreXP_7_price)
+                {
+                    if (cobaltSpawn_purchased) { moreXP_7_plus.SetActive(true); }
+                    else { moreXP_7_plus.SetActive(false); }
+                }
+                else
+                {
+                    moreXP_7_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region moreXP_8
+            if (moreXP_8_purchaseCount >= 2)
+            {
+                moreXP_8_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalUraniumBars >= moreXP_8_price)
+                {
+                    if (uraniumSpawn_purchased) { moreXP_8_plus.SetActive(true); }
+                    else { moreXP_8_plus.SetActive(false); }
+                }
+                else
+                {
+                    moreXP_8_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #endregion
+
+            #region Talent Points Upgrade Checks
+
+            #region talentPointsPerXlevel_1
+            if (talentPointsPerXlevel_1_purchaseCount >= 1)
+            {
+                talentPointsPerXlevel_1_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalCopperBars >= talentPointsPerXlevel_1_price)
+                {
+                    if (spawnCopper_purchased) { talentPointsPerXlevel_1_plus.SetActive(true); }
+                    else { talentPointsPerXlevel_1_plus.SetActive(false); }
+                }
+                else
+                {
+                    talentPointsPerXlevel_1_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region talentPointsPerXlevel_2
+            if (talentPointsPerXlevel_2_purchaseCount >= 1)
+            {
+                talentPointsPerXlevel_2_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalIronBars >= talentPointsPerXlevel_2_price)
+                {
+                    if (spawnIron_purchased) { talentPointsPerXlevel_2_plus.SetActive(true); }
+                    else { talentPointsPerXlevel_2_plus.SetActive(false); }
+                }
+                else
+                {
+                    talentPointsPerXlevel_2_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region talentPointsPerXlevel_3
+            if (talentPointsPerXlevel_3_purchaseCount >= 1)
+            {
+                talentPointsPerXlevel_3_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalCopperBars >= talentPointsPerXlevel_3_price)
+                {
+                    if (spawnCopper_purchased) { talentPointsPerXlevel_3_plus.SetActive(true); }
+                    else { talentPointsPerXlevel_3_plus.SetActive(false); }
+                }
+                else
+                {
+                    talentPointsPerXlevel_3_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #endregion
+
+            #region Lightning Beam Upgrade Checks
+
+            #region lightningBeamChanceS_1
+            if (lightningBeamChanceS_1_purchaseCount >= 5)
+            {
+                lightningBeamChanceS_1_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalIronBars >= lightningBeamChanceS_1_price)
+                {
+                    if (spawnIron_purchased) { lightningBeamChanceS_1_plus.SetActive(true); }
+                    else { lightningBeamChanceS_1_plus.SetActive(false); }
+                }
+                else
+                {
+                    lightningBeamChanceS_1_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region lightningBeamChanceS_2
+            if (lightningBeamChanceS_2_purchaseCount >= 5)
+            {
+                lightningBeamChanceS_2_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalCopperBars >= lightningBeamChanceS_2_price)
+                {
+                    if (spawnCopper_purchased) { lightningBeamChanceS_2_plus.SetActive(true); }
+                    else { lightningBeamChanceS_2_plus.SetActive(false); }
+                }
+                else
+                {
+                    lightningBeamChanceS_2_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region lightningBeamChancePH_1
+            if (lightningBeamChancePH_1_purchaseCount >= 3)
+            {
+                lightningBeamChancePH_1_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalCopperBars >= lightningBeamChancePH_1_price)
+                {
+                    if (spawnCopper_purchased) { lightningBeamChancePH_1_plus.SetActive(true); }
+                    else { lightningBeamChancePH_1_plus.SetActive(false); }
+                }
+                else
+                {
+                    lightningBeamChancePH_1_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region lightningBeamChancePH_2
+            if (lightningBeamChancePH_2_purchaseCount >= 3)
+            {
+                lightningBeamChancePH_2_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalIronBars >= lightningBeamChancePH_2_price)
+                {
+                    if (spawnIron_purchased) { lightningBeamChancePH_2_plus.SetActive(true); }
+                    else { lightningBeamChancePH_2_plus.SetActive(false); }
+                }
+                else
+                {
+                    lightningBeamChancePH_2_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region lightningBeamSpawnAnotherOneChance
+            if (lightningBeamSpawnAnotherOneChance_purchaseCount >= 1)
+            {
+                lightningBeamSpawnAnotherOneChance_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalIridiumBars >= lightningBeamSpawnAnotherOneChance_price)
+                {
+                    if (iridiumSpawn_purchased) { lightningBeamSpawnAnotherOneChance_plus.SetActive(true); }
+                    else { lightningBeamSpawnAnotherOneChance_plus.SetActive(false); }
+                }
+                else
+                {
+                    lightningBeamSpawnAnotherOneChance_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region lightningBeamDamage
+            if (lightningBeamDamage_purchaseCount >= 3)
+            {
+                lightningBeamDamage_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalGoldBars >= lightningBeamDamage_price)
+                {
+                    lightningBeamDamage_plus.SetActive(true);
+                }
+                else
+                {
+                    lightningBeamDamage_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region lightningBeamSize
+            if (lightningBeamSize_purchaseCount >= 3)
+            {
+                lightningBeamSize_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalIronBars >= lightningBeamSize_price)
+                {
+                    if (spawnIron_purchased) { lightningBeamSize_plus.SetActive(true); }
+                    else { lightningBeamSize_plus.SetActive(false); }
+                }
+                else
+                {
+                    lightningBeamSize_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region lightningSplashes
+            if (lightningSplashes_purchaseCount >= 1)
+            {
+                lightningSplashes_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalGoldBars >= lightningSplashes_price)
+                {
+                    lightningSplashes_plus.SetActive(true);
+                }
+                else
+                {
+                    lightningSplashes_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region lightningBeamSpawnRock
+            if (lightningBeamSpawnRock_purchaseCount >= 1)
+            {
+                lightningBeamSpawnRock_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalCobaltBars >= lightningBeamSpawnRock_price)
+                {
+                    if (cobaltSpawn_purchased) { lightningBeamSpawnRock_plus.SetActive(true); }
+                    else { lightningBeamSpawnRock_plus.SetActive(false); }
+                }
+                else
+                {
+                    lightningBeamSpawnRock_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region lightningBeamExplosion
+            if (lightningBeamExplosion_purchaseCount >= 1)
+            {
+                lightningBeamExplosion_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalCobaltBars >= lightningBeamExplosion_price)
+                {
+                    if (cobaltSpawn_purchased) { lightningBeamExplosion_plus.SetActive(true); }
+                    else { lightningBeamExplosion_plus.SetActive(false); }
+                }
+                else
+                {
+                    lightningBeamExplosion_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region lightningBeamAddTime
+            if (lightningBeamAddTime_purchaseCount >= 1)
+            {
+                lightningBeamAddTime_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalGoldBars >= lightningBeamAddTime_price)
+                {
+                    lightningBeamAddTime_plus.SetActive(true);
+                }
+                else
+                {
+                    lightningBeamAddTime_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #endregion
+
+            #region Dynamite Upgrade Checks
+
+            #region dynamiteChance_1
+            if (dynamiteChance_1_purchaseCount >= 3)
+            {
+                dynamiteChance_1_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalIronBars >= dynamiteChance_1_price)
+                {
+                    if (spawnIron_purchased) { dynamiteChance_1_plus.SetActive(true); }
+                    else { dynamiteChance_1_plus.SetActive(false); }
+                }
+                else
+                {
+                    dynamiteChance_1_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region dynamiteChance_2
+            if (dynamiteChance_2_purchaseCount >= 3)
+            {
+                dynamiteChance_2_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalCopperBars >= dynamiteChance_2_price)
+                {
+                    if (spawnCopper_purchased) { dynamiteChance_2_plus.SetActive(true); }
+                    else { dynamiteChance_2_plus.SetActive(false); }
+                }
+                else
+                {
+                    dynamiteChance_2_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region dynamiteSpawn2SmallChance
+            if (dynamiteSpawn2SmallChance_purchaseCount >= 1)
+            {
+                dynamiteSpawn2SmallChance_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalUraniumBars >= dynamiteSpawn2SmallChance_price)
+                {
+                    if (uraniumSpawn_purchased) { dynamiteSpawn2SmallChance_plus.SetActive(true); }
+                    else { dynamiteSpawn2SmallChance_plus.SetActive(false); }
+                }
+                else
+                {
+                    dynamiteSpawn2SmallChance_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region dynamiteExplosionSize
+            if (dynamiteExplosionSize_purchaseCount >= 3)
+            {
+                dynamiteExplosionSize_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalGoldBars >= dynamiteExplosionSize_price)
+                {
+                    dynamiteExplosionSize_plus.SetActive(true);
+                }
+                else
+                {
+                    dynamiteExplosionSize_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region dynamiteDamage
+            if (dynamiteDamage_purchaseCount >= 3)
+            {
+                dynamiteDamage_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalGoldBars >= dynamiteDamage_price)
+                {
+                    dynamiteDamage_plus.SetActive(true);
+                }
+                else
+                {
+                    dynamiteDamage_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region dynamiteExplosionSpawnRock
+            if (dynamiteExplosionSpawnRock_purchaseCount >= 1)
+            {
+                dynamiteExplosionSpawnRock_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalCobaltBars >= dynamiteExplosionSpawnRock_price)
+                {
+                    if (cobaltSpawn_purchased) { dynamiteExplosionSpawnRock_plus.SetActive(true); }
+                    else { dynamiteExplosionSpawnRock_plus.SetActive(false); }
+                }
+                else
+                {
+                    dynamiteExplosionSpawnRock_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region dynamiteExplosionAddTimeChance
+            if (dynamiteExplosionAddTimeChance_purchaseCount >= 1)
+            {
+                dynamiteExplosionAddTimeChance_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalCopperBars >= dynamiteExplosionAddTimeChance_price)
+                {
+                    if (spawnCopper_purchased) { dynamiteExplosionAddTimeChance_plus.SetActive(true); }
+                    else { dynamiteExplosionAddTimeChance_plus.SetActive(false); }
+                }
+                else
+                {
+                    dynamiteExplosionAddTimeChance_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region dynamiteExplosionSpawnLightning
+            if (dynamiteExplosionSpawnLightning_purchaseCount >= 1)
+            {
+                dynamiteExplosionSpawnLightning_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalIsmiumBar >= dynamiteExplosionSpawnLightning_price)
+                {
+                    if (ismiumSpawn_purchased) { dynamiteExplosionSpawnLightning_plus.SetActive(true); }
+                    else { dynamiteExplosionSpawnLightning_plus.SetActive(false); }
+                }
+                else
+                {
+                    dynamiteExplosionSpawnLightning_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #endregion
+
+            #region Plazma Ball Upgrade Checks
+
+            #region plazmaBallSpawn_1
+            if (plazmaBallSpawn_1_purchaseCount >= 3)
+            {
+                plazmaBallSpawn_1_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalCobaltBars >= plazmaBallSpawn_1_price)
+                {
+                    if (cobaltSpawn_purchased) { plazmaBallSpawn_1_plus.SetActive(true); }
+                    else { plazmaBallSpawn_1_plus.SetActive(false); }
+                }
+                else
+                {
+                    plazmaBallSpawn_1_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region plazmaBallSpawn_2
+            if (plazmaBallSpawn_2_purchaseCount >= 3)
+            {
+                plazmaBallSpawn_2_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalIridiumBars >= plazmaBallSpawn_2_price)
+                {
+                    if (iridiumSpawn_purchased) { plazmaBallSpawn_2_plus.SetActive(true); }
+                    else { plazmaBallSpawn_2_plus.SetActive(false); }
+                }
+                else
+                {
+                    plazmaBallSpawn_2_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region plazmaBallTime
+            if (plazmaBallTime_purchaseCount >= 3)
+            {
+                plazmaBallTime_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalCopperBars >= plazmaBallTime_price)
+                {
+                    if (spawnCopper_purchased) { plazmaBallTime_plus.SetActive(true); }
+                    else { plazmaBallTime_plus.SetActive(false); }
+                }
+                else
+                {
+                    plazmaBallTime_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region plazmaBallSize
+            if (plazmaBallSize_purchaseCount >= 3)
+            {
+                plazmaBallSize_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalUraniumBars >= plazmaBallSize_price)
+                {
+                    if (uraniumSpawn_purchased) { plazmaBallSize_plus.SetActive(true); }
+                    else { plazmaBallSize_plus.SetActive(false); }
+                }
+                else
+                {
+                    plazmaBallSize_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region plazmaBallExplosionChance
+            if (plazmaBallExplosionChance_purchaseCount >= 1)
+            {
+                plazmaBallExplosionChance_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalIridiumBars >= plazmaBallExplosionChance_price)
+                {
+                    if (iridiumSpawn_purchased) { plazmaBallExplosionChance_plus.SetActive(true); }
+                    else { plazmaBallExplosionChance_plus.SetActive(false); }
+                }
+                else
+                {
+                    plazmaBallExplosionChance_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region plazmaBallSpawnSmallChance
+            if (plazmaBallSpawnSmallChance_purchaseCount >= 1)
+            {
+                plazmaBallSpawnSmallChance_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalGoldBars >= plazmaBallSpawnSmallChance_price)
+                {
+                    plazmaBallSpawnSmallChance_plus.SetActive(true);
+                }
+                else
+                {
+                    plazmaBallSpawnSmallChance_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region plazmaBallDamage
+            if (plazmaBallDamage_purchaseCount >= 5)
+            {
+                plazmaBallDamage_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalGoldBars >= plazmaBallDamage_price)
+                {
+                    plazmaBallDamage_plus.SetActive(true);
+                }
+                else
+                {
+                    plazmaBallDamage_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region plazmaBallSpawnPickaxeChance
+            if (plazmaBallSpawnPickaxeChance_purchaseCount >= 1)
+            {
+                plazmaBallSpawnPickaxeChance_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalPainiteBars >= plazmaBallSpawnPickaxeChance_price)
+                {
+                    if (painiteSpawn_purchased) { plazmaBallSpawnPickaxeChance_plus.SetActive(true); }
+                    else { plazmaBallSpawnPickaxeChance_plus.SetActive(false); }
+                }
+                else
+                {
+                    plazmaBallSpawnPickaxeChance_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #endregion
+
+            #region Rock Spawning Upgrade Checks
+
+            #region spawnMoreRocks_1
+            if (spawnMoreRocks_1_purchaseCount >= 5)
+            {
+                spawnMoreRocks_1_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalGoldBars >= spawnMoreRocks_1_price)
+                {
+                    spawnMoreRocks_1_plus.SetActive(true);
+                }
+                else
+                {
+                    spawnMoreRocks_1_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region spawnMoreRocks_2
+            if (spawnMoreRocks_2_purchaseCount >= 4)
+            {
+                spawnMoreRocks_2_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalGoldBars >= spawnMoreRocks_2_price)
+                {
+                    spawnMoreRocks_2_plus.SetActive(true);
+                }
+                else
+                {
+                    spawnMoreRocks_2_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region spawnMoreRocks_3
+            if (spawnMoreRocks_3_purchaseCount >= 4)
+            {
+                spawnMoreRocks_3_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalGoldBars >= spawnMoreRocks_3_price)
+                {
+                    spawnMoreRocks_3_plus.SetActive(true);
+                }
+                else
+                {
+                    spawnMoreRocks_3_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region spawnMoreRocks_4
+            if (spawnMoreRocks_4_purchaseCount >= 5)
+            {
+                spawnMoreRocks_4_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalGoldBars >= spawnMoreRocks_4_price)
+                {
+                    spawnMoreRocks_4_plus.SetActive(true);
+                }
+                else
+                {
+                    spawnMoreRocks_4_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region spawnMoreRocks_5
+            if (spawnMoreRocks_5_purchaseCount >= 5)
+            {
+                spawnMoreRocks_5_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalCopperBars >= spawnMoreRocks_5_price)
+                {
+                    if (spawnCopper_purchased) { spawnMoreRocks_5_plus.SetActive(true); }
+                    else { spawnMoreRocks_5_plus.SetActive(false); }
+                }
+                else
+                {
+                    spawnMoreRocks_5_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region spawnMoreRocks_6
+            if (spawnMoreRocks_6_purchaseCount >= 3)
+            {
+                spawnMoreRocks_6_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalIronBars >= spawnMoreRocks_6_price)
+                {
+                    if (spawnIron_purchased) { spawnMoreRocks_6_plus.SetActive(true); }
+                    else { spawnMoreRocks_6_plus.SetActive(false); }
+                }
+                else
+                {
+                    spawnMoreRocks_6_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region spawnMoreRocks_7
+            if (spawnMoreRocks_7_purchaseCount >= 3)
+            {
+                spawnMoreRocks_7_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalGoldBars >= spawnMoreRocks_7_price)
+                {
+                    spawnMoreRocks_7_plus.SetActive(true);
+                }
+                else
+                {
+                    spawnMoreRocks_7_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region spawnMoreRocks_8
+            if (spawnMoreRocks_8_purchaseCount >= 3)
+            {
+                spawnMoreRocks_8_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalPainiteBars >= spawnMoreRocks_8_price)
+                {
+                    if (painiteSpawn_purchased) { spawnMoreRocks_8_plus.SetActive(true); }
+                    else { spawnMoreRocks_8_plus.SetActive(false); }
+                }
+                else
+                {
+                    spawnMoreRocks_8_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region spawnMoreRocks_9
+            if (spawnMoreRocks_9_purchaseCount >= 3)
+            {
+                spawnMoreRocks_9_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalPainiteBars >= spawnMoreRocks_9_price)
+                {
+                    if (painiteSpawn_purchased) { spawnMoreRocks_9_plus.SetActive(true); }
+                    else { spawnMoreRocks_9_plus.SetActive(false); }
+                }
+                else
+                {
+                    spawnMoreRocks_9_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #endregion
+
+            #region More Materials From Rock Upgrade Checks
+
+            #region moreMeterialsFromRock_1
+            if (moreMeterialsFromRock_1_purchaseCount >= 2)
+            {
+                moreMeterialsFromRock_1_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalCopperBars >= moreMeterialsFromRock_1_price)
+                {
+                    if (spawnCopper_purchased) { moreMeterialsFromRock_1_plus.SetActive(true); }
+                    else { moreMeterialsFromRock_1_plus.SetActive(false); }
+                }
+                else
+                {
+                    moreMeterialsFromRock_1_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region moreMeterialsFromRock_2
+            if (moreMeterialsFromRock_2_purchaseCount >= 2)
+            {
+                moreMeterialsFromRock_2_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalIsmiumBar >= moreMeterialsFromRock_2_price)
+                {
+                    if (ismiumSpawn_purchased) { moreMeterialsFromRock_2_plus.SetActive(true); }
+                    else { moreMeterialsFromRock_2_plus.SetActive(false); }
+                }
+                else
+                {
+                    moreMeterialsFromRock_2_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region moreMeterialsFromRock_3
+            if (moreMeterialsFromRock_3_purchaseCount >= 2)
+            {
+                moreMeterialsFromRock_3_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalIridiumBars >= moreMeterialsFromRock_3_price)
+                {
+                    if (iridiumSpawn_purchased) { moreMeterialsFromRock_3_plus.SetActive(true); }
+                    else { moreMeterialsFromRock_3_plus.SetActive(false); }
+                }
+                else
+                {
+                    moreMeterialsFromRock_3_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region moreMeterialsFromRock_4
+            if (moreMeterialsFromRock_4_purchaseCount >= 2)
+            {
+                moreMeterialsFromRock_4_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalCobaltBars >= moreMeterialsFromRock_4_price)
+                {
+                    if (cobaltSpawn_purchased) { moreMeterialsFromRock_4_plus.SetActive(true); }
+                    else { moreMeterialsFromRock_4_plus.SetActive(false); }
+                }
+                else
+                {
+                    moreMeterialsFromRock_4_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region moreMeterialsFromRock_5
+            if (moreMeterialsFromRock_5_purchaseCount >= 2)
+            {
+                moreMeterialsFromRock_5_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalCopperBars >= moreMeterialsFromRock_5_price)
+                {
+                    if (spawnCopper_purchased) { moreMeterialsFromRock_5_plus.SetActive(true); }
+                    else { moreMeterialsFromRock_5_plus.SetActive(false); }
+                }
+                else
+                {
+                    moreMeterialsFromRock_5_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #endregion
+
+            #region Materials Worth More Upgrade Checks
+
+            #region marterialsWorthMore_1
+            if (marterialsWorthMore_1_purchaseCount >= 4)
+            {
+                marterialsWorthMore_1_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalGoldBars >= marterialsWorthMore_1_price)
+                {
+                    marterialsWorthMore_1_plus.SetActive(true);
+                }
+                else
+                {
+                    marterialsWorthMore_1_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region marterialsWorthMore_2
+            if (marterialsWorthMore_2_purchaseCount >= 5)
+            {
+                marterialsWorthMore_2_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalGoldBars >= marterialsWorthMore_2_price)
+                {
+                    marterialsWorthMore_2_plus.SetActive(true);
+                }
+                else
+                {
+                    marterialsWorthMore_2_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region marterialsWorthMore_3
+            if (marterialsWorthMore_3_purchaseCount >= 5)
+            {
+                marterialsWorthMore_3_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalIronBars >= marterialsWorthMore_3_price)
+                {
+                    if (spawnIron_purchased) { marterialsWorthMore_3_plus.SetActive(true); }
+                    else { marterialsWorthMore_3_plus.SetActive(false); }
+                }
+                else
+                {
+                    marterialsWorthMore_3_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region marterialsWorthMore_4
+            if (marterialsWorthMore_4_purchaseCount >= 5)
+            {
+                marterialsWorthMore_4_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalIsmiumBar >= marterialsWorthMore_4_price)
+                {
+                    if (ismiumSpawn_purchased) { marterialsWorthMore_4_plus.SetActive(true); }
+                    else { marterialsWorthMore_4_plus.SetActive(false); }
+                }
+                else
+                {
+                    marterialsWorthMore_4_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region marterialsWorthMore_5
+            if (marterialsWorthMore_5_purchaseCount >= 5)
+            {
+                marterialsWorthMore_5_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalIridiumBars >= marterialsWorthMore_5_price)
+                {
+                    if (iridiumSpawn_purchased) { marterialsWorthMore_5_plus.SetActive(true); }
+                    else { marterialsWorthMore_5_plus.SetActive(false); }
+                }
+                else
+                {
+                    marterialsWorthMore_5_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region marterialsWorthMore_6
+            if (marterialsWorthMore_6_purchaseCount >= 5)
+            {
+                marterialsWorthMore_6_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalCopperBars >= marterialsWorthMore_6_price)
+                {
+                    if (spawnCopper_purchased) { marterialsWorthMore_6_plus.SetActive(true); }
+                    else { marterialsWorthMore_6_plus.SetActive(false); }
+                }
+                else
+                {
+                    marterialsWorthMore_6_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region marterialsWorthMore_7
+            if (marterialsWorthMore_7_purchaseCount >= 5)
+            {
+                marterialsWorthMore_7_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalGoldBars >= marterialsWorthMore_7_price)
+                {
+                    marterialsWorthMore_7_plus.SetActive(true);
+                }
+                else
+                {
+                    marterialsWorthMore_7_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region marterialsWorthMore_8
+            if (marterialsWorthMore_8_purchaseCount >= 5)
+            {
+                marterialsWorthMore_8_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalGoldBars >= marterialsWorthMore_8_price)
+                {
+                    marterialsWorthMore_8_plus.SetActive(true);
+                }
+                else
+                {
+                    marterialsWorthMore_8_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #endregion
+
+            #region Gold & Other Materials Upgrade Checks
+
+            #region goldChunk_1
+            if (goldChunk_1_purchaseCount >= 5)
+            {
+                goldChunk_1_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalGoldBars >= goldChunk_1_price)
+                {
+                    goldChunk_1_plus.SetActive(true);
+                }
+                else
+                {
+                    goldChunk_1_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region goldChunk_2
+            if (goldChunk_2_purchaseCount >= 5)
+            {
+                goldChunk_2_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalCopperBars >= goldChunk_2_price)
+                {
+                    if (spawnCopper_purchased) { goldChunk_2_plus.SetActive(true); }
+                    else { goldChunk_2_plus.SetActive(false); }
+                }
+                else
+                {
+                    goldChunk_2_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region goldChunk_3
+            if (goldChunk_3_purchaseCount >= 5)
+            {
+                goldChunk_3_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalGoldBars >= goldChunk_3_price)
+                {
+                    goldChunk_3_plus.SetActive(true);
+                }
+                else
+                {
+                    goldChunk_3_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region goldChunk_4
+            if (goldChunk_4_purchaseCount >= 5)
+            {
+                goldChunk_4_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalUraniumBars >= goldChunk_4_price)
+                {
+                    if (uraniumSpawn_purchased) { goldChunk_4_plus.SetActive(true); }
+                    else { goldChunk_4_plus.SetActive(false); }
+                }
+                else
+                {
+                    goldChunk_4_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region goldChunk_5_
+            if (goldChunk_5_purchaseCount >= 5)
+            {
+                goldChunk_5__plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalIronBars >= goldChunk_5__price)
+                {
+                    if (spawnIron_purchased) { goldChunk_5__plus.SetActive(true); }
+                    else { goldChunk_5__plus.SetActive(false); }
+                }
+                else
+                {
+                    goldChunk_5__plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region fullGold_1
+            if (fullGold_1_purchaseCount >= 3)
+            {
+                fullGold_1_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalGoldBars >= fullGold_1_price)
+                {
+                    fullGold_1_plus.SetActive(true);
+                }
+                else
+                {
+                    fullGold_1_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region fullGold_2
+            if (fullGold_2_purchaseCount >= 3)
+            {
+                fullGold_2_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalGoldBars >= fullGold_2_price)
+                {
+                    fullGold_2_plus.SetActive(true);
+                }
+                else
+                {
+                    fullGold_2_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region fullGold_3
+            if (fullGold_3_purchaseCount >= 3)
+            {
+                fullGold_3_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalIronBars >= fullGold_3_price)
+                {
+                    if (spawnIron_purchased) { fullGold_3_plus.SetActive(true); }
+                    else { fullGold_3_plus.SetActive(false); }
+                }
+                else
+                {
+                    fullGold_3_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #endregion
+
+            #region Copper Upgrade Checks
+
+            #region spawnCopper
+            if (spawnCopper_purchaseCount >= 1)
+            {
+                spawnCopper_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalGoldBars >= spawnCopper_price)
+                {
+                    spawnCopper_plus.SetActive(true);
+                }
+                else
+                {
+                    spawnCopper_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region copperChunk_1
+            if (copperChunk_1_purchaseCount >= 3)
+            {
+                copperChunk_1_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalCopperBars >= copperChunk_1_price)
+                {
+                    if (spawnCopper_purchased) { copperChunk_1_plus.SetActive(true); }
+                    else { copperChunk_1_plus.SetActive(false); }
+                }
+                else
+                {
+                    copperChunk_1_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region copperChunk_2
+            if (copperChunk_2_purchaseCount >= 3)
+            {
+                copperChunk_2_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalUraniumBars >= copperChunk_2_price)
+                {
+                    if (uraniumSpawn_purchased) { copperChunk_2_plus.SetActive(true); }
+                    else { copperChunk_2_plus.SetActive(false); }
+                }
+                else
+                {
+                    copperChunk_2_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region copperChunk_3
+            if (copperChunk_3_purchaseCount >= 3)
+            {
+                copperChunk_3_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalIsmiumBar >= copperChunk_3_price)
+                {
+                    if (ismiumSpawn_purchased) { copperChunk_3_plus.SetActive(true); }
+                    else { copperChunk_3_plus.SetActive(false); }
+                }
+                else
+                {
+                    copperChunk_3_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region fullCopper_1
+            if (fullCopper_1_purchaseCount >= 2)
+            {
+                fullCopper_1_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalCopperBars >= fullCopper_1_price)
+                {
+                    if (spawnCopper_purchased) { fullCopper_1_plus.SetActive(true); }
+                    else { fullCopper_1_plus.SetActive(false); }
+                }
+                else
+                {
+                    fullCopper_1_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region fullCopper_2
+            if (fullCopper_2_purchaseCount >= 2)
+            {
+                fullCopper_2_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalCobaltBars >= fullCopper_2_price)
+                {
+                    if (cobaltSpawn_purchased) { fullCopper_2_plus.SetActive(true); }
+                    else { fullCopper_2_plus.SetActive(false); }
+                }
+                else
+                {
+                    fullCopper_2_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region fullCopper_3
+            if (fullCopper_3_purchaseCount >= 2)
+            {
+                fullCopper_3_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalIronBars >= fullCopper_3_price)
+                {
+                    if (spawnIron_purchased) { fullCopper_3_plus.SetActive(true); }
+                    else { fullCopper_3_plus.SetActive(false); }
+                }
+                else
+                {
+                    fullCopper_3_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #endregion
+
+            #region Iron Upgrade Checks
+
+            #region spawnIron
+            if (spawnIron_purchaseCount >= 1)
+            {
+                spawnIron_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalCopperBars >= spawnIron_price)
+                {
+                    if (spawnCopper_purchased) { spawnIron_plus.SetActive(true); }
+                    else { spawnIron_plus.SetActive(false); }
+                }
+                else
+                {
+                    spawnIron_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region ironChunk_1
+            if (ironChunk_1_purchaseCount >= 3)
+            {
+                ironChunk_1_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalIronBars >= ironChunk_1_price)
+                {
+                    if (spawnIron_purchased) { ironChunk_1_plus.SetActive(true); }
+                    else { ironChunk_1_plus.SetActive(false); }
+                }
+                else
+                {
+                    ironChunk_1_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region ironChunk_2
+            if (ironChunk_2_purchaseCount >= 3)
+            {
+                ironChunk_2_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalGoldBars >= ironChunk_2_price)
+                {
+                    ironChunk_2_plus.SetActive(true);
+                }
+                else
+                {
+                    ironChunk_2_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region fullIron_1
+            if (fullIron_1_purchaseCount >= 2)
+            {
+                fullIron_1_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalIronBars >= fullIron_1_price)
+                {
+                    if (spawnIron_purchased) { fullIron_1_plus.SetActive(true); }
+                    else { fullIron_1_plus.SetActive(false); }
+                }
+                else
+                {
+                    fullIron_1_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region fullIron_2
+            if (fullIron_2_purchaseCount >= 2)
+            {
+                fullIron_2_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalCopperBars >= fullIron_2_price)
+                {
+                    if (spawnCopper_purchased) { fullIron_2_plus.SetActive(true); }
+                    else { fullIron_2_plus.SetActive(false); }
+                }
+                else
+                {
+                    fullIron_2_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #endregion
+
+            #region Cobalt Upgrade Checks
+
+            #region cobaltSpawn
+            if (cobaltSpawn_purchaseCount >= 1)
+            {
+                cobaltSpawn_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalIronBars >= cobaltSpawn_price)
+                {
+                    if (spawnIron_purchased) { cobaltSpawn_plus.SetActive(true); }
+                    else { cobaltSpawn_plus.SetActive(false); }
+                }
+                else
+                {
+                    cobaltSpawn_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region cobaltChunk_1
+            if (cobaltChunk_1_purchaseCount >= 3)
+            {
+                cobaltChunk_1_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalCobaltBars >= cobaltChunk_1_price)
+                {
+                    if (cobaltSpawn_purchased) { cobaltChunk_1_plus.SetActive(true); }
+                    else { cobaltChunk_1_plus.SetActive(false); }
+                }
+                else
+                {
+                    cobaltChunk_1_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region fullCobalt_1
+            if (fullCobalt_1_purchaseCount >= 2)
+            {
+                fullCobalt_1_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalCobaltBars >= fullCobalt_1_price)
+                {
+                    if (cobaltSpawn_purchased) { fullCobalt_1_plus.SetActive(true); }
+                    else { fullCobalt_1_plus.SetActive(false); }
+                }
+                else
+                {
+                    fullCobalt_1_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #endregion
+
+            #region Uranium Upgrade Checks
+
+            #region uraniumSpawn
+            if (uraniumSpawn_purchaseCount >= 1)
+            {
+                uraniumSpawn_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalCobaltBars >= uraniumSpawn_price)
+                {
+                    if (cobaltSpawn_purchased) { uraniumSpawn_plus.SetActive(true); }
+                    else { uraniumSpawn_plus.SetActive(false); }
+                }
+                else
+                {
+                    uraniumSpawn_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region uraniumChunk_1
+            if (uraniumChunk_1_purchaseCount >= 3)
+            {
+                uraniumChunk_1_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalUraniumBars >= uraniumChunk_1_price)
+                {
+                    if (uraniumSpawn_purchased) { uraniumChunk_1_plus.SetActive(true); }
+                    else { uraniumChunk_1_plus.SetActive(false); }
+                }
+                else
+                {
+                    uraniumChunk_1_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region fullUranium_1
+            if (fullUranium_1_purchaseCount >= 2)
+            {
+                fullUranium_1_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalUraniumBars >= fullUranium_1_price)
+                {
+                    if (uraniumSpawn_purchased) { fullUranium_1_plus.SetActive(true); }
+                    else { fullUranium_1_plus.SetActive(false); }
+                }
+                else
+                {
+                    fullUranium_1_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #endregion
+
+            #region Ismium Upgrade Checks
+
+            #region ismiumSpawn
+            if (ismiumSpawn_purchaseCount >= 1)
+            {
+                ismiumSpawn_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalUraniumBars >= ismiumSpawn_price)
+                {
+                    if (uraniumSpawn_purchased) { ismiumSpawn_plus.SetActive(true); }
+                    else { ismiumSpawn_plus.SetActive(false); }
+                }
+                else
+                {
+                    ismiumSpawn_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region ismiumChunk_1
+            if (ismiumChunk_1_purchaseCount >= 3)
+            {
+                ismiumChunk_1_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalIsmiumBar >= ismiumChunk_1_price)
+                {
+                    if (ismiumSpawn_purchased) { ismiumChunk_1_plus.SetActive(true); }
+                    else { ismiumChunk_1_plus.SetActive(false); }
+                }
+                else
+                {
+                    ismiumChunk_1_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region fullIsmium_1
+            if (fullIsmium_1_purchaseCount >= 2)
+            {
+                fullIsmium_1_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalIsmiumBar >= fullIsmium_1_price)
+                {
+                    if (ismiumSpawn_purchased) { fullIsmium_1_plus.SetActive(true); }
+                    else { fullIsmium_1_plus.SetActive(false); }
+                }
+                else
+                {
+                    fullIsmium_1_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #endregion
+
+            #region Iridium Upgrade Checks
+
+            #region iridiumSpawn
+            if (iridiumSpawn_purchaseCount >= 1)
+            {
+                iridiumSpawn_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalIsmiumBar >= iridiumSpawn_price)
+                {
+                    if (ismiumSpawn_purchased) { iridiumSpawn_plus.SetActive(true); }
+                    else { iridiumSpawn_plus.SetActive(false); }
+                }
+                else
+                {
+                    iridiumSpawn_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region iridiumChunk_1
+            if (iridiumChunk_1_purchaseCount >= 3)
+            {
+                iridiumChunk_1_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalIridiumBars >= iridiumChunk_1_price)
+                {
+                    if (iridiumSpawn_purchased) { iridiumChunk_1_plus.SetActive(true); }
+                    else { iridiumChunk_1_plus.SetActive(false); }
+                }
+                else
+                {
+                    iridiumChunk_1_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region fullIridium_1
+            if (fullIridium_1_purchaseCount >= 2)
+            {
+                fullIridium_1_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalIridiumBars >= fullIridium_1_price)
+                {
+                    if (iridiumSpawn_purchased) { fullIridium_1_plus.SetActive(true); }
+                    else { fullIridium_1_plus.SetActive(false); }
+                }
+                else
+                {
+                    fullIridium_1_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #endregion
+
+            #region Painite Upgrade Checks
+
+            #region painiteSpawn
+            if (painiteSpawn_purchaseCount >= 1)
+            {
+                painiteSpawn_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalIridiumBars >= painiteSpawn_price)
+                {
+                    if (iridiumSpawn_purchased) { painiteSpawn_plus.SetActive(true); }
+                    else { painiteSpawn_plus.SetActive(false); }
+                }
+                else
+                {
+                    painiteSpawn_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region painiteChunk_1
+            if (painiteChunk_1_purchaseCount >= 3)
+            {
+                painiteChunk_1_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalPainiteBars >= painiteChunk_1_price)
+                {
+                    if (painiteSpawn_purchased) { painiteChunk_1_plus.SetActive(true); }
+                    else { painiteChunk_1_plus.SetActive(false); }
+                }
+                else
+                {
+                    painiteChunk_1_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region fullPainite_1
+            if (fullPainite_1_purchaseCount >= 2)
+            {
+                fullPainite_1_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalPainiteBars >= fullPainite_1_price)
+                {
+                    if (painiteSpawn_purchased) { fullPainite_1_plus.SetActive(true); }
+                    else { fullPainite_1_plus.SetActive(false); }
+                }
+                else
+                {
+                    fullPainite_1_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #endregion
+
+            #region Pickaxe Upgrade Checks
+
+            #region improvedPickaxe_1
+            if (improvedPickaxe_1_purchaseCount >= 3)
+            {
+                improvedPickaxe_1_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalGoldBars >= improvedPickaxe_1_price)
+                {
+                    improvedPickaxe_1_plus.SetActive(true);
+                }
+                else
+                {
+                    improvedPickaxe_1_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region improvedPickaxe_2
+            if (improvedPickaxe_2_purchaseCount >= 3)
+            {
+                improvedPickaxe_2_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalGoldBars >= improvedPickaxe_2_price)
+                {
+                    improvedPickaxe_2_plus.SetActive(true);
+                }
+                else
+                {
+                    improvedPickaxe_2_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region improvedPickaxe_3
+            if (improvedPickaxe_3_purchaseCount >= 3)
+            {
+                improvedPickaxe_3_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalCopperBars >= improvedPickaxe_3_price)
+                {
+                    if (spawnCopper_purchased) { improvedPickaxe_3_plus.SetActive(true); }
+                    else { improvedPickaxe_3_plus.SetActive(false); }
+                }
+                else
+                {
+                    improvedPickaxe_3_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region improvedPickaxe_4
+            if (improvedPickaxe_4_purchaseCount >= 3)
+            {
+                improvedPickaxe_4_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalIronBars >= improvedPickaxe_4_price)
+                {
+                    if (spawnIron_purchased) { improvedPickaxe_4_plus.SetActive(true); }
+                    else { improvedPickaxe_4_plus.SetActive(false); }
+                }
+                else
+                {
+                    improvedPickaxe_4_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region improvedPickaxe_5
+            if (improvedPickaxe_5_purchaseCount >= 3)
+            {
+                improvedPickaxe_5_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalCobaltBars >= improvedPickaxe_5_price)
+                {
+                    if (cobaltSpawn_purchased) { improvedPickaxe_5_plus.SetActive(true); }
+                    else { improvedPickaxe_5_plus.SetActive(false); }
+                }
+                else
+                {
+                    improvedPickaxe_5_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region improvedPickaxe_6
+            if (improvedPickaxe_6_purchaseCount >= 3)
+            {
+                improvedPickaxe_6_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalPainiteBars >= improvedPickaxe_6_price)
+                {
+                    if (painiteSpawn_purchased) { improvedPickaxe_6_plus.SetActive(true); }
+                    else { improvedPickaxe_6_plus.SetActive(false); }
+                }
+                else
+                {
+                    improvedPickaxe_6_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #endregion
+
+            #region Mining Area Upgrade Checks
+
+            #region biggerMiningErea_1
+            if (biggerMiningErea_1_purchaseCount >= 5)
+            {
+                biggerMiningErea_1_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalGoldBars >= biggerMiningErea_1_price)
+                {
+                    biggerMiningErea_1_plus.SetActive(true);
+                }
+                else
+                {
+                    biggerMiningErea_1_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region biggerMiningErea_2
+            if (biggerMiningErea_2_purchaseCount >= 5)
+            {
+                biggerMiningErea_2_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalCobaltBars >= biggerMiningErea_2_price)
+                {
+                    if (cobaltSpawn_purchased) { biggerMiningErea_2_plus.SetActive(true); }
+                    else { biggerMiningErea_2_plus.SetActive(false); }
+                }
+                else
+                {
+                    biggerMiningErea_2_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region biggerMiningErea_3
+            if (biggerMiningErea_3_purchaseCount >= 5)
+            {
+                biggerMiningErea_3_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalCopperBars >= biggerMiningErea_3_price)
+                {
+                    if (spawnCopper_purchased) { biggerMiningErea_3_plus.SetActive(true); }
+                    else { biggerMiningErea_3_plus.SetActive(false); }
+                }
+                else
+                {
+                    biggerMiningErea_3_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region biggerMiningErea_4
+            if (biggerMiningErea_4_purchaseCount >= 5)
+            {
+                biggerMiningErea_4_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalIsmiumBar >= biggerMiningErea_4_price)
+                {
+                    if (ismiumSpawn_purchased) { biggerMiningErea_4_plus.SetActive(true); }
+                    else { biggerMiningErea_4_plus.SetActive(false); }
+                }
+                else
+                {
+                    biggerMiningErea_4_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region shootCircleChance
+            if (shootCircleChance_purchaseCount >= 1)
+            {
+                shootCircleChance_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalCopperBars >= shootCircleChance_price)
+                {
+                    if (spawnCopper_purchased) { shootCircleChance_plus.SetActive(true); }
+                    else { shootCircleChance_plus.SetActive(false); }
+                }
+                else
+                {
+                    shootCircleChance_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region increaseAndDecreaseMinignErea
+            if (increaseAndDecreaseMinignErea_purchaseCount >= 1)
+            {
+                increaseAndDecreaseMinignErea_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalIronBars >= increaseAndDecreaseMinignErea_price)
+                {
+                    if (spawnIron_purchased) { increaseAndDecreaseMinignErea_plus.SetActive(true); }
+                    else { increaseAndDecreaseMinignErea_plus.SetActive(false); }
+                }
+                else
+                {
+                    increaseAndDecreaseMinignErea_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #endregion
+
+            #region Rock Spawning Per Rock & Per Time Upgrade Checks
+
+            #region spawnRockEveryXrock_1
+            if (spawnRockEveryXrock_1_purchaseCount >= 1)
+            {
+                spawnRockEveryXrock_1_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalGoldBars >= spawnRockEveryXrock_1_price)
+                {
+                    spawnRockEveryXrock_1_plus.SetActive(true);
+                }
+                else
+                {
+                    spawnRockEveryXrock_1_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region spawnRockEveryXrock_2
+            if (spawnRockEveryXrock_2_purchaseCount >= 1)
+            {
+                spawnRockEveryXrock_2_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalCopperBars >= spawnRockEveryXrock_2_price)
+                {
+                    if (spawnCopper_purchased) { spawnRockEveryXrock_2_plus.SetActive(true); }
+                    else { spawnRockEveryXrock_2_plus.SetActive(false); }
+                }
+                else
+                {
+                    spawnRockEveryXrock_2_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region spawnRockEveryXrock_3
+            if (spawnRockEveryXrock_3_purchaseCount >= 1)
+            {
+                spawnRockEveryXrock_3_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalGoldBars >= spawnRockEveryXrock_3_price)
+                {
+                    spawnRockEveryXrock_3_plus.SetActive(true);
+                }
+                else
+                {
+                    spawnRockEveryXrock_3_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region spawnXRockEveryXSecond_1
+            if (spawnXRockEveryXSecond_1_purchaseCount >= 1)
+            {
+                spawnXRockEveryXSecond_1_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalGoldBars >= spawnXRockEveryXSecond_1_price)
+                {
+                    spawnXRockEveryXSecond_1_plus.SetActive(true);
+                }
+                else
+                {
+                    spawnXRockEveryXSecond_1_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region spawnXRockEveryXSecond_2
+            if (spawnXRockEveryXSecond_2_purchaseCount >= 1)
+            {
+                spawnXRockEveryXSecond_2_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalGoldBars >= spawnXRockEveryXSecond_2_price)
+                {
+                    spawnXRockEveryXSecond_2_plus.SetActive(true);
+                }
+                else
+                {
+                    spawnXRockEveryXSecond_2_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region spawnXRockEveryXSecond_3
+            if (spawnXRockEveryXSecond_3_purchaseCount >= 1)
+            {
+                spawnXRockEveryXSecond_3_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalIridiumBars >= spawnXRockEveryXSecond_3_price)
+                {
+                    if (iridiumSpawn_purchased) { spawnXRockEveryXSecond_3_plus.SetActive(true); }
+                    else { spawnXRockEveryXSecond_3_plus.SetActive(false); }
+                }
+                else
+                {
+                    spawnXRockEveryXSecond_3_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #endregion
+
+            #region Chance To Spawn Rock When Mined Upgrade Checks
+
+            #region chanceToSpawnRockWhenMined_1
+            if (chanceToSpawnRockWhenMined_1_purchaseCount >= 6)
+            {
+                chanceToSpawnRockWhenMined_1_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalGoldBars >= chanceToSpawnRockWhenMined_1_price)
+                {
+                    chanceToSpawnRockWhenMined_1_plus.SetActive(true);
+                }
+                else
+                {
+                    chanceToSpawnRockWhenMined_1_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region chanceToSpawnRockWhenMined_2
+            if (chanceToSpawnRockWhenMined_2_purchaseCount >= 3)
+            {
+                chanceToSpawnRockWhenMined_2_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalCobaltBars >= chanceToSpawnRockWhenMined_2_price)
+                {
+                    if (cobaltSpawn_purchased) { chanceToSpawnRockWhenMined_2_plus.SetActive(true); }
+                    else { chanceToSpawnRockWhenMined_2_plus.SetActive(false); }
+                }
+                else
+                {
+                    chanceToSpawnRockWhenMined_2_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region chanceToSpawnRockWhenMined_3
+            if (chanceToSpawnRockWhenMined_3_purchaseCount >= 3)
+            {
+                chanceToSpawnRockWhenMined_3_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalIsmiumBar >= chanceToSpawnRockWhenMined_3_price)
+                {
+                    if (ismiumSpawn_purchased) { chanceToSpawnRockWhenMined_3_plus.SetActive(true); }
+                    else { chanceToSpawnRockWhenMined_3_plus.SetActive(false); }
+                }
+                else
+                {
+                    chanceToSpawnRockWhenMined_3_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region chanceToSpawnRockWhenMined_4
+            if (chanceToSpawnRockWhenMined_4_purchaseCount >= 3)
+            {
+                chanceToSpawnRockWhenMined_4_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalGoldBars >= chanceToSpawnRockWhenMined_4_price)
+                {
+                    chanceToSpawnRockWhenMined_4_plus.SetActive(true);
+                }
+                else
+                {
+                    chanceToSpawnRockWhenMined_4_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region chanceToSpawnRockWhenMined_5
+            if (chanceToSpawnRockWhenMined_5_purchaseCount >= 3)
+            {
+                chanceToSpawnRockWhenMined_5_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalIronBars >= chanceToSpawnRockWhenMined_5_price)
+                {
+                    if (spawnIron_purchased) { chanceToSpawnRockWhenMined_5_plus.SetActive(true); }
+                    else { chanceToSpawnRockWhenMined_5_plus.SetActive(false); }
+                }
+                else
+                {
+                    chanceToSpawnRockWhenMined_5_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region chanceToSpawnRockWhenMined_6
+            if (chanceToSpawnRockWhenMined_6_purchaseCount >= 1)
+            {
+                chanceToSpawnRockWhenMined_6_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalCopperBars >= chanceToSpawnRockWhenMined_6_price)
+                {
+                    if (spawnCopper_purchased) { chanceToSpawnRockWhenMined_6_plus.SetActive(true); }
+                    else { chanceToSpawnRockWhenMined_6_plus.SetActive(false); }
+                }
+                else
+                {
+                    chanceToSpawnRockWhenMined_6_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #endregion
+
+            #region Chance To Mine Random Rock & Spawn Pickaxe Every Second Upgrade Checks
+
+            #region chanceToMineRandomRock_1
+            if (chanceToMineRandomRock_1_purchaseCount >= 4)
+            {
+                chanceToMineRandomRock_1_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalCopperBars >= chanceToMineRandomRock_1_price)
+                {
+                    if (spawnCopper_purchased) { chanceToMineRandomRock_1_plus.SetActive(true); }
+                    else { chanceToMineRandomRock_1_plus.SetActive(false); }
+                }
+                else
+                {
+                    chanceToMineRandomRock_1_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region chanceToMineRandomRock_2
+            if (chanceToMineRandomRock_2_purchaseCount >= 3)
+            {
+                chanceToMineRandomRock_2_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalCobaltBars >= chanceToMineRandomRock_2_price)
+                {
+                    if (cobaltSpawn_purchased) { chanceToMineRandomRock_2_plus.SetActive(true); }
+                    else { chanceToMineRandomRock_2_plus.SetActive(false); }
+                }
+                else
+                {
+                    chanceToMineRandomRock_2_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region chanceToMineRandomRock_3
+            if (chanceToMineRandomRock_3_purchaseCount >= 3)
+            {
+                chanceToMineRandomRock_3_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalIronBars >= chanceToMineRandomRock_3_price)
+                {
+                    if (spawnIron_purchased) { chanceToMineRandomRock_3_plus.SetActive(true); }
+                    else { chanceToMineRandomRock_3_plus.SetActive(false); }
+                }
+                else
+                {
+                    chanceToMineRandomRock_3_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region chanceToMineRandomRock_4
+            if (chanceToMineRandomRock_4_purchaseCount >= 3)
+            {
+                chanceToMineRandomRock_4_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalIsmiumBar >= chanceToMineRandomRock_4_price)
+                {
+                    if (ismiumSpawn_purchased) { chanceToMineRandomRock_4_plus.SetActive(true); }
+                    else { chanceToMineRandomRock_4_plus.SetActive(false); }
+                }
+                else
+                {
+                    chanceToMineRandomRock_4_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region spawnPickaxeEverySecond_1
+            if (spawnPickaxeEverySecond_1_purchaseCount >= 1)
+            {
+                spawnPickaxeEverySecond_1_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalGoldBars >= spawnPickaxeEverySecond_1_price)
+                {
+                    spawnPickaxeEverySecond_1_plus.SetActive(true);
+                }
+                else
+                {
+                    spawnPickaxeEverySecond_1_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region spawnPickaxeEverySecond_2
+            if (spawnPickaxeEverySecond_2_purchaseCount >= 1)
+            {
+                spawnPickaxeEverySecond_2_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalGoldBars >= spawnPickaxeEverySecond_2_price)
+                {
+                    spawnPickaxeEverySecond_2_plus.SetActive(true);
+                }
+                else
+                {
+                    spawnPickaxeEverySecond_2_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region spawnPickaxeEverySecond_3
+            if (spawnPickaxeEverySecond_3_purchaseCount >= 1)
+            {
+                spawnPickaxeEverySecond_3_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalGoldBars >= spawnPickaxeEverySecond_3_price)
+                {
+                    spawnPickaxeEverySecond_3_plus.SetActive(true);
+                }
+                else
+                {
+                    spawnPickaxeEverySecond_3_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #endregion
+
+            #region More Time & Time Chance Upgrade Checks
+
+            #region moreTime_1
+            if (moreTime_1_purchaseCount >= 5)
+            {
+                moreTime_1_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalGoldBars >= moreTime_1_price)
+                {
+                    moreTime_1_plus.SetActive(true);
+                }
+                else
+                {
+                    moreTime_1_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region moreTime_2
+            if (moreTime_2_purchaseCount >= 4)
+            {
+                moreTime_2_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalCopperBars >= moreTime_2_price)
+                {
+                    if (spawnCopper_purchased) { moreTime_2_plus.SetActive(true); }
+                    else { moreTime_2_plus.SetActive(false); }
+                }
+                else
+                {
+                    moreTime_2_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region moreTime_3
+            if (moreTime_3_purchaseCount >= 3)
+            {
+                moreTime_3_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalCobaltBars >= moreTime_3_price)
+                {
+                    if (cobaltSpawn_purchased) { moreTime_3_plus.SetActive(true); }
+                    else { moreTime_3_plus.SetActive(false); }
+                }
+                else
+                {
+                    moreTime_3_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region moreTime_4
+            if (moreTime_4_purchaseCount >= 3)
+            {
+                moreTime_4_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalUraniumBars >= moreTime_4_price)
+                {
+                    if (uraniumSpawn_purchased) { moreTime_4_plus.SetActive(true); }
+                    else { moreTime_4_plus.SetActive(false); }
+                }
+                else
+                {
+                    moreTime_4_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region chanceToAdd1SecondEverySecond
+            if (chanceToAdd1SecondEverySecond_purchaseCount >= 1)
+            {
+                chanceToAdd1SecondEverySecond_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalIronBars >= chanceToAdd1SecondEverySecond_price)
+                {
+                    if (spawnIron_purchased) { chanceToAdd1SecondEverySecond_plus.SetActive(true); }
+                    else { chanceToAdd1SecondEverySecond_plus.SetActive(false); }
+                }
+                else
+                {
+                    chanceToAdd1SecondEverySecond_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region chanceAdd1SecondEveryRockMined
+            if (chanceAdd1SecondEveryRockMined_purchaseCount >= 1)
+            {
+                chanceAdd1SecondEveryRockMined_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalGoldBars >= chanceAdd1SecondEveryRockMined_price)
+                {
+                    chanceAdd1SecondEveryRockMined_plus.SetActive(true);
+                }
+                else
+                {
+                    chanceAdd1SecondEveryRockMined_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #endregion
+
+            #region Double XP Gold Chance Upgrade Checks
+
+            #region doubleXpGoldChance_1
+            if (doubleXpGoldChance_1_purchaseCount >= 3)
+            {
+                doubleXpGoldChance_1_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalGoldBars >= doubleXpGoldChance_1_price)
+                {
+                    doubleXpGoldChance_1_plus.SetActive(true);
+                }
+                else
+                {
+                    doubleXpGoldChance_1_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region doubleXpGoldChance_2
+            if (doubleXpGoldChance_2_purchaseCount >= 3)
+            {
+                doubleXpGoldChance_2_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalCobaltBars >= doubleXpGoldChance_2_price)
+                {
+                    if (cobaltSpawn_purchased) { doubleXpGoldChance_2_plus.SetActive(true); }
+                    else { doubleXpGoldChance_2_plus.SetActive(false); }
+                }
+                else
+                {
+                    doubleXpGoldChance_2_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region doubleXpGoldChance_3
+            if (doubleXpGoldChance_3_purchaseCount >= 3)
+            {
+                doubleXpGoldChance_3_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalGoldBars >= doubleXpGoldChance_3_price)
+                {
+                    doubleXpGoldChance_3_plus.SetActive(true);
+                }
+                else
+                {
+                    doubleXpGoldChance_3_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region doubleXpGoldChance_4
+            if (doubleXpGoldChance_4_purchaseCount >= 3)
+            {
+                doubleXpGoldChance_4_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalPainiteBars >= doubleXpGoldChance_4_price)
+                {
+                    if (painiteSpawn_purchased) { doubleXpGoldChance_4_plus.SetActive(true); }
+                    else { doubleXpGoldChance_4_plus.SetActive(false); }
+                }
+                else
+                {
+                    doubleXpGoldChance_4_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region doubleXpGoldChance_5
+            if (doubleXpGoldChance_5_purchaseCount >= 3)
+            {
+                doubleXpGoldChance_5_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalIridiumBars >= doubleXpGoldChance_5_price)
+                {
+                    if (iridiumSpawn_purchased) { doubleXpGoldChance_5_plus.SetActive(true); }
+                    else { doubleXpGoldChance_5_plus.SetActive(false); }
+                }
+                else
+                {
+                    doubleXpGoldChance_5_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #endregion
+
+            #region Misc Upgrade Checks
+
+            #region allProjectileDoubleDamageChance
+            if (allProjectileDoubleDamageChance_purchaseCount >= 1)
+            {
+                allProjectileDoubleDamageChance_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalIridiumBars >= allProjectileDoubleDamageChance_price)
+                {
+                    if (iridiumSpawn_purchased) { allProjectileDoubleDamageChance_plus.SetActive(true); }
+                    else { allProjectileDoubleDamageChance_plus.SetActive(false); }
+                }
+                else
+                {
+                    allProjectileDoubleDamageChance_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region allProjectileTriggerChance
+            if (allProjectileTriggerChance_purchaseCount >= 1)
+            {
+                allProjectileTriggerChance_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalPainiteBars >= allProjectileTriggerChance_price)
+                {
+                    if (painiteSpawn_purchased) { allProjectileTriggerChance_plus.SetActive(true); }
+                    else { allProjectileTriggerChance_plus.SetActive(false); }
+                }
+                else
+                {
+                    allProjectileTriggerChance_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region pickaxeDoubleDamageChance_1
+            if (pickaxeDoubleDamageChance_1_purchaseCount >= 3)
+            {
+                pickaxeDoubleDamageChance_1_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalGoldBars >= pickaxeDoubleDamageChance_1_price)
+                {
+                    pickaxeDoubleDamageChance_1_plus.SetActive(true);
+                }
+                else
+                {
+                    pickaxeDoubleDamageChance_1_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region pickaxeDoubleDamageChance_2
+            if (pickaxeDoubleDamageChance_2_purchaseCount >= 3)
+            {
+                pickaxeDoubleDamageChance_2_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalCobaltBars >= pickaxeDoubleDamageChance_2_price)
+                {
+                    if (cobaltSpawn_purchased) { pickaxeDoubleDamageChance_2_plus.SetActive(true); }
+                    else { pickaxeDoubleDamageChance_2_plus.SetActive(false); }
+                }
+                else
+                {
+                    pickaxeDoubleDamageChance_2_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region intaMineChance_1
+            if (intaMineChance_1_purchaseCount >= 3)
+            {
+                intaMineChance_1_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalCopperBars >= intaMineChance_1_price)
+                {
+                    if (spawnCopper_purchased) { intaMineChance_1_plus.SetActive(true); }
+                    else { intaMineChance_1_plus.SetActive(false); }
+                }
+                else
+                {
+                    intaMineChance_1_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region intaMineChance_2
+            if (intaMineChance_2_purchaseCount >= 3)
+            {
+                intaMineChance_2_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalIronBars >= intaMineChance_2_price)
+                {
+                    if (spawnIron_purchased) { intaMineChance_2_plus.SetActive(true); }
+                    else { intaMineChance_2_plus.SetActive(false); }
+                }
+                else
+                {
+                    intaMineChance_2_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region increaseSpawnChanceAllRocks
+            if (increaseSpawnChanceAllRocks_purchaseCount >= 1)
+            {
+                increaseSpawnChanceAllRocks_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalGoldBars >= increaseSpawnChanceAllRocks_price)
+                {
+                    increaseSpawnChanceAllRocks_plus.SetActive(true);
+                }
+                else
+                {
+                    increaseSpawnChanceAllRocks_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region craft2Material
+            if (craft2Material_purchaseCount >= 1)
+            {
+                craft2Material_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalGoldBars >= craft2Material_price)
+                {
+                    craft2Material_plus.SetActive(true);
+                }
+                else
+                {
+                    craft2Material_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #region finalUpgrade
+            if (finalUpgrade_purchaseCount >= 1)
+            {
+                finalUpgrade_plus.SetActive(false);
+            }
+            else
+            {
+                if (GoldAndOreMechanics.totalPainiteBars >= finalUpgrade_price)
+                {
+                    if (painiteSpawn_purchased) { finalUpgrade_plus.SetActive(true); }
+                    else { finalUpgrade_plus.SetActive(false); }
+                }
+                else
+                {
+                    finalUpgrade_plus.SetActive(false);
+                }
+            }
+            #endregion
+
+            #endregion
+
+            #region Endless upgrades
+            if (GoldAndOreMechanics.totalGoldBars >= endlessGold_price)
+            {
+                endlessGold_pluss.SetActive(true);
+            }
+            else
+            {
+                endlessGold_pluss.SetActive(false);
+            }
+
+            if (GoldAndOreMechanics.totalCopperBars >= endlessCopper_price)
+            {
+                endlessCopper_pluss.SetActive(true);
+            }
+            else
+            {
+                endlessCopper_pluss.SetActive(false);
+            }
+
+            if (GoldAndOreMechanics.totalIronBars >= endlessIron_price)
+            {
+                endlessIron_pluss.SetActive(true);
+            }
+            else
+            {
+                endlessIron_pluss.SetActive(false);
+            }
+
+            if (GoldAndOreMechanics.totalCobaltBars >= endlessCobalt_price)
+            {
+                endlessCobalt_pluss.SetActive(true);
+            }
+            else
+            {
+                endlessCobalt_pluss.SetActive(false);
+            }
+
+            if (GoldAndOreMechanics.totalUraniumBars >= endlessUranium_price)
+            {
+                endlessUranium_pluss.SetActive(true);
+            }
+            else
+            {
+                endlessUranium_pluss.SetActive(false);
+            }
+
+            if (GoldAndOreMechanics.totalIsmiumBar >= endlessIsmium_price)
+            {
+                endlessIsmium_pluss.SetActive(true);
+            }
+            else
+            {
+                endlessIsmium_pluss.SetActive(false);
+            }
+
+            if (GoldAndOreMechanics.totalIridiumBars >= endlessIridium_price)
+            {
+                endlessIridium_pluss.SetActive(true);
+            }
+            else
+            {
+                endlessIridium_pluss.SetActive(false);
+            }
+
+            if (GoldAndOreMechanics.totalPainiteBars >= endlessPainite_price)
+            {
+                endlessPainite_pluss.SetActive(true);
+            }
+            else
+            {
+                endlessPainite_pluss.SetActive(false);
+            }
+            #endregion
+
+            #endregion
+
             string colorName = "yo";
 
             if (Tooltip.goldPriceST)
@@ -850,7 +4022,119 @@ public class SkillTree : MonoBehaviour, IDataPersistence
                 }
             }
 
-            skillTreePrice_text.text = $"Price: {colorName}{LocalizationScript.currentSkillTreePrice.ToString("F0")}";
+            if(Tooltip.hoveringEndless == 0)
+            {
+                skillTreePrice_text.text = $"{LocalizationScript.price} {colorName}{FormatNumbers.FormatPoints(LocalizationScript.currentSkillTreePrice)}";
+            }
+            else
+            {
+                #region check endless
+                if (Tooltip.hoveringEndless == 1)
+                {
+                    if (GoldAndOreMechanics.totalGoldBars >= endlessGold_price)
+                    {
+                        colorName = "<color=green>";
+                    }
+                    else
+                    {
+                        colorName = "<color=red>";
+                    }
+
+                    skillTreePrice_text.text = $"{LocalizationScript.price} {colorName}{FormatNumbers.FormatPoints(SkillTree.endlessGold_price)}";
+                }
+                if (Tooltip.hoveringEndless == 8)
+                {
+                    if (GoldAndOreMechanics.totalPainiteBars >= endlessPainite_price)
+                    {
+                        colorName = "<color=green>";
+                    }
+                    else
+                    {
+                        colorName = "<color=red>";
+                    }
+
+                    skillTreePrice_text.text = $"{LocalizationScript.price} {colorName}{FormatNumbers.FormatPoints(SkillTree.endlessPainite_price)}";
+                }
+                if (Tooltip.hoveringEndless == 2)
+                {
+                    if (GoldAndOreMechanics.totalCopperBars >= endlessCopper_price)
+                    {
+                        colorName = "<color=green>";
+                    }
+                    else
+                    {
+                        colorName = "<color=red>";
+                    }
+
+                    skillTreePrice_text.text = $"{LocalizationScript.price} {colorName}{FormatNumbers.FormatPoints(SkillTree.endlessCopper_price)}";
+                }
+                if (Tooltip.hoveringEndless == 7)
+                {
+                    if (GoldAndOreMechanics.totalIridiumBars >= endlessIridium_price)
+                    {
+                        colorName = "<color=green>";
+                    }
+                    else
+                    {
+                        colorName = "<color=red>";
+                    }
+
+                    skillTreePrice_text.text = $"{LocalizationScript.price} {colorName}{FormatNumbers.FormatPoints(SkillTree.endlessIridium_price)}";
+                }
+                if (Tooltip.hoveringEndless == 3)
+                {
+                    if (GoldAndOreMechanics.totalIronBars >= endlessIron_price)
+                    {
+                        colorName = "<color=green>";
+                    }
+                    else
+                    {
+                        colorName = "<color=red>";
+                    }
+
+                    skillTreePrice_text.text = $"{LocalizationScript.price} {colorName}{FormatNumbers.FormatPoints(SkillTree.endlessIron_price)}";
+                }
+                if (Tooltip.hoveringEndless == 6)
+                {
+                    if (GoldAndOreMechanics.totalIsmiumBar >= endlessIsmium_price)
+                    {
+                        colorName = "<color=green>";
+                    }
+                    else
+                    {
+                        colorName = "<color=red>";
+                    }
+
+                    skillTreePrice_text.text = $"{LocalizationScript.price} {colorName}{FormatNumbers.FormatPoints(SkillTree.endlessIsmium_price)}";
+                }
+                if (Tooltip.hoveringEndless == 4)
+                {
+                    if (GoldAndOreMechanics.totalCobaltBars >= endlessCobalt_price)
+                    {
+                        colorName = "<color=green>";
+                    }
+                    else
+                    {
+                        colorName = "<color=red>";
+                    }
+
+                    skillTreePrice_text.text = $"{LocalizationScript.price} {colorName}{FormatNumbers.FormatPoints(SkillTree.endlessCobalt_price)}";
+                }
+                if (Tooltip.hoveringEndless == 5)
+                {
+                    if (GoldAndOreMechanics.totalUraniumBars >= endlessUranium_price)
+                    {
+                        colorName = "<color=green>";
+                    }
+                    else
+                    {
+                        colorName = "<color=red>";
+                    }
+
+                    skillTreePrice_text.text = $"{LocalizationScript.price} {colorName}{FormatNumbers.FormatPoints(SkillTree.endlessUranium_price)}";
+                }
+                #endregion
+            }
         }
     }
     #endregion
@@ -865,12 +4149,85 @@ public class SkillTree : MonoBehaviour, IDataPersistence
         if (Tooltip.ismiumPriceST) { GoldAndOreMechanics.totalIsmiumBar -= LocalizationScript.currentHoverPrice; }
         if (Tooltip.iridiumPriceST) { GoldAndOreMechanics.totalIridiumBars -= LocalizationScript.currentHoverPrice; }
         if (Tooltip.painitePriceST) { GoldAndOreMechanics.totalPainiteBars -= LocalizationScript.currentHoverPrice; }
-
     }
+
+    #region Mobile buttons
+    public static bool pressedPurchaseMobile;
+
+    public GameObject skillTreeDark, skillTreeTooltip;
+    public GameObject tooltipPurchase, tooltipClose;
+    public Animation skillTreeTooltipAnim;
+    public static string upgradeNameMobile;
+
+    public void CloseTooltip()
+    {
+        audioManager.Play("UI_Click1");
+
+        skillTreeDark.SetActive(false);
+        skillTreeTooltip.SetActive(false);
+        tooltipPurchase.SetActive(false);
+        tooltipClose.SetActive(false);
+    }
+
+    public void PurchaseMobileBTN()
+    {
+        pressedPurchaseMobile = true;
+        PurchaseUpgrade(upgradeNameMobile);
+
+        CheckPosOfBnts();
+    }
+
+    public void CheckPosOfBnts()
+    {
+        if (LocalizationScript.currentPurchaseCount < LocalizationScript.currentTotalPurchaseCount)
+        {
+            tooltipPurchase.SetActive(true);
+            tooltipPurchase.transform.localPosition = new Vector2(-100, -120);
+            tooltipClose.SetActive(true);
+            tooltipClose.transform.localPosition = new Vector2(100, -120);
+        }
+        else
+        {
+            tooltipPurchase.SetActive(false);
+            tooltipClose.SetActive(true);
+            tooltipClose.transform.localPosition = new Vector2(0, -120);
+        }
+    }
+    #endregion
+
+    //Set back the tooltip to scale = 1.15, 1.15, 1.15
 
     public void PurchaseUpgrade(string upgradeName)
     {
-        audioManager.Play("Click_1");
+        if(MobileAndTesting.isMobile == true)
+        {
+            audioManager.Play("UI_Click1");
+            upgradeNameMobile = upgradeName;
+
+            skillTreeDark.SetActive(true);
+            skillTreeTooltip.SetActive(true);
+
+            skillTreeTooltip.transform.localPosition = new Vector2(0, 50);
+            skillTreeTooltip.transform.localScale = new Vector2(1.69f, 1.69f);
+
+            CheckPosOfBnts();
+
+            if (pressedPurchaseMobile == false)
+            {
+                return;
+            }
+        }
+
+        double currentTotalCheck = 0;
+
+        if (Tooltip.goldPriceST) { currentTotalCheck = GoldAndOreMechanics.totalGoldBars; }
+        if (Tooltip.copperPriceST) { currentTotalCheck = GoldAndOreMechanics.totalCopperBars; }
+        if (Tooltip.ironPriceST) { currentTotalCheck = GoldAndOreMechanics.totalIronBars; }
+        if (Tooltip.cobaltPriceST) { currentTotalCheck = GoldAndOreMechanics.totalCobaltBars; }
+        if (Tooltip.uraniumPriceST) { currentTotalCheck = GoldAndOreMechanics.totalUraniumBars; }
+        if (Tooltip.ismiumPriceST) { currentTotalCheck = GoldAndOreMechanics.totalIsmiumBar; }
+        if (Tooltip.iridiumPriceST) { currentTotalCheck = GoldAndOreMechanics.totalIridiumBars; }
+        if (Tooltip.painitePriceST) { currentTotalCheck = GoldAndOreMechanics.totalPainiteBars; }
 
         //More rocks
         #region All spawn more Rocks
@@ -878,7 +4235,7 @@ public class SkillTree : MonoBehaviour, IDataPersistence
         #region spawnMoreRocks_1
         if (upgradeName == "MoreRocks1")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= spawnMoreRocks_1_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 totalRocksToSpawn += LocalizationScript.rockSpawnIncrease;
 
@@ -890,7 +4247,7 @@ public class SkillTree : MonoBehaviour, IDataPersistence
             }
             else
             {
-                PlayErrorSound();
+                ErrorSound();
                 return;
             }
         }
@@ -900,7 +4257,7 @@ public class SkillTree : MonoBehaviour, IDataPersistence
         #region spawnMoreRocks_2
         else if (upgradeName == "MoreRocks2")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= spawnMoreRocks_2_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 totalRocksToSpawn += LocalizationScript.rockSpawnIncrease;
 
@@ -911,13 +4268,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 ReduceBars();
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region spawnMoreRocks_3
         else if (upgradeName == "MoreRocks3")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= spawnMoreRocks_3_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 if (Tutorial.pressedOkAnvil == false) { tutorialScript.SetTutorial(3); }
 
@@ -930,13 +4292,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = spawnMoreRocks_3_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region spawnMoreRocks_4
         else if (upgradeName == "MoreRocks4")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= spawnMoreRocks_4_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 totalRocksToSpawn += LocalizationScript.rockSpawnIncrease;
 
@@ -946,13 +4313,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = spawnMoreRocks_4_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region spawnMoreRocks_5
         else if (upgradeName == "MoreRocks5")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= spawnMoreRocks_5_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 totalRocksToSpawn += LocalizationScript.rockSpawnIncrease;
 
@@ -962,13 +4334,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = spawnMoreRocks_5_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region spawnMoreRocks_6
         else if (upgradeName == "MoreRocks6")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= spawnMoreRocks_6_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 totalRocksToSpawn += LocalizationScript.rockSpawnIncrease;
 
@@ -978,13 +4355,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = spawnMoreRocks_6_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region spawnMoreRocks_7
         else if (upgradeName == "MoreRocks7")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= spawnMoreRocks_7_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 totalRocksToSpawn += LocalizationScript.rockSpawnIncrease;
 
@@ -994,13 +4376,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = spawnMoreRocks_7_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region spawnMoreRocks_8
         else if (upgradeName == "MoreRocks8")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= spawnMoreRocks_8_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 totalRocksToSpawn += LocalizationScript.rockSpawnIncrease;
 
@@ -1010,13 +4397,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = spawnMoreRocks_8_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region spawnMoreRocks_9
         else if (upgradeName == "MoreRocks9")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= spawnMoreRocks_9_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 totalRocksToSpawn += LocalizationScript.rockSpawnIncrease;
 
@@ -1025,6 +4417,11 @@ public class SkillTree : MonoBehaviour, IDataPersistence
                 spawnMoreRocks_9_purchaseCount += 1;
 
                 LocalizationScript.currentPurchaseCount = spawnMoreRocks_9_purchaseCount;
+            }
+            else
+            {
+                ErrorSound();
+                return;
             }
         }
         #endregion
@@ -1037,7 +4434,7 @@ public class SkillTree : MonoBehaviour, IDataPersistence
         #region moreMeterialsFromRock_1
         else if (upgradeName == "moreMeterialsFromRock_1")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= moreMeterialsFromRock_1_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 materialsFromChunkRocks += LocalizationScript.materialsFromChunkRocksIncrease;
                 materialsFromFullRocks += LocalizationScript.materialsFromFullRocksIncrease;
@@ -1048,13 +4445,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = moreMeterialsFromRock_1_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region moreMeterialsFromRock_2
         else if (upgradeName == "moreMeterialsFromRock_2")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= moreMeterialsFromRock_2_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 materialsFromChunkRocks += LocalizationScript.materialsFromChunkRocksIncrease;
                 materialsFromFullRocks += LocalizationScript.materialsFromFullRocksIncrease;
@@ -1065,13 +4467,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = moreMeterialsFromRock_2_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region moreMeterialsFromRock_3
         else if (upgradeName == "moreMeterialsFromRock_3")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= moreMeterialsFromRock_3_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 materialsFromChunkRocks += LocalizationScript.materialsFromChunkRocksIncrease;
                 materialsFromFullRocks += LocalizationScript.materialsFromFullRocksIncrease;
@@ -1082,13 +4489,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = moreMeterialsFromRock_3_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region moreMeterialsFromRock_4
         else if (upgradeName == "moreMeterialsFromRock_4")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= moreMeterialsFromRock_4_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 materialsFromChunkRocks += LocalizationScript.materialsFromChunkRocksIncrease;
                 materialsFromFullRocks += LocalizationScript.materialsFromFullRocksIncrease;
@@ -1099,13 +4511,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = moreMeterialsFromRock_4_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region moreMeterialsFromRock_5
         else if (upgradeName == "moreMeterialsFromRock_5")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= moreMeterialsFromRock_5_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 materialsFromChunkRocks += LocalizationScript.materialsFromChunkRocksIncrease;
                 materialsFromFullRocks += LocalizationScript.materialsFromFullRocksIncrease;
@@ -1115,6 +4532,11 @@ public class SkillTree : MonoBehaviour, IDataPersistence
                 moreMeterialsFromRock_5_purchaseCount += 1;
 
                 LocalizationScript.currentPurchaseCount = moreMeterialsFromRock_5_purchaseCount;
+            }
+            else
+            {
+                ErrorSound();
+                return;
             }
         }
         #endregion
@@ -1127,7 +4549,7 @@ public class SkillTree : MonoBehaviour, IDataPersistence
         #region marterialsWorthMore_1
         else if (upgradeName == "marterialsWorthMore_1")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= marterialsWorthMore_1_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 materialsTotalWorth += LocalizationScript.materialsWorthIncrease;
 
@@ -1137,13 +4559,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = marterialsWorthMore_1_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region marterialsWorthMore_2
         else if (upgradeName == "marterialsWorthMore_2")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= marterialsWorthMore_2_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 materialsTotalWorth += LocalizationScript.materialsWorthIncrease;
 
@@ -1153,13 +4580,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = marterialsWorthMore_2_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region marterialsWorthMore_3
         else if (upgradeName == "marterialsWorthMore_3")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= marterialsWorthMore_3_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 materialsTotalWorth += LocalizationScript.materialsWorthIncrease;
 
@@ -1169,13 +4601,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = marterialsWorthMore_3_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region marterialsWorthMore_4
         else if (upgradeName == "marterialsWorthMore_4")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= marterialsWorthMore_4_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 materialsTotalWorth += LocalizationScript.materialsWorthIncrease;
 
@@ -1185,13 +4622,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = marterialsWorthMore_4_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region marterialsWorthMore_5
         else if (upgradeName == "marterialsWorthMore_5")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= marterialsWorthMore_5_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 materialsTotalWorth += LocalizationScript.materialsWorthIncrease;
 
@@ -1201,13 +4643,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = marterialsWorthMore_5_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region marterialsWorthMore_6
         else if (upgradeName == "marterialsWorthMore_6")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= marterialsWorthMore_6_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 materialsTotalWorth += LocalizationScript.materialsWorthIncrease;
 
@@ -1217,13 +4664,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = marterialsWorthMore_6_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region marterialsWorthMore_7
         else if (upgradeName == "marterialsWorthMore_7")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= marterialsWorthMore_7_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 materialsTotalWorth += LocalizationScript.materialsWorthIncrease;
 
@@ -1233,13 +4685,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = marterialsWorthMore_7_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region marterialsWorthMore_8
         else if (upgradeName == "marterialsWorthMore_8")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= marterialsWorthMore_8_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 materialsTotalWorth += LocalizationScript.materialsWorthIncrease;
 
@@ -1248,6 +4705,11 @@ public class SkillTree : MonoBehaviour, IDataPersistence
                 marterialsWorthMore_8_purchaseCount += 1;
 
                 LocalizationScript.currentPurchaseCount = marterialsWorthMore_8_purchaseCount;
+            }
+            else
+            {
+                ErrorSound();
+                return;
             }
         }
         #endregion
@@ -1260,7 +4722,7 @@ public class SkillTree : MonoBehaviour, IDataPersistence
         #region goldChunk_1
         else if (upgradeName == "goldChunk_1")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= goldChunk_1_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 goldRockChance += LocalizationScript.goldRockChanceIncrease;
 
@@ -1270,13 +4732,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = goldChunk_1_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region goldChunk_2
         else if (upgradeName == "goldChunk_2")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= goldChunk_2_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 goldRockChance += LocalizationScript.goldRockChanceIncrease;
 
@@ -1286,13 +4753,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = goldChunk_2_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region goldChunk_3
         else if (upgradeName == "goldChunk_3")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= goldChunk_3_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 goldRockChance += LocalizationScript.goldRockChanceIncrease;
 
@@ -1302,13 +4774,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = goldChunk_3_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region goldChunk_4
         else if (upgradeName == "goldChunk_4")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= goldChunk_4_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 goldRockChance += LocalizationScript.goldRockChanceIncrease;
 
@@ -1318,13 +4795,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = goldChunk_4_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region goldChunk_5
         else if (upgradeName == "goldChunk_5_")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= goldChunk_5__price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 goldRockChance += LocalizationScript.goldRockChanceIncrease;
 
@@ -1334,13 +4816,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = goldChunk_5_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region fullGold_1
         else if (upgradeName == "fullGold_1")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= fullGold_1_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 if (Tutorial.pressedOkAnvil == false) { tutorialScript.SetTutorial(3); }
 
@@ -1352,13 +4839,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = fullGold_1_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region fullGold_2
         else if (upgradeName == "fullGold_2")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= fullGold_2_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 fullGoldRockChance += LocalizationScript.fullGoldRockChanceIncrease;
 
@@ -1368,13 +4860,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = fullGold_2_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region fullGold_3
         else if (upgradeName == "fullGold_3")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= fullGold_3_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 fullGoldRockChance += LocalizationScript.fullGoldRockChanceIncrease;
 
@@ -1383,6 +4880,11 @@ public class SkillTree : MonoBehaviour, IDataPersistence
                 fullGold_3_purchaseCount += 1;
 
                 LocalizationScript.currentPurchaseCount = fullGold_3_purchaseCount;
+            }
+            else
+            {
+                ErrorSound();
+                return;
             }
         }
         #endregion
@@ -1395,7 +4897,7 @@ public class SkillTree : MonoBehaviour, IDataPersistence
         #region spawnCopper
         else if (upgradeName == "spawnCopper")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= spawnCopper_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 if (Tutorial.pressedOkMine == false) { tutorialScript.SetTutorial(4); }
 
@@ -1405,6 +4907,13 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = spawnCopper_purchaseCount;
                 totalMaterialRocksSpawning += 1;
+
+                fallingCopper_skillTree.SetActive(true); fallingCopper_MainMenu.SetActive(true);
+            }
+            else
+            {
+                ErrorSound();
+                return;
             }
         }
         #endregion
@@ -1412,7 +4921,7 @@ public class SkillTree : MonoBehaviour, IDataPersistence
         #region copperChunk_1
         else if (upgradeName == "copperChunk_1")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= copperChunk_1_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 copperRockChance += LocalizationScript.copperRockChanceIncrease;
 
@@ -1422,13 +4931,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = copperChunk_1_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region copperChunk_2
         else if (upgradeName == "copperChunk_2")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= copperChunk_2_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 copperRockChance += LocalizationScript.copperRockChanceIncrease;
 
@@ -1438,13 +4952,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = copperChunk_2_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region copperChunk_3
         else if (upgradeName == "copperChunk_3")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= copperChunk_3_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 copperRockChance += LocalizationScript.copperRockChanceIncrease;
 
@@ -1454,13 +4973,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = copperChunk_3_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region fullCopper_1
         else if (upgradeName == "fullCopper_1")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= fullCopper_1_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 fullCopperRockChance += LocalizationScript.fullCopperRockChanceIncrease;
 
@@ -1470,13 +4994,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = fullCopper_1_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region fullCopper_2
         else if (upgradeName == "fullCopper_2")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= fullCopper_2_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 fullCopperRockChance += LocalizationScript.fullCopperRockChanceIncrease;
 
@@ -1486,13 +5015,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = fullCopper_2_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region fullCopper_3
         else if (upgradeName == "fullCopper_3")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= fullCopper_3_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 fullCopperRockChance += LocalizationScript.fullCopperRockChanceIncrease;
 
@@ -1501,6 +5035,11 @@ public class SkillTree : MonoBehaviour, IDataPersistence
                 fullCopper_3_purchaseCount += 1;
 
                 LocalizationScript.currentPurchaseCount = fullCopper_3_purchaseCount;
+            }
+            else
+            {
+                ErrorSound();
+                return;
             }
         }
         #endregion
@@ -1513,7 +5052,7 @@ public class SkillTree : MonoBehaviour, IDataPersistence
         #region spawnIron
         else if (upgradeName == "spawnIron")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= spawnIron_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 ReduceBars();
                 spawnIron_purchased = true;
@@ -1521,6 +5060,13 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = spawnIron_purchaseCount;
                 totalMaterialRocksSpawning += 1;
+
+                if (spawnIron_purchased == true) { fallingIron_skillTree.SetActive(true); fallingIron_MainMenu.SetActive(true); }
+            }
+            else
+            {
+                ErrorSound();
+                return;
             }
         }
         #endregion
@@ -1528,7 +5074,7 @@ public class SkillTree : MonoBehaviour, IDataPersistence
         #region ironChunk_1
         else if (upgradeName == "ironChunk_1")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= ironChunk_1_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 ironRockChance += LocalizationScript.ironRockChanceIncrease;
 
@@ -1538,13 +5084,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = ironChunk_1_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region ironChunk_2
         else if (upgradeName == "ironChunk_2")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= ironChunk_2_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 ironRockChance += LocalizationScript.ironRockChanceIncrease;
 
@@ -1554,13 +5105,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = ironChunk_2_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region fullIron_1
         else if (upgradeName == "fullIron_1")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= fullIron_1_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 fullIronRockChance += LocalizationScript.fullIronRockChanceIncrease;
 
@@ -1570,13 +5126,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = fullIron_1_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region fullIron_2
         else if (upgradeName == "fullIron_2")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= fullIron_2_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 fullIronRockChance += LocalizationScript.fullIronRockChanceIncrease;
 
@@ -1585,6 +5146,11 @@ public class SkillTree : MonoBehaviour, IDataPersistence
                 fullIron_2_purchaseCount += 1;
 
                 LocalizationScript.currentPurchaseCount = fullIron_2_purchaseCount;
+            }
+            else
+            {
+                ErrorSound();
+                return;
             }
         }
         #endregion
@@ -1597,7 +5163,7 @@ public class SkillTree : MonoBehaviour, IDataPersistence
         #region cobaltSpawn
         else if (upgradeName == "cobaltSpawn")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= cobaltSpawn_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 ReduceBars();
                 cobaltSpawn_purchased = true;
@@ -1606,6 +5172,13 @@ public class SkillTree : MonoBehaviour, IDataPersistence
                 LocalizationScript.currentPurchaseCount = cobaltSpawn_purchaseCount;
 
                 totalMaterialRocksSpawning += 1;
+
+                if (cobaltSpawn_purchased == true) { fallingCobalt_skillTree.SetActive(true); fallingCobalt_MainMenu.SetActive(true); }
+            }
+            else
+            {
+                ErrorSound();
+                return;
             }
         }
         #endregion
@@ -1613,7 +5186,7 @@ public class SkillTree : MonoBehaviour, IDataPersistence
         #region cobaltChunk_1
         else if (upgradeName == "cobaltChunk_1")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= cobaltChunk_1_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 cobaltRockChance += LocalizationScript.cobaltRockChanceIncrease;
 
@@ -1623,13 +5196,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = cobaltChunk_1_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region fullCobalt_1
         else if (upgradeName == "fullCobalt_1")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= fullCobalt_1_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 fullCobaltRockChance += LocalizationScript.fullCobaltRockChanceIncrease;
 
@@ -1638,6 +5216,11 @@ public class SkillTree : MonoBehaviour, IDataPersistence
                 fullCobalt_1_purchaseCount += 1;
 
                 LocalizationScript.currentPurchaseCount = fullCobalt_1_purchaseCount;
+            }
+            else
+            {
+                ErrorSound();
+                return;
             }
         }
         #endregion
@@ -1650,7 +5233,7 @@ public class SkillTree : MonoBehaviour, IDataPersistence
         #region uraniumSpawn
         else if (upgradeName == "uraniumSpawn")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= uraniumSpawn_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 ReduceBars();
                 uraniumSpawn_purchased = true;
@@ -1659,6 +5242,13 @@ public class SkillTree : MonoBehaviour, IDataPersistence
                 LocalizationScript.currentPurchaseCount = uraniumSpawn_purchaseCount;
 
                 totalMaterialRocksSpawning += 1;
+
+                if (uraniumSpawn_purchased == true) { fallingUranium_skillTree.SetActive(true); fallingUranium_MainMenu.SetActive(true); }
+            }
+            else
+            {
+                ErrorSound();
+                return;
             }
         }
         #endregion
@@ -1666,7 +5256,7 @@ public class SkillTree : MonoBehaviour, IDataPersistence
         #region uraniumChunk_1
         else if (upgradeName == "uraniumChunk_1")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= uraniumChunk_1_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 uraniumRockChance += LocalizationScript.uraniumRockChanceIncrease;
 
@@ -1676,13 +5266,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = uraniumChunk_1_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region fullUranium_1
         else if (upgradeName == "fullUranium_1")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= fullUranium_1_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 fullUraniumRockChance += LocalizationScript.fullUraniumRockChanceIncrease;
 
@@ -1691,6 +5286,11 @@ public class SkillTree : MonoBehaviour, IDataPersistence
                 fullUranium_1_purchaseCount += 1;
 
                 LocalizationScript.currentPurchaseCount = fullUranium_1_purchaseCount;
+            }
+            else
+            {
+                ErrorSound();
+                return;
             }
         }
         #endregion
@@ -1703,7 +5303,7 @@ public class SkillTree : MonoBehaviour, IDataPersistence
         #region ismiumSpawn
         else if (upgradeName == "ismiumSpawn")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= ismiumSpawn_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 ReduceBars();
                 ismiumSpawn_purchased = true;
@@ -1712,6 +5312,13 @@ public class SkillTree : MonoBehaviour, IDataPersistence
                 LocalizationScript.currentPurchaseCount = ismiumSpawn_purchaseCount;
 
                 totalMaterialRocksSpawning += 1;
+
+                if (ismiumSpawn_purchased == true) { fallingIsmium_skillTree.SetActive(true); fallingIsmium_MainMenu.SetActive(true); }
+            }
+            else
+            {
+                ErrorSound();
+                return;
             }
         }
         #endregion
@@ -1719,7 +5326,7 @@ public class SkillTree : MonoBehaviour, IDataPersistence
         #region ismiumChunk_1
         else if (upgradeName == "ismiumChunk_1")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= ismiumChunk_1_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 ismiumRockChance += LocalizationScript.ismiumRockChanceIncrease;
 
@@ -1729,13 +5336,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = ismiumChunk_1_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region fullIsmium_1
         else if (upgradeName == "fullIsmium_1")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= fullIsmium_1_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 fullIsmiumRockChance += LocalizationScript.fullIsmiumRockChanceIncrease;
 
@@ -1744,6 +5356,11 @@ public class SkillTree : MonoBehaviour, IDataPersistence
                 fullIsmium_1_purchaseCount += 1;
 
                 LocalizationScript.currentPurchaseCount = fullIsmium_1_purchaseCount;
+            }
+            else
+            {
+                ErrorSound();
+                return;
             }
         }
         #endregion
@@ -1756,7 +5373,7 @@ public class SkillTree : MonoBehaviour, IDataPersistence
         #region iridiumSpawn
         else if (upgradeName == "iridiumSpawn")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= iridiumSpawn_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 ReduceBars();
                 iridiumSpawn_purchased = true;
@@ -1765,6 +5382,13 @@ public class SkillTree : MonoBehaviour, IDataPersistence
                 LocalizationScript.currentPurchaseCount = iridiumSpawn_purchaseCount;
 
                 totalMaterialRocksSpawning += 1;
+
+                if (iridiumSpawn_purchased == true) { fallingIridium_skillTree.SetActive(true); fallingIridium_MainMenu.SetActive(true); }
+            }
+            else
+            {
+                ErrorSound();
+                return;
             }
         }
         #endregion
@@ -1772,7 +5396,7 @@ public class SkillTree : MonoBehaviour, IDataPersistence
         #region iridiumChunk_1
         else if (upgradeName == "iridiumChunk_1")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= iridiumChunk_1_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 iridiumRockChance += LocalizationScript.iridiumRockChanceIncrease;
 
@@ -1782,13 +5406,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = iridiumChunk_1_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region fullIridium_1
         else if (upgradeName == "fullIridium_1")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= fullIridium_1_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 fullIridiumRockChance += LocalizationScript.fullIridiumRockChanceIncrease;
 
@@ -1797,6 +5426,11 @@ public class SkillTree : MonoBehaviour, IDataPersistence
                 fullIridium_1_purchaseCount += 1;
 
                 LocalizationScript.currentPurchaseCount = fullIridium_1_purchaseCount;
+            }
+            else
+            {
+                ErrorSound();
+                return;
             }
         }
         #endregion
@@ -1809,7 +5443,7 @@ public class SkillTree : MonoBehaviour, IDataPersistence
         #region painiteSpawn
         else if (upgradeName == "painiteSpawn")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= painiteSpawn_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 ReduceBars();
                 painiteSpawn_purchased = true;
@@ -1818,6 +5452,13 @@ public class SkillTree : MonoBehaviour, IDataPersistence
                 LocalizationScript.currentPurchaseCount = painiteSpawn_purchaseCount;
 
                 totalMaterialRocksSpawning += 1;
+
+                if (painiteSpawn_purchased == true) { fallingPainite_skillTree.SetActive(true); fallingPainite_MainMenu.SetActive(true); }
+            }
+            else
+            {
+                ErrorSound();
+                return;
             }
         }
         #endregion
@@ -1825,7 +5466,7 @@ public class SkillTree : MonoBehaviour, IDataPersistence
         #region painiteChunk_1
         else if (upgradeName == "painiteChunk_1")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= painiteChunk_1_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 painiteRockChance += LocalizationScript.painiteRockChanceIncrease;
 
@@ -1835,13 +5476,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = painiteChunk_1_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region fullPainite_1
         else if (upgradeName == "fullPainite_1")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= fullPainite_1_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 fullPainiteRockChance += LocalizationScript.fullPainiteRockChanceIncrease;
 
@@ -1850,6 +5496,11 @@ public class SkillTree : MonoBehaviour, IDataPersistence
                 fullPainite_1_purchaseCount += 1;
 
                 LocalizationScript.currentPurchaseCount = fullPainite_1_purchaseCount;
+            }
+            else
+            {
+                ErrorSound();
+                return;
             }
         }
         #endregion
@@ -1862,7 +5513,7 @@ public class SkillTree : MonoBehaviour, IDataPersistence
         #region moreXP_1
         else if (upgradeName == "MoreXP1")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= moreXP_1_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 LevelMechanics.xpFromRock += LocalizationScript.xpIncrease;
 
@@ -1872,13 +5523,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = moreXP_1_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region moreXP_2
         else if (upgradeName == "MoreXP2")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= moreXP_2_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 LevelMechanics.xpFromRock += LocalizationScript.xpIncrease;
 
@@ -1888,13 +5544,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = moreXP_2_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region moreXP_3
         else if (upgradeName == "MoreXP3")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= moreXP_3_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 LevelMechanics.xpFromRock += LocalizationScript.xpIncrease;
 
@@ -1904,13 +5565,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = moreXP_3_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region moreXP_4
         else if (upgradeName == "MoreXP4")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= moreXP_4_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 LevelMechanics.xpFromRock += LocalizationScript.xpIncrease;
 
@@ -1920,13 +5586,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = moreXP_4_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region moreXP_5
         else if (upgradeName == "MoreXP5")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= moreXP_5_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 LevelMechanics.xpFromRock += LocalizationScript.xpIncrease;
 
@@ -1936,13 +5607,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = moreXP_5_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region moreXP_6
         else if (upgradeName == "MoreXP6")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= moreXP_6_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 LevelMechanics.xpFromRock += LocalizationScript.xpIncrease;
 
@@ -1952,13 +5628,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = moreXP_6_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region moreXP_7
         else if (upgradeName == "MoreXP7")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= moreXP_7_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 LevelMechanics.xpFromRock += LocalizationScript.xpIncrease;
 
@@ -1968,13 +5649,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = moreXP_7_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region moreXP_8
         else if (upgradeName == "MoreXP8")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= moreXP_8_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 LevelMechanics.xpFromRock += LocalizationScript.xpIncrease;
 
@@ -1984,13 +5670,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = moreXP_8_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region talentPointsPerXlevel_1
         else if (upgradeName == "TalentPointsPerXLevel1")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= talentPointsPerXlevel_1_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 extraTalentPointPerLevel -= LocalizationScript.moreTalentPointsReduce;
 
@@ -2000,13 +5691,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = talentPointsPerXlevel_1_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region talentPointsPerXlevel_2
         else if (upgradeName == "TalentPointsPerXLevel2")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= talentPointsPerXlevel_2_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 extraTalentPointPerLevel -= LocalizationScript.moreTalentPointsReduce;
 
@@ -2016,13 +5712,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = talentPointsPerXlevel_2_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region talentPointsPerXlevel_3
         else if (upgradeName == "TalentPointsPerXLevel3")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= talentPointsPerXlevel_3_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 extraTalentPointPerLevel -= LocalizationScript.moreTalentPointsReduce;
 
@@ -2031,6 +5732,11 @@ public class SkillTree : MonoBehaviour, IDataPersistence
                 talentPointsPerXlevel_3_purchaseCount += 1;
 
                 LocalizationScript.currentPurchaseCount = talentPointsPerXlevel_3_purchaseCount;
+            }
+            else
+            {
+                ErrorSound();
+                return;
             }
         }
         #endregion
@@ -2043,7 +5749,7 @@ public class SkillTree : MonoBehaviour, IDataPersistence
         #region improvedPickaxe_1
         else if (upgradeName == "improvedPickaxe_1")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= improvedPickaxe_1_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 if (Tutorial.pressedOkAnvil == false) { tutorialScript.SetTutorial(3); }
 
@@ -2056,13 +5762,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = improvedPickaxe_1_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region improvedPickaxe_2
         else if (upgradeName == "improvedPickaxe_2")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= improvedPickaxe_2_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 improvedPickaxeStrength += LocalizationScript.improvedPickaxeIncrease;
                 reducePickaxeMineTime += LocalizationScript.improvedPickaxeIncrease;
@@ -2073,13 +5784,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = improvedPickaxe_2_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region improvedPickaxe_3
         else if (upgradeName == "improvedPickaxe_3")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= improvedPickaxe_3_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 improvedPickaxeStrength += LocalizationScript.improvedPickaxeIncrease;
                 reducePickaxeMineTime += LocalizationScript.improvedPickaxeIncrease;
@@ -2090,13 +5806,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = improvedPickaxe_3_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region improvedPickaxe_4
         else if (upgradeName == "improvedPickaxe_4")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= improvedPickaxe_4_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 improvedPickaxeStrength += LocalizationScript.improvedPickaxeIncrease;
                 reducePickaxeMineTime += LocalizationScript.improvedPickaxeIncrease;
@@ -2107,13 +5828,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = improvedPickaxe_4_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region improvedPickaxe_5
         else if (upgradeName == "improvedPickaxe_5")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= improvedPickaxe_5_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 improvedPickaxeStrength += LocalizationScript.improvedPickaxeIncrease;
                 reducePickaxeMineTime += LocalizationScript.improvedPickaxeIncrease;
@@ -2124,13 +5850,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = improvedPickaxe_5_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region improvedPickaxe_6
         else if (upgradeName == "improvedPickaxe_6")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= improvedPickaxe_6_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 improvedPickaxeStrength += LocalizationScript.improvedPickaxeIncrease;
                 reducePickaxeMineTime += LocalizationScript.improvedPickaxeIncrease;
@@ -2140,6 +5871,11 @@ public class SkillTree : MonoBehaviour, IDataPersistence
                 improvedPickaxe_6_purchaseCount += 1;
 
                 LocalizationScript.currentPurchaseCount = improvedPickaxe_6_purchaseCount;
+            }
+            else
+            {
+                ErrorSound();
+                return;
             }
         }
         #endregion
@@ -2152,7 +5888,7 @@ public class SkillTree : MonoBehaviour, IDataPersistence
         #region biggerMiningErea_1
         else if (upgradeName == "biggerMiningErea_1")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= biggerMiningErea_1_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 miningAreaSize += LocalizationScript.miningAreaIncrease;
 
@@ -2162,13 +5898,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = biggerMiningErea_1_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region biggerMiningErea_2
         else if (upgradeName == "biggerMiningErea_2")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= biggerMiningErea_2_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 miningAreaSize += LocalizationScript.miningAreaIncrease;
 
@@ -2178,13 +5919,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = biggerMiningErea_2_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region biggerMiningErea_3
         else if (upgradeName == "biggerMiningErea_3")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= biggerMiningErea_3_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 miningAreaSize += LocalizationScript.miningAreaIncrease;
 
@@ -2194,13 +5940,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = biggerMiningErea_3_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region biggerMiningErea_4
         else if (upgradeName == "biggerMiningErea_4")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= biggerMiningErea_4_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 miningAreaSize += LocalizationScript.miningAreaIncrease;
 
@@ -2210,13 +5961,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = biggerMiningErea_4_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region shootCircleChance
         else if (upgradeName == "shootCircleChance")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= shootCircleChance_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 ReduceBars();
                 shootCircleChance_purchased = true;
@@ -2224,19 +5980,29 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = shootCircleChance_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region increaseAndDecreaseMinignErea
         else if (upgradeName == "increaseAndDecreaseMinignErea")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= increaseAndDecreaseMinignErea_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 ReduceBars();
                 increaseAndDecreaseMinignErea_purchased = true;
                 increaseAndDecreaseMinignErea_purchaseCount += 1;
 
                 LocalizationScript.currentPurchaseCount = increaseAndDecreaseMinignErea_purchaseCount;
+            }
+            else
+            {
+                ErrorSound();
+                return;
             }
         }
         #endregion
@@ -2249,7 +6015,7 @@ public class SkillTree : MonoBehaviour, IDataPersistence
         #region spawnRockEveryXrock_1
         else if (upgradeName == "spawnRockEveryXrock_1")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= spawnRockEveryXrock_1_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 spawnRockEveryXRock -= LocalizationScript.spawnEveryRockIncrease;
 
@@ -2259,13 +6025,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = spawnRockEveryXrock_1_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region spawnRockEveryXrock_2
         else if (upgradeName == "spawnRockEveryXrock_2")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= spawnRockEveryXrock_2_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 spawnRockEveryXRock -= LocalizationScript.spawnEveryRockIncrease;
 
@@ -2275,13 +6046,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = spawnRockEveryXrock_2_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region spawnRockEveryXrock_3
         else if (upgradeName == "spawnRockEveryXrock_3")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= spawnRockEveryXrock_3_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 spawnRockEveryXRock -= LocalizationScript.spawnEveryRockIncrease;
 
@@ -2291,13 +6067,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = spawnRockEveryXrock_3_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region spawnXRockEveryXSecond_1
         else if (upgradeName == "spawnXRockEveryXSecond_1")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= spawnXRockEveryXSecond_1_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 spawnXRockEveryXSecond -= LocalizationScript.spawnEverySecondIncrease;
 
@@ -2307,13 +6088,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = spawnXRockEveryXSecond_1_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region spawnXRockEveryXSecond_2
         else if (upgradeName == "spawnXRockEveryXSecond_2")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= spawnXRockEveryXSecond_2_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 spawnXRockEveryXSecond -= LocalizationScript.spawnEverySecondIncrease;
 
@@ -2323,13 +6109,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = spawnXRockEveryXSecond_2_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region spawnXRockEveryXSecond_3
         else if (upgradeName == "spawnXRockEveryXSecond_3")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= spawnXRockEveryXSecond_3_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 spawnXRockEveryXSecond -= LocalizationScript.spawnEverySecondIncrease;
 
@@ -2339,13 +6130,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = spawnXRockEveryXSecond_3_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region chanceToSpawnRockWhenMined_1
         else if (upgradeName == "chanceToSpawnRockWhenMined_1")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= chanceToSpawnRockWhenMined_1_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 chanceToSpawnRockWhenMined += LocalizationScript.spawnWhenMinedIncrease;
 
@@ -2355,13 +6151,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = chanceToSpawnRockWhenMined_1_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region chanceToSpawnRockWhenMined_2
         else if (upgradeName == "chanceToSpawnRockWhenMined_2")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= chanceToSpawnRockWhenMined_2_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 chanceToSpawnRockWhenMined += LocalizationScript.spawnWhenMinedIncrease;
 
@@ -2371,13 +6172,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = chanceToSpawnRockWhenMined_2_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region chanceToSpawnRockWhenMined_3
         else if (upgradeName == "chanceToSpawnRockWhenMined_3")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= chanceToSpawnRockWhenMined_3_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 chanceToSpawnRockWhenMined += LocalizationScript.spawnWhenMinedIncrease;
 
@@ -2387,13 +6193,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = chanceToSpawnRockWhenMined_3_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region chanceToSpawnRockWhenMined_4
         else if (upgradeName == "chanceToSpawnRockWhenMined_4")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= chanceToSpawnRockWhenMined_4_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 chanceToSpawnRockWhenMined += LocalizationScript.spawnWhenMinedIncrease;
 
@@ -2403,13 +6214,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = chanceToSpawnRockWhenMined_4_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region chanceToSpawnRockWhenMined_5
         else if (upgradeName == "chanceToSpawnRockWhenMined_5")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= chanceToSpawnRockWhenMined_5_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 chanceToSpawnRockWhenMined += LocalizationScript.spawnWhenMinedIncrease;
 
@@ -2419,13 +6235,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = chanceToSpawnRockWhenMined_5_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region chanceToSpawnRockWhenMined_6
         else if (upgradeName == "chanceToSpawnRockWhenMined_6")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= chanceToSpawnRockWhenMined_6_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 chanceToSpawnRockWhenMined += LocalizationScript.spawnWhenMinedIncrease;
 
@@ -2434,6 +6255,11 @@ public class SkillTree : MonoBehaviour, IDataPersistence
                 chanceToSpawnRockWhenMined_6_purchaseCount += 1;
 
                 LocalizationScript.currentPurchaseCount = chanceToSpawnRockWhenMined_6_purchaseCount;
+            }
+            else
+            {
+                ErrorSound();
+                return;
             }
         }
         #endregion
@@ -2446,7 +6272,7 @@ public class SkillTree : MonoBehaviour, IDataPersistence
         #region chanceToMineRandomRock_1
         else if (upgradeName == "chanceToMineRandomRock_1")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= chanceToMineRandomRock_1_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 chanceToMineRandomRock += LocalizationScript.chanceToMineRandomRockIncrease;
 
@@ -2456,13 +6282,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = chanceToMineRandomRock_1_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region chanceToMineRandomRock_2
         else if (upgradeName == "chanceToMineRandomRock_2")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= chanceToMineRandomRock_2_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 chanceToMineRandomRock += LocalizationScript.chanceToMineRandomRockIncrease;
 
@@ -2472,13 +6303,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = chanceToMineRandomRock_2_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region chanceToMineRandomRock_3
         else if (upgradeName == "chanceToMineRandomRock_3")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= chanceToMineRandomRock_3_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 chanceToMineRandomRock += LocalizationScript.chanceToMineRandomRockIncrease;
 
@@ -2488,13 +6324,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = chanceToMineRandomRock_3_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region chanceToMineRandomRock_4
         else if (upgradeName == "chanceToMineRandomRock_4")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= chanceToMineRandomRock_4_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 chanceToMineRandomRock += LocalizationScript.chanceToMineRandomRockIncrease;
 
@@ -2504,13 +6345,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = chanceToMineRandomRock_4_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region spawnPickaxeEverySecond_1
         else if (upgradeName == "spawnPickaxeEverySecond_1")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= spawnPickaxeEverySecond_1_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 spawnPickaxeEverySecond -= LocalizationScript.spawnPickaxeEverySecondIncrease;
 
@@ -2520,13 +6366,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = spawnPickaxeEverySecond_1_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region spawnPickaxeEverySecond_2
         else if (upgradeName == "spawnPickaxeEverySecond_2")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= spawnPickaxeEverySecond_2_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 spawnPickaxeEverySecond -= LocalizationScript.spawnPickaxeEverySecondIncrease;
 
@@ -2536,13 +6387,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = spawnPickaxeEverySecond_2_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region spawnPickaxeEverySecond_3
         else if (upgradeName == "spawnPickaxeEverySecond_3")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= spawnPickaxeEverySecond_3_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 spawnPickaxeEverySecond -= LocalizationScript.spawnPickaxeEverySecondIncrease;
 
@@ -2551,6 +6407,11 @@ public class SkillTree : MonoBehaviour, IDataPersistence
                 spawnPickaxeEverySecond_3_purchaseCount += 1;
 
                 LocalizationScript.currentPurchaseCount = spawnPickaxeEverySecond_3_purchaseCount;
+            }
+            else
+            {
+                ErrorSound();
+                return;
             }
         }
         #endregion
@@ -2563,7 +6424,7 @@ public class SkillTree : MonoBehaviour, IDataPersistence
         #region moreTime_1
         else if (upgradeName == "moreTime_1")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= moreTime_1_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 mineSessionTime += LocalizationScript.moreTimeIncrease;
 
@@ -2573,13 +6434,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = moreTime_1_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region moreTime_2
         else if (upgradeName == "moreTime_2")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= moreTime_2_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 mineSessionTime += LocalizationScript.moreTimeIncrease;
 
@@ -2589,13 +6455,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = moreTime_2_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region moreTime_3
         else if (upgradeName == "moreTime_3")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= moreTime_3_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 mineSessionTime += LocalizationScript.moreTimeIncrease;
 
@@ -2605,13 +6476,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = moreTime_3_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region moreTime_4
         else if (upgradeName == "moreTime_4")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= moreTime_4_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 mineSessionTime += LocalizationScript.moreTimeIncrease;
 
@@ -2621,13 +6497,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = moreTime_4_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region chanceToAdd1SecondEverySecond
         else if (upgradeName == "chanceToAdd1SecondEverySecond")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= chanceToAdd1SecondEverySecond_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 ReduceBars();
                 chanceToAdd1SecondEverySecond_purchased = true;
@@ -2635,19 +6516,29 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = chanceToAdd1SecondEverySecond_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region chanceAdd1SecondEveryRockMined
         else if (upgradeName == "chanceAdd1SecondEveryRockMined")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= chanceAdd1SecondEveryRockMined_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 ReduceBars();
                 chanceAdd1SecondEveryRockMined_purchased = true;
                 chanceAdd1SecondEveryRockMined_purchaseCount += 1;
 
                 LocalizationScript.currentPurchaseCount = chanceAdd1SecondEveryRockMined_purchaseCount;
+            }
+            else
+            {
+                ErrorSound();
+                return;
             }
         }
         #endregion
@@ -2660,7 +6551,7 @@ public class SkillTree : MonoBehaviour, IDataPersistence
         #region doubleXpGoldChance_1
         else if (upgradeName == "doubleXpGoldChance_1")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= doubleXpGoldChance_1_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 doubleXpAndGoldChance += LocalizationScript.doubleXpAndGoldChanceIncrease;
 
@@ -2670,13 +6561,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = doubleXpGoldChance_1_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region doubleXpGoldChance_2
         else if (upgradeName == "doubleXpGoldChance_2")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= doubleXpGoldChance_2_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 doubleXpAndGoldChance += LocalizationScript.doubleXpAndGoldChanceIncrease;
 
@@ -2686,13 +6582,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = doubleXpGoldChance_2_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region doubleXpGoldChance_3
         else if (upgradeName == "doubleXpGoldChance_3")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= doubleXpGoldChance_3_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 doubleXpAndGoldChance += LocalizationScript.doubleXpAndGoldChanceIncrease;
 
@@ -2702,13 +6603,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = doubleXpGoldChance_3_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region doubleXpGoldChance_4
         else if (upgradeName == "doubleXpGoldChance_4")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= doubleXpGoldChance_4_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 doubleXpAndGoldChance += LocalizationScript.doubleXpAndGoldChanceIncrease;
 
@@ -2718,13 +6624,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = doubleXpGoldChance_4_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region doubleXpGoldChance_5
         else if (upgradeName == "doubleXpGoldChance_5")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= doubleXpGoldChance_5_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 doubleXpAndGoldChance += LocalizationScript.doubleXpAndGoldChanceIncrease;
 
@@ -2733,6 +6644,11 @@ public class SkillTree : MonoBehaviour, IDataPersistence
                 doubleXpGoldChance_5_purchaseCount += 1;
 
                 LocalizationScript.currentPurchaseCount = doubleXpGoldChance_5_purchaseCount;
+            }
+            else
+            {
+                ErrorSound();
+                return;
             }
         }
         #endregion
@@ -2745,7 +6661,7 @@ public class SkillTree : MonoBehaviour, IDataPersistence
         #region lightningBeamChanceS_1
         else if (upgradeName == "lightningBeamChanceS_1")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= lightningBeamChanceS_1_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 lightningTriggerChanceS += LocalizationScript.lightningTriggerChanceS_Increase;
 
@@ -2755,13 +6671,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = lightningBeamChanceS_1_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region lightningBeamChanceS_2
         else if (upgradeName == "lightningBeamChanceS_2")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= lightningBeamChanceS_2_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 lightningTriggerChanceS += LocalizationScript.lightningTriggerChanceS_Increase;
 
@@ -2771,13 +6692,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = lightningBeamChanceS_2_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region lightningBeamChancePH_1
         else if (upgradeName == "lightningBeamChancePH_1")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= lightningBeamChancePH_1_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 lightningTriggerChancePH += LocalizationScript.lightningTriggerChancePH_Increase;
 
@@ -2787,13 +6713,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = lightningBeamChancePH_1_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region lightningBeamChancePH_2
         else if (upgradeName == "lightningBeamChancePH_2")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= lightningBeamChancePH_2_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 lightningTriggerChancePH += LocalizationScript.lightningTriggerChancePH_Increase;
 
@@ -2803,13 +6734,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = lightningBeamChancePH_2_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region lightningBeamSpawnAnotherOneChance
         else if (upgradeName == "lightningBeamSpawnAnotherOneChance")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= lightningBeamSpawnAnotherOneChance_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 ReduceBars();
                 lightningBeamSpawnAnotherOneChance_purchased = true;
@@ -2817,13 +6753,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = lightningBeamSpawnAnotherOneChance_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region lightningBeamDamage
         else if (upgradeName == "lightningBeamDamage")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= lightningBeamDamage_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 lightningDamage += LocalizationScript.lightningDamageIncrease;
 
@@ -2833,13 +6774,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = lightningBeamDamage_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region lightningBeamSize
         else if (upgradeName == "lightningBeamSize")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= lightningBeamSize_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 lightningSize += LocalizationScript.lightningSizeIncrease;
 
@@ -2849,13 +6795,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = lightningBeamSize_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region lightningSplashes
         else if (upgradeName == "lightningSplashes")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= lightningSplashes_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 ReduceBars();
                 lightningSplashes_purchased = true;
@@ -2863,13 +6814,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = lightningSplashes_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region lightningBeamSpawnRock
         else if (upgradeName == "lightningBeamSpawnRock")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= lightningBeamSpawnRock_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 ReduceBars();
                 lightningBeamSpawnRock_purchased = true;
@@ -2877,13 +6833,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = lightningBeamSpawnRock_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region lightningBeamExplosion
         else if (upgradeName == "lightningBeamExplosion")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= lightningBeamExplosion_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 ReduceBars();
                 lightningBeamExplosion_purchased = true;
@@ -2891,19 +6852,29 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = lightningBeamExplosion_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region lightningBeamAddTime
         else if (upgradeName == "lightningBeamAddTime")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= lightningBeamAddTime_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 ReduceBars();
                 lightningBeamAddTime_purchased = true;
                 lightningBeamAddTime_purchaseCount += 1;
 
                 LocalizationScript.currentPurchaseCount = lightningBeamAddTime_purchaseCount;
+            }
+            else
+            {
+                ErrorSound();
+                return;
             }
         }
         #endregion
@@ -2916,7 +6887,7 @@ public class SkillTree : MonoBehaviour, IDataPersistence
         #region dynamiteChance_1
         else if (upgradeName == "dynamiteChance_1")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= dynamiteChance_1_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 dynamiteStickChance += LocalizationScript.dynamiteStickChanceIncrease;
 
@@ -2926,13 +6897,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = dynamiteChance_1_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region dynamiteChance_2
         else if (upgradeName == "dynamiteChance_2")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= dynamiteChance_2_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 dynamiteStickChance += LocalizationScript.dynamiteStickChanceIncrease;
 
@@ -2942,13 +6918,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = dynamiteChance_2_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region dynamiteSpawn2SmallChance
         else if (upgradeName == "dynamiteSpawn2SmallChance")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= dynamiteSpawn2SmallChance_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 ReduceBars();
                 dynamiteSpawn2SmallChance_purchased = true;
@@ -2956,13 +6937,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = dynamiteSpawn2SmallChance_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region dynamiteExplosionSize
         else if (upgradeName == "dynamiteExplosionSize")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= dynamiteExplosionSize_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 explosionSize += LocalizationScript.explosionSizeIncrease;
 
@@ -2972,13 +6958,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = dynamiteExplosionSize_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region dynamiteDamage
         else if (upgradeName == "dynamiteDamage")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= dynamiteDamage_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 explosionDamagage += LocalizationScript.explosionDamagageIncrease;
 
@@ -2988,13 +6979,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = dynamiteDamage_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region dynamiteExplosionSpawnRock
         else if (upgradeName == "dynamiteExplosionSpawnRock")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= dynamiteExplosionSpawnRock_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 ReduceBars();
                 dynamiteExplosionSpawnRock_purchased = true;
@@ -3002,13 +6998,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = dynamiteExplosionSpawnRock_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region dynamiteExplosionAddTimeChance
         else if (upgradeName == "dynamiteExplosionAddTimeChance")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= dynamiteExplosionAddTimeChance_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 ReduceBars();
                 dynamiteExplosionAddTimeChance_purchased = true;
@@ -3016,19 +7017,29 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = dynamiteExplosionAddTimeChance_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region dynamiteExplosionSpawnLightning
         else if (upgradeName == "dynamiteExplosionSpawnLightning")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= dynamiteExplosionSpawnLightning_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 ReduceBars();
                 dynamiteExplosionSpawnLightning_purchased = true;
                 dynamiteExplosionSpawnLightning_purchaseCount += 1;
 
                 LocalizationScript.currentPurchaseCount = dynamiteExplosionSpawnLightning_purchaseCount;
+            }
+            else
+            {
+                ErrorSound();
+                return;
             }
         }
         #endregion
@@ -3041,7 +7052,7 @@ public class SkillTree : MonoBehaviour, IDataPersistence
         #region plazmaBallSpawn_1
         else if (upgradeName == "plazmaBallSpawn_1")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= plazmaBallSpawn_1_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 plazmaBallChance += LocalizationScript.plazmaBallChanceIncrease;
 
@@ -3051,13 +7062,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = plazmaBallSpawn_1_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region plazmaBallSpawn_2
         else if (upgradeName == "plazmaBallSpawn_2")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= plazmaBallSpawn_2_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 plazmaBallChance += LocalizationScript.plazmaBallChanceIncrease;
 
@@ -3067,13 +7083,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = plazmaBallSpawn_2_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region plazmaBallTime
         else if (upgradeName == "plazmaBallTime")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= plazmaBallTime_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 plazmaBallTimer += LocalizationScript.plazmaBallTimerIncrease;
 
@@ -3083,13 +7104,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = plazmaBallTime_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region plazmaBallSize
         else if (upgradeName == "plazmaBallSize")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= plazmaBallSize_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 plazmaBallTotalSize += LocalizationScript.plazmaBallTotalSizeIncrease;
 
@@ -3099,13 +7125,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = plazmaBallSize_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region plazmaBallExplosionChance
         else if (upgradeName == "plazmaBallExplosionChance")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= plazmaBallExplosionChance_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 ReduceBars();
                 plazmaBallExplosionChance_purchased = true;
@@ -3113,13 +7144,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = plazmaBallExplosionChance_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region plazmaBallSpawnSmallChance
         else if (upgradeName == "plazmaBallSpawnSmallChance")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= plazmaBallSpawnSmallChance_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 ReduceBars();
                 plazmaBallSpawnSmallChance_purchased = true;
@@ -3127,13 +7163,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = plazmaBallSpawnSmallChance_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region plazmaBallDamage
         else if (upgradeName == "plazmaBallDamage")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= plazmaBallDamage_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 plazmaBallTotalDamage += LocalizationScript.plazmaBallTotalDamageIncrease;
 
@@ -3143,19 +7184,29 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = plazmaBallDamage_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region plazmaBallSpawnPickaxeChance
         else if (upgradeName == "plazmaBallSpawnPickaxeChance")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= plazmaBallSpawnPickaxeChance_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 ReduceBars();
                 plazmaBallSpawnPickaxeChance_purchased = true;
                 plazmaBallSpawnPickaxeChance_purchaseCount += 1;
 
                 LocalizationScript.currentPurchaseCount = plazmaBallSpawnPickaxeChance_purchaseCount;
+            }
+            else
+            {
+                ErrorSound();
+                return;
             }
         }
         #endregion
@@ -3168,7 +7219,7 @@ public class SkillTree : MonoBehaviour, IDataPersistence
         #region allProjectileDoubleDamageChance
         else if (upgradeName == "allProjectileDoubleDamageChance")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= allProjectileDoubleDamageChance_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 ReduceBars();
                 allProjectileDoubleDamageChance_purchased = true;
@@ -3176,13 +7227,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = allProjectileDoubleDamageChance_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region allProjectileTriggerChance
         else if (upgradeName == "allProjectileTriggerChance")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= allProjectileTriggerChance_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 ReduceBars();
                 allProjectileTriggerChance_purchased = true;
@@ -3190,13 +7246,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = allProjectileTriggerChance_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region pickaxeDoubleDamageChance_1
         else if (upgradeName == "pickaxeDoubleDamageChance_1")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= pickaxeDoubleDamageChance_1_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 doubleDamageChance += LocalizationScript.doubleDamageChanceIncrease;
 
@@ -3206,13 +7267,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = pickaxeDoubleDamageChance_1_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region pickaxeDoubleDamageChance_2
         else if (upgradeName == "pickaxeDoubleDamageChance_2")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= pickaxeDoubleDamageChance_2_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 doubleDamageChance += LocalizationScript.doubleDamageChanceIncrease;
 
@@ -3222,13 +7288,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = pickaxeDoubleDamageChance_2_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region intaMineChance_1
         else if (upgradeName == "intaMineChance_1")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= intaMineChance_1_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 instaMineChance += LocalizationScript.instaMineChanceIncrease;
 
@@ -3238,13 +7309,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = intaMineChance_1_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region intaMineChance_2
         else if (upgradeName == "intaMineChance_2")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= intaMineChance_2_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 instaMineChance += LocalizationScript.instaMineChanceIncrease;
 
@@ -3254,13 +7330,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = intaMineChance_2_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region increaseSpawnChanceAllRocks
         else if (upgradeName == "increaseSpawnChanceAllRocks")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= increaseSpawnChanceAllRocks_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 ReduceBars();
 
@@ -3295,13 +7376,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = increaseSpawnChanceAllRocks_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region craft2Material
         else if (upgradeName == "craft2Material")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= craft2Material_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 ReduceBars();
                 craft2Material_purchased = true;
@@ -3309,13 +7395,18 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = craft2Material_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #region finalUpgrade
         else if (upgradeName == "finalUpgrade")
         {
-            if (GoldAndOreMechanics.totalGoldBars >= finalUpgrade_price)
+            if (currentTotalCheck >= LocalizationScript.currentHoverPrice)
             {
                 ReduceBars();
                 finalUpgrade_purchased = true;
@@ -3323,11 +7414,208 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 LocalizationScript.currentPurchaseCount = finalUpgrade_purchaseCount;
             }
+            else
+            {
+                ErrorSound();
+                return;
+            }
         }
         #endregion
 
         #endregion
 
+        //Endless
+        #region All andless
+
+        #region Endless Gold
+        else if (upgradeName == "endlessGold")
+        {
+            if (GoldAndOreMechanics.totalGoldBars >= endlessGold_price)
+            {
+                materialsTotalWorth += LocalizationScript.materialsWorthIncrease;
+
+                GoldAndOreMechanics.totalGoldBars -= endlessGold_price;
+
+                endlessGold_purchaseCount += 1;
+
+                endlessGold_price *= 1.08f;
+
+                LocalizationScript.currentPurchaseCount = endlessGold_purchaseCount;
+            }
+            else
+            {
+                ErrorSound();
+                return;
+            }
+        }
+        #endregion
+
+        #region Endless Copper
+        else if (upgradeName == "endlessCopper")
+        {
+            if (GoldAndOreMechanics.totalCopperBars >= endlessCopper_price)
+            {
+                doubleXpAndGoldChance += LocalizationScript.doubleXpAndGoldChanceIncrease;
+
+                GoldAndOreMechanics.totalCopperBars -= endlessCopper_price;
+
+                endlessCopper_purchaseCount += 1;
+
+                endlessCopper_price *= 1.1f;
+
+                LocalizationScript.currentPurchaseCount = endlessCopper_purchaseCount;
+            }
+            else
+            {
+                ErrorSound();
+                return;
+            }
+        }
+        #endregion
+
+        #region Endless Iron
+        else if (upgradeName == "endlessIron")
+        {
+            if (GoldAndOreMechanics.totalIronBars >= endlessIron_price)
+            {
+                LevelMechanics.xpFromRock += LocalizationScript.xpIncrease;
+
+                GoldAndOreMechanics.totalIronBars -= endlessIron_price;
+
+                endlessIron_purchaseCount += 1;
+
+                endlessIron_price *= 1.1f;
+
+                LocalizationScript.currentPurchaseCount = endlessIron_purchaseCount;
+            }
+            else
+            {
+                ErrorSound();
+                return;
+            }
+        }
+        #endregion
+
+        #region Endless Cobalt
+        else if (upgradeName == "endlessCobalt")
+        {
+            if (GoldAndOreMechanics.totalCobaltBars >= endlessCobalt_price)
+            {
+                improvedPickaxeStrength += LocalizationScript.improvedPickaxeIncrease;
+                reducePickaxeMineTime += LocalizationScript.improvedPickaxeIncrease;
+
+                GoldAndOreMechanics.totalCobaltBars -= endlessCobalt_price;
+
+                endlessCobalt_purchaseCount += 1;
+
+                endlessCobalt_price *= 1.3f;
+
+                LocalizationScript.currentPurchaseCount = endlessCobalt_purchaseCount;
+            }
+            else
+            {
+                ErrorSound();
+                return;
+            }
+        }
+        #endregion
+
+        #region Endless Uranium
+        else if (upgradeName == "endlessUranium")
+        {
+            if (GoldAndOreMechanics.totalUraniumBars >= endlessUranium_price)
+            {
+                improvedPickaxeStrength += LocalizationScript.improvedPickaxeIncrease;
+                reducePickaxeMineTime += LocalizationScript.improvedPickaxeIncrease;
+
+                GoldAndOreMechanics.totalUraniumBars -= endlessUranium_price;
+
+                endlessUranium_purchaseCount += 1;
+
+                endlessUranium_price *= 1.3f;
+
+                LocalizationScript.currentPurchaseCount = endlessUranium_purchaseCount;
+            }
+            else
+            {
+                ErrorSound();
+                return;
+            }
+        }
+        #endregion
+
+        #region Endless Ismium
+        else if (upgradeName == "endlessIsmium")
+        {
+            if (GoldAndOreMechanics.totalIsmiumBar >= endlessIsmium_price)
+            {
+                LevelMechanics.xpFromRock += LocalizationScript.xpIncrease;
+
+                GoldAndOreMechanics.totalIsmiumBar -= endlessIsmium_price;
+
+                endlessIsmium_purchaseCount += 1;
+
+                endlessIsmium_price *= 1.1f;
+
+                LocalizationScript.currentPurchaseCount = endlessIsmium_purchaseCount;
+            }
+            else
+            {
+                ErrorSound();
+                return;
+            }
+        }
+        #endregion
+
+        #region Endless Iridum
+        else if (upgradeName == "endlessIridium")
+        {
+            if (GoldAndOreMechanics.totalIridiumBars >= endlessIridium_price)
+            {
+                doubleXpAndGoldChance += LocalizationScript.doubleXpAndGoldChanceIncrease;
+
+                GoldAndOreMechanics.totalIridiumBars -= endlessIridium_price;
+
+                endlessIridium_purchaseCount += 1;
+
+                endlessIridium_price *= 1.1f;
+
+                LocalizationScript.currentPurchaseCount = endlessIridium_purchaseCount;
+            }
+            else
+            {
+                ErrorSound();
+                return;
+            }
+        }
+        #endregion
+
+        #region Endless Painite
+        else if (upgradeName == "endlessPainite")
+        {
+            if (GoldAndOreMechanics.totalPainiteBars >= endlessPainite_price)
+            {
+                materialsTotalWorth += LocalizationScript.materialsWorthIncrease;
+
+                GoldAndOreMechanics.totalPainiteBars -= endlessPainite_price;
+
+                endlessPainite_purchaseCount += 1;
+
+                endlessPainite_price *= 1.08f;
+
+                LocalizationScript.currentPurchaseCount = endlessPainite_purchaseCount;
+            }
+            else
+            {
+                ErrorSound();
+                return;
+            }
+        }
+        #endregion
+
+        #endregion
+
+        audioManager.Play("Click_1");
         theAnvilScript.DisplayEquippedAndSetStats(TheAnvil.equippedMineTime, TheAnvil.equippedMinePower, TheAnvil.equipped2XChance, TheAnvil.equippedMiningArea);
         CheckUpgrades();
         UpdateTooltipText();
@@ -3336,10 +7624,36 @@ public class SkillTree : MonoBehaviour, IDataPersistence
         goldAndOreScript.SetTotalResourcesText();
 
         totalSkillTreeUpgradesPurchased += 1;
+        achScript.CheckAch();
         //Debug.Log(totalSkillTreeUpgradesPurchased);
+
+        if (totalSkillTreeUpgradesPurchased >= 399)
+        {
+            if(hasPressedEndlessOK == false)
+            {
+                isInEndlessPopUp = true;
+                endlessUpgradesPopUp.SetActive(true);
+                endlessUpgradesParent.SetActive(true);
+            }
+        }
+    }
+
+    public static bool isInEndlessPopUp;
+
+    public void PressOkEndless()
+    {
+        audioManager.Play("UI_Click1");
+        isInEndlessPopUp = false;
+        hasPressedEndlessOK = true;
+        endlessUpgradesPopUp.SetActive(false);
     }
 
     public LocalizationScript locScript;
+
+    public void ErrorSound()
+    {
+        audioManager.Play("CantAfford");
+    }
 
     public void UpdateTooltipText()
     {
@@ -3429,6 +7743,7 @@ public class SkillTree : MonoBehaviour, IDataPersistence
             lines[19].SetActive(true);
             lines[37].SetActive(true);
 
+            if (marterialsWorthMore_1_purchased) { lines[39].SetActive(true); }
             if (moreXP_1_purchased) { lines[12].SetActive(true); }
             if (spawnMoreRocks_3_purchased) { lines[24].SetActive(true); }
             if (chanceToSpawnRockWhenMined_1_purchased) { lines[15].SetActive(true); lines[39].SetActive(true); }
@@ -3669,7 +7984,7 @@ public class SkillTree : MonoBehaviour, IDataPersistence
             moreMeterialsFromRock_1.SetActive(true);
             goldChunk_1.SetActive(true);
 
-            if (marterialsWorthMore_1_purchaseCount >= 5)
+            if (marterialsWorthMore_1_purchaseCount >= 4)
             {
                 marterialsWorthMore_1_LOCKED.SetActive(false);
                 marterialsWorthMore_1.GetComponent<Button>().enabled = false;
@@ -3728,7 +8043,7 @@ public class SkillTree : MonoBehaviour, IDataPersistence
             lines[32].SetActive(true);
 
             if (intaMineChance_2_purchased) { lines[27].SetActive(true); }
-            if (moreTime_4_purchased) { lines[29].SetActive(true); lines[31].SetActive(true); }
+            if (moreTime_4_purchased) { lines[31].SetActive(true); }
 
 
             moreTime_4.SetActive(true);
@@ -3831,6 +8146,7 @@ public class SkillTree : MonoBehaviour, IDataPersistence
             lines[10].SetActive(true);
             lines[8].SetActive(true);
 
+            if (spawnCopper_purchased) { lines[40].SetActive(true); }
             if (chanceToSpawnRockWhenMined_1_purchased) { lines[40].SetActive(true); }
             if (fullGold_1_purchased) { lines[41].SetActive(true); }
 
@@ -3988,6 +8304,7 @@ public class SkillTree : MonoBehaviour, IDataPersistence
             lines[39].SetActive(true);
             lines[123].SetActive(true);
 
+            if (doubleXpGoldChance_1_purchased) { lines[19].SetActive(true); }
             if (doubleXpGoldChance_1_purchased) { lines[35].SetActive(true); }
             if (spawnMoreRocks_4_purchased) { lines[35].SetActive(true); lines[44].SetActive(true); }
             if (spawnMoreRocks_2_purchased) { lines[13].SetActive(true); lines[14].SetActive(true); }
@@ -4296,8 +8613,10 @@ public class SkillTree : MonoBehaviour, IDataPersistence
             lines[155].SetActive(true);
             lines[148].SetActive(true);
 
+            if (moreMeterialsFromRock_4_purchased) { lines[165].SetActive(true); }
             if (fullGold_2_purchased) { lines[165].SetActive(true); }
             if (ironChunk_1_purchased) { lines[143].SetActive(true); lines[149].SetActive(true); }
+
 
             uraniumChunk_1.SetActive(true);
             spawnMoreRocks_7.SetActive(true);
@@ -4851,6 +9170,8 @@ public class SkillTree : MonoBehaviour, IDataPersistence
             moreXP_5.SetActive(true);
             chanceToSpawnRockWhenMined_5.SetActive(true);
 
+            if (spawnIron_purchased) { lines[137].SetActive(true); }
+
             if (talentPointsPerXlevel_2_purchaseCount >= 1)
             {
                 talentPointsPerXlevel_2_LOCKED.SetActive(false);
@@ -4998,6 +9319,7 @@ public class SkillTree : MonoBehaviour, IDataPersistence
             lines[54].SetActive(true);
             lines[53].SetActive(true);
 
+            if (fullGold_1_purchased) { lines[58].SetActive(true); }
             if (shootCircleChance_purchased) { lines[58].SetActive(true); lines[60].SetActive(true); }
 
             shootCircleChance.SetActive(true);
@@ -5078,6 +9400,8 @@ public class SkillTree : MonoBehaviour, IDataPersistence
             lines[24].SetActive(true);
             lines[35].SetActive(true);
 
+            if (marterialsWorthMore_2_purchased) { lines[38].SetActive(true); }
+            if (moreXP_2_purchased) { lines[23].SetActive(true); }
             if (chanceToSpawnRockWhenMined_2_purchased) { lines[33].SetActive(true); }
             if (doubleXpGoldChance_1_purchased) { lines[25].SetActive(true); }
             if (spawnMoreRocks_3_purchased) { lines[18].SetActive(true); }
@@ -5143,7 +9467,7 @@ public class SkillTree : MonoBehaviour, IDataPersistence
             spawnMoreRocks_4.SetActive(true);
             marterialsWorthMore_2.SetActive(true);
 
-            if (chanceToSpawnRockWhenMined_1_purchaseCount >= 3)
+            if (chanceToSpawnRockWhenMined_1_purchaseCount >= 6)
             {
                 chanceToSpawnRockWhenMined_1_LOCKED.SetActive(false);
                 chanceToSpawnRockWhenMined_1.GetComponent<Button>().enabled = false;
@@ -5159,6 +9483,7 @@ public class SkillTree : MonoBehaviour, IDataPersistence
             lines[29].SetActive(true);
             lines[28].SetActive(true);
 
+            if (talentPointsPerXlevel_1_purchased) { lines[32].SetActive(true); }
             if (spawnPickaxeEverySecond_3_purchased) { lines[32].SetActive(true); lines[33].SetActive(true); }
 
             doubleXpGoldChance_5.SetActive(true);
@@ -5239,7 +9564,7 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
             fullCopper_2.SetActive(true);
 
-            if (chanceToSpawnRockWhenMined_6_purchaseCount >= 3)
+            if (chanceToSpawnRockWhenMined_6_purchaseCount >= 1)
             {
                 chanceToSpawnRockWhenMined_6_LOCKED.SetActive(false);
                 chanceToSpawnRockWhenMined_6.GetComponent<Button>().enabled = false;
@@ -5266,7 +9591,7 @@ public class SkillTree : MonoBehaviour, IDataPersistence
             improvedPickaxe_2.SetActive(true);
             moreTime_1.SetActive(true);
 
-            if (chanceToMineRandomRock_1_purchaseCount >= 3)
+            if (chanceToMineRandomRock_1_purchaseCount >= 4)
             {
                 chanceToMineRandomRock_1_LOCKED.SetActive(false);
                 chanceToMineRandomRock_1.GetComponent<Button>().enabled = false;
@@ -5431,7 +9756,7 @@ public class SkillTree : MonoBehaviour, IDataPersistence
             improvedPickaxe_3.SetActive(true);
             chanceToAdd1SecondEverySecond.SetActive(true);
 
-            if (moreTime_2_purchaseCount >= 5)
+            if (moreTime_2_purchaseCount >= 4)
             {
                 moreTime_2_LOCKED.SetActive(false);
                 moreTime_2.GetComponent<Button>().enabled = false;
@@ -5454,7 +9779,7 @@ public class SkillTree : MonoBehaviour, IDataPersistence
             increaseAndDecreaseMinignErea.SetActive(true);
             moreXP_3.SetActive(true);
 
-            if (moreTime_3_purchaseCount >= 5)
+            if (moreTime_3_purchaseCount >= 3)
             {
                 moreTime_3_LOCKED.SetActive(false);
                 moreTime_3.GetComponent<Button>().enabled = false;
@@ -5476,7 +9801,7 @@ public class SkillTree : MonoBehaviour, IDataPersistence
             spawnPickaxeEverySecond_3.SetActive(true);
             talentPointsPerXlevel_1.SetActive(true);
 
-            if (moreTime_4_purchaseCount >= 5)
+            if (moreTime_4_purchaseCount >= 3)
             {
                 moreTime_4_LOCKED.SetActive(false);
                 moreTime_4.GetComponent<Button>().enabled = false;
@@ -5558,8 +9883,8 @@ public class SkillTree : MonoBehaviour, IDataPersistence
             lines[63].SetActive(true);
 
             if (moreTime_3_purchased) { lines[62].SetActive(true); lines[68].SetActive(true); }
-            if (spawnPickaxeEverySecond_2_purchased) { lines[62].SetActive(true); }
-            if (increaseAndDecreaseMinignErea_purchased) { lines[71].SetActive(true); }
+            if (spawnPickaxeEverySecond_2_purchased) { lines[62].SetActive(true);  }
+            if (increaseAndDecreaseMinignErea_purchased) { lines[70].SetActive(true); }
 
             biggerMiningErea_2.SetActive(true);
             marterialsWorthMore_5.SetActive(true);
@@ -6085,7 +10410,6 @@ public class SkillTree : MonoBehaviour, IDataPersistence
         if (allProjectileDoubleDamageChance_purchased)
         {
             lines[122].SetActive(true);
-          
 
             allProjectileTriggerChance.SetActive(true);
 
@@ -6176,6 +10500,7 @@ public class SkillTree : MonoBehaviour, IDataPersistence
             lines[26].SetActive(true);
             lines[33].SetActive(true);
 
+            if (spawnCopper_purchased) { lines[34].SetActive(true); }
             if (spawnXRockEveryXSecond_1_purchased) { lines[34].SetActive(true); }
             if (spawnPickaxeEverySecond_3_purchased) { lines[29].SetActive(true); }
             if (spawnMoreRocks_3_purchased) { lines[21].SetActive(true); }
@@ -6234,22 +10559,45 @@ public class SkillTree : MonoBehaviour, IDataPersistence
                 finalUpgrade_LOCKED.SetActive(false);
                 finalUpgrade.GetComponent<Button>().enabled = false;
 
-                endingButton.SetActive(true);
+                if(TheEnding.isEndingCompleted == false)
+                {
+                    endingButton.SetActive(true);
+                }
             }
         }
         #endregion
 
         #endregion
-    }
 
-    public void PlayErrorSound()
-    {
-        //Cannot purchase
+        if(MobileAndTesting.isMobile == true)
+        {
+            SetButtonsActive();
+        }
     }
 
     #region Load Data
     public void LoadData(GameData data)
     {
+        hasPressedEndlessOK = data.hasPressedEndlessOK;
+
+        endlessGold_price = data.endlessGold_price;
+        endlessCopper_price = data.endlessCopper_price;
+        endlessIron_price = data.endlessIron_price;
+        endlessCobalt_price = data.endlessCobalt_price;
+        endlessUranium_price = data.endlessUranium_price;
+        endlessIsmium_price = data.endlessIsmium_price;
+        endlessIridium_price = data.endlessIridium_price;
+        endlessPainite_price = data.endlessPainite_price;
+
+        endlessGold_purchaseCount = data.endlessGold_purchaseCount;
+        endlessCopper_purchaseCount = data.endlessCopper_purchaseCount;
+        endlessIron_purchaseCount = data.endlessIron_purchaseCount;
+        endlessCobalt_purchaseCount = data.endlessCobalt_purchaseCount;
+        endlessUranium_purchaseCount = data.endlessUranium_purchaseCount;
+        endlessIsmium_purchaseCount = data.endlessIsmium_purchaseCount;
+        endlessIridium_purchaseCount = data.endlessIridium_purchaseCount;
+        endlessPainite_purchaseCount = data.endlessPainite_purchaseCount;
+
         moreTime_1_purchased = data.moreTime_1_purchased;
         moreTime_2_purchased = data.moreTime_2_purchased;
         moreTime_3_purchased = data.moreTime_3_purchased;
@@ -6666,6 +11014,26 @@ public class SkillTree : MonoBehaviour, IDataPersistence
     #region Save Data
     public void SaveData(ref GameData data)
     {
+        data.hasPressedEndlessOK = hasPressedEndlessOK;
+
+        data.endlessGold_price = endlessGold_price;
+        data.endlessCopper_price = endlessCopper_price;
+        data.endlessIron_price = endlessIron_price;
+        data.endlessCobalt_price = endlessCobalt_price;
+        data.endlessUranium_price = endlessUranium_price;
+        data.endlessIsmium_price = endlessIsmium_price;
+        data.endlessIridium_price = endlessIridium_price;
+        data.endlessPainite_price = endlessPainite_price;
+
+        data.endlessGold_purchaseCount = endlessGold_purchaseCount;
+        data.endlessCopper_purchaseCount = endlessCopper_purchaseCount;
+        data.endlessIron_purchaseCount = endlessIron_purchaseCount;
+        data.endlessCobalt_purchaseCount = endlessCobalt_purchaseCount;
+        data.endlessUranium_purchaseCount = endlessUranium_purchaseCount;
+        data.endlessIsmium_purchaseCount = endlessIsmium_purchaseCount;
+        data.endlessIridium_purchaseCount = endlessIridium_purchaseCount;
+        data.endlessPainite_purchaseCount = endlessPainite_purchaseCount;
+
         data.moreTime_1_purchased = moreTime_1_purchased;
         data.moreTime_2_purchased = moreTime_2_purchased;
         data.moreTime_3_purchased = moreTime_3_purchased;
@@ -7076,6 +11444,187 @@ public class SkillTree : MonoBehaviour, IDataPersistence
         // Misc
         data.doubleDamageChance = doubleDamageChance;
         data.instaMineChance = instaMineChance;
+    }
+    #endregion
+
+    #region Mobile set buttons active
+    public void SetButtonsActive()
+    {
+        moreXP_1.GetComponent<Button>().enabled = true;
+        moreXP_2.GetComponent<Button>().enabled = true;
+        moreXP_3.GetComponent<Button>().enabled = true;
+        moreXP_4.GetComponent<Button>().enabled = true;
+        moreXP_5.GetComponent<Button>().enabled = true;
+        moreXP_6.GetComponent<Button>().enabled = true;
+        moreXP_7.GetComponent<Button>().enabled = true;
+        moreXP_8.GetComponent<Button>().enabled = true;
+
+        talentPointsPerXlevel_1.GetComponent<Button>().enabled = true;
+        talentPointsPerXlevel_2.GetComponent<Button>().enabled = true;
+        talentPointsPerXlevel_3.GetComponent<Button>().enabled = true;
+
+        lightningBeamChanceS_1.GetComponent<Button>().enabled = true;
+        lightningBeamChanceS_2.GetComponent<Button>().enabled = true;
+        lightningBeamChancePH_1.GetComponent<Button>().enabled = true;
+        lightningBeamChancePH_2.GetComponent<Button>().enabled = true;
+        lightningBeamSpawnAnotherOneChance.GetComponent<Button>().enabled = true;
+        lightningBeamDamage.GetComponent<Button>().enabled = true;
+        lightningBeamSize.GetComponent<Button>().enabled = true;
+        lightningSplashes.GetComponent<Button>().enabled = true;
+        lightningBeamSpawnRock.GetComponent<Button>().enabled = true;
+        lightningBeamExplosion.GetComponent<Button>().enabled = true;
+        lightningBeamAddTime.GetComponent<Button>().enabled = true;
+
+        dynamiteChance_1.GetComponent<Button>().enabled = true;
+        dynamiteChance_2.GetComponent<Button>().enabled = true;
+        dynamiteSpawn2SmallChance.GetComponent<Button>().enabled = true;
+        dynamiteExplosionSize.GetComponent<Button>().enabled = true;
+        dynamiteDamage.GetComponent<Button>().enabled = true;
+        dynamiteExplosionSpawnRock.GetComponent<Button>().enabled = true;
+        dynamiteExplosionAddTimeChance.GetComponent<Button>().enabled = true;
+        dynamiteExplosionSpawnLightning.GetComponent<Button>().enabled = true;
+
+        plazmaBallSpawn_1.GetComponent<Button>().enabled = true;
+        plazmaBallSpawn_2.GetComponent<Button>().enabled = true;
+        plazmaBallTime.GetComponent<Button>().enabled = true;
+        plazmaBallSize.GetComponent<Button>().enabled = true;
+        plazmaBallExplosionChance.GetComponent<Button>().enabled = true;
+        plazmaBallSpawnSmallChance.GetComponent<Button>().enabled = true;
+        plazmaBallDamage.GetComponent<Button>().enabled = true;
+        plazmaBallSpawnPickaxeChance.GetComponent<Button>().enabled = true;
+
+        spawnMoreRocks_1.GetComponent<Button>().enabled = true;
+        spawnMoreRocks_2.GetComponent<Button>().enabled = true;
+        spawnMoreRocks_3.GetComponent<Button>().enabled = true;
+        spawnMoreRocks_4.GetComponent<Button>().enabled = true;
+        spawnMoreRocks_5.GetComponent<Button>().enabled = true;
+        spawnMoreRocks_6.GetComponent<Button>().enabled = true;
+        spawnMoreRocks_7.GetComponent<Button>().enabled = true;
+        spawnMoreRocks_8.GetComponent<Button>().enabled = true;
+        spawnMoreRocks_9.GetComponent<Button>().enabled = true;
+
+        moreMeterialsFromRock_1.GetComponent<Button>().enabled = true;
+        moreMeterialsFromRock_2.GetComponent<Button>().enabled = true;
+        moreMeterialsFromRock_3.GetComponent<Button>().enabled = true;
+        moreMeterialsFromRock_4.GetComponent<Button>().enabled = true;
+        moreMeterialsFromRock_5.GetComponent<Button>().enabled = true;
+
+        marterialsWorthMore_1.GetComponent<Button>().enabled = true;
+        marterialsWorthMore_2.GetComponent<Button>().enabled = true;
+        marterialsWorthMore_3.GetComponent<Button>().enabled = true;
+        marterialsWorthMore_4.GetComponent<Button>().enabled = true;
+        marterialsWorthMore_5.GetComponent<Button>().enabled = true;
+        marterialsWorthMore_6.GetComponent<Button>().enabled = true;
+        marterialsWorthMore_7.GetComponent<Button>().enabled = true;
+        marterialsWorthMore_8.GetComponent<Button>().enabled = true;
+
+        goldChunk_1.GetComponent<Button>().enabled = true;
+        goldChunk_2.GetComponent<Button>().enabled = true;
+        goldChunk_3.GetComponent<Button>().enabled = true;
+        goldChunk_4.GetComponent<Button>().enabled = true;
+        goldChunk_5_.GetComponent<Button>().enabled = true;
+        fullGold_1.GetComponent<Button>().enabled = true;
+        fullGold_2.GetComponent<Button>().enabled = true;
+        fullGold_3.GetComponent<Button>().enabled = true;
+
+        spawnCopper.GetComponent<Button>().enabled = true;
+        copperChunk_1.GetComponent<Button>().enabled = true;
+        copperChunk_2.GetComponent<Button>().enabled = true;
+        copperChunk_3.GetComponent<Button>().enabled = true;
+        fullCopper_1.GetComponent<Button>().enabled = true;
+        fullCopper_2.GetComponent<Button>().enabled = true;
+        fullCopper_3.GetComponent<Button>().enabled = true;
+
+        spawnIron.GetComponent<Button>().enabled = true;
+        ironChunk_1.GetComponent<Button>().enabled = true;
+        ironChunk_2.GetComponent<Button>().enabled = true;
+        fullIron_1.GetComponent<Button>().enabled = true;
+        fullIron_2.GetComponent<Button>().enabled = true;
+
+        cobaltSpawn.GetComponent<Button>().enabled = true;
+        cobaltChunk_1.GetComponent<Button>().enabled = true;
+        fullCobalt_1.GetComponent<Button>().enabled = true;
+
+        uraniumSpawn.GetComponent<Button>().enabled = true;
+        uraniumChunk_1.GetComponent<Button>().enabled = true;
+        fullUranium_1.GetComponent<Button>().enabled = true;
+
+        ismiumSpawn.GetComponent<Button>().enabled = true;
+        ismiumChunk_1.GetComponent<Button>().enabled = true;
+        fullIsmium_1.GetComponent<Button>().enabled = true;
+
+        iridiumSpawn.GetComponent<Button>().enabled = true;
+        iridiumChunk_1.GetComponent<Button>().enabled = true;
+        fullIridium_1.GetComponent<Button>().enabled = true;
+
+        painiteSpawn.GetComponent<Button>().enabled = true;
+        painiteChunk_1.GetComponent<Button>().enabled = true;
+        fullPainite_1.GetComponent<Button>().enabled = true;
+
+        improvedPickaxe_1.GetComponent<Button>().enabled = true;
+        improvedPickaxe_2.GetComponent<Button>().enabled = true;
+        improvedPickaxe_3.GetComponent<Button>().enabled = true;
+        improvedPickaxe_4.GetComponent<Button>().enabled = true;
+        improvedPickaxe_5.GetComponent<Button>().enabled = true;
+        improvedPickaxe_6.GetComponent<Button>().enabled = true;
+
+        biggerMiningErea_1.GetComponent<Button>().enabled = true;
+        biggerMiningErea_2.GetComponent<Button>().enabled = true;
+        biggerMiningErea_3.GetComponent<Button>().enabled = true;
+        biggerMiningErea_4.GetComponent<Button>().enabled = true;
+        shootCircleChance.GetComponent<Button>().enabled = true;
+        increaseAndDecreaseMinignErea.GetComponent<Button>().enabled = true;
+
+        spawnRockEveryXrock_1.GetComponent<Button>().enabled = true;
+        spawnRockEveryXrock_2.GetComponent<Button>().enabled = true;
+        spawnRockEveryXrock_3.GetComponent<Button>().enabled = true;
+
+        spawnXRockEveryXSecond_1.GetComponent<Button>().enabled = true;
+        spawnXRockEveryXSecond_2.GetComponent<Button>().enabled = true;
+        spawnXRockEveryXSecond_3.GetComponent<Button>().enabled = true;
+
+        chanceToSpawnRockWhenMined_1.GetComponent<Button>().enabled = true;
+        chanceToSpawnRockWhenMined_2.GetComponent<Button>().enabled = true;
+        chanceToSpawnRockWhenMined_3.GetComponent<Button>().enabled = true;
+        chanceToSpawnRockWhenMined_4.GetComponent<Button>().enabled = true;
+        chanceToSpawnRockWhenMined_5.GetComponent<Button>().enabled = true;
+        chanceToSpawnRockWhenMined_6.GetComponent<Button>().enabled = true;
+
+        chanceToMineRandomRock_1.GetComponent<Button>().enabled = true;
+        chanceToMineRandomRock_2.GetComponent<Button>().enabled = true;
+        chanceToMineRandomRock_3.GetComponent<Button>().enabled = true;
+        chanceToMineRandomRock_4.GetComponent<Button>().enabled = true;
+
+        spawnPickaxeEverySecond_1.GetComponent<Button>().enabled = true;
+        spawnPickaxeEverySecond_2.GetComponent<Button>().enabled = true;
+        spawnPickaxeEverySecond_3.GetComponent<Button>().enabled = true;
+
+        moreTime_1.GetComponent<Button>().enabled = true;
+        moreTime_2.GetComponent<Button>().enabled = true;
+        moreTime_3.GetComponent<Button>().enabled = true;
+        moreTime_4.GetComponent<Button>().enabled = true;
+
+        chanceToAdd1SecondEverySecond.GetComponent<Button>().enabled = true;
+        chanceAdd1SecondEveryRockMined.GetComponent<Button>().enabled = true;
+
+        doubleXpGoldChance_1.GetComponent<Button>().enabled = true;
+        doubleXpGoldChance_2.GetComponent<Button>().enabled = true;
+        doubleXpGoldChance_3.GetComponent<Button>().enabled = true;
+        doubleXpGoldChance_4.GetComponent<Button>().enabled = true;
+        doubleXpGoldChance_5.GetComponent<Button>().enabled = true;
+
+        allProjectileDoubleDamageChance.GetComponent<Button>().enabled = true;
+        allProjectileTriggerChance.GetComponent<Button>().enabled = true;
+
+        pickaxeDoubleDamageChance_1.GetComponent<Button>().enabled = true;
+        pickaxeDoubleDamageChance_2.GetComponent<Button>().enabled = true;
+
+        intaMineChance_1.GetComponent<Button>().enabled = true;
+        intaMineChance_2.GetComponent<Button>().enabled = true;
+
+        increaseSpawnChanceAllRocks.GetComponent<Button>().enabled = true;
+        craft2Material.GetComponent<Button>().enabled = true;
+        finalUpgrade.GetComponent<Button>().enabled = true;
     }
     #endregion
 
@@ -7739,32 +12288,209 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
         #endregion
 
+        #region Set all buttons enabled
+        spawnMoreRocks_1.GetComponent<Button>().enabled = true;
+        spawnMoreRocks_2.GetComponent<Button>().enabled = true;
+        spawnMoreRocks_3.GetComponent<Button>().enabled = true;
+        spawnMoreRocks_4.GetComponent<Button>().enabled = true;
+        spawnMoreRocks_5.GetComponent<Button>().enabled = true;
+        spawnMoreRocks_6.GetComponent<Button>().enabled = true;
+        spawnMoreRocks_7.GetComponent<Button>().enabled = true;
+        spawnMoreRocks_8.GetComponent<Button>().enabled = true;
+        spawnMoreRocks_9.GetComponent<Button>().enabled = true;
+
+        moreMeterialsFromRock_1.GetComponent<Button>().enabled = true;
+        moreMeterialsFromRock_2.GetComponent<Button>().enabled = true;
+        moreMeterialsFromRock_3.GetComponent<Button>().enabled = true;
+        moreMeterialsFromRock_4.GetComponent<Button>().enabled = true;
+        moreMeterialsFromRock_5.GetComponent<Button>().enabled = true;
+
+        marterialsWorthMore_1.GetComponent<Button>().enabled = true;
+        marterialsWorthMore_2.GetComponent<Button>().enabled = true;
+        marterialsWorthMore_3.GetComponent<Button>().enabled = true;
+        marterialsWorthMore_4.GetComponent<Button>().enabled = true;
+        marterialsWorthMore_5.GetComponent<Button>().enabled = true;
+        marterialsWorthMore_6.GetComponent<Button>().enabled = true;
+        marterialsWorthMore_7.GetComponent<Button>().enabled = true;
+        marterialsWorthMore_8.GetComponent<Button>().enabled = true;
+
+        goldChunk_1.GetComponent<Button>().enabled = true;
+        goldChunk_2.GetComponent<Button>().enabled = true;
+        goldChunk_3.GetComponent<Button>().enabled = true;
+        goldChunk_4.GetComponent<Button>().enabled = true;
+        goldChunk_5_.GetComponent<Button>().enabled = true;
+        fullGold_1.GetComponent<Button>().enabled = true;
+        fullGold_2.GetComponent<Button>().enabled = true;
+        fullGold_3.GetComponent<Button>().enabled = true;
+
+        spawnCopper.GetComponent<Button>().enabled = true;
+        copperChunk_1.GetComponent<Button>().enabled = true;
+        copperChunk_2.GetComponent<Button>().enabled = true;
+        copperChunk_3.GetComponent<Button>().enabled = true;
+        fullCopper_1.GetComponent<Button>().enabled = true;
+        fullCopper_2.GetComponent<Button>().enabled = true;
+        fullCopper_3.GetComponent<Button>().enabled = true;
+
+        spawnIron.GetComponent<Button>().enabled = true;
+        ironChunk_1.GetComponent<Button>().enabled = true;
+        ironChunk_2.GetComponent<Button>().enabled = true;
+        fullIron_1.GetComponent<Button>().enabled = true;
+        fullIron_2.GetComponent<Button>().enabled = true;
+
+        cobaltSpawn.GetComponent<Button>().enabled = true;
+        cobaltChunk_1.GetComponent<Button>().enabled = true;
+        fullCobalt_1.GetComponent<Button>().enabled = true;
+
+        uraniumSpawn.GetComponent<Button>().enabled = true;
+        uraniumChunk_1.GetComponent<Button>().enabled = true;
+        fullUranium_1.GetComponent<Button>().enabled = true;
+
+        ismiumSpawn.GetComponent<Button>().enabled = true;
+        ismiumChunk_1.GetComponent<Button>().enabled = true;
+        fullIsmium_1.GetComponent<Button>().enabled = true;
+
+        iridiumSpawn.GetComponent<Button>().enabled = true;
+        iridiumChunk_1.GetComponent<Button>().enabled = true;
+        fullIridium_1.GetComponent<Button>().enabled = true;
+
+        painiteSpawn.GetComponent<Button>().enabled = true;
+        painiteChunk_1.GetComponent<Button>().enabled = true;
+        fullPainite_1.GetComponent<Button>().enabled = true;
+
+        moreXP_1.GetComponent<Button>().enabled = true;
+        moreXP_2.GetComponent<Button>().enabled = true;
+        moreXP_3.GetComponent<Button>().enabled = true;
+        moreXP_4.GetComponent<Button>().enabled = true;
+        moreXP_5.GetComponent<Button>().enabled = true;
+        moreXP_6.GetComponent<Button>().enabled = true;
+        moreXP_7.GetComponent<Button>().enabled = true;
+        moreXP_8.GetComponent<Button>().enabled = true;
+
+        talentPointsPerXlevel_1.GetComponent<Button>().enabled = true;
+        talentPointsPerXlevel_2.GetComponent<Button>().enabled = true;
+        talentPointsPerXlevel_3.GetComponent<Button>().enabled = true;
+
+        lightningBeamChanceS_1.GetComponent<Button>().enabled = true;
+        lightningBeamChanceS_2.GetComponent<Button>().enabled = true;
+        lightningBeamChancePH_1.GetComponent<Button>().enabled = true;
+        lightningBeamChancePH_2.GetComponent<Button>().enabled = true;
+        lightningBeamSpawnAnotherOneChance.GetComponent<Button>().enabled = true;
+        lightningBeamDamage.GetComponent<Button>().enabled = true;
+        lightningBeamSize.GetComponent<Button>().enabled = true;
+        lightningSplashes.GetComponent<Button>().enabled = true;
+        lightningBeamSpawnRock.GetComponent<Button>().enabled = true;
+        lightningBeamExplosion.GetComponent<Button>().enabled = true;
+        lightningBeamAddTime.GetComponent<Button>().enabled = true;
+
+        dynamiteChance_1.GetComponent<Button>().enabled = true;
+        dynamiteChance_2.GetComponent<Button>().enabled = true;
+        dynamiteSpawn2SmallChance.GetComponent<Button>().enabled = true;
+        dynamiteExplosionSize.GetComponent<Button>().enabled = true;
+        dynamiteDamage.GetComponent<Button>().enabled = true;
+        dynamiteExplosionSpawnRock.GetComponent<Button>().enabled = true;
+        dynamiteExplosionAddTimeChance.GetComponent<Button>().enabled = true;
+        dynamiteExplosionSpawnLightning.GetComponent<Button>().enabled = true;
+
+        plazmaBallSpawn_1.GetComponent<Button>().enabled = true;
+        plazmaBallSpawn_2.GetComponent<Button>().enabled = true;
+        plazmaBallTime.GetComponent<Button>().enabled = true;
+        plazmaBallSize.GetComponent<Button>().enabled = true;
+        plazmaBallExplosionChance.GetComponent<Button>().enabled = true;
+        plazmaBallSpawnSmallChance.GetComponent<Button>().enabled = true;
+        plazmaBallDamage.GetComponent<Button>().enabled = true;
+        plazmaBallSpawnPickaxeChance.GetComponent<Button>().enabled = true;
+
+        improvedPickaxe_1.GetComponent<Button>().enabled = true;
+        improvedPickaxe_2.GetComponent<Button>().enabled = true;
+        improvedPickaxe_3.GetComponent<Button>().enabled = true;
+        improvedPickaxe_4.GetComponent<Button>().enabled = true;
+        improvedPickaxe_5.GetComponent<Button>().enabled = true;
+        improvedPickaxe_6.GetComponent<Button>().enabled = true;
+
+        biggerMiningErea_1.GetComponent<Button>().enabled = true;
+        biggerMiningErea_2.GetComponent<Button>().enabled = true;
+        biggerMiningErea_3.GetComponent<Button>().enabled = true;
+        biggerMiningErea_4.GetComponent<Button>().enabled = true;
+        shootCircleChance.GetComponent<Button>().enabled = true;
+        increaseAndDecreaseMinignErea.GetComponent<Button>().enabled = true;
+
+        spawnRockEveryXrock_1.GetComponent<Button>().enabled = true;
+        spawnRockEveryXrock_2.GetComponent<Button>().enabled = true;
+        spawnRockEveryXrock_3.GetComponent<Button>().enabled = true;
+
+        spawnXRockEveryXSecond_1.GetComponent<Button>().enabled = true;
+        spawnXRockEveryXSecond_2.GetComponent<Button>().enabled = true;
+        spawnXRockEveryXSecond_3.GetComponent<Button>().enabled = true;
+
+        chanceToSpawnRockWhenMined_1.GetComponent<Button>().enabled = true;
+        chanceToSpawnRockWhenMined_2.GetComponent<Button>().enabled = true;
+        chanceToSpawnRockWhenMined_3.GetComponent<Button>().enabled = true;
+        chanceToSpawnRockWhenMined_4.GetComponent<Button>().enabled = true;
+        chanceToSpawnRockWhenMined_5.GetComponent<Button>().enabled = true;
+        chanceToSpawnRockWhenMined_6.GetComponent<Button>().enabled = true;
+
+        chanceToMineRandomRock_1.GetComponent<Button>().enabled = true;
+        chanceToMineRandomRock_2.GetComponent<Button>().enabled = true;
+        chanceToMineRandomRock_3.GetComponent<Button>().enabled = true;
+        chanceToMineRandomRock_4.GetComponent<Button>().enabled = true;
+
+        spawnPickaxeEverySecond_1.GetComponent<Button>().enabled = true;
+        spawnPickaxeEverySecond_2.GetComponent<Button>().enabled = true;
+        spawnPickaxeEverySecond_3.GetComponent<Button>().enabled = true;
+
+        moreTime_1.GetComponent<Button>().enabled = true;
+        moreTime_2.GetComponent<Button>().enabled = true;
+        moreTime_3.GetComponent<Button>().enabled = true;
+        moreTime_4.GetComponent<Button>().enabled = true;
+        chanceToAdd1SecondEverySecond.GetComponent<Button>().enabled = true;
+        chanceAdd1SecondEveryRockMined.GetComponent<Button>().enabled = true;
+
+        doubleXpGoldChance_1.GetComponent<Button>().enabled = true;
+        doubleXpGoldChance_2.GetComponent<Button>().enabled = true;
+        doubleXpGoldChance_3.GetComponent<Button>().enabled = true;
+        doubleXpGoldChance_4.GetComponent<Button>().enabled = true;
+        doubleXpGoldChance_5.GetComponent<Button>().enabled = true;
+
+        allProjectileDoubleDamageChance.GetComponent<Button>().enabled = true;
+        allProjectileTriggerChance.GetComponent<Button>().enabled = true;
+
+        pickaxeDoubleDamageChance_1.GetComponent<Button>().enabled = true;
+        pickaxeDoubleDamageChance_2.GetComponent<Button>().enabled = true;
+
+        intaMineChance_1.GetComponent<Button>().enabled = true;
+        intaMineChance_2.GetComponent<Button>().enabled = true;
+
+        increaseSpawnChanceAllRocks.GetComponent<Button>().enabled = true;
+        craft2Material.GetComponent<Button>().enabled = true;
+        finalUpgrade.GetComponent<Button>().enabled = true;
+        #endregion
+
         //All non _purchased and _purchaseCount
         totalMaterialRocksSpawning = 1;
 
         totalSkillTreeUpgradesPurchased = 0;
         totalUpgradesFullyPurchased = 0;
-        mineSessionTime = 12;
+        mineSessionTime = 15;
         totalRocksToSpawn = 25;
         extraTalentPointPerLevel = 7;
 
         // === Rock chances ===
         goldRockChance = 11f;
-        fullGoldRockChance = 4;
-        copperRockChance = 3.5f;
-        fullCopperRockChance = 2.3f;
-        ironRockChance = 2.5f;
-        fullIronRockChance = 1.5f;
+        fullGoldRockChance = 4.2f;
+        copperRockChance = 3.1f;
+        fullCopperRockChance = 2.2f;
+        ironRockChance = 2.4f;
+        fullIronRockChance = 1.7f;
         cobaltRockChance = 1.5f;
-        fullCobaltRockChance = 1.1f;
-        uraniumRockChance = 1.2f;
-        fullUraniumRockChance = 1;
-        ismiumRockChance = 0.8f;
-        fullIsmiumRockChance = 0.7f;
-        iridiumRockChance = 0.6f;
-        fullIridiumRockChance = 0.5f;
-        painiteRockChance = 0.35f;
-        fullPainiteRockChance = 0.25f;
+        fullCobaltRockChance = 1.3f;
+        uraniumRockChance = 1.1f;
+        fullUraniumRockChance = 1f;
+        ismiumRockChance = 0.9f;
+        fullIsmiumRockChance = 0.8f;
+        iridiumRockChance = 0.7f;
+        fullIridiumRockChance = 0.6f;
+        painiteRockChance = 0.5f;
+        fullPainiteRockChance = 0.4f;
 
         // === Pickaxe ===
         improvedPickaxeStrength = 1f;
@@ -7774,7 +12500,7 @@ public class SkillTree : MonoBehaviour, IDataPersistence
         miningAreaSize = 1f;
 
         // === Spawn rocks ===
-        spawnRockEveryXRock = 5f;
+        spawnRockEveryXRock = 6f;
         spawnXRockEveryXSecond = 2;
         chanceToSpawnRockWhenMined = 0f;
 
@@ -7812,5 +12538,46 @@ public class SkillTree : MonoBehaviour, IDataPersistence
         // === Misc ===
         doubleDamageChance = 0f;
         instaMineChance = 0f;
+
+        fallingCopper_skillTree.SetActive(false); fallingCopper_MainMenu.SetActive(false);
+        fallingIron_skillTree.SetActive(false); fallingIron_MainMenu.SetActive(false);
+        fallingCobalt_skillTree.SetActive(false); fallingCobalt_MainMenu.SetActive(false);
+        fallingUranium_skillTree.SetActive(false); fallingUranium_MainMenu.SetActive(false);
+        fallingIsmium_skillTree.SetActive(false); fallingIsmium_MainMenu.SetActive(false);
+        fallingIridium_skillTree.SetActive(false); fallingIridium_MainMenu.SetActive(false);
+        fallingPainite_skillTree.SetActive(false); fallingPainite_MainMenu.SetActive(false);
+
+        endingButton.SetActive(false);
+
+        copperBarFrame.SetActive(false);
+        ironBarFrame.SetActive(false);
+        cobaltBarFrame.SetActive(false);
+        uraniumiumBarFrame.SetActive(false);
+        ismiumBarFrame.SetActive(false);
+        iridiumBarFRame.SetActive(false);
+        painiteBarFrame.SetActive(false);
+
+        endlessUpgradesParent.SetActive(false);
+        endlessUpgradesPopUp.SetActive(false);
+
+        hasPressedEndlessOK = false;
+
+        endlessGold_price = 6500000;
+        endlessCopper_price = 3500000;
+        endlessIron_price = 2500000;
+        endlessCobalt_price = 1700000;
+        endlessUranium_price = 1200000;
+        endlessIsmium_price = 700000;
+        endlessIridium_price = 500000;
+        endlessPainite_price = 300000;
+
+        endlessGold_purchaseCount = 0;
+        endlessCopper_purchaseCount = 0;
+        endlessIron_purchaseCount = 0;
+        endlessCobalt_purchaseCount = 0;
+        endlessUranium_purchaseCount = 0;
+        endlessIsmium_purchaseCount = 0;
+        endlessIridium_purchaseCount = 0;
+        endlessPainite_purchaseCount = 0;
     }
 }

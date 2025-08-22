@@ -15,6 +15,7 @@ public class GameData
         PickaxeSaves();
         TheMineSaves();
         SkillTreeSaves();
+        SetEndingSaves();
     }
 
     #region Tutorial saves
@@ -33,6 +34,15 @@ public class GameData
         pressedOkAnvil = false;
         pressedOkMine = false;
         pressedOkArtifact = false;
+    }
+    #endregion
+
+    #region End Saves
+    public bool isEndingCompleted;
+
+    public void SetEndingSaves()
+    {
+        isEndingCompleted = false;
     }
     #endregion
 
@@ -75,8 +85,14 @@ public class GameData
 
     public int cardsLeft;
 
+    public int talentCard1Picked, talentCard2Picked, talentCard3Picked;
+
     public void TalenSaves()
     {
+        talentCard1Picked = 0;
+        talentCard2Picked = 0;
+        talentCard3Picked = 0;
+
         cardsLeft = 20;
 
         currentXP = 0;
@@ -218,20 +234,20 @@ public class GameData
     public double totalIronBars;
     public double totalCobaltBars;
     public double totalUraniumBars;
-    public double totalIsmiumBar;  // Note singular as per your naming
+    public double totalIsmiumBar; 
     public double totalIridiumBars;
     public double totalPainiteBars;
 
     public void GoldBarsSaves()
     {
-        totalGoldBars = 0;
-        totalCopperBars = 0;
-        totalIronBars = 0;
-        totalCobaltBars = 0;
-        totalUraniumBars = 0;
-        totalIsmiumBar = 0;
-        totalIridiumBars = 0;
-        totalPainiteBars = 0;
+        totalGoldBars = 0.494f;
+        totalCopperBars = 0.494f;
+        totalIronBars = 0.494f;
+        totalCobaltBars = 0.494f;
+        totalUraniumBars = 0.494f;
+        totalIsmiumBar = 0.494f;
+        totalIridiumBars = 0.494f;
+        totalPainiteBars = 0.494f;
     }
     #endregion
 
@@ -248,8 +264,26 @@ public class GameData
 
     public bool isTheAnvilUnlocked;
 
+    public int pickaxe1_skinsChosen;
+    public int pickaxe2_skinsChosen;
+    public int pickaxe3_skinsChosen;
+    public int pickaxe4_skinsChosen;
+    public int pickaxe5_skinsChosen;
+    public int pickaxe6_skinsChosen;
+    public int pickaxe7_skinsChosen;
+    public int pickaxe8_skinsChosen;
+    public int pickaxe9_skinsChosen;
+    public int pickaxe10_skinsChosen;
+    public int pickaxe11_skinsChosen;
+    public int pickaxe12_skinsChosen;
+    public int pickaxe13_skinsChosen;
+
+    public int totalPickaxesCrafted;
+
     public void PickaxeSaves()
     {
+        totalPickaxesCrafted = 0;
+
         isTheAnvilUnlocked = false;
 
         pickaxe1_crafted = true;
@@ -281,6 +315,20 @@ public class GameData
         pickaxe12_equipped = false;
         pickaxe13_equipped = false;
         pickaxe14_equipped = false;
+
+        pickaxe1_skinsChosen = 0;
+        pickaxe2_skinsChosen = 0;
+        pickaxe3_skinsChosen = 0;
+        pickaxe4_skinsChosen = 0;
+        pickaxe5_skinsChosen = 0;
+        pickaxe6_skinsChosen = 0;
+        pickaxe7_skinsChosen = 0;
+        pickaxe8_skinsChosen = 0;
+        pickaxe9_skinsChosen = 0;
+        pickaxe10_skinsChosen = 0;
+        pickaxe11_skinsChosen = 0;
+        pickaxe12_skinsChosen = 0;
+        pickaxe13_skinsChosen = 0;
     }
     #endregion
 
@@ -296,14 +344,14 @@ public class GameData
     public void TheMineSaves()
     {
         isTheMineUnlocked = false;
-        theMinePrice = 1000;
+        theMinePrice = 500;
 
-        miningTime = 30f;
-        mineTimeDecrase = 1.2f;
-        mineTimePrice = 500;
+        miningTime = 15f;
+        mineTimeDecrase = miningTime / 19;
+        mineTimePrice = 300;
 
         mineMaterialsPrice = 750;
-        barsMined = 4;
+        barsMined = 2;
         bersMinedIncrease = 2;
     }
     #endregion
@@ -532,8 +580,34 @@ public class GameData
     public bool moreTime_1_purchased, moreTime_2_purchased, moreTime_3_purchased, moreTime_4_purchased;
     public bool chanceToAdd1SecondEverySecond_purchased, chanceAdd1SecondEveryRockMined_purchased;
 
+    public double endlessGold_price, endlessCopper_price, endlessIron_price, endlessCobalt_price, endlessUranium_price, endlessIsmium_price, endlessIridium_price, endlessPainite_price;
+
+    public int endlessGold_purchaseCount, endlessCopper_purchaseCount, endlessIron_purchaseCount, endlessCobalt_purchaseCount, endlessUranium_purchaseCount, endlessIsmium_purchaseCount, endlessIridium_purchaseCount, endlessPainite_purchaseCount;
+
+    public bool hasPressedEndlessOK;
+
     public void SkillTreeSaves()
     {
+        hasPressedEndlessOK = false;
+
+        endlessGold_price = 6500000;
+        endlessCopper_price = 3500000;
+        endlessIron_price = 2500000;
+        endlessCobalt_price = 1700000;
+        endlessUranium_price = 1200000;
+        endlessIsmium_price = 700000;
+        endlessIridium_price = 500000;
+        endlessPainite_price = 300000;
+
+        endlessGold_purchaseCount = 0;
+        endlessCopper_purchaseCount = 0;
+        endlessIron_purchaseCount = 0;
+        endlessCobalt_purchaseCount = 0;
+        endlessUranium_purchaseCount = 0;
+        endlessIsmium_purchaseCount = 0;
+        endlessIridium_purchaseCount = 0;
+        endlessPainite_purchaseCount = 0;
+
         #region Purchased
         moreTime_1_purchased = false;
         moreTime_2_purchased = false;
@@ -762,27 +836,27 @@ public class GameData
 
         totalSkillTreeUpgradesPurchased = 0;
         totalUpgradesFullyPurchased = 0;
-        mineSessionTime = 12;
+        mineSessionTime = 15;
         totalRocksToSpawn = 25;
         extraTalentPointPerLevel = 7;
 
         // === Rock chances ===
         goldRockChance = 11f;
-        fullGoldRockChance = 4;
-        copperRockChance = 3.5f;
-        fullCopperRockChance = 2.3f;
-        ironRockChance = 2.5f;
-        fullIronRockChance = 1.5f;
+        fullGoldRockChance = 4.2f;
+        copperRockChance = 3.1f;
+        fullCopperRockChance = 2.2f;
+        ironRockChance = 2.4f;
+        fullIronRockChance = 1.7f;
         cobaltRockChance = 1.5f;
-        fullCobaltRockChance = 1.1f;
-        uraniumRockChance = 1.2f;
-        fullUraniumRockChance = 1;
-        ismiumRockChance = 0.8f;
-        fullIsmiumRockChance = 0.7f;
-        iridiumRockChance = 0.6f;
-        fullIridiumRockChance = 0.5f;
-        painiteRockChance = 0.35f;
-        fullPainiteRockChance = 0.25f;
+        fullCobaltRockChance = 1.3f;
+        uraniumRockChance = 1.1f;
+        fullUraniumRockChance = 1f;
+        ismiumRockChance = 0.9f;
+        fullIsmiumRockChance = 0.8f;
+        iridiumRockChance = 0.7f;
+        fullIridiumRockChance = 0.6f;
+        painiteRockChance = 0.5f;
+        fullPainiteRockChance = 0.4f;
 
         // === Pickaxe ===
         improvedPickaxeStrength = 1f;
@@ -792,7 +866,7 @@ public class GameData
         miningAreaSize = 1f;
 
         // === Spawn rocks ===
-        spawnRockEveryXRock = 5f;
+        spawnRockEveryXRock = 6f;
         spawnXRockEveryXSecond = 2;
         chanceToSpawnRockWhenMined = 0f;
 

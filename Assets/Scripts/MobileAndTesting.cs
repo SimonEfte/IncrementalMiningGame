@@ -9,9 +9,15 @@ public class MobileAndTesting : MonoBehaviour
 
     private void Awake()
     {
-        isMobile = false;
-
+        isMobile = true;
         isTesting = false;
     }
 
+    private void Start()
+    {
+        if(isMobile == true)
+        {
+            Application.targetFrameRate = 60;
+        }
+    }
 }

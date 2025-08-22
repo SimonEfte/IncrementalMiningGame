@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,6 +12,7 @@ public class LevelMechanics : MonoBehaviour, IDataPersistence
     public AudioManager audioManager;
     public Tutorial tutorialScript;
     public LocalizationScript locScript;
+    public Achievements achScript;
 
     public Slider xpSlider;
 
@@ -24,7 +25,7 @@ public class LevelMechanics : MonoBehaviour, IDataPersistence
     public static float xpFromRock;
     public float xpNeedForNextLvl;
     public float currentXP;
-    public bool isInChoose1;
+    public static bool isInChoose1;
     public static bool isBlockFrameActive;
     public static int newTalentsPrice;
     public static bool potionDrinker_chosen, potionChugger_chosen, chests_chosen, goldenChests_chosen, skilledMiners_chosen, efficientBlacksmith_chosen, itsASign_chosen, steamSale_chosen, bigMiningArea_chosen, itsHammerTime_chosen, goldenTouch_chosen, zeus_chosen, shapeShifter_chosen, xMarksTheSpor_chosen, explorer_chosen, archaeologist_chosen, energiDrinker_chosen, springSeason_chosen, camper_chosen, d100_chosen;
@@ -43,19 +44,19 @@ public class LevelMechanics : MonoBehaviour, IDataPersistence
 
     public static int rocksMinedByHammer;
 
-    public static float archeologistIncrease;
+    public static float archeologistIncrease, archeologistIncreaseDISPLAY;
 
-    public static float blacksmithDecrease;
+    public static float blacksmithDecrease, blacksmithDecreaseDISPLAY;
 
     public static int totalChestMaterials, totalGoldenChestMaterials;
 
-    public static float shapeShifterSizeIncrease;
+    public static float shapeShifterSizeIncrease, shapeShifterSizeIncreaseDISPLAY;
 
     public static float rockSpawnChance;
 
     public static float skilledMinersFastChance, skilledMinersDoubleChance;
    
-    public static float bigMiningAreaChance;
+    public static float bigMiningAreaChance, bigMiningAreaTime;
 
     public static float hammerChance;
 
@@ -80,6 +81,8 @@ public class LevelMechanics : MonoBehaviour, IDataPersistence
 
     public GameObject card1Left, card2Left, cardAllChosen, allTalentCardsChosenBlockBtn;
 
+    public Animation potionTooltipAnim;
+
     private void Awake()
     {
         SetOriginalStats();
@@ -91,71 +94,139 @@ public class LevelMechanics : MonoBehaviour, IDataPersistence
     {
         talentLevelHpIncrease = 2;
 
+        inflationBurstIncrease = 0.4f;
 
-
-        inflationBurstIncrease = 0.3f;
-
-        totalGoldenChestMaterials = 40;
+        totalGoldenChestMaterials = 50;
         totalChestMaterials = 25;
 
         archeologistIncrease = 0f;
+        archeologistIncreaseDISPLAY = 0.08f;
 
         steamSaleDiscount = 1;
 
         blacksmithDecrease = 1f;
+        blacksmithDecreaseDISPLAY = 0.75f;
 
         shapeShifterSizeIncrease = 0;
+        shapeShifterSizeIncreaseDISPLAY = 0.06f;
 
-        rockSpawnChance = 0.5f;
+        rockSpawnChance = 0.6f;
 
-        skilledMinersFastChance = 7;
-        skilledMinersDoubleChance = 4;
+        skilledMinersFastChance = 10;
+        skilledMinersDoubleChance = 8;
 
-        bigMiningAreaChance = 6;
+        bigMiningAreaChance = 7;
+        bigMiningAreaTime = 3;
 
-        hammerChance = 0.2f;
+        hammerChance = 0.4f;
 
-        midasTouchChance = 9;
-        midasTouchSpawnChance = 15;
+        midasTouchChance = 20;
+        midasTouchSpawnChance = 25;
 
         zeusChance = 5;
         zeusLightningAmount = 15;
 
-        energiDrinkChance = 6;
-        energiDrinkTime = 2;
+        energiDrinkChance = 7;
+        energiDrinkTime = 3;
 
-        flowerIncrease = 0.02f;
+        flowerIncrease = 0.015f;
     }
 
+    public static int talentCard1Picked, talentCard2Picked, talentCard3Picked;
+    public int startCardsAdded;
+
+    public GameObject goldenCursorCard, goldenCursorLeft, goldenCircleCard, goldenCircleLeft;
+
+    #region Wait
     IEnumerator Wait()
     {
         yield return new WaitForSeconds(0.1f);
+
+        if(MobileAndTesting.isMobile == false)
+        {
+            goldenCursorCard.SetActive(true);
+            goldenCursorLeft.SetActive(true);
+            goldenCircleCard.SetActive(false);
+            goldenCircleLeft.SetActive(false);
+        }
+        else
+        {
+            potionTooltipAnim.enabled = false;
+
+            talentTooltipAnim.enabled = false;
+            talentLevelAnim.enabled = false;
+
+            goldenCursorCard.SetActive(false);
+            goldenCursorLeft.SetActive(false);
+            goldenCircleCard.SetActive(true);
+            goldenCircleLeft.SetActive(true);
+        }
 
         if (potionDrinker_chosen) { potionDrinker_unlocked.SetActive(true); }
         if (potionChugger_chosen) { potionChugger_unlocked.SetActive(true); }
         if (chests_chosen) { chests_unlocked.SetActive(true); }
         if (goldenChests_chosen) { goldenChests_unlocked.SetActive(true); }
         if (skilledMiners_chosen) { skilledMiners_unlocked.SetActive(true); }
-        if (efficientBlacksmith_chosen) { efficientBlacksmith_unlocked.SetActive(true); blacksmithDecrease = 0.90f; }
+        if (efficientBlacksmith_chosen) { efficientBlacksmith_unlocked.SetActive(true); blacksmithDecrease = blacksmithDecreaseDISPLAY; }
         if (itsASign_chosen) { itsASign_unlocked.SetActive(true); StartCoroutine(ChangeSignBuff()); sign.SetActive(true); }
         if (steamSale_chosen) { steamSale_unlocked.SetActive(true); steamSaleDiscount = 0.93f; }
         if (bigMiningArea_chosen) { bigMiningArea_unlocked.SetActive(true);StartCoroutine(ChanceToIncreaseMiningErea()); }
         if (itsHammerTime_chosen) { itsHammerTime_unlocked.SetActive(true); }
         if (goldenTouch_chosen) { goldenTouch_unlocked.SetActive(true); }
         if (zeus_chosen) { zeus_unlocked.SetActive(true); StartCoroutine(StartZeus()); }
-        if (shapeShifter_chosen) { shapeShifter_unlocked.SetActive(true); shapeShifterSizeIncrease = 0.05f; }
+        if (shapeShifter_chosen) { shapeShifter_unlocked.SetActive(true); shapeShifterSizeIncrease = shapeShifterSizeIncreaseDISPLAY; }
         if (xMarksTheSpor_chosen) { xMarksTheSpor_unlocked.SetActive(true); }
         if (explorer_chosen) { explorer_unlocked.SetActive(true); }
-        if (archaeologist_chosen) { archaeologist_unlocked.SetActive(true); }
+        if (archaeologist_chosen) { archaeologist_unlocked.SetActive(true); archeologistIncrease = archeologistIncreaseDISPLAY; }
         if (energiDrinker_chosen) { energiDrinker_unlocked.SetActive(true); StartCoroutine(ChanceToDrinkEnergiDRink()); }
         if (springSeason_chosen) { springSeason_unlocked.SetActive(true); }
         if (camper_chosen) { camper_unlocked.SetActive(true); }
         if (d100_chosen) { d100_unlocked.SetActive(true); }
 
-        AddTalentCards();
+        if(isInChoose1 == true)
+        {
+            unlockParent.SetActive(false);
+            blockBtn.SetActive(true);
+            choose1Parent.SetActive(true);
+            lockedTalent1.Play("RemoveBlockedCard");
+            lockedTalent2.Play("RemoveBlockedCard");
+            lockedTalent3.Play("RemoveBlockedCard");
+
+            if (talentCard1Picked == 0 || talentCard2Picked == 0 || talentCard3Picked == 0)
+            {
+                setSpecificCards = false;
+                AddTalentCards();
+            }
+            else
+            {
+                setSpecificCards = true;
+                AddTalentCards();
+
+                startCardsAdded += 1;
+                SetCard();
+                if (cardsLeft > 1)
+                {
+                    startCardsAdded += 1;
+                    SetCard();
+                }
+                if (cardsLeft > 2)
+                {
+                    startCardsAdded += 1;
+                    SetCard();
+                } //Potion chugger, shape shifter and spring season.
+            }
+        }
+        else
+        {
+            setSpecificCards = false;
+            AddTalentCards();
+        }
+
         SetTalentTexts();
     }
+    #endregion
 
+    public bool setSpecificCards;
     public TextMeshProUGUI revealTalentsPriceText;
  
     private void Update()
@@ -173,7 +244,7 @@ public class LevelMechanics : MonoBehaviour, IDataPersistence
                 colorName = "<color=red>";
             }
 
-            revealTalentsPriceText.text = $"Price: {colorName}{newTalentsPrice}";
+            revealTalentsPriceText.text = $"{LocalizationScript.price} {colorName}{newTalentsPrice}";
         }
     }
 
@@ -181,12 +252,28 @@ public class LevelMechanics : MonoBehaviour, IDataPersistence
 
     public void SetTalentTexts()
     {
-        talentLevelText.text = "Talent level: " + talentLevel;
+       
 
-        int durability = 10 + (talentLevelHpIncrease * talentLevel);
+        talentLevelText.text = LocalizationScript.talentLevel + " " + talentLevel;
+
+        float durability = 10 + (talentLevelHpIncrease * talentLevel);
         durability -= talentLevelHpIncrease;
 
-        rockDurabilityTooltipText.text = $"= {durability} Durability";
+        if (Artifacts.horn_found)
+        {
+            float hornDecrase = 1 - Artifacts.hornRockDecrease;
+
+            if (archaeologist_chosen) { hornDecrase -= (Artifacts.hornRockDecrease * archeologistIncreaseDISPLAY); }
+            if (Artifacts.rune_found) { hornDecrase -= (Artifacts.hornRockDecrease * Artifacts.runeImproveAll); }
+
+            durability *= hornDecrase;
+
+            rockDurabilityTooltipText.text = $"= {durability.ToString("F2")} {LocalizationScript.durability}";
+        }
+        else
+        {
+            rockDurabilityTooltipText.text = $"= {durability.ToString("F0")} {LocalizationScript.durability}";
+        }
 
         xpSlider.minValue = 0;
         xpSlider.maxValue = xpNeedForNextLvl;
@@ -194,7 +281,8 @@ public class LevelMechanics : MonoBehaviour, IDataPersistence
         xpSlider.value = currentXP;
 
         float value = xpSlider.value;
-        needToReachText.text = (value * 100).ToString("F0") + "/" + (xpSlider.maxValue * 100).ToString("F0") + "XP";
+
+        needToReachText.text = FormatNumbers.FormatPoints(value * 100) + "/" + FormatNumbers.FormatPoints(xpSlider.maxValue * 100) + "XP";
 
         levelText.text = level + "";
         talentScreen_talentPoints.text = totalTalentPoints.ToString("F0");
@@ -270,9 +358,25 @@ public class LevelMechanics : MonoBehaviour, IDataPersistence
 
             currentXP = 0;
             xpSlider.value = 0;
-            xpNeedForNextLvl *= 1.82f;
+
             level += 1;
+            achScript.CheckAch();
             levelText.text = "" + level;
+
+            float levelIncrease = 1.7f;
+
+            if (level > 2)
+            {
+                for (int i = 0; i < level - 1; i++)
+                {
+                    levelIncrease -= 0.024f;
+                    if(levelIncrease < 1.075f) { levelIncrease = 1.075f; }
+                }
+            }
+
+            //Debug.Log(levelIncrease);
+
+            xpNeedForNextLvl *= levelIncrease;
 
             xpSlider.minValue = 0;
             xpSlider.maxValue = xpNeedForNextLvl;
@@ -307,7 +411,7 @@ public class LevelMechanics : MonoBehaviour, IDataPersistence
 
             didLevelUpTotalTalentPoints = totalTalentPointsToAdd;
 
-            levelUpAnim.GetComponent<TextMeshProUGUI>().text = "LEVEL UP! <color=purple>+" + totalTalentPointsToAdd;
+            levelUpAnim.GetComponent<TextMeshProUGUI>().text =  LocalizationScript.levelUp + " <color=purple>+" + totalTalentPointsToAdd;
 
             levelUpAnim.gameObject.SetActive(true);
             levelUpAnim.Play();
@@ -315,9 +419,9 @@ public class LevelMechanics : MonoBehaviour, IDataPersistence
 
             talentScreen_talentPoints.text = totalTalentPoints.ToString("F0");
         }
-
+      
         float value = xpSlider.value;
-        needToReachText.text = (value * 100).ToString("F0") + "/" + (xpSlider.maxValue * 100).ToString("F0") + "XP";
+        needToReachText.text = FormatNumbers.FormatPoints(value * 100) + "/" + FormatNumbers.FormatPoints(xpSlider.maxValue * 100) + "XP";
     }
 
     IEnumerator SetLevelAnimOff()
@@ -346,6 +450,10 @@ public class LevelMechanics : MonoBehaviour, IDataPersistence
             blockFrame.SetActive(true);
 
             StartCoroutine(RemoveBlockedTalentCards());
+        }
+        else
+        {
+            audioManager.Play("CantAfford");
         }
     }
 
@@ -412,7 +520,7 @@ public class LevelMechanics : MonoBehaviour, IDataPersistence
         camper_card.SetActive(false);
         d100_card.SetActive(false);
 
-        SetCard();
+        if(setSpecificCards == false) { SetCard(); }
     }
 
     public void SetCard()
@@ -420,94 +528,120 @@ public class LevelMechanics : MonoBehaviour, IDataPersistence
         if(cardsLeft == 0) { return; }
 
         //int randomCard = Random.Range(1, 21);
-        int randomCard = Random.Range(1, 21);
+        int randomCard = 0;
+
+        if(setSpecificCards == true) 
+        { 
+            if(startCardsAdded == 1) { randomCard = talentCard1Picked; }
+            if (startCardsAdded == 2) { randomCard = talentCard2Picked; }
+            if (startCardsAdded == 3) { randomCard = talentCard3Picked; }
+        }
+        else
+        {
+            randomCard = Random.Range(1, 21);
+        }
 
         if (randomCard == 1 && potionDrinker_chosen == false)
         {
             if (card1Number == randomCard || card2Number == randomCard || card3Number == randomCard) { SetCard(); return; }
             storeCard[cardsChosen] = potionDrinker_card; storeCard[cardsChosen].SetActive(true);
+
+            locScript.TalentTexts(randomCard); 
         }
         else if (randomCard == 2 && potionChugger_chosen == false) 
         { 
-            if(cardsLeft > 4)
+            if(cardsLeft > 5)
             {
                 if (potionDrinker_chosen == false) { SetCard(); return; }
             }
 
             if (card1Number == randomCard || card2Number == randomCard || card3Number == randomCard) { SetCard(); return; }
             storeCard[cardsChosen] = potionChugger_Card; storeCard[cardsChosen].SetActive(true);
+
+            locScript.TalentTexts(randomCard);
         }
         else if(randomCard == 3 && chests_chosen == false)
         {
             if (card1Number == randomCard || card2Number == randomCard || card3Number == randomCard) { SetCard(); return; }
             storeCard[cardsChosen] = chests_card; storeCard[cardsChosen].SetActive(true);
+
+            locScript.TalentTexts(randomCard);
         }
         else if (randomCard == 4 && goldenChests_chosen == false) 
         {
             if (card1Number == randomCard || card2Number == randomCard || card3Number == randomCard) { SetCard(); return; }
             storeCard[cardsChosen] = goldenChests_card; storeCard[cardsChosen].SetActive(true);
+
+            locScript.TalentTexts(randomCard);
         }
         else if (randomCard == 5 && skilledMiners_chosen == false) 
         {
-            if (cardsLeft > 6)
+            if (cardsLeft > 7)
             {
                 if (TheMine.isTheMineUnlocked == false) { SetCard(); return; }
             }
 
             if (card1Number == randomCard || card2Number == randomCard || card3Number == randomCard) { SetCard(); return; }
             storeCard[cardsChosen] = skilledMiners_card; storeCard[cardsChosen].SetActive(true);
+            locScript.TalentTexts(randomCard);
         }
         else if (randomCard == 6 && efficientBlacksmith_chosen == false)
         {
-            if (cardsLeft > 5)
+            if (cardsLeft > 7)
             {
                 if (TheAnvil.isTheAnvilUnlocked == false) { SetCard(); return; }
             }
 
             if (card1Number == randomCard || card2Number == randomCard || card3Number == randomCard) { SetCard(); return; }
             storeCard[cardsChosen] = efficientBlacksmith_card; storeCard[cardsChosen].SetActive(true);
+            locScript.TalentTexts(7);
         }
         else if (randomCard == 7 && itsASign_chosen == false) 
         {
-            if (cardsLeft > 6)
+            if (cardsLeft > 7)
             {
                 if (TheMine.isTheMineUnlocked == false) { SetCard(); return; }
             }
 
             if (card1Number == randomCard || card2Number == randomCard || card3Number == randomCard) { SetCard(); return; }
             storeCard[cardsChosen] = itsASign_card; storeCard[cardsChosen].SetActive(true);
+            locScript.TalentTexts(6);
         }
         else if (randomCard == 8 && steamSale_chosen == false) 
         {
             if (card1Number == randomCard || card2Number == randomCard || card3Number == randomCard) { SetCard(); return; }
             storeCard[cardsChosen] = steamSale_card; storeCard[cardsChosen].SetActive(true);
+            locScript.TalentTexts(randomCard);
         }
         else if (randomCard == 9 && bigMiningArea_chosen == false) 
         {
             if (card1Number == randomCard || card2Number == randomCard || card3Number == randomCard) { SetCard(); return; }
             storeCard[cardsChosen] = bigMiningArea_card; storeCard[cardsChosen].SetActive(true);
+            locScript.TalentTexts(randomCard);
         }
         else if (randomCard == 10 && itsHammerTime_chosen == false) 
         {
             if (card1Number == randomCard || card2Number == randomCard || card3Number == randomCard) { SetCard(); return; }
             storeCard[cardsChosen] = itsHammerTime_card; storeCard[cardsChosen].SetActive(true);
+            locScript.TalentTexts(randomCard);
         }
         else if (randomCard == 11 && goldenTouch_chosen == false) 
         {
             if (card1Number == randomCard || card2Number == randomCard || card3Number == randomCard) { SetCard(); return; }
             storeCard[cardsChosen] = goldenTouch_card; storeCard[cardsChosen].SetActive(true);
+            locScript.TalentTexts(randomCard);
         }
         else if (randomCard == 12 && zeus_chosen == false)
         {
             if(SkillTree.lightningBeamChancePH_1_purchased == false && SkillTree.lightningBeamChanceS_1_purchased == false)
             {
-                if (cardsLeft > 7)
+                if (cardsLeft > 8)
                 {
                     if (SkillTree.lightningBeamChancePH_1_purchased == false) { SetCard(); return; }
                     if (SkillTree.lightningBeamChanceS_1_purchased == false) { SetCard(); return; }
                 }
             }
-            else if (cardsLeft > 5)
+            else if (cardsLeft > 6)
             {
                 if (SkillTree.lightningBeamChancePH_1_purchased == false) { SetCard(); return; }
                 if (SkillTree.lightningBeamChanceS_1_purchased == false) { SetCard(); return; }
@@ -515,78 +649,93 @@ public class LevelMechanics : MonoBehaviour, IDataPersistence
 
             if (card1Number == randomCard || card2Number == randomCard || card3Number == randomCard) { SetCard(); return; }
             storeCard[cardsChosen] = zeus_card; storeCard[cardsChosen].SetActive(true);
+            locScript.TalentTexts(randomCard);
         }
         else if (randomCard == 13 && shapeShifter_chosen == false)
         {
             if (card1Number == randomCard || card2Number == randomCard || card3Number == randomCard) { SetCard(); return; }
             storeCard[cardsChosen] = shapeShifter_card; storeCard[cardsChosen].SetActive(true);
+            locScript.TalentTexts(randomCard);
         }
         else if (randomCard == 14 && xMarksTheSpor_chosen == false)
         {
             if (card1Number == randomCard || card2Number == randomCard || card3Number == randomCard) { SetCard(); return; }
          
-            if (cardsLeft > 6)
+            if (cardsLeft > 7)
             {
                 if (Artifacts.artifactsFound == 0) { SetCard(); return; }
             }
 
             storeCard[cardsChosen] = xMarksTheSpor_card; storeCard[cardsChosen].SetActive(true);
+            locScript.TalentTexts(randomCard);
         }
         else if (randomCard == 15 && explorer_chosen == false)
         {
             if (card1Number == randomCard || card2Number == randomCard || card3Number == randomCard) { SetCard(); return; }
 
-            if (cardsLeft > 6)
+            if (cardsLeft > 7)
             {
                 if (xMarksTheSpor_chosen == false) { SetCard(); return; }
                 if (Artifacts.artifactsFound == 0) { SetCard(); return; }
             }
 
             storeCard[cardsChosen] = explorer_card; storeCard[cardsChosen].SetActive(true);
+            locScript.TalentTexts(randomCard);
         }
         else if (randomCard == 16 && archaeologist_chosen == false) 
         {
             if (card1Number == randomCard || card2Number == randomCard || card3Number == randomCard) { SetCard(); return; }
 
-            if (cardsLeft > 6)
+            if (cardsLeft > 7)
             {
                 if (Artifacts.artifactsFound == 0) { SetCard(); return; }
             }
 
             storeCard[cardsChosen] = archaeologist_Card; storeCard[cardsChosen].SetActive(true);
+            locScript.TalentTexts(randomCard);
         }
         else if (randomCard == 17 && energiDrinker_chosen == false)
         {
             if (card1Number == randomCard || card2Number == randomCard || card3Number == randomCard) { SetCard(); return; }
             storeCard[cardsChosen] = energiDrinker_card; storeCard[cardsChosen].SetActive(true);
+            locScript.TalentTexts(randomCard);
         }
         else if (randomCard == 18 && springSeason_chosen == false) 
         {
             if (card1Number == randomCard || card2Number == randomCard || card3Number == randomCard) { SetCard(); return; }
             storeCard[cardsChosen] = springSeason_card; storeCard[cardsChosen].SetActive(true);
+            locScript.TalentTexts(randomCard);
         }
         else if (randomCard == 19 && camper_chosen == false) 
         {
             if (card1Number == randomCard || card2Number == randomCard || card3Number == randomCard) { SetCard(); return; }
             storeCard[cardsChosen] = camper_card; storeCard[cardsChosen].SetActive(true);
+            locScript.TalentTexts(randomCard);
         }
         else if (randomCard == 20 && d100_chosen == false)
         {
             if (card1Number == randomCard || card2Number == randomCard || card3Number == randomCard) { SetCard(); return; }
             storeCard[cardsChosen] = d100_card; storeCard[cardsChosen].SetActive(true);
+            locScript.TalentTexts(randomCard);
         }
         else { SetCard(); return; }
 
         cardsChosen += 1;
 
-        if (cardsChosen == 1) { card1Number = randomCard; }
-        if (cardsChosen == 2) { card2Number = randomCard; }
-        if (cardsChosen == 3) { card3Number = randomCard; }
+        if (cardsChosen == 1) { card1Number = randomCard; talentCard1Picked = randomCard; }
+        if (cardsChosen == 2) { card2Number = randomCard; talentCard2Picked = randomCard; }
+        if (cardsChosen == 3) { card3Number = randomCard; talentCard3Picked = randomCard; }
 
         if(cardsLeft > 2)
         {
-            if (cardsChosen == 1) { SetCard(); }
-            if (cardsChosen == 2) { SetCard(); }
+            if (cardsChosen == 1) 
+            {
+                if(setSpecificCards == false) { SetCard(); }
+            }
+            if (cardsChosen == 2) 
+            {
+                if (setSpecificCards == false) { SetCard(); }
+            }
 
             if (cardsChosen == 3)
             {
@@ -601,7 +750,10 @@ public class LevelMechanics : MonoBehaviour, IDataPersistence
         }
         else if (cardsLeft == 2)
         {
-            if (cardsChosen == 1) { SetCard(); }
+            if (cardsChosen == 1)
+            {
+                if (setSpecificCards == false) { SetCard(); } 
+            }
 
             if (cardsChosen == 2)
             {
@@ -646,16 +798,15 @@ public class LevelMechanics : MonoBehaviour, IDataPersistence
             cardNumberToMove = 2;
         }
 
-
         if (cardNumberToMove == 0)
         {
-            storeCard[1].GetComponent<Animation>().Play("TalentCardDown");
-            storeCard[2].GetComponent<Animation>().Play("TalentCardDown");
+            if(cardsLeft > 1) { storeCard[1].GetComponent<Animation>().Play("TalentCardDown"); }
+            if (cardsLeft > 2) { storeCard[2].GetComponent<Animation>().Play("TalentCardDown"); }
         }
         else if (cardNumberToMove == 1)
         {
             storeCard[0].GetComponent<Animation>().Play("TalentCardDown");
-            storeCard[2].GetComponent<Animation>().Play("TalentCardDown");
+            if (cardsLeft > 2) { storeCard[2].GetComponent<Animation>().Play("TalentCardDown"); }
         }
         else if (cardNumberToMove == 2)
         {
@@ -746,8 +897,8 @@ public class LevelMechanics : MonoBehaviour, IDataPersistence
         audioManager.Play("CardPop");
 
         cardsLeft -= 1;
+        achScript.CheckAch();
 
-        SetTalentTexts(); 
 
         if (name == "potionDrinker")
         {
@@ -799,7 +950,7 @@ public class LevelMechanics : MonoBehaviour, IDataPersistence
             efficientBlacksmith_unlocked.SetActive(true);
             efficientBlacksmith_chosen = true;
 
-            blacksmithDecrease = 0.90f;
+            blacksmithDecrease = blacksmithDecreaseDISPLAY;
         }
         if (name == "itsASign")
         {
@@ -867,7 +1018,7 @@ public class LevelMechanics : MonoBehaviour, IDataPersistence
             shapeShifter_unlocked.SetActive(true);
             shapeShifter_chosen = true;
 
-            shapeShifterSizeIncrease = 0.05f;
+            shapeShifterSizeIncrease = shapeShifterSizeIncreaseDISPLAY;
         }
         if (name == "xMarksTheSpor")
         {
@@ -897,7 +1048,7 @@ public class LevelMechanics : MonoBehaviour, IDataPersistence
             archaeologist_unlocked.SetActive(true);
             archaeologist_chosen = true;
 
-            archeologistIncrease = 0.08f;
+            archeologistIncrease = archeologistIncreaseDISPLAY;
 
             SkillTree.improvedPickaxeStrength += 0.02f * archeologistIncrease;
             SkillTree.reducePickaxeMineTime -= 0.02f * archeologistIncrease;
@@ -948,6 +1099,8 @@ public class LevelMechanics : MonoBehaviour, IDataPersistence
             d100_chosen = true;
         }
 
+        SetTalentTexts();
+
         locScript.TalentCardsLeftText();
 
         if (cardsLeft < 3) { card1Left.SetActive(true); }
@@ -964,6 +1117,7 @@ public class LevelMechanics : MonoBehaviour, IDataPersistence
         card2Number = 0;
         card3Number = 0;
 
+        setSpecificCards = false;
         AddTalentCards();
 
         blockFrame.SetActive(false);
@@ -1027,7 +1181,7 @@ public class LevelMechanics : MonoBehaviour, IDataPersistence
 
     IEnumerator DoubleSizeCooldown()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(bigMiningAreaTime);
         isDoubleAreaSize = false;
     }
     #endregion
@@ -1127,37 +1281,327 @@ public class LevelMechanics : MonoBehaviour, IDataPersistence
             if (randomBuff == 1) 
             {
                 isSignFasterMine = true;
-                signFasterMineAmount = Random.Range(0.02f, 0.04f);
-
-                signBuffText.text = $"The Mine is {(signFasterMineAmount * 100).ToString("F1")}% faster";
+                signFasterMineAmount = Random.Range(0.04f, 0.07f);
             }
             if (randomBuff == 2)
             {
                 isSignMineMoreMaterials = true;
-                signMoreMaterialsAmount = Random.Range(3, 5);
-
-                signBuffText.text = $"Mines {signMoreMaterialsAmount} more materials";
+                signMoreMaterialsAmount = Random.Range(4, 9);
             }
             if (randomBuff == 3)
             {
                 isSignDoubleMaterialsChance = true;
-                signDoubleMaterialsChance = Random.Range(2, 4);
-
-                signBuffText.text = $"{signDoubleMaterialsChance}% chance to double materials";
+                signDoubleMaterialsChance = Random.Range(4, 8);
             }
             if (randomBuff == 4)
             {
                 isSignChanceToMine3XFaster = true;
-                signMine3XFasterChance = Random.Range(0.6f, 1f);
-
-                signBuffText.text = $"{signMine3XFasterChance.ToString("F2")}% chance to mine 3X faster";
+                signMine3XFasterChance = Random.Range(4f, 8f);
             }
+
+            SetSignText();
 
             yield return new WaitForSeconds(300);
         }
     }
+
+    public void SetSignText()
+    {
+        if(isSignFasterMine == true)
+        {
+            #region Faster texts
+            if (LocalizationScript.isEnglish == true)
+            {
+                signBuffText.text = $"The Mine is {(signFasterMineAmount * 100).ToString("F1")}% faster";
+            }
+
+            if (LocalizationScript.isFrench == true)
+            {
+                signBuffText.text = $"La Mine est {(signFasterMineAmount * 100).ToString("F1")}% plus rapide";
+            }
+
+            if (LocalizationScript.isItalian == true)
+            {
+                signBuffText.text = $"La Miniera è più veloce del {(signFasterMineAmount * 100).ToString("F1")}%";
+            }
+
+            if (LocalizationScript.isGerman == true)
+            {
+                signBuffText.text = $"Die Mine ist {(signFasterMineAmount * 100).ToString("F1")}% schneller";
+            }
+
+            if (LocalizationScript.isSpanish == true)
+            {
+                signBuffText.text = $"La Mina es {(signFasterMineAmount * 100).ToString("F1")}% más rápida";
+            }
+
+            if (LocalizationScript.isJapanese == true)
+            {
+                signBuffText.text = $"ザ・マインの速度が{(signFasterMineAmount * 100).ToString("F1")}%アップ";
+            }
+
+            if (LocalizationScript.isKorean == true)
+            {
+                signBuffText.text = $"광산 속도가 {(signFasterMineAmount * 100).ToString("F1")}% 빨라집니다";
+            }
+
+            if (LocalizationScript.isPolish == true)
+            {
+                signBuffText.text = $"Kopalnia działa o {(signFasterMineAmount * 100).ToString("F1")}% szybciej";
+            }
+
+            if (LocalizationScript.isPortugese == true)
+            {
+                signBuffText.text = $"A Mina está {(signFasterMineAmount * 100).ToString("F1")}% mais rápida";
+            }
+
+            if (LocalizationScript.isRussian == true)
+            {
+                signBuffText.text = $"Шахта работает на {(signFasterMineAmount * 100).ToString("F1")}% быстрее";
+            }
+
+            if (LocalizationScript.isSimplefiedChinese == true)
+            {
+                signBuffText.text = $"矿井速度提升 {(signFasterMineAmount * 100).ToString("F1")}%";
+            }
+            #endregion
+        }
+        if (isSignMineMoreMaterials == true)
+        {
+            #region More bars texts
+            if (LocalizationScript.isEnglish == true)
+            {
+                signBuffText.text = $"Mines {signMoreMaterialsAmount} more bars";
+            }
+
+            if (LocalizationScript.isFrench == true)
+            {
+                signBuffText.text = $"Mine {signMoreMaterialsAmount} lingots de plus";
+            }
+
+            if (LocalizationScript.isItalian == true)
+            {
+                signBuffText.text = $"Estrae {signMoreMaterialsAmount} lingotti in più";
+            }
+
+            if (LocalizationScript.isGerman == true)
+            {
+                signBuffText.text = $"Fördert {signMoreMaterialsAmount} zusätzliche Barren";
+            }
+
+            if (LocalizationScript.isSpanish == true)
+            {
+                signBuffText.text = $"Extrae {signMoreMaterialsAmount} lingotes más";
+            }
+
+            if (LocalizationScript.isJapanese == true)
+            {
+                signBuffText.text = $"バーを{signMoreMaterialsAmount}個多く採掘";
+            }
+
+            if (LocalizationScript.isKorean == true)
+            {
+                signBuffText.text = $"바를 {signMoreMaterialsAmount}개 더 채굴";
+            }
+
+            if (LocalizationScript.isPolish == true)
+            {
+                signBuffText.text = $"Wydobywa o {signMoreMaterialsAmount} sztabek więcej";
+            }
+
+            if (LocalizationScript.isPortugese == true)
+            {
+                signBuffText.text = $"Minerar mais {signMoreMaterialsAmount} barras";
+            }
+
+            if (LocalizationScript.isRussian == true)
+            {
+                signBuffText.text = $"Добывает на {signMoreMaterialsAmount} слитков больше";
+            }
+
+            if (LocalizationScript.isSimplefiedChinese == true)
+            {
+                signBuffText.text = $"多开采 {signMoreMaterialsAmount} 个锭";
+            }
+            #endregion
+        }
+        if (isSignDoubleMaterialsChance == true)
+        {
+            #region Double materials texts
+            if (LocalizationScript.isEnglish == true)
+            {
+                signBuffText.text = $"{signDoubleMaterialsChance}% chance to double mined bars";
+            }
+
+            if (LocalizationScript.isFrench == true)
+            {
+                signBuffText.text = $"{signDoubleMaterialsChance}% de chance de doubler les lingots extraits";
+            }
+
+            if (LocalizationScript.isItalian == true)
+            {
+                signBuffText.text = $"{signDoubleMaterialsChance}% di probabilità di raddoppiare i lingotti estratti";
+            }
+
+            if (LocalizationScript.isGerman == true)
+            {
+                signBuffText.text = $"{signDoubleMaterialsChance}% Chance, geförderte Barren zu verdoppeln";
+            }
+
+            if (LocalizationScript.isSpanish == true)
+            {
+                signBuffText.text = $"{signDoubleMaterialsChance}% de probabilidad de duplicar los lingotes extraídos";
+            }
+
+            if (LocalizationScript.isJapanese == true)
+            {
+                signBuffText.text = $"採掘したバーを2倍にする確率: {signDoubleMaterialsChance}%";
+            }
+
+            if (LocalizationScript.isKorean == true)
+            {
+                signBuffText.text = $"채굴된 바 2배 확률: {signDoubleMaterialsChance}%";
+            }
+
+            if (LocalizationScript.isPolish == true)
+            {
+                signBuffText.text = $"{signDoubleMaterialsChance}% szansy na podwojenie wydobytych sztabek";
+            }
+
+            if (LocalizationScript.isPortugese == true)
+            {
+                signBuffText.text = $"{signDoubleMaterialsChance}% de chance de dobrar as barras mineradas";
+            }
+
+            if (LocalizationScript.isRussian == true)
+            {
+                signBuffText.text = $"{signDoubleMaterialsChance}% шанс удвоить добытые слитки";
+            }
+
+            if (LocalizationScript.isSimplefiedChinese == true)
+            {
+                signBuffText.text = $"有 {signDoubleMaterialsChance}% 概率使开采锭数量翻倍";
+            }
+            #endregion
+        }
+        if (isSignChanceToMine3XFaster == true)
+        {
+            #region 3X faster texts
+            if (LocalizationScript.isEnglish == true)
+            {
+                signBuffText.text = $"{signMine3XFasterChance.ToString("F2")}% chance to mine 3X faster";
+            }
+
+            if (LocalizationScript.isFrench == true)
+            {
+                signBuffText.text = $"{signMine3XFasterChance.ToString("F2")}% de chance de miner 3X plus vite";
+            }
+
+            if (LocalizationScript.isItalian == true)
+            {
+                signBuffText.text = $"{signMine3XFasterChance.ToString("F2")}% di probabilità di minare 3X più velocemente";
+            }
+
+            if (LocalizationScript.isGerman == true)
+            {
+                signBuffText.text = $"{signMine3XFasterChance.ToString("F2")}% Chance, 3X schneller zu fördern";
+            }
+
+            if (LocalizationScript.isSpanish == true)
+            {
+                signBuffText.text = $"{signMine3XFasterChance.ToString("F2")}% de probabilidad de minar 3X más rápido";
+            }
+
+            if (LocalizationScript.isJapanese == true)
+            {
+                signBuffText.text = $"{signMine3XFasterChance.ToString("F2")}%の確率で採掘速度が3倍になる";
+            }
+
+            if (LocalizationScript.isKorean == true)
+            {
+                signBuffText.text = $"채굴 속도 3배 확률: {signMine3XFasterChance.ToString("F2")}%";
+            }
+
+            if (LocalizationScript.isPolish == true)
+            {
+                signBuffText.text = $"{signMine3XFasterChance.ToString("F2")}% szansy na 3X szybsze wydobycie";
+            }
+
+            if (LocalizationScript.isPortugese == true)
+            {
+                signBuffText.text = $"{signMine3XFasterChance.ToString("F2")}% de chance de minerar 3X mais rápido";
+            }
+
+            if (LocalizationScript.isRussian == true)
+            {
+                signBuffText.text = $"{signMine3XFasterChance.ToString("F2")}% шанс добывать в 3 раза быстрее";
+            }
+
+            if (LocalizationScript.isSimplefiedChinese == true)
+            {
+                signBuffText.text = $"有 {signMine3XFasterChance.ToString("F2")}% 概率采矿速度提高 3 倍";
+            }
+            #endregion
+        }
+    }
     #endregion
 
+
+    #region Open talent tooltip
+    public GameObject talentTooltip;
+    public GameObject closeTalentBtn;
+    public GameObject talentDark;
+    public Animation talentTooltipAnim;
+
+    public void OpenTalenTooltip()
+    {
+        if (MobileAndTesting.isMobile == true)
+        {
+            audioManager.Play("UI_Click1");
+            talentTooltip.transform.localScale = new Vector2(2.1f, 2.1f);
+            talentTooltip.transform.localPosition = new Vector2(0f, 45f);
+
+            talentDark.SetActive(true);
+            talentTooltip.SetActive(true);
+            closeTalentBtn.SetActive(true);
+        }
+    }
+
+    public void CloseTalentTooltip()
+    {
+        audioManager.Play("UI_Click1");
+        talentDark.SetActive(false);
+        talentTooltip.SetActive(false);
+        closeTalentBtn.SetActive(false);
+    }
+
+    public GameObject talentLevelTooltip;
+    public GameObject closeTalentLevelTooltip;
+    public GameObject talentLevelDark;
+    public Animation talentLevelAnim;
+
+    public void OpenTalentLevelTooltip()
+    {
+        if (MobileAndTesting.isMobile == true)
+        {
+            audioManager.Play("UI_Click1");
+            talentLevelTooltip.transform.localScale = new Vector2(2.1f, 2.1f);
+            talentLevelTooltip.transform.localPosition = new Vector2(0f, 45f);
+
+            talentLevelDark.SetActive(true);
+            talentLevelTooltip.SetActive(true);
+            closeTalentLevelTooltip.SetActive(true);
+        }
+    }
+
+    public void CloseTalentLevelTooltip()
+    {
+        audioManager.Play("UI_Click1");
+        talentLevelDark.SetActive(false);
+        talentLevelTooltip.SetActive(false);
+        closeTalentLevelTooltip.SetActive(false);
+    }
+    #endregion
 
     #region Load Data
     public void LoadData(GameData data)
@@ -1199,6 +1643,10 @@ public class LevelMechanics : MonoBehaviour, IDataPersistence
         springSeason_chosen = data.springSeason_chosen;
         camper_chosen = data.camper_chosen;
         d100_chosen = data.d100_chosen;
+
+        talentCard1Picked = data.talentCard1Picked;
+        talentCard2Picked = data.talentCard2Picked;
+        talentCard3Picked = data.talentCard3Picked;
     }
     #endregion
 
@@ -1242,6 +1690,10 @@ public class LevelMechanics : MonoBehaviour, IDataPersistence
         data.springSeason_chosen = springSeason_chosen;
         data.camper_chosen = camper_chosen;
         data.d100_chosen = d100_chosen;
+
+        data.talentCard1Picked = talentCard1Picked;
+        data.talentCard2Picked = talentCard2Picked;
+        data.talentCard3Picked = talentCard3Picked;
     }
     #endregion
 
@@ -1251,6 +1703,27 @@ public class LevelMechanics : MonoBehaviour, IDataPersistence
 
         SetOriginalStats();
         skillTreeScript.SkillTreePrices();
+
+        potionDrinker_card.SetActive(false);
+        potionChugger_Card.SetActive(false);
+        chests_card.SetActive(false);
+        goldenChests_card.SetActive(false);
+        skilledMiners_card.SetActive(false);
+        efficientBlacksmith_card.SetActive(false);
+        itsASign_card.SetActive(false);
+        steamSale_card.SetActive(false);
+        bigMiningArea_card.SetActive(false);
+        itsHammerTime_card.SetActive(false);
+        goldenTouch_card.SetActive(false);
+        zeus_card.SetActive(false);
+        shapeShifter_card.SetActive(false);
+        xMarksTheSpor_card.SetActive(false);
+        explorer_card.SetActive(false);
+        archaeologist_Card.SetActive(false);
+        energiDrinker_card.SetActive(false);
+        springSeason_card.SetActive(false);
+        camper_card.SetActive(false);
+        d100_card.SetActive(false);
 
         potionDrinker_unlocked.SetActive(false);
         potionChugger_unlocked.SetActive(false);
@@ -1316,6 +1789,14 @@ public class LevelMechanics : MonoBehaviour, IDataPersistence
         card2Number = 0;
         card3Number = 0;
 
+        talentCard1Picked = 0;
+        talentCard2Picked = 0;
+        talentCard3Picked = 0;
+
+        setSpecificCards = false;
+
+        cardsLeft = 20;
+
         AddTalentCards();
 
         potionDrinker_card.transform.localScale = new Vector2(1,1);
@@ -1339,12 +1820,30 @@ public class LevelMechanics : MonoBehaviour, IDataPersistence
         camper_card.transform.localScale = new Vector2(1, 1);
         d100_card.transform.localScale = new Vector2(1, 1);
 
-        cardsLeft = 20;
-
-        card1Left.SetActive(true);
-        card2Left.SetActive(true);
-        cardAllChosen.SetActive(true);
+        card1Left.SetActive(false);
+        card2Left.SetActive(false);
+        cardAllChosen.SetActive(false);
 
         allTalentCardsChosenBlockBtn.SetActive(true);
+
+        lockedTalent1.gameObject.SetActive(true);
+        lockedTalent1.transform.localScale = new Vector3(1,1,1);
+        lockedTalent1.transform.localPosition = new Vector3(0, 0, 0);
+        lockedTalent2.gameObject.SetActive(true);
+        lockedTalent2.transform.localScale = new Vector3(1, 1, 1);
+        lockedTalent2.transform.localPosition = new Vector3(0, 0, 0);
+        lockedTalent3.gameObject.SetActive(true);
+        lockedTalent3.transform.localScale = new Vector3(1, 1, 1);
+        lockedTalent3.transform.localPosition = new Vector3(0, 0, 0);
+
+        choose1Parent.SetActive(false);
+        unlockParent.SetActive(true);
+
+        if (isInChoose1 == false)
+        {
+            lockedTalent1.Play("BlockedCardDown");
+            lockedTalent2.Play("BlockedCardDown");
+            lockedTalent3.Play("BlockedCardDown");
+        }
     }
 }

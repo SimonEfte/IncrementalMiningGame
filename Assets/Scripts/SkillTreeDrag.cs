@@ -1,14 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SkillTreeDrag : MonoBehaviour
 {
     [SerializeField] private float zoomSpeed = 5f;
     [SerializeField] private float minZoom = 0.5f;
     [SerializeField] private float maxZoom = 1.5f;
-    [SerializeField] private float defaultZoom = 0.9f;
-    public Vector3 targetScale;
+    [SerializeField] public static float defaultZoom = 0.9f;
+    public static Vector3 targetScale;
 
     private bool isDragging = false;
     private Vector3 lastMousePosition;
@@ -20,39 +21,34 @@ public class SkillTreeDrag : MonoBehaviour
 
     public static float scaleX;
 
+    public Slider zoomSliderMobile;
+
     void Awake()
     {
         dragThreshold = 100f;
         rectTransform = GetComponent<RectTransform>();
+        StartCoroutine(Wait());
+    }
+
+    IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(0.2f);
+        if(MobileAndTesting.isMobile == true)
+        {
+            zoomSliderMobile.gameObject.SetActive(true);
+        }
+        else
+        {
+            zoomSliderMobile.gameObject.SetActive(false);
+        }
     }
 
     void OnEnable()
     {
-        if(SkillTree.totalSkillTreeUpgradesPurchased < 10) { defaultZoom = 2.1f; }
-        else if (SkillTree.totalSkillTreeUpgradesPurchased < 25) { defaultZoom = 2f; }
-        else if(SkillTree.totalSkillTreeUpgradesPurchased < 50) { defaultZoom = 1.95f; }
-        else if (SkillTree.totalSkillTreeUpgradesPurchased < 75) { defaultZoom = 1.9f; }
-        else if (SkillTree.totalSkillTreeUpgradesPurchased < 100) { defaultZoom = 1.85f; }
-        else if (SkillTree.totalSkillTreeUpgradesPurchased < 125) { defaultZoom = 1.8f; }
-        else if (SkillTree.totalSkillTreeUpgradesPurchased < 150) { defaultZoom = 1.75f; }
-        else if (SkillTree.totalSkillTreeUpgradesPurchased < 175) { defaultZoom = 1.7f; }
-        else if (SkillTree.totalSkillTreeUpgradesPurchased < 200) { defaultZoom = 1.65f; }
-        else
-        {
-            defaultZoom = 1.2f;
-        }
-
-        targetScale = Vector3.one * defaultZoom;
-        transform.localScale = targetScale;
-        transform.localPosition = new Vector2(0,-53);
-
-        contentFrame.transform.localPosition = new Vector2(0,0);
-
-        currentScale = defaultZoom;
+       
     }
 
     public float divideDiff;
-    public float currentScale;
 
     public float currentXscale = 0;
 
@@ -63,7 +59,7 @@ public class SkillTreeDrag : MonoBehaviour
 
     void Update()
     {
-        if (MainMenu.isInUpgrades == true)
+        if (MainMenu.isInUpgrades == true && SkillTree.isInEndlessPopUp == false)
         {
             scaleX = gameObject.transform.localScale.x;
 
@@ -84,7 +80,10 @@ public class SkillTreeDrag : MonoBehaviour
 
                     if (isDragging)
                     {
-                        skillTreeTooltip.SetActive(false);
+                        if(MobileAndTesting.isMobile == false)
+                        {
+                            skillTreeTooltip.SetActive(false);
+                        }
                     }
                 }
 
@@ -93,19 +92,26 @@ public class SkillTreeDrag : MonoBehaviour
                     isDragging = false;
                 }
 
-                float scroll = Input.mouseScrollDelta.y;
-
-                if (Mathf.Abs(scroll) > 0.01f)
+                if(MobileAndTesting.isMobile == false)
                 {
-                    float scaleFactor = 1 + scroll * 0.1f; // Adjust scroll sensitivity here
-                    targetScale *= scaleFactor;
+                    float scroll = Input.mouseScrollDelta.y;
 
-                    float clampedX = Mathf.Clamp(targetScale.x, minZoom, maxZoom);
-                    float clampedY = Mathf.Clamp(targetScale.y, minZoom, maxZoom);
-                    targetScale = new Vector3(clampedX, clampedY, 1f);
+                    if (Mathf.Abs(scroll) > 0.01f)
+                    {
+                        float scaleFactor = 1 + scroll * 0.1f; // Adjust scroll sensitivity here
+                        targetScale *= scaleFactor;
+
+                        float clampedX = Mathf.Clamp(targetScale.x, minZoom, maxZoom);
+                        float clampedY = Mathf.Clamp(targetScale.y, minZoom, maxZoom);
+                        targetScale = new Vector3(clampedX, clampedY, 1f);
+                    }
+
+                    transform.localScale = Vector3.Lerp(transform.localScale, targetScale, Time.deltaTime * zoomSpeed);
                 }
-
-                transform.localScale = Vector3.Lerp(transform.localScale, targetScale, Time.deltaTime * zoomSpeed);
+                else
+                {
+                    transform.localScale = new Vector3(zoomSliderMobile.value, zoomSliderMobile.value, zoomSliderMobile.value);
+                }
             }
         }
     }

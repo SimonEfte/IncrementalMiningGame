@@ -15,17 +15,24 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public bool isTalentLevelText;
 
+    public bool isFlower;
+
     public bool isLeftTalent;
     public int talentNumber;
 
     public bool isArtifact;
     public int artifactNumber;
 
+    public bool isTheMineInfo;
+
     public GameObject skillTreeTooltip, theMineTimeTooltip, theMineOreTooltip;
     public GameObject artifactTooltip;
     public GameObject potionTooltip;
     public GameObject talentTooltp;
     public GameObject talentLevelTooltip;
+    public GameObject flowerTooltip;
+    public GameObject infoTooltip;
+    public TextMeshProUGUI flowerBuffText;
 
     public static Vector2 skillTreeToolTipPos;
 
@@ -44,26 +51,34 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public static bool goldPriceST, copperPriceST, ironPriceST, cobaltPriceST, uraniumPriceST, ismiumPriceST, iridiumPriceST, painitePriceST;
 
-    public GameObject goldIcon, copperIcon, ironIcon, cobaltIcon, uraniumIcon, ismiumIcon, iridiumIcon, painiteIcon;
+    public GameObject goldIcon, copperIcon, ironIcon, cobaltIcon, uraniumIcon, ismiumIcon, iridiumIcon, painiteIcon, oreDarkIcon;
 
     public static Vector2 currentPos;
 
     public bool isFinalUpgrade;
     public static bool isFinalUpgradeHover;
 
+    public GameObject potions1, potions2, potion3, potion4;
+
+    public static int hoveringEndless;
+
     public void OnPointerEnter(PointerEventData eventData)
     {
+        hoveringEndless = 0;
         upgradeType = upgradeTypeSet;
 
         float xPos = gameObject.transform.position.x;
         float yPos = 0;
         if (isSkillTreeBtn)
         {
+            if(MobileAndTesting.isMobile == true) { SkillTree.pressedPurchaseMobile = false; }
+
             goldIcon.SetActive(false); copperIcon.SetActive(false); ironIcon.SetActive(false); cobaltIcon.SetActive(false);
             uraniumIcon.SetActive(false); ismiumIcon.SetActive(false); iridiumIcon.SetActive(false); painiteIcon.SetActive(false);
+            oreDarkIcon.SetActive(false);
 
             goldPriceST = false; copperPriceST = false; ironPriceST = false; cobaltPriceST = false;
-            uraniumPriceST = false; ismiumPriceST = false; iridiumPriceST = false; goldPriceST = false;
+            uraniumPriceST = false; ismiumPriceST = false; iridiumPriceST = false; painitePriceST = false;
 
             if (goldPrice) { goldIcon.SetActive(true); goldPriceST = goldPrice; }
             if (copperPrice) { copperIcon.SetActive(true); copperPriceST = copperPrice; }
@@ -72,7 +87,15 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             if (uraniumPrice) { uraniumIcon.SetActive(true); uraniumPriceST = uraniumPrice; }
             if (ismiumPrice) { ismiumIcon.SetActive(true); ismiumPriceST = ismiumPrice; }
             if (iridiumPrice) { iridiumIcon.SetActive(true); iridiumPriceST = iridiumPrice; }
-            if (painitePrice) { painiteIcon.SetActive(true); iridiumPriceST = painitePrice; }
+            if (painitePrice) { painiteIcon.SetActive(true); painitePriceST = painitePrice; }
+
+            if(copperPriceST == true && SkillTree.spawnCopper_purchased == false) { oreDarkIcon.SetActive(true); }
+            if (ironPriceST == true && SkillTree.spawnIron_purchased == false) { oreDarkIcon.SetActive(true); }
+            if (cobaltPriceST == true && SkillTree.cobaltSpawn_purchased == false) { oreDarkIcon.SetActive(true); }
+            if (uraniumPriceST == true && SkillTree.uraniumSpawn_purchased == false) { oreDarkIcon.SetActive(true); }
+            if (ismiumPriceST == true && SkillTree.ismiumSpawn_purchased == false) { oreDarkIcon.SetActive(true); }
+            if (iridiumPriceST == true && SkillTree.iridiumSpawn_purchased == false) { oreDarkIcon.SetActive(true); }
+            if (painitePriceST == true && SkillTree.painiteSpawn_purchased == false) { oreDarkIcon.SetActive(true); }
 
             currentPos = gameObject.transform.position;
 
@@ -102,10 +125,13 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             else if (SkillTreeDrag.scaleX < 2.5) { yPos = gameObject.transform.position.y + scale4; }
             else if (SkillTreeDrag.scaleX < 3) { yPos = gameObject.transform.position.y + scale5; }
 
-            skillTreeTooltip.transform.position = new Vector2(xPos, yPos);
+            if(MobileAndTesting.isMobile == false)
+            {
+                skillTreeTooltip.transform.position = new Vector2(xPos, yPos);
+            }
 
             #region Spawn more rocks
-            if(upgradeType == 1)
+            if (upgradeType == 1)
             {
                 if (gameObject.name == "treeUpgrade_moreRocks_1(firstUpgrade)")
                 {
@@ -197,6 +223,18 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                 {
                     upgradeName = "XP8";
                     locScript.SetSkillTreeTexts(upgradeName, upgradeType, SkillTree.moreXP_8_price, SkillTree.moreXP_8_purchaseCount, 2);
+                }
+                else if (gameObject.name == "treeUpgrade_endlessIron")
+                {
+                    hoveringEndless = 3;
+                    upgradeName = "EndlessXP1";
+                    locScript.SetSkillTreeTexts(upgradeName, upgradeType, SkillTree.endlessIron_price, SkillTree.endlessIron_purchaseCount, 9999);
+                }
+                else if (gameObject.name == "treeUpgrade_endlessIsmium")
+                {
+                    hoveringEndless = 6;
+                    upgradeName = "EndlessXP2";
+                    locScript.SetSkillTreeTexts(upgradeName, upgradeType, SkillTree.endlessIsmium_price, SkillTree.endlessIsmium_purchaseCount, 9999);
                 }
 
                 //Talent
@@ -666,7 +704,7 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                 if (gameObject.name == "treeUpgrade_materialsWorthMore_1")
                 {
                     upgradeName = "MaterialsWorthMore1";
-                    locScript.SetSkillTreeTexts(upgradeName, upgradeType, SkillTree.marterialsWorthMore_1_price, SkillTree.marterialsWorthMore_1_purchaseCount, 5);
+                    locScript.SetSkillTreeTexts(upgradeName, upgradeType, SkillTree.marterialsWorthMore_1_price, SkillTree.marterialsWorthMore_1_purchaseCount, 4);
                 }
                 else if (gameObject.name == "treeUpgrade_materialsWorthMore_2")
                 {
@@ -703,6 +741,18 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                     upgradeName = "MaterialsWorthMore8";
                     locScript.SetSkillTreeTexts(upgradeName, upgradeType, SkillTree.marterialsWorthMore_8_price, SkillTree.marterialsWorthMore_8_purchaseCount, 5);
                 }
+                if (gameObject.name == "treeUpgrade_endlessGold")
+                {
+                    hoveringEndless = 1;
+                    upgradeName = "EndlessGold1";
+                    locScript.SetSkillTreeTexts(upgradeName, upgradeType, SkillTree.endlessGold_price, SkillTree.endlessGold_purchaseCount, 9999);
+                }
+                if (gameObject.name == "treeUpgrade_endlessPainite")
+                {
+                    hoveringEndless = 8;
+                    upgradeName = "EndlessGold2";
+                    locScript.SetSkillTreeTexts(upgradeName, upgradeType, SkillTree.endlessPainite_price, SkillTree.endlessPainite_purchaseCount, 9999);
+                }
             }
             #endregion
 
@@ -738,6 +788,18 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                 {
                     upgradeName = "ImprovedPickaxe6";
                     locScript.SetSkillTreeTexts(upgradeName, upgradeType, SkillTree.improvedPickaxe_6_price, SkillTree.improvedPickaxe_6_purchaseCount, 3);
+                }
+                else if (gameObject.name == "treeUpgrade_endlessCobalt")
+                {
+                    hoveringEndless = 4;
+                    upgradeName = "EndlessPickaxe1";
+                    locScript.SetSkillTreeTexts(upgradeName, upgradeType, SkillTree.endlessCobalt_price, SkillTree.endlessCobalt_purchaseCount, 9999);
+                }
+                else if (gameObject.name == "treeUpgrade_endlessUranium")
+                {
+                    hoveringEndless = 5;
+                    upgradeName = "EndlessPickaxe2";
+                    locScript.SetSkillTreeTexts(upgradeName, upgradeType, SkillTree.endlessUranium_price, SkillTree.endlessUranium_purchaseCount, 9999);
                 }
             }
             #endregion
@@ -818,7 +880,7 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                 else if (gameObject.name == "treeUpgrade_chanceToSpawnRockWhenMined_1")
                 {
                     upgradeName = "ChanceToSpawnRockWhenMined1";
-                    locScript.SetSkillTreeTexts(upgradeName, upgradeType, SkillTree.chanceToSpawnRockWhenMined_1_price, SkillTree.chanceToSpawnRockWhenMined_1_purchaseCount, 1);
+                    locScript.SetSkillTreeTexts(upgradeName, upgradeType, SkillTree.chanceToSpawnRockWhenMined_1_price, SkillTree.chanceToSpawnRockWhenMined_1_purchaseCount, 6);
                 }
                 else if (gameObject.name == "treeUpgrade_chanceToSpawnRockWhenMined_2")
                 {
@@ -833,12 +895,12 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                 else if (gameObject.name == "treeUpgrade_chanceToSpawnRockWhenMined_4")
                 {
                     upgradeName = "ChanceToSpawnRockWhenMined4";
-                    locScript.SetSkillTreeTexts(upgradeName, upgradeType, SkillTree.chanceToSpawnRockWhenMined_4_price, SkillTree.chanceToSpawnRockWhenMined_4_purchaseCount, 2);
+                    locScript.SetSkillTreeTexts(upgradeName, upgradeType, SkillTree.chanceToSpawnRockWhenMined_4_price, SkillTree.chanceToSpawnRockWhenMined_4_purchaseCount, 3);
                 }
                 else if (gameObject.name == "treeUpgrade_chanceToSpawnRockWhenMined_5")
                 {
                     upgradeName = "ChanceToSpawnRockWhenMined5";
-                    locScript.SetSkillTreeTexts(upgradeName, upgradeType, SkillTree.chanceToSpawnRockWhenMined_5_price, SkillTree.chanceToSpawnRockWhenMined_5_purchaseCount, 2);
+                    locScript.SetSkillTreeTexts(upgradeName, upgradeType, SkillTree.chanceToSpawnRockWhenMined_5_price, SkillTree.chanceToSpawnRockWhenMined_5_purchaseCount, 3);
                 }
                 else if (gameObject.name == "treeUpgrade_chanceToSpawnRockWhenMined_6")
                 {
@@ -854,7 +916,7 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                 if (gameObject.name == "treeUpgrade_chanceToMineRandomRock_1")
                 {
                     upgradeName = "ChanceToMineRandomRock1";
-                    locScript.SetSkillTreeTexts(upgradeName, upgradeType, SkillTree.chanceToMineRandomRock_1_price, SkillTree.chanceToMineRandomRock_1_purchaseCount, 3);
+                    locScript.SetSkillTreeTexts(upgradeName, upgradeType, SkillTree.chanceToMineRandomRock_1_price, SkillTree.chanceToMineRandomRock_1_purchaseCount, 4);
                 }
                 else if (gameObject.name == "treeUpgrade_chanceToMineRandomRock_2")
                 {
@@ -880,7 +942,7 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                 }
                 else if (gameObject.name == "treeUpgrade_spawnPickaxeEverySecond_2")
                 {
-                    upgradeName = "SpawnPickaxeEverySecond3";
+                    upgradeName = "SpawnPickaxeEverySecond2";
                     locScript.SetSkillTreeTexts(upgradeName, upgradeType, SkillTree.spawnPickaxeEverySecond_2_price, SkillTree.spawnPickaxeEverySecond_2_purchaseCount, 1);
                 }
                 else if (gameObject.name == "treeUpgrade_spawnPickaxeEverySecond_3")
@@ -902,17 +964,17 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                 else if (gameObject.name == "treeUpgrade_moreTime_2")
                 {
                     upgradeName = "MoreTime2";
-                    locScript.SetSkillTreeTexts(upgradeName, upgradeType, SkillTree.moreTime_2_price, SkillTree.moreTime_2_purchaseCount, 5);
+                    locScript.SetSkillTreeTexts(upgradeName, upgradeType, SkillTree.moreTime_2_price, SkillTree.moreTime_2_purchaseCount, 4);
                 }
                 else if (gameObject.name == "treeUpgrade_moreTime_3")
                 {
                     upgradeName = "MoreTime3";
-                    locScript.SetSkillTreeTexts(upgradeName, upgradeType, SkillTree.moreTime_3_price, SkillTree.moreTime_3_purchaseCount, 5);
+                    locScript.SetSkillTreeTexts(upgradeName, upgradeType, SkillTree.moreTime_3_price, SkillTree.moreTime_3_purchaseCount, 3);
                 }
                 else if (gameObject.name == "treeUpgrade_moreTime_4")
                 {
                     upgradeName = "MoreTime4";
-                    locScript.SetSkillTreeTexts(upgradeName, upgradeType, SkillTree.moreTime_4_price, SkillTree.moreTime_4_purchaseCount, 5);
+                    locScript.SetSkillTreeTexts(upgradeName, upgradeType, SkillTree.moreTime_4_price, SkillTree.moreTime_4_purchaseCount, 3);
                 }
 
                 else if (gameObject.name == "treeUpgrade_chanceToAdd1SecondEverySecond")
@@ -956,6 +1018,18 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                 {
                     upgradeName = "DoubleXpAndMaterial5";
                     locScript.SetSkillTreeTexts(upgradeName, upgradeType, SkillTree.doubleXpGoldChance_5_price, SkillTree.doubleXpGoldChance_5_purchaseCount, 3);
+                }
+                else if (gameObject.name == "treeUpgrade_endlessCopper")
+                {
+                    hoveringEndless = 2;
+                    upgradeName = "DoubleEndless1";
+                    locScript.SetSkillTreeTexts(upgradeName, upgradeType, SkillTree.endlessCopper_price, SkillTree.endlessCopper_purchaseCount, 9999);
+                }
+                else if (gameObject.name == "treeUpgrade_endlessIridium")
+                {
+                    hoveringEndless = 7;
+                    upgradeName = "DoubleEndless2";
+                    locScript.SetSkillTreeTexts(upgradeName, upgradeType, SkillTree.endlessIridium_price, SkillTree.endlessIridium_purchaseCount, 9999);
                 }
             }
             #endregion
@@ -1017,10 +1091,13 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             }
             #endregion
 
-            skillTreeToolTipPos = gameObject.transform.position;
+            if(MobileAndTesting.isMobile == false)
+            {
+                skillTreeToolTipPos = gameObject.transform.position;
 
-            if (skillTreeTooltip != null)
-                skillTreeTooltip.SetActive(true);
+                if (skillTreeTooltip != null)
+                    skillTreeTooltip.SetActive(true);
+            }
         }
 
         #region The mine tooltip
@@ -1032,20 +1109,26 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             {
                 locScript.TheMineTexts(true);
 
-                theMineTimeTooltip.transform.position = new Vector2(xPos, yPos);
+                if (MobileAndTesting.isMobile == false)
+                {
+                    theMineTimeTooltip.transform.position = new Vector2(xPos, yPos);
 
-                if (theMineTimeTooltip != null)
-                    theMineTimeTooltip.SetActive(true);
+                    if (theMineTimeTooltip != null)
+                        theMineTimeTooltip.SetActive(true);
+                }
             }
 
             if (isMineOreBtn == true)
             {
                 locScript.TheMineTexts(false);
 
-                theMineOreTooltip.transform.position = new Vector2(xPos, yPos);
+                if (MobileAndTesting.isMobile == false)
+                {
+                    theMineOreTooltip.transform.position = new Vector2(xPos, yPos);
 
-                if (theMineOreTooltip != null)
-                    theMineOreTooltip.SetActive(true);
+                    if (theMineOreTooltip != null)
+                        theMineOreTooltip.SetActive(true);
+                }
             }
         }
         #endregion
@@ -1065,13 +1148,16 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                
             }
 
-            yPos = gameObject.transform.position.y + 1.6f;
-
-            artifactTooltip.transform.position = new Vector2(xPos, yPos);
-
-            artifactTooltip.SetActive(true);
-
             locScript.ArtifactsTooltipText(artifactNumber);
+
+            if (MobileAndTesting.isMobile == false)
+            {
+                yPos = gameObject.transform.position.y + 1.6f;
+
+                artifactTooltip.transform.position = new Vector2(xPos, yPos);
+
+                artifactTooltip.SetActive(true);
+            }
         }
         #endregion
 
@@ -1085,10 +1171,12 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
             potionTooltip.SetActive(true);
 
-            if(gameObject.name == "Potion_GoldIncrease") { locScript.PotionText("materialIncrease"); }
-            if (gameObject.name == "Potion_PickaxeStats") { locScript.PotionText("pickaxeIncrease"); }
-            if (gameObject.name == "Potion_XPIncrease") { locScript.PotionText("xpIncrease"); }
-            if (gameObject.name == "Potion_DoubleXpAndGoldIncrease") { locScript.PotionText("doubleXpAndMaterialIncrease"); }
+            potions1.SetActive(false); potions2.SetActive(false); potion3.SetActive(false); potion4.SetActive(false);
+
+            if (gameObject.name == "Potion_GoldIncrease") { locScript.PotionText("materialIncrease"); potions1.SetActive(true); }
+            if (gameObject.name == "Potion_PickaxeStats") { locScript.PotionText("pickaxeIncrease"); potions2.SetActive(true); }
+            if (gameObject.name == "Potion_XPIncrease") { locScript.PotionText("xpIncrease"); potion3.SetActive(true); }
+            if (gameObject.name == "Potion_DoubleXpAndGoldIncrease") { locScript.PotionText("doubleXpAndMaterialIncrease"); potion4.SetActive(true); }
         }
         #endregion
 
@@ -1104,42 +1192,83 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                 yPos += 0.9f;
             }
 
-            talentTooltp.transform.position = new Vector2(xPos + 2.9f, yPos);
-
             locScript.TalentTexts(talentNumber);
 
-            talentTooltp.SetActive(true);
+            if (MobileAndTesting.isMobile == false)
+            {
+                talentTooltp.transform.position = new Vector2(xPos + 2.9f, yPos);
+                talentTooltp.SetActive(true);
+            }
         }
         #endregion
 
         #region Talent level tooltip
         if (isTalentLevelText)
         {
-            yPos = gameObject.transform.position.y;
+            if (MobileAndTesting.isMobile == false)
+            {
+                yPos = gameObject.transform.position.y;
 
-            talentLevelTooltip.transform.position = new Vector2(xPos, yPos - 1.1f);
-            talentLevelTooltip.SetActive(true);
+                talentLevelTooltip.transform.position = new Vector2(xPos, yPos - 1.1f);
+                talentLevelTooltip.SetActive(true);
+            }
         }
         #endregion
+
+        #region Flower tooltip
+        if (isFlower)
+        {
+            if (MobileAndTesting.isMobile == false)
+            {
+                yPos = gameObject.transform.position.y + 1.1f;
+                xPos = gameObject.transform.position.x + 1.4f;
+
+                flowerBuffText.text = $"+{SetRockScreen.flowersOnScreen * (LevelMechanics.flowerIncrease * 100)}%XP";
+                flowerTooltip.transform.position = new Vector2(xPos, yPos);
+                flowerTooltip.SetActive(true);
+            }
+        }
+        #endregion
+
+        if(isTheMineInfo == true)
+        {
+            if (MobileAndTesting.isMobile == false)
+            {
+                yPos = gameObject.transform.position.y - 0.65f;
+                xPos = gameObject.transform.position.x - 3.3f;
+
+                infoTooltip.transform.position = new Vector2(xPos, yPos);
+                infoTooltip.SetActive(true);
+            }
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         if (isSkillTreeBtn)
         {
-            if (skillTreeTooltip != null)
-                skillTreeTooltip.SetActive(false);
+            if (MobileAndTesting.isMobile == false)
+            {
+                if (skillTreeTooltip != null)
+                    skillTreeTooltip.SetActive(false);
+            }
         }
 
         if (isTheMineBtn == true)
         {
-            theMineTimeTooltip.SetActive(false);
-            theMineOreTooltip.SetActive(false);
+            if (MobileAndTesting.isMobile == false)
+            {
+                theMineTimeTooltip.SetActive(false);
+                theMineOreTooltip.SetActive(false);
+            }
         }
 
         if (isArtifact)
         {
-            artifactTooltip.SetActive(false);
+            if (MobileAndTesting.isMobile == false)
+            {
+                artifactTooltip.SetActive(false);
+            }
         }
 
         if (isPotion)
@@ -1149,12 +1278,34 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
         if (isLeftTalent)
         {
-            talentTooltp.SetActive(false);
+            if (MobileAndTesting.isMobile == false)
+            {
+                talentTooltp.SetActive(false);
+            }
         }
 
         if (isTalentLevelText)
         {
-            talentLevelTooltip.SetActive(false);
+            if (MobileAndTesting.isMobile == false)
+            {
+                talentLevelTooltip.SetActive(false);
+            }
+        }
+
+        if (isFlower)
+        {
+            if (MobileAndTesting.isMobile == false)
+            {
+                flowerTooltip.SetActive(false);
+            }
+        }
+
+        if (isTheMineInfo == true)
+        {
+            if (MobileAndTesting.isMobile == false)
+            {
+                infoTooltip.SetActive(false);
+            }
         }
     }
 }

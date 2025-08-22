@@ -70,7 +70,7 @@ public class SpawnRocks : MonoBehaviour
 
     IEnumerator SpawnRock_Dice()
     {
-        float waitTime = 1;
+        float waitTime = Artifacts.diceTime;
 
         while (true)
         {

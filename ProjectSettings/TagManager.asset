@@ -23,6 +23,7 @@ TagManager:
   - MinePopUp
   - CircleShoot
   - BigRock
+  - Card
   layers:
   - Default
   - TransparentFX

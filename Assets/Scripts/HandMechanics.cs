@@ -5,8 +5,7 @@ using UnityEngine;
 public class HandMechanics : MonoBehaviour
 {
     public Collider2D mineCollider;
-    public Collider2D triangleCollider, squareCollider, hexagonCollider;
-
+    public Collider2D squareCollider, hexagonCollider;
 
     private void OnEnable()
     {
@@ -25,7 +24,7 @@ public class HandMechanics : MonoBehaviour
 
             if (LevelMechanics.shapeShifter_chosen)
             {
-                triangleCollider.enabled = true; squareCollider.enabled = true; hexagonCollider.enabled = true;
+                squareCollider.enabled = true; hexagonCollider.enabled = true;
             }
 
             yield return new WaitForSeconds(TheAnvil.collTime);
@@ -33,7 +32,7 @@ public class HandMechanics : MonoBehaviour
 
             if (LevelMechanics.shapeShifter_chosen)
             {
-                triangleCollider.enabled = false; squareCollider.enabled = false; hexagonCollider.enabled = false;
+                squareCollider.enabled = false; hexagonCollider.enabled = false;
             }
 
             yield return null;
@@ -42,6 +41,10 @@ public class HandMechanics : MonoBehaviour
 
     private void OnDisable()
     {
+        mineCollider.enabled = false;
+        squareCollider.enabled = false; 
+        hexagonCollider.enabled = false;
+
         StopAllCoroutines();
     }
 

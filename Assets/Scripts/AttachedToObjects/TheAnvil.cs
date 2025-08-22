@@ -8,6 +8,7 @@ public class TheAnvil : MonoBehaviour, IDataPersistence
 {
     public AudioManager audioManager;
     public GoldAndOreMechanics goldAndOreScript;
+    public Achievements achScript;
 
     public GameObject copperBar, ironBar, cobaltBar, uraniumBar, ismiumBar, iridiumBar, painiteBar;
     public GameObject copperQuestionmark, ironQuestionmark, cobaltQuestionmark, uraniumQuestionmark, ismiumQuestionmark, iridiumQuestionmark, painiteQuestionmark;
@@ -63,6 +64,298 @@ public class TheAnvil : MonoBehaviour, IDataPersistence
 
     bool playSound;
 
+    public static bool isDLC;
+    public GameObject allSkinsFrame, skinLeftBTN, skinRightBTN;
+    public TextMeshProUGUI skinText;
+
+    public static int totalPickaxesCrafted;
+
+    public static bool craftedOnePickaxe;
+
+    public GameObject mobileCircleBtn, pcCursorImage;
+
+    private void Awake()
+    {
+        isDLC = true;
+
+        if(isDLC == true)
+        {
+            skinLeftBTN.SetActive(true);
+            skinRightBTN.SetActive(true);
+            skinText.gameObject.SetActive(true);
+            allSkinsFrame.transform.localPosition = new Vector2(0, -7);
+        }
+        else
+        {
+            SetSkinsOff(true);
+        }
+    }
+
+    public void SetSkinsOff(bool all)
+    {
+        if (all == true)
+        {
+            pickaxe1_skins[0].SetActive(false); pickaxe1_skins[1].SetActive(false); pickaxe1_skins[2].SetActive(false);
+            pickaxe2_skins[0].SetActive(false); pickaxe2_skins[1].SetActive(false); pickaxe2_skins[2].SetActive(false);
+            pickaxe3_skins[0].SetActive(false); pickaxe3_skins[1].SetActive(false); pickaxe3_skins[2].SetActive(false);
+            pickaxe4_skins[0].SetActive(false); pickaxe4_skins[1].SetActive(false); pickaxe4_skins[2].SetActive(false);
+            pickaxe5_skins[0].SetActive(false); pickaxe5_skins[1].SetActive(false); pickaxe5_skins[2].SetActive(false);
+            pickaxe6_skins[0].SetActive(false); pickaxe6_skins[1].SetActive(false); pickaxe6_skins[2].SetActive(false);
+            pickaxe7_skins[0].SetActive(false); pickaxe7_skins[1].SetActive(false); pickaxe7_skins[2].SetActive(false);
+            pickaxe8_skins[0].SetActive(false); pickaxe8_skins[1].SetActive(false); pickaxe8_skins[2].SetActive(false);
+            pickaxe9_skins[0].SetActive(false); pickaxe9_skins[1].SetActive(false); pickaxe9_skins[2].SetActive(false);
+            pickaxe10_skins[0].SetActive(false); pickaxe10_skins[1].SetActive(false); pickaxe10_skins[2].SetActive(false);
+            pickaxe11_skins[0].SetActive(false); pickaxe11_skins[1].SetActive(false); pickaxe11_skins[2].SetActive(false);
+            pickaxe12_skins[0].SetActive(false); pickaxe12_skins[1].SetActive(false); pickaxe12_skins[2].SetActive(false);
+            pickaxe13_skins[0].SetActive(false); pickaxe13_skins[1].SetActive(false); pickaxe13_skins[2].SetActive(false);
+        }
+        else
+        {
+            pickaxe1_skins[1].SetActive(false); pickaxe1_skins[2].SetActive(false);
+            pickaxe2_skins[1].SetActive(false); pickaxe2_skins[2].SetActive(false);
+            pickaxe3_skins[1].SetActive(false); pickaxe3_skins[2].SetActive(false);
+            pickaxe4_skins[1].SetActive(false); pickaxe4_skins[2].SetActive(false);
+            pickaxe5_skins[1].SetActive(false); pickaxe5_skins[2].SetActive(false);
+            pickaxe6_skins[1].SetActive(false); pickaxe6_skins[2].SetActive(false);
+            pickaxe7_skins[1].SetActive(false); pickaxe7_skins[2].SetActive(false);
+            pickaxe8_skins[1].SetActive(false); pickaxe8_skins[2].SetActive(false);
+            pickaxe9_skins[1].SetActive(false); pickaxe9_skins[2].SetActive(false);
+            pickaxe10_skins[1].SetActive(false); pickaxe10_skins[2].SetActive(false);
+            pickaxe11_skins[1].SetActive(false); pickaxe11_skins[2].SetActive(false);
+            pickaxe12_skins[1].SetActive(false); pickaxe12_skins[2].SetActive(false);
+            pickaxe13_skins[1].SetActive(false); pickaxe13_skins[2].SetActive(false);
+        }
+
+        skinLeftBTN.SetActive(false);
+        skinRightBTN.SetActive(false);
+        skinText.gameObject.SetActive(false);
+        allSkinsFrame.transform.localPosition = new Vector2(0, 0);
+    }
+
+    #region Skin buttons
+    public GameObject[] pickaxe1_skins;
+    public GameObject[] pickaxe2_skins;
+    public GameObject[] pickaxe3_skins;
+    public GameObject[] pickaxe4_skins;
+    public GameObject[] pickaxe5_skins;
+    public GameObject[] pickaxe6_skins;
+    public GameObject[] pickaxe7_skins;
+    public GameObject[] pickaxe8_skins;
+    public GameObject[] pickaxe9_skins;
+    public GameObject[] pickaxe10_skins;
+    public GameObject[] pickaxe11_skins;
+    public GameObject[] pickaxe12_skins;
+    public GameObject[] pickaxe13_skins;
+
+    public static int pickaxe1_skinsChosen;
+    public static int pickaxe2_skinsChosen;
+    public static int pickaxe3_skinsChosen;
+    public static int pickaxe4_skinsChosen;
+    public static int pickaxe5_skinsChosen;
+    public static int pickaxe6_skinsChosen;
+    public static int pickaxe7_skinsChosen;
+    public static int pickaxe8_skinsChosen;
+    public static int pickaxe9_skinsChosen;
+    public static int pickaxe10_skinsChosen;
+    public static int pickaxe11_skinsChosen;
+    public static int pickaxe12_skinsChosen;
+    public static int pickaxe13_skinsChosen;
+
+    public void SelectSkins(bool right)
+    {
+        if (playSound == true) { audioManager.Play("UI_Click1"); }
+
+        #region Skin 1
+        if (pickaxe1_equipped)
+        {
+            if (pickaxe1_skins[0].activeInHierarchy && right == false) { pickaxe1_skinsChosen = 0; return; }
+            else if (pickaxe1_skins[0].activeInHierarchy && right == true) { pickaxe1_skinsChosen = 1; }
+            else if (pickaxe1_skins[1].activeInHierarchy && right == true) { pickaxe1_skinsChosen = 2; }
+            else if (pickaxe1_skins[1].activeInHierarchy && right == false) { pickaxe1_skinsChosen = 0; }
+            else if (pickaxe1_skins[2].activeInHierarchy && right == false) { pickaxe1_skinsChosen = 1; }
+            else if (pickaxe1_skins[2].activeInHierarchy && right == true) { pickaxe1_skinsChosen = 2; return; }
+        }
+        #endregion
+
+        #region Skin 2
+        if (pickaxe2_equipped)
+        {
+            if (pickaxe2_skins[0].activeInHierarchy && right == false) { pickaxe2_skinsChosen = 0; return; }
+            else if (pickaxe2_skins[0].activeInHierarchy && right == true) { pickaxe2_skinsChosen = 1; }
+            else if (pickaxe2_skins[1].activeInHierarchy && right == true) { pickaxe2_skinsChosen = 2; }
+            else if (pickaxe2_skins[1].activeInHierarchy && right == false) { pickaxe2_skinsChosen = 0; }
+            else if (pickaxe2_skins[2].activeInHierarchy && right == false) { pickaxe2_skinsChosen = 1; }
+            else if (pickaxe2_skins[2].activeInHierarchy && right == true) { pickaxe2_skinsChosen = 2; return; }
+        }
+        #endregion
+
+        #region Skin 3
+        if (pickaxe3_equipped)
+        {
+            if (pickaxe3_skins[0].activeInHierarchy && right == false) { pickaxe3_skinsChosen = 0; return; }
+            else if (pickaxe3_skins[0].activeInHierarchy && right == true) { pickaxe3_skinsChosen = 1; }
+            else if (pickaxe3_skins[1].activeInHierarchy && right == true) { pickaxe3_skinsChosen = 2; }
+            else if (pickaxe3_skins[1].activeInHierarchy && right == false) { pickaxe3_skinsChosen = 0; }
+            else if (pickaxe3_skins[2].activeInHierarchy && right == false) { pickaxe3_skinsChosen = 1; }
+            else if (pickaxe3_skins[2].activeInHierarchy && right == true) { pickaxe3_skinsChosen = 2; return; }
+        }
+        #endregion
+
+        #region Skin 4
+        if (pickaxe4_equipped)
+        {
+            if (pickaxe4_skins[0].activeInHierarchy && right == false) { pickaxe4_skinsChosen = 0; return; }
+            else if (pickaxe4_skins[0].activeInHierarchy && right == true) { pickaxe4_skinsChosen = 1; }
+            else if (pickaxe4_skins[1].activeInHierarchy && right == true) { pickaxe4_skinsChosen = 2; }
+            else if (pickaxe4_skins[1].activeInHierarchy && right == false) { pickaxe4_skinsChosen = 0; }
+            else if (pickaxe4_skins[2].activeInHierarchy && right == false) { pickaxe4_skinsChosen = 1; }
+            else if (pickaxe4_skins[2].activeInHierarchy && right == true) { pickaxe4_skinsChosen = 2; return; }
+        }
+        #endregion
+
+        #region Skin 5
+        if (pickaxe5_equipped)
+        {
+            if (pickaxe5_skins[0].activeInHierarchy && right == false) { pickaxe5_skinsChosen = 0; return; }
+            else if (pickaxe5_skins[0].activeInHierarchy && right == true) { pickaxe5_skinsChosen = 1; }
+            else if (pickaxe5_skins[1].activeInHierarchy && right == true) { pickaxe5_skinsChosen = 2; }
+            else if (pickaxe5_skins[1].activeInHierarchy && right == false) { pickaxe5_skinsChosen = 0; }
+            else if (pickaxe5_skins[2].activeInHierarchy && right == false) { pickaxe5_skinsChosen = 1; }
+            else if (pickaxe5_skins[2].activeInHierarchy && right == true) { pickaxe5_skinsChosen = 2; return; }
+        }
+        #endregion
+
+        #region Skin 6
+        if (pickaxe6_equipped)
+        {
+            if (pickaxe6_skins[0].activeInHierarchy && right == false) { pickaxe6_skinsChosen = 0; return; }
+            else if (pickaxe6_skins[0].activeInHierarchy && right == true) { pickaxe6_skinsChosen = 1; }
+            else if (pickaxe6_skins[1].activeInHierarchy && right == true) { pickaxe6_skinsChosen = 2; }
+            else if (pickaxe6_skins[1].activeInHierarchy && right == false) { pickaxe6_skinsChosen = 0; }
+            else if (pickaxe6_skins[2].activeInHierarchy && right == false) { pickaxe6_skinsChosen = 1; }
+            else if (pickaxe6_skins[2].activeInHierarchy && right == true) { pickaxe6_skinsChosen = 2; return; }
+        }
+        #endregion
+
+        #region Skin 7
+        if (pickaxe7_equipped)
+        {
+            if (pickaxe7_skins[0].activeInHierarchy && right == false) { pickaxe7_skinsChosen = 0; return; }
+            else if (pickaxe7_skins[0].activeInHierarchy && right == true) { pickaxe7_skinsChosen = 1; }
+            else if (pickaxe7_skins[1].activeInHierarchy && right == true) { pickaxe7_skinsChosen = 2; }
+            else if (pickaxe7_skins[1].activeInHierarchy && right == false) { pickaxe7_skinsChosen = 0; }
+            else if (pickaxe7_skins[2].activeInHierarchy && right == false) { pickaxe7_skinsChosen = 1; }
+            else if (pickaxe7_skins[2].activeInHierarchy && right == true) { pickaxe7_skinsChosen = 2; return; }
+        }
+        #endregion
+
+        #region Skin 8
+        if (pickaxe8_equipped)
+        {
+            if (pickaxe8_skins[0].activeInHierarchy && right == false) { pickaxe8_skinsChosen = 0; return; }
+            else if (pickaxe8_skins[0].activeInHierarchy && right == true) { pickaxe8_skinsChosen = 1; }
+            else if (pickaxe8_skins[1].activeInHierarchy && right == true) { pickaxe8_skinsChosen = 2; }
+            else if (pickaxe8_skins[1].activeInHierarchy && right == false) { pickaxe8_skinsChosen = 0; }
+            else if (pickaxe8_skins[2].activeInHierarchy && right == false) { pickaxe8_skinsChosen = 1; }
+            else if (pickaxe8_skins[2].activeInHierarchy && right == true) { pickaxe8_skinsChosen = 2; return; }
+        }
+        #endregion
+
+        #region Skin 9
+        if (pickaxe9_equipped)
+        {
+            if (pickaxe9_skins[0].activeInHierarchy && right == false) { pickaxe9_skinsChosen = 0; return; }
+            else if (pickaxe9_skins[0].activeInHierarchy && right == true) { pickaxe9_skinsChosen = 1; }
+            else if (pickaxe9_skins[1].activeInHierarchy && right == true) { pickaxe9_skinsChosen = 2; }
+            else if (pickaxe9_skins[1].activeInHierarchy && right == false) { pickaxe9_skinsChosen = 0; }
+            else if (pickaxe9_skins[2].activeInHierarchy && right == false) { pickaxe9_skinsChosen = 1; }
+            else if (pickaxe9_skins[2].activeInHierarchy && right == true) { pickaxe9_skinsChosen = 2; return; }
+        }
+        #endregion
+
+        #region Skin 10
+        if (pickaxe10_equipped)
+        {
+            if (pickaxe10_skins[0].activeInHierarchy && right == false) { pickaxe10_skinsChosen = 0; return; }
+            else if (pickaxe10_skins[0].activeInHierarchy && right == true) { pickaxe10_skinsChosen = 1; }
+            else if (pickaxe10_skins[1].activeInHierarchy && right == true) { pickaxe10_skinsChosen = 2; }
+            else if (pickaxe10_skins[1].activeInHierarchy && right == false) { pickaxe10_skinsChosen = 0; }
+            else if (pickaxe10_skins[2].activeInHierarchy && right == false) { pickaxe10_skinsChosen = 1; }
+            else if (pickaxe10_skins[2].activeInHierarchy && right == true) { pickaxe10_skinsChosen = 2; return; }
+        }
+        #endregion
+
+        #region Skin 11
+        if (pickaxe11_equipped)
+        {
+            if (pickaxe11_skins[0].activeInHierarchy && right == false) { pickaxe11_skinsChosen = 0; return; }
+            else if (pickaxe11_skins[0].activeInHierarchy && right == true) { pickaxe11_skinsChosen = 1; }
+            else if (pickaxe11_skins[1].activeInHierarchy && right == true) { pickaxe11_skinsChosen = 2; }
+            else if (pickaxe11_skins[1].activeInHierarchy && right == false) { pickaxe11_skinsChosen = 0; }
+            else if (pickaxe11_skins[2].activeInHierarchy && right == false) { pickaxe11_skinsChosen = 1; }
+            else if (pickaxe11_skins[2].activeInHierarchy && right == true) { pickaxe11_skinsChosen = 2; return; }
+        }
+        #endregion
+
+        #region Skin 12
+        if (pickaxe12_equipped)
+        {
+            if (pickaxe12_skins[0].activeInHierarchy && right == false) { pickaxe12_skinsChosen = 0; return; }
+            else if (pickaxe12_skins[0].activeInHierarchy && right == true) { pickaxe12_skinsChosen = 1; }
+            else if (pickaxe12_skins[1].activeInHierarchy && right == true) { pickaxe12_skinsChosen = 2; }
+            else if (pickaxe12_skins[1].activeInHierarchy && right == false) { pickaxe12_skinsChosen = 0; }
+            else if (pickaxe12_skins[2].activeInHierarchy && right == false) { pickaxe12_skinsChosen = 1; }
+            else if (pickaxe12_skins[2].activeInHierarchy && right == true) { pickaxe12_skinsChosen = 2; return; }
+        }
+        #endregion
+
+        #region Skin 13
+        if (pickaxe13_equipped)
+        {
+            if (pickaxe13_skins[0].activeInHierarchy && right == false) { pickaxe13_skinsChosen = 0; return; }
+            else if (pickaxe13_skins[0].activeInHierarchy && right == true) { pickaxe13_skinsChosen = 1; }
+            else if (pickaxe13_skins[1].activeInHierarchy && right == true) { pickaxe13_skinsChosen = 2; }
+            else if (pickaxe13_skins[1].activeInHierarchy && right == false) { pickaxe13_skinsChosen = 0; }
+            else if (pickaxe13_skins[2].activeInHierarchy && right == false) { pickaxe13_skinsChosen = 1; }
+            else if (pickaxe13_skins[2].activeInHierarchy && right == true) { pickaxe13_skinsChosen = 2; return; }
+        }
+        #endregion
+
+        CheckSkin();
+    }
+
+    public void CheckSkin()
+    {
+        pickaxe1_skins[0].SetActive(false); pickaxe1_skins[1].SetActive(false); pickaxe1_skins[2].SetActive(false);
+        pickaxe2_skins[0].SetActive(false); pickaxe2_skins[1].SetActive(false); pickaxe2_skins[2].SetActive(false);
+        pickaxe3_skins[0].SetActive(false); pickaxe3_skins[1].SetActive(false); pickaxe3_skins[2].SetActive(false);
+        pickaxe4_skins[0].SetActive(false); pickaxe4_skins[1].SetActive(false); pickaxe4_skins[2].SetActive(false);
+        pickaxe5_skins[0].SetActive(false); pickaxe5_skins[1].SetActive(false); pickaxe5_skins[2].SetActive(false);
+        pickaxe6_skins[0].SetActive(false); pickaxe6_skins[1].SetActive(false); pickaxe6_skins[2].SetActive(false);
+        pickaxe7_skins[0].SetActive(false); pickaxe7_skins[1].SetActive(false); pickaxe7_skins[2].SetActive(false);
+        pickaxe8_skins[0].SetActive(false); pickaxe8_skins[1].SetActive(false); pickaxe8_skins[2].SetActive(false);
+        pickaxe9_skins[0].SetActive(false); pickaxe9_skins[1].SetActive(false); pickaxe9_skins[2].SetActive(false);
+        pickaxe10_skins[0].SetActive(false); pickaxe10_skins[1].SetActive(false); pickaxe10_skins[2].SetActive(false);
+        pickaxe11_skins[0].SetActive(false); pickaxe11_skins[1].SetActive(false); pickaxe11_skins[2].SetActive(false);
+        pickaxe12_skins[0].SetActive(false); pickaxe12_skins[1].SetActive(false); pickaxe12_skins[2].SetActive(false);
+        pickaxe13_skins[0].SetActive(false); pickaxe13_skins[1].SetActive(false); pickaxe13_skins[2].SetActive(false);
+
+        if (pickaxe1_equipped) { pickaxe1_skins[pickaxe1_skinsChosen].SetActive(true); skinText.text = LocalizationScript.skin + (pickaxe1_skinsChosen + 1) + ""; }
+        if (pickaxe2_equipped) { pickaxe2_skins[pickaxe2_skinsChosen].SetActive(true); skinText.text = LocalizationScript.skin + (pickaxe2_skinsChosen + 1) + ""; }
+        if (pickaxe3_equipped) { pickaxe3_skins[pickaxe3_skinsChosen].SetActive(true); skinText.text = LocalizationScript.skin + (pickaxe3_skinsChosen + 1) + ""; }
+        if (pickaxe4_equipped) { pickaxe4_skins[pickaxe4_skinsChosen].SetActive(true); skinText.text = LocalizationScript.skin + (pickaxe4_skinsChosen + 1) + ""; }
+        if (pickaxe5_equipped) { pickaxe5_skins[pickaxe5_skinsChosen].SetActive(true); skinText.text = LocalizationScript.skin + (pickaxe5_skinsChosen + 1) + ""; }
+        if (pickaxe6_equipped) { pickaxe6_skins[pickaxe6_skinsChosen].SetActive(true); skinText.text = LocalizationScript.skin + (pickaxe6_skinsChosen + 1) + ""; }
+        if (pickaxe7_equipped) { pickaxe7_skins[pickaxe7_skinsChosen].SetActive(true); skinText.text = LocalizationScript.skin + (pickaxe7_skinsChosen + 1) + ""; }
+        if (pickaxe8_equipped) { pickaxe8_skins[pickaxe8_skinsChosen].SetActive(true); skinText.text = LocalizationScript.skin + (pickaxe8_skinsChosen + 1) + ""; }
+        if (pickaxe9_equipped) { pickaxe9_skins[pickaxe9_skinsChosen].SetActive(true); skinText.text = LocalizationScript.skin + (pickaxe9_skinsChosen + 1) + ""; }
+        if (pickaxe10_equipped) { pickaxe10_skins[pickaxe10_skinsChosen].SetActive(true); skinText.text = LocalizationScript.skin + (pickaxe10_skinsChosen + 1) + ""; }
+        if (pickaxe11_equipped) { pickaxe11_skins[pickaxe11_skinsChosen].SetActive(true); skinText.text = LocalizationScript.skin + (pickaxe11_skinsChosen + 1) + ""; }
+        if (pickaxe12_equipped) { pickaxe12_skins[pickaxe12_skinsChosen].SetActive(true); skinText.text = LocalizationScript.skin + (pickaxe12_skinsChosen + 1) + ""; }
+        if (pickaxe13_equipped) { pickaxe13_skins[pickaxe13_skinsChosen].SetActive(true); skinText.text = LocalizationScript.skin + (pickaxe13_skinsChosen + 1) + ""; }
+    }
+    #endregion
+
     void Start()
     {
         StartCoroutine(Wait());
@@ -72,45 +365,60 @@ public class TheAnvil : MonoBehaviour, IDataPersistence
     {
         yield return new WaitForSeconds(0.2f);
 
-        pickaxe2_goldPrice = 100;
+        if(MobileAndTesting.isMobile == true)
+        {
+            pcCursorImage.SetActive(false);
+            mobileCircleBtn.SetActive(true);
 
-        pickaxe3_goldPrice = 110;
-        pickaxe3_copperPrice = 135;
+            //holdToCraftText.gameObject.SetActive(false);
+            isDLC = false;
+            SetSkinsOff(true);
+        }
+        else
+        {
+            pcCursorImage.SetActive(true);
+            mobileCircleBtn.SetActive(false);
+        }
 
-        pickaxe4_copperPrice = 145;
-        pickaxe4_ironPrice = 170;
+        pickaxe2_goldPrice = 65;
 
-        pickaxe5_goldPrice = 200;
-        pickaxe5_ironPrice = 220;
+        pickaxe3_goldPrice = 370;
+        pickaxe3_copperPrice = 140;
 
-        pickaxe6_goldPrice = 250;
-        pickaxe6_cobaltPrice = 280;
+        pickaxe4_copperPrice = 650;
+        pickaxe4_ironPrice = 400;
 
-        pickaxe7_goldPrice = 310;
-        pickaxe7_copperPrice = 350;
-        pickaxe7_ironPrice = 390;
+        pickaxe5_goldPrice = 4000;
+        pickaxe5_ironPrice = 1800;
 
-        pickaxe8_cobaltPrice = 420;
-        pickaxe8_uraniumPrice = 470;
+        pickaxe6_goldPrice = 10000;
+        pickaxe6_cobaltPrice = 3000;
 
-        pickaxe9_goldPrice = 500;
-        pickaxe9_uraniumPrice = 550;
-        pickaxe9_ismiumPrice = 600;
+        pickaxe7_goldPrice = 25000;
+        pickaxe7_copperPrice = 6000;
+        pickaxe7_ironPrice = 5000;
 
-        pickaxe10_goldPrice = 650;
-        pickaxe10_copperPrice = 700;
-        pickaxe10_iridiumPrice = 750;
+        pickaxe8_cobaltPrice = 12000;
+        pickaxe8_uraniumPrice = 8000;
 
-        pickaxe11_cobaltPrice = 800;
-        pickaxe11_uraniumPrice = 850;
-        pickaxe11_ismiumPrice = 900;
+        pickaxe9_goldPrice = 300000;
+        pickaxe9_uraniumPrice = 40000;
+        pickaxe9_ismiumPrice = 25000;
 
-        pickaxe12_goldPrice = 950;
-        pickaxe12_iridiumPrice = 1000;
+        pickaxe10_goldPrice = 750000;
+        pickaxe10_copperPrice = 550000;
+        pickaxe10_iridiumPrice = 40000;
 
-        pickaxe13_goldPrice = 1100;
-        pickaxe13_ironPrice = 1200;
-        pickaxe13_painitePrice = 1300;
+        pickaxe11_cobaltPrice = 1000000;
+        pickaxe11_uraniumPrice = 650000;
+        pickaxe11_ismiumPrice = 235000;
+
+        pickaxe12_goldPrice = 9000000;
+        pickaxe12_iridiumPrice = 700000;
+
+        pickaxe13_goldPrice = 30000000;
+        pickaxe13_ironPrice = 10000000;
+        pickaxe13_painitePrice = 700000;
 
         collTime = 0.04f;
 
@@ -129,20 +437,20 @@ public class TheAnvil : MonoBehaviour, IDataPersistence
         if (pickaxe13_crafted) { SetImageToWhite(pickaxe13_topImage); SetImageToWhite(pickaxe13_craftImage); }
         if (pickaxe14_crafted) { SetImageToWhite(pickaxe14_topImage); SetImageToWhite(pickaxe14_craftImage); }
 
-        pickaxe1_mineTime = 0.32f; pickaxe1_minePower = 2.5f; pickaxe1_2XChance = 1.1f; pickaxe1_miningAreaSize = 1.1f;
-        pickaxe2_mineTime = 0.30f; pickaxe2_minePower = 2.7f; pickaxe2_2XChance = 1.2f; pickaxe2_miningAreaSize = 1.2f;
-        pickaxe3_mineTime = 0.33f; pickaxe3_minePower = 2.8f; pickaxe3_2XChance = 1.3f; pickaxe3_miningAreaSize = 1.2f;
-        pickaxe4_mineTime = 0.31f; pickaxe4_minePower = 3.2f; pickaxe4_2XChance = 1.5f; pickaxe4_miningAreaSize = 1.3f;
-        pickaxe5_mineTime = 0.28f; pickaxe5_minePower = 3.5f; pickaxe5_2XChance = 1.8f; pickaxe5_miningAreaSize = 1.35f;
-        pickaxe6_mineTime = 0.29f; pickaxe6_minePower = 3.5f; pickaxe6_2XChance = 2.1f; pickaxe6_miningAreaSize = 1.5f;
-        pickaxe7_mineTime = 0.30f; pickaxe7_minePower = 3.7f; pickaxe7_2XChance = 2.4f; pickaxe7_miningAreaSize = 1.45f;
-        pickaxe8_mineTime = 0.27f; pickaxe8_minePower = 3.9f; pickaxe8_2XChance = 3f; pickaxe8_miningAreaSize = 1.6f;
-        pickaxe9_mineTime = 0.26f; pickaxe9_minePower = 4.2f; pickaxe9_2XChance = 3.4f; pickaxe9_miningAreaSize = 1.7f;
-        pickaxe10_mineTime = 0.28f; pickaxe10_minePower = 4.3f; pickaxe10_2XChance = 3.5f; pickaxe10_miningAreaSize = 1.75f;
-        pickaxe11_mineTime = 0.25f; pickaxe11_minePower = 4.5f; pickaxe11_2XChance = 4f; pickaxe11_miningAreaSize = 1.75f;
-        pickaxe12_mineTime = 0.24f; pickaxe12_minePower = 5f; pickaxe12_2XChance = 4.3f; pickaxe12_miningAreaSize = 1.8f;
-        pickaxe13_mineTime = 0.23f; pickaxe13_minePower = 6f; pickaxe13_2XChance = 4.6f; pickaxe13_miningAreaSize = 1.9f;
-        pickaxe14_mineTime = 0.20f; pickaxe14_minePower = 8f; pickaxe14_2XChance = 5.5f; pickaxe14_miningAreaSize = 2.1f;
+        pickaxe1_mineTime = 0.34f; pickaxe1_minePower = 2.5f; pickaxe1_2XChance = 1.1f; pickaxe1_miningAreaSize = 1.21f;
+        pickaxe2_mineTime = 0.33f; pickaxe2_minePower = 2.9f; pickaxe2_2XChance = 1.4f; pickaxe2_miningAreaSize = 1.3f;
+        pickaxe3_mineTime = 0.32f; pickaxe3_minePower = 3.3f; pickaxe3_2XChance = 1.9f; pickaxe3_miningAreaSize = 1.4f;
+        pickaxe4_mineTime = 0.31f; pickaxe4_minePower = 3.7f; pickaxe4_2XChance = 2.1f; pickaxe4_miningAreaSize = 1.43f;
+        pickaxe5_mineTime = 0.30f; pickaxe5_minePower = 3.9f; pickaxe5_2XChance = 2.3f; pickaxe5_miningAreaSize = 1.47f;
+        pickaxe6_mineTime = 0.3f; pickaxe6_minePower = 4.3f; pickaxe6_2XChance = 2.6f; pickaxe6_miningAreaSize = 1.5f;
+        pickaxe7_mineTime = 0.285f; pickaxe7_minePower = 4.7f; pickaxe7_2XChance = 2.9f; pickaxe7_miningAreaSize = 1.52f;
+        pickaxe8_mineTime = 0.28f; pickaxe8_minePower = 5f; pickaxe8_2XChance = 3.1f; pickaxe8_miningAreaSize = 1.6f;
+        pickaxe9_mineTime = 0.27f; pickaxe9_minePower = 5.2f; pickaxe9_2XChance = 3.8f; pickaxe9_miningAreaSize = 1.6f;
+        pickaxe10_mineTime = 0.26f; pickaxe10_minePower = 5.6f; pickaxe10_2XChance = 4.1f; pickaxe10_miningAreaSize = 1.67f;
+        pickaxe11_mineTime = 0.25f; pickaxe11_minePower = 6.1f; pickaxe11_2XChance = 4.6f; pickaxe11_miningAreaSize = 1.7f;
+        pickaxe12_mineTime = 0.24f; pickaxe12_minePower = 6.6f; pickaxe12_2XChance = 5.1f; pickaxe12_miningAreaSize = 1.7f;
+        pickaxe13_mineTime = 0.23f; pickaxe13_minePower = 7.4f; pickaxe13_2XChance = 5.7f; pickaxe13_miningAreaSize = 1.76f;
+        pickaxe14_mineTime = 0.2f; pickaxe14_minePower = 8f; pickaxe14_2XChance = 6.5f; pickaxe14_miningAreaSize = 1.8f;
 
         CheckPickaxes();
         if (pickaxe1_equipped) { EquipPickaxe(0); pickaxeNumber = 0; }
@@ -177,20 +485,22 @@ public class TheAnvil : MonoBehaviour, IDataPersistence
     private float dotTimer = 0f;
     private int dotCount = 0;
 
+    public bool isPlayingCrafting;
+
     private void Update()
     {
         #region Prices
         if (pickaxeNumber == 1)
         {
-            if (GoldAndOreMechanics.totalGoldBars >= pickaxe2_goldPrice) { goldPriceText.color = Color.green; }
+            if (GoldAndOreMechanics.totalGoldBars >= pickaxe2_goldPrice * LevelMechanics.blacksmithDecrease) { goldPriceText.color = Color.green; }
             else { goldPriceText.color = Color.red; }
             goldPriceText.text = (pickaxe2_goldPrice * LevelMechanics.blacksmithDecrease).ToString("F0");
         }
         if (pickaxeNumber == 2)
         {
-            if (GoldAndOreMechanics.totalGoldBars >= pickaxe3_goldPrice) { goldPriceText.color = Color.green; }
+            if (GoldAndOreMechanics.totalGoldBars >= pickaxe3_goldPrice * LevelMechanics.blacksmithDecrease) { goldPriceText.color = Color.green; }
             else { goldPriceText.color = Color.red; }
-            if (GoldAndOreMechanics.totalCopperBars >= pickaxe3_copperPrice) { copperPriceText.color = Color.green; }
+            if (GoldAndOreMechanics.totalCopperBars >= pickaxe3_copperPrice * LevelMechanics.blacksmithDecrease) { copperPriceText.color = Color.green; }
             else { copperPriceText.color = Color.red; }
 
             goldPriceText.text = (pickaxe3_goldPrice * LevelMechanics.blacksmithDecrease).ToString("F0");
@@ -198,9 +508,9 @@ public class TheAnvil : MonoBehaviour, IDataPersistence
         }
         if (pickaxeNumber == 3)
         {
-            if (GoldAndOreMechanics.totalCopperBars >= pickaxe4_copperPrice) { copperPriceText.color = Color.green; }
+            if (GoldAndOreMechanics.totalCopperBars >= pickaxe4_copperPrice * LevelMechanics.blacksmithDecrease) { copperPriceText.color = Color.green; }
             else { copperPriceText.color = Color.red; }
-            if (GoldAndOreMechanics.totalIronBars >= pickaxe4_ironPrice) { ironPriceText.color = Color.green; }
+            if (GoldAndOreMechanics.totalIronBars >= pickaxe4_ironPrice * LevelMechanics.blacksmithDecrease) { ironPriceText.color = Color.green; }
             else { ironPriceText.color = Color.red; }
 
             copperPriceText.text = (pickaxe4_copperPrice * LevelMechanics.blacksmithDecrease).ToString("F0");
@@ -208,9 +518,9 @@ public class TheAnvil : MonoBehaviour, IDataPersistence
         }
         if (pickaxeNumber == 4)
         {
-            if (GoldAndOreMechanics.totalGoldBars >= pickaxe5_goldPrice) { goldPriceText.color = Color.green; }
+            if (GoldAndOreMechanics.totalGoldBars >= pickaxe5_goldPrice * LevelMechanics.blacksmithDecrease) { goldPriceText.color = Color.green; }
             else { goldPriceText.color = Color.red; }
-            if (GoldAndOreMechanics.totalIronBars >= pickaxe5_ironPrice) { ironPriceText.color = Color.green; }
+            if (GoldAndOreMechanics.totalIronBars >= pickaxe5_ironPrice * LevelMechanics.blacksmithDecrease) { ironPriceText.color = Color.green; }
             else { ironPriceText.color = Color.red; }
 
             goldPriceText.text = (pickaxe5_goldPrice * LevelMechanics.blacksmithDecrease).ToString("F0");
@@ -218,9 +528,9 @@ public class TheAnvil : MonoBehaviour, IDataPersistence
         }
         if (pickaxeNumber == 5)
         {
-            if (GoldAndOreMechanics.totalGoldBars >= pickaxe6_goldPrice) { goldPriceText.color = Color.green; }
+            if (GoldAndOreMechanics.totalGoldBars >= pickaxe6_goldPrice * LevelMechanics.blacksmithDecrease) { goldPriceText.color = Color.green; }
             else { goldPriceText.color = Color.red; }
-            if (GoldAndOreMechanics.totalCobaltBars >= pickaxe6_cobaltPrice) { cobaltPriceText.color = Color.green; }
+            if (GoldAndOreMechanics.totalCobaltBars >= pickaxe6_cobaltPrice * LevelMechanics.blacksmithDecrease) { cobaltPriceText.color = Color.green; }
             else { cobaltPriceText.color = Color.red; }
 
             goldPriceText.text = (pickaxe6_goldPrice * LevelMechanics.blacksmithDecrease).ToString("F0");
@@ -228,11 +538,11 @@ public class TheAnvil : MonoBehaviour, IDataPersistence
         }
         if (pickaxeNumber == 6)
         {
-            if (GoldAndOreMechanics.totalGoldBars >= pickaxe7_goldPrice) { goldPriceText.color = Color.green; }
+            if (GoldAndOreMechanics.totalGoldBars >= pickaxe7_goldPrice * LevelMechanics.blacksmithDecrease) { goldPriceText.color = Color.green; }
             else { goldPriceText.color = Color.red; }
-            if (GoldAndOreMechanics.totalCopperBars >= pickaxe7_copperPrice) { copperPriceText.color = Color.green; }
+            if (GoldAndOreMechanics.totalCopperBars >= pickaxe7_copperPrice * LevelMechanics.blacksmithDecrease) { copperPriceText.color = Color.green; }
             else { copperPriceText.color = Color.red; }
-            if (GoldAndOreMechanics.totalIronBars >= pickaxe7_ironPrice) { ironPriceText.color = Color.green; }
+            if (GoldAndOreMechanics.totalIronBars >= pickaxe7_ironPrice * LevelMechanics.blacksmithDecrease) { ironPriceText.color = Color.green; }
             else { ironPriceText.color = Color.red; }
 
             goldPriceText.text = (pickaxe7_goldPrice * LevelMechanics.blacksmithDecrease).ToString("F0");
@@ -241,9 +551,9 @@ public class TheAnvil : MonoBehaviour, IDataPersistence
         }
         if (pickaxeNumber == 7)
         {
-            if (GoldAndOreMechanics.totalCobaltBars >= pickaxe8_cobaltPrice) { cobaltPriceText.color = Color.green; }
+            if (GoldAndOreMechanics.totalCobaltBars >= pickaxe8_cobaltPrice * LevelMechanics.blacksmithDecrease) { cobaltPriceText.color = Color.green; }
             else { cobaltPriceText.color = Color.red; }
-            if (GoldAndOreMechanics.totalUraniumBars >= pickaxe8_uraniumPrice) { uraniumPriceText.color = Color.green; }
+            if (GoldAndOreMechanics.totalUraniumBars >= pickaxe8_uraniumPrice * LevelMechanics.blacksmithDecrease) { uraniumPriceText.color = Color.green; }
             else { uraniumPriceText.color = Color.red; }
 
             cobaltPriceText.text = (pickaxe8_cobaltPrice * LevelMechanics.blacksmithDecrease).ToString("F0");
@@ -251,72 +561,72 @@ public class TheAnvil : MonoBehaviour, IDataPersistence
         }
         if (pickaxeNumber == 8)
         {
-            if (GoldAndOreMechanics.totalGoldBars >= pickaxe9_goldPrice) { goldPriceText.color = Color.green; }
+            if (GoldAndOreMechanics.totalGoldBars >= pickaxe9_goldPrice * LevelMechanics.blacksmithDecrease) { goldPriceText.color = Color.green; }
             else { goldPriceText.color = Color.red; }
-            if (GoldAndOreMechanics.totalUraniumBars >= pickaxe9_uraniumPrice) { uraniumPriceText.color = Color.green; }
+            if (GoldAndOreMechanics.totalUraniumBars >= pickaxe9_uraniumPrice * LevelMechanics.blacksmithDecrease) { uraniumPriceText.color = Color.green; }
             else { uraniumPriceText.color = Color.red; }
-            if (GoldAndOreMechanics.totalIsmiumBar >= pickaxe9_ismiumPrice) { ismiumPriceText.color = Color.green; }
+            if (GoldAndOreMechanics.totalIsmiumBar >= pickaxe9_ismiumPrice * LevelMechanics.blacksmithDecrease) { ismiumPriceText.color = Color.green; }
             else { ismiumPriceText.color = Color.red; }
 
-            goldPriceText.text = (pickaxe9_goldPrice * LevelMechanics.blacksmithDecrease).ToString("F0");
-            uraniumPriceText.text = (pickaxe9_uraniumPrice * LevelMechanics.blacksmithDecrease).ToString("F0");
-            ismiumPriceText.text = (pickaxe9_ismiumPrice * LevelMechanics.blacksmithDecrease).ToString("F0");
+            goldPriceText.text = FormatNumbers.FormatPoints(pickaxe9_goldPrice * LevelMechanics.blacksmithDecrease);
+            uraniumPriceText.text = FormatNumbers.FormatPoints(pickaxe9_uraniumPrice * LevelMechanics.blacksmithDecrease);
+            ismiumPriceText.text = FormatNumbers.FormatPoints(pickaxe9_ismiumPrice * LevelMechanics.blacksmithDecrease);
         }
         if (pickaxeNumber == 9)
         {
-            if (GoldAndOreMechanics.totalGoldBars >= pickaxe10_goldPrice) { goldPriceText.color = Color.green; }
+            if (GoldAndOreMechanics.totalGoldBars >= pickaxe10_goldPrice * LevelMechanics.blacksmithDecrease) { goldPriceText.color = Color.green; }
             else { goldPriceText.color = Color.red; }
-            if (GoldAndOreMechanics.totalCopperBars >= pickaxe10_copperPrice) { copperPriceText.color = Color.green; }
+            if (GoldAndOreMechanics.totalCopperBars >= pickaxe10_copperPrice * LevelMechanics.blacksmithDecrease) { copperPriceText.color = Color.green; }
             else { copperPriceText.color = Color.red; }
-            if (GoldAndOreMechanics.totalIridiumBars >= pickaxe10_iridiumPrice) { iridiumPriceText.color = Color.green; }
+            if (GoldAndOreMechanics.totalIridiumBars >= pickaxe10_iridiumPrice * LevelMechanics.blacksmithDecrease) { iridiumPriceText.color = Color.green; }
             else { iridiumPriceText.color = Color.red; }
 
-            goldPriceText.text = (pickaxe10_goldPrice * LevelMechanics.blacksmithDecrease).ToString("F0");
-            copperPriceText.text = (pickaxe10_copperPrice * LevelMechanics.blacksmithDecrease).ToString("F0");
-            iridiumPriceText.text = (pickaxe10_iridiumPrice * LevelMechanics.blacksmithDecrease).ToString("F0");
+            goldPriceText.text = FormatNumbers.FormatPoints(pickaxe10_goldPrice * LevelMechanics.blacksmithDecrease);
+            copperPriceText.text = FormatNumbers.FormatPoints(pickaxe10_copperPrice * LevelMechanics.blacksmithDecrease);
+            iridiumPriceText.text = FormatNumbers.FormatPoints(pickaxe10_iridiumPrice * LevelMechanics.blacksmithDecrease);
         }
         if (pickaxeNumber == 10)
         {
-            if (GoldAndOreMechanics.totalCobaltBars >= pickaxe11_cobaltPrice) { cobaltPriceText.color = Color.green; }
+            if (GoldAndOreMechanics.totalCobaltBars >= pickaxe11_cobaltPrice * LevelMechanics.blacksmithDecrease) { cobaltPriceText.color = Color.green; }
             else { cobaltPriceText.color = Color.red; }
-            if (GoldAndOreMechanics.totalUraniumBars >= pickaxe11_uraniumPrice) { uraniumPriceText.color = Color.green; }
+            if (GoldAndOreMechanics.totalUraniumBars >= pickaxe11_uraniumPrice * LevelMechanics.blacksmithDecrease) { uraniumPriceText.color = Color.green; }
             else { uraniumPriceText.color = Color.red; }
-            if (GoldAndOreMechanics.totalIsmiumBar >= pickaxe11_ismiumPrice) { ismiumPriceText.color = Color.green; }
+            if (GoldAndOreMechanics.totalIsmiumBar >= pickaxe11_ismiumPrice * LevelMechanics.blacksmithDecrease) { ismiumPriceText.color = Color.green; }
             else { ismiumPriceText.color = Color.red; }
-
-            cobaltPriceText.text = (pickaxe11_cobaltPrice * LevelMechanics.blacksmithDecrease).ToString("F0");
-            uraniumPriceText.text = (pickaxe11_uraniumPrice * LevelMechanics.blacksmithDecrease).ToString("F0");
-            ismiumPriceText.text = (pickaxe11_ismiumPrice * LevelMechanics.blacksmithDecrease).ToString("F0");
+          
+            cobaltPriceText.text = FormatNumbers.FormatPoints(pickaxe11_cobaltPrice * LevelMechanics.blacksmithDecrease);
+            uraniumPriceText.text = FormatNumbers.FormatPoints(pickaxe11_uraniumPrice * LevelMechanics.blacksmithDecrease);
+            ismiumPriceText.text = FormatNumbers.FormatPoints(pickaxe11_ismiumPrice * LevelMechanics.blacksmithDecrease);
         }
         if (pickaxeNumber == 11)
         {
-            if (GoldAndOreMechanics.totalGoldBars >= pickaxe12_goldPrice) { goldPriceText.color = Color.green; }
+            if (GoldAndOreMechanics.totalGoldBars >= pickaxe12_goldPrice * LevelMechanics.blacksmithDecrease) { goldPriceText.color = Color.green; }
             else { goldPriceText.color = Color.red; }
-            if (GoldAndOreMechanics.totalIridiumBars >= pickaxe12_iridiumPrice) { iridiumPriceText.color = Color.green; }
+            if (GoldAndOreMechanics.totalIridiumBars >= pickaxe12_iridiumPrice * LevelMechanics.blacksmithDecrease) { iridiumPriceText.color = Color.green; }
             else { iridiumPriceText.color = Color.red; }
 
-            goldPriceText.text = (pickaxe12_goldPrice * LevelMechanics.blacksmithDecrease).ToString("F0");
-            iridiumPriceText.text = (pickaxe12_iridiumPrice * LevelMechanics.blacksmithDecrease).ToString("F0");
+            goldPriceText.text = FormatNumbers.FormatPoints(pickaxe12_goldPrice * LevelMechanics.blacksmithDecrease);
+            iridiumPriceText.text = FormatNumbers.FormatPoints(pickaxe12_iridiumPrice * LevelMechanics.blacksmithDecrease);
         }
         if (pickaxeNumber == 12)
         {
-            if (GoldAndOreMechanics.totalGoldBars >= pickaxe13_goldPrice) { goldPriceText.color = Color.green; }
+            if (GoldAndOreMechanics.totalGoldBars >= pickaxe13_goldPrice * LevelMechanics.blacksmithDecrease) { goldPriceText.color = Color.green; }
             else { goldPriceText.color = Color.red; }
-            if (GoldAndOreMechanics.totalIronBars >= pickaxe13_ironPrice) { ironPriceText.color = Color.green; }
+            if (GoldAndOreMechanics.totalIronBars >= pickaxe13_ironPrice * LevelMechanics.blacksmithDecrease) { ironPriceText.color = Color.green; }
             else { ironPriceText.color = Color.red; }
-            if (GoldAndOreMechanics.totalPainiteBars >= pickaxe13_painitePrice) { painitePriceText.color = Color.green; }
+            if (GoldAndOreMechanics.totalPainiteBars >= pickaxe13_painitePrice * LevelMechanics.blacksmithDecrease) { painitePriceText.color = Color.green; }
             else { painitePriceText.color = Color.red; }
 
-            goldPriceText.text = (pickaxe13_goldPrice * LevelMechanics.blacksmithDecrease).ToString("F0");
-            ironPriceText.text = (pickaxe13_ironPrice * LevelMechanics.blacksmithDecrease).ToString("F0");
-            painitePriceText.text = (pickaxe13_painitePrice * LevelMechanics.blacksmithDecrease).ToString("F0");
+            goldPriceText.text = FormatNumbers.FormatPoints(pickaxe13_goldPrice * LevelMechanics.blacksmithDecrease);
+            ironPriceText.text = FormatNumbers.FormatPoints(pickaxe13_ironPrice * LevelMechanics.blacksmithDecrease);
+            painitePriceText.text = FormatNumbers.FormatPoints(pickaxe13_painitePrice * LevelMechanics.blacksmithDecrease);
         }
         #endregion
 
         if (MainMenu.isInTheAnvil)
         {
             //Crafting
-            if (Input.GetMouseButton(1))
+            if (Input.GetMouseButton(1) || CraftMobileButton.isPressing == true)
             {
                 bool canCraft = false;
 
@@ -377,7 +687,9 @@ public class TheAnvil : MonoBehaviour, IDataPersistence
                 {
                     if (!isCrafting)
                     {
+                        craftingText.text = LocalizationScript.crafting;
                         audioManager.Play("Crafting...");
+                        isPlayingCrafting = true;
 
                         isCrafting = true;
                         currentTime = 0f;
@@ -392,6 +704,7 @@ public class TheAnvil : MonoBehaviour, IDataPersistence
                         currentTime += Time.deltaTime;
                         float fill = Mathf.Clamp01(currentTime / craftingTime);
                         outLineCircle.SetActive(true);
+                      
                         craftingText.gameObject.SetActive(true);
                         craftingCircle.gameObject.SetActive(true);
                         craftingCircle.fillAmount = fill;
@@ -409,7 +722,7 @@ public class TheAnvil : MonoBehaviour, IDataPersistence
                         {
                             dotTimer = 0f;
                             dotCount = (dotCount + 1) % 4;
-                            craftingText.text = "Crafting" + new string('.', dotCount);
+                            craftingText.text = LocalizationScript.crafting + new string('.', dotCount);
                         }
                     }
                 }
@@ -420,14 +733,19 @@ public class TheAnvil : MonoBehaviour, IDataPersistence
                 {
                     if (isInCraftingDone == false)
                     {
+                        audioManager.Stop("Crafting...");
                         isCrafting = false;
                         craftingFrame.SetActive(false);
                         craftingCircle.fillAmount = 0f;
                     }
                 }
+                else
+                {
+
+                }
             }
 
-            if (Input.GetMouseButtonDown(1))
+            if (Input.GetMouseButtonDown(1) || CraftMobileButton.isPressing == true)
             {
                 if (pickaxeNumber == 0 && pickaxe1_crafted == true && pickaxe1_equipped == false) { EquipPickaxe(pickaxeNumber); }
                 if (pickaxeNumber == 1 && pickaxe2_crafted == true && pickaxe2_equipped == false) { EquipPickaxe(pickaxeNumber); }
@@ -452,7 +770,9 @@ public class TheAnvil : MonoBehaviour, IDataPersistence
         audioManager.Play("CraftingDone");
         audioManager.Play("FinishedCrafting");
 
-        if(pickaxeNumber == 1) { pickaxe2_crafted = true; SetImageToWhite(pickaxe2_topImage); SetImageToWhite(pickaxe2_craftImage);  }
+        craftedOnePickaxe = true;
+
+        if (pickaxeNumber == 1) { pickaxe2_crafted = true; SetImageToWhite(pickaxe2_topImage); SetImageToWhite(pickaxe2_craftImage);  }
         if (pickaxeNumber == 2) { pickaxe3_crafted = true; SetImageToWhite(pickaxe3_topImage); SetImageToWhite(pickaxe3_craftImage); }
         if (pickaxeNumber == 3) { pickaxe4_crafted = true; SetImageToWhite(pickaxe4_topImage); SetImageToWhite(pickaxe4_craftImage); }
         if (pickaxeNumber == 4) { pickaxe5_crafted = true; SetImageToWhite(pickaxe5_topImage); SetImageToWhite(pickaxe5_craftImage); }
@@ -465,70 +785,73 @@ public class TheAnvil : MonoBehaviour, IDataPersistence
         if (pickaxeNumber == 11) { pickaxe12_crafted = true; SetImageToWhite(pickaxe12_topImage); SetImageToWhite(pickaxe12_craftImage); }
         if (pickaxeNumber == 12) { pickaxe13_crafted = true; SetImageToWhite(pickaxe13_topImage); SetImageToWhite(pickaxe13_craftImage); }
 
+        totalPickaxesCrafted += 1;
+        achScript.CheckAch();
+
         #region Reduce bars
         if (pickaxeNumber == 1)
         {
-            GoldAndOreMechanics.totalGoldBars -= pickaxe2_goldPrice;
+            GoldAndOreMechanics.totalGoldBars -= (pickaxe2_goldPrice * LevelMechanics.blacksmithDecrease);
         }
         if (pickaxeNumber == 2)
         {
-            GoldAndOreMechanics.totalGoldBars -= pickaxe3_goldPrice;
-            GoldAndOreMechanics.totalCopperBars -= pickaxe3_copperPrice;
+            GoldAndOreMechanics.totalGoldBars -= (pickaxe3_goldPrice * LevelMechanics.blacksmithDecrease);
+            GoldAndOreMechanics.totalCopperBars -= (pickaxe3_copperPrice * LevelMechanics.blacksmithDecrease);
         }
         if (pickaxeNumber == 3)
         {
-            GoldAndOreMechanics.totalCopperBars -= pickaxe4_copperPrice;
-            GoldAndOreMechanics.totalIronBars -= pickaxe4_ironPrice;
+            GoldAndOreMechanics.totalCopperBars -= (pickaxe4_copperPrice * LevelMechanics.blacksmithDecrease);
+            GoldAndOreMechanics.totalIronBars -= (pickaxe4_ironPrice * LevelMechanics.blacksmithDecrease);
         }
         if (pickaxeNumber == 4)
         {
-            GoldAndOreMechanics.totalGoldBars -= pickaxe5_goldPrice;
-            GoldAndOreMechanics.totalIronBars -= pickaxe5_ironPrice;
+            GoldAndOreMechanics.totalGoldBars -= (pickaxe5_goldPrice * LevelMechanics.blacksmithDecrease);
+            GoldAndOreMechanics.totalIronBars -= (pickaxe5_ironPrice * LevelMechanics.blacksmithDecrease);
         }
         if (pickaxeNumber == 5)
         {
-            GoldAndOreMechanics.totalGoldBars -= pickaxe6_goldPrice;
-            GoldAndOreMechanics.totalCobaltBars -= pickaxe6_cobaltPrice;
+            GoldAndOreMechanics.totalGoldBars -= (pickaxe6_goldPrice * LevelMechanics.blacksmithDecrease);
+            GoldAndOreMechanics.totalCobaltBars -= (pickaxe6_cobaltPrice * LevelMechanics.blacksmithDecrease);
         }
         if (pickaxeNumber == 6)
         {
-            GoldAndOreMechanics.totalGoldBars -= pickaxe7_goldPrice;
-            GoldAndOreMechanics.totalCopperBars -= pickaxe7_copperPrice;
-            GoldAndOreMechanics.totalIronBars -= pickaxe7_ironPrice;
+            GoldAndOreMechanics.totalGoldBars -= (pickaxe7_goldPrice * LevelMechanics.blacksmithDecrease);
+            GoldAndOreMechanics.totalCopperBars -= (pickaxe7_copperPrice * LevelMechanics.blacksmithDecrease);
+            GoldAndOreMechanics.totalIronBars -= (pickaxe7_ironPrice * LevelMechanics.blacksmithDecrease);
         }
         if (pickaxeNumber == 7)
         {
-            GoldAndOreMechanics.totalCobaltBars -= pickaxe8_cobaltPrice;
-            GoldAndOreMechanics.totalUraniumBars -= pickaxe8_uraniumPrice;
+            GoldAndOreMechanics.totalCobaltBars -= (pickaxe8_cobaltPrice * LevelMechanics.blacksmithDecrease);
+            GoldAndOreMechanics.totalUraniumBars -= (pickaxe8_uraniumPrice * LevelMechanics.blacksmithDecrease);
         }
         if (pickaxeNumber == 8)
         {
-            GoldAndOreMechanics.totalGoldBars -= pickaxe9_goldPrice;
-            GoldAndOreMechanics.totalUraniumBars -= pickaxe9_uraniumPrice;
-            GoldAndOreMechanics.totalIsmiumBar -= pickaxe9_ismiumPrice;
+            GoldAndOreMechanics.totalGoldBars -= (pickaxe9_goldPrice * LevelMechanics.blacksmithDecrease);
+            GoldAndOreMechanics.totalUraniumBars -= (pickaxe9_uraniumPrice * LevelMechanics.blacksmithDecrease);
+            GoldAndOreMechanics.totalIsmiumBar -= (pickaxe9_ismiumPrice * LevelMechanics.blacksmithDecrease);
         }
         if (pickaxeNumber == 9)
         {
-            GoldAndOreMechanics.totalGoldBars -= pickaxe10_goldPrice;
-            GoldAndOreMechanics.totalCopperBars -= pickaxe10_copperPrice;
-            GoldAndOreMechanics.totalIridiumBars -= pickaxe10_iridiumPrice;
+            GoldAndOreMechanics.totalGoldBars -= (pickaxe10_goldPrice * LevelMechanics.blacksmithDecrease);
+            GoldAndOreMechanics.totalCopperBars -= (pickaxe10_copperPrice * LevelMechanics.blacksmithDecrease);
+            GoldAndOreMechanics.totalIridiumBars -= (pickaxe10_iridiumPrice * LevelMechanics.blacksmithDecrease);
         }
         if (pickaxeNumber == 10)
         {
-            GoldAndOreMechanics.totalCobaltBars -= pickaxe11_cobaltPrice;
-            GoldAndOreMechanics.totalUraniumBars -= pickaxe11_uraniumPrice;
-            GoldAndOreMechanics.totalIsmiumBar -= pickaxe11_ismiumPrice;
+            GoldAndOreMechanics.totalCobaltBars -= (pickaxe11_cobaltPrice * LevelMechanics.blacksmithDecrease);
+            GoldAndOreMechanics.totalUraniumBars -= (pickaxe11_uraniumPrice * LevelMechanics.blacksmithDecrease);
+            GoldAndOreMechanics.totalIsmiumBar -= (pickaxe11_ismiumPrice * LevelMechanics.blacksmithDecrease);
         }
         if (pickaxeNumber == 11)
         {
-            GoldAndOreMechanics.totalGoldBars -= pickaxe12_goldPrice;
-            GoldAndOreMechanics.totalIridiumBars -= pickaxe12_iridiumPrice;
+            GoldAndOreMechanics.totalGoldBars -= (pickaxe12_goldPrice * LevelMechanics.blacksmithDecrease);
+            GoldAndOreMechanics.totalIridiumBars -= (pickaxe12_iridiumPrice * LevelMechanics.blacksmithDecrease);
         }
         if (pickaxeNumber == 12)
         {
-            GoldAndOreMechanics.totalGoldBars -= pickaxe13_goldPrice;
-            GoldAndOreMechanics.totalIronBars -= pickaxe13_ironPrice;
-            GoldAndOreMechanics.totalPainiteBars -= pickaxe13_painitePrice;
+            GoldAndOreMechanics.totalGoldBars -= (pickaxe13_goldPrice * LevelMechanics.blacksmithDecrease);
+            GoldAndOreMechanics.totalIronBars -= (pickaxe13_ironPrice * LevelMechanics.blacksmithDecrease);
+            GoldAndOreMechanics.totalPainiteBars -= (pickaxe13_painitePrice * LevelMechanics.blacksmithDecrease);
         }
         #endregion
 
@@ -539,7 +862,6 @@ public class TheAnvil : MonoBehaviour, IDataPersistence
         craftingCircle.gameObject.SetActive(false);
         outLineCircle.SetActive(false);
         craftingText.gameObject.SetActive(false);
-        craftingText.text = "Crafted!";
         isInCraftingDone = true;
         StartCoroutine(SetFinishedCraftingPopUp());
     }
@@ -571,7 +893,25 @@ public class TheAnvil : MonoBehaviour, IDataPersistence
 
         craftedParticle.Play();
         yield return new WaitForSeconds(2.35f);
-      
+
+        //Equip new pickaxe
+        bool equipPickaxe = false;
+
+        if (pickaxe1_equipped) { equipPickaxe = true; }
+        if (pickaxe2_equipped) { equipPickaxe = true; }
+        if (pickaxe3_equipped && pickaxeNumber > 2) { equipPickaxe = true; }
+        if (pickaxe4_equipped && pickaxeNumber > 3) { equipPickaxe = true; }
+        if (pickaxe5_equipped && pickaxeNumber > 4) { equipPickaxe = true; }
+        if (pickaxe6_equipped && pickaxeNumber > 5) { equipPickaxe = true; }
+        if (pickaxe7_equipped && pickaxeNumber > 6) { equipPickaxe = true; }
+        if (pickaxe8_equipped && pickaxeNumber > 7) { equipPickaxe = true; }
+        if (pickaxe9_equipped && pickaxeNumber > 8) { equipPickaxe = true; }
+        if (pickaxe10_equipped && pickaxeNumber > 9) { equipPickaxe = true; }
+        if (pickaxe11_equipped && pickaxeNumber > 10) { equipPickaxe = true; }
+        if (pickaxe12_equipped && pickaxeNumber > 11) { equipPickaxe = true; }
+       
+        if (equipPickaxe == true) { EquipPickaxe(pickaxeNumber); }
+
         craftingFrame.SetActive(false);
         isInCraftingDone = false;
     }
@@ -604,8 +944,35 @@ public class TheAnvil : MonoBehaviour, IDataPersistence
         if (pickaxeNumber == 12) { pickaxe13_equipped = true; equippedMineTime = pickaxe13_mineTime + collTime; equippedMinePower = pickaxe13_minePower; equipped2XChance = pickaxe13_2XChance; equippedMiningArea = pickaxe13_miningAreaSize; pickaxe13_frameIcon.SetActive(true); }
         if (pickaxeNumber == 13) { pickaxe14_equipped = true; equippedMineTime = pickaxe14_mineTime + collTime; equippedMinePower = pickaxe14_minePower; equipped2XChance = pickaxe14_2XChance; equippedMiningArea = pickaxe14_miningAreaSize; pickaxe14_frameIcon.SetActive(true); }
 
+        if(isDLC == true)
+        {
+            CheckSkin();
+        }
+
         DisplayEquippedAndSetStats(equippedMineTime, equippedMinePower, equipped2XChance, equippedMiningArea);
         CheckPickaxes();
+
+        if (pickaxe14_equipped == true)
+        {
+            skinLeftBTN.SetActive(false);
+            skinRightBTN.SetActive(false);
+            skinText.gameObject.SetActive(false);
+            allSkinsFrame.transform.localPosition = new Vector2(0, 0);
+        }
+        else
+        {
+            skinLeftBTN.SetActive(true);
+            skinRightBTN.SetActive(true);
+            skinText.gameObject.SetActive(true);
+            allSkinsFrame.transform.localPosition = new Vector2(0, -7);
+        }
+
+        if(isDLC == false)
+        {
+            SetSkinsOff(false);
+        }
+
+        achScript.CheckAch();
     }
     #endregion
 
@@ -629,26 +996,27 @@ public class TheAnvil : MonoBehaviour, IDataPersistence
         currentMiningErea = miningErea * (SkillTree.improvedPickaxeStrength + SetRockScreen.potionPickaxeStats_increase + LevelMechanics.shapeShifterSizeIncrease);
 
         currentMineTime_text.text = (currentMineTime).ToString("F2") + "s";
-        currentMinePower_text.text = currentMinePower.ToString("F1");
-        current2XPowerChance_text.text = current2XPowerChance.ToString("F1") + "%";
-        currentMiningErea_text.text = currentMiningErea.ToString("F1");
+        currentMinePower_text.text = currentMinePower.ToString("F2");
+        current2XPowerChance_text.text = current2XPowerChance.ToString("F2") + "%";
 
         SetHandColliderSize(currentMiningErea);
     }
     #endregion
 
     #region Set hand collider size
-    public GameObject handCollider, triangleCollider, squareCollider, hexagonCollider;
-    public float currentColliderSize;
+    public GameObject handCollider, squareCollider, hexagonCollider;
+    public static float currentColliderSize;
 
     public void SetHandColliderSize(float size)
     {
         size *= SkillTree.miningAreaSize;
+
+        currentMiningErea_text.text = size.ToString("F2");
+        currentColliderSize = size;
+
         handCollider.transform.localScale = new Vector2(size, size);
-        triangleCollider.transform.localScale = new Vector2(size, size);
         squareCollider.transform.localScale = new Vector2(size, size);
         hexagonCollider.transform.localScale = new Vector2(size, size);
-        currentColliderSize = size;
 
         if(SkillTree.increaseAndDecreaseMinignErea_purchased == true)
         {
@@ -665,8 +1033,8 @@ public class TheAnvil : MonoBehaviour, IDataPersistence
 
     IEnumerator ScaleHandColliderUpAndDown()
     {
-        float maxSize = currentColliderSize * 1.2f;
-        float minSize = currentColliderSize * 0.9f;
+        float maxSize = currentColliderSize * 1.1f;
+        float minSize = currentColliderSize * 0.95f;
         float duration = 2f;
 
         while (true)
@@ -683,14 +1051,12 @@ public class TheAnvil : MonoBehaviour, IDataPersistence
                     float scaleIncrease = 1 + LevelMechanics.inflationBurstIncrease;
 
                     handCollider.transform.localScale = Vector3.Lerp(startScale * scaleIncrease, targetScale * scaleIncrease, elapsedTime / duration);
-                    triangleCollider.transform.localScale = Vector3.Lerp(startScale * scaleIncrease, targetScale * scaleIncrease, elapsedTime / duration);
                     squareCollider.transform.localScale = Vector3.Lerp(startScale * scaleIncrease, targetScale * scaleIncrease, elapsedTime / duration);
                     hexagonCollider.transform.localScale = Vector3.Lerp(startScale * scaleIncrease, targetScale * scaleIncrease, elapsedTime / duration);
                 }
                 else
                 {
                     handCollider.transform.localScale = Vector3.Lerp(startScale, targetScale, elapsedTime / duration);
-                    triangleCollider.transform.localScale = Vector3.Lerp(startScale, targetScale, elapsedTime / duration);
                     squareCollider.transform.localScale = Vector3.Lerp(startScale, targetScale, elapsedTime / duration);
                     hexagonCollider.transform.localScale = Vector3.Lerp(startScale, targetScale, elapsedTime / duration);
                 }
@@ -713,14 +1079,12 @@ public class TheAnvil : MonoBehaviour, IDataPersistence
                 if (LevelMechanics.isDoubleAreaSize == true)
                 {
                     handCollider.transform.localScale = Vector3.Lerp(startScale * scaleIncrease, targetScale * scaleIncrease, elapsedTime / duration);
-                    triangleCollider.transform.localScale = Vector3.Lerp(startScale * scaleIncrease, targetScale * scaleIncrease, elapsedTime / duration);
                     squareCollider.transform.localScale = Vector3.Lerp(startScale * scaleIncrease, targetScale * scaleIncrease, elapsedTime / duration);
                     hexagonCollider.transform.localScale = Vector3.Lerp(startScale * scaleIncrease, targetScale * scaleIncrease, elapsedTime / duration);
                 }
                 else
                 {
                     handCollider.transform.localScale = Vector3.Lerp(startScale, targetScale, elapsedTime / duration);
-                    triangleCollider.transform.localScale = Vector3.Lerp(startScale, targetScale, elapsedTime / duration);
                     squareCollider.transform.localScale = Vector3.Lerp(startScale, targetScale, elapsedTime / duration);
                     hexagonCollider.transform.localScale = Vector3.Lerp(startScale, targetScale, elapsedTime / duration);
                 }
@@ -798,7 +1162,15 @@ public class TheAnvil : MonoBehaviour, IDataPersistence
         if (pickaxeNumber == 11) { pickaxe12_craftImage.gameObject.SetActive(true); }
         if (pickaxeNumber == 12) { pickaxe13_craftImage.gameObject.SetActive(true); }
         if (pickaxeNumber == 13)
-        { 
+        {
+            if (pickaxe14_equipped == true)
+            {
+                skinLeftBTN.SetActive(false);
+                skinRightBTN.SetActive(false);
+                skinText.gameObject.SetActive(false);
+                allSkinsFrame.transform.localPosition = new Vector2(0, 0);
+            }
+
             pickaxe14_craftImage.gameObject.SetActive(true);
             diamondPickaxeQuestionMark.SetActive(true);
             if (pickaxe14_crafted) 
@@ -807,8 +1179,45 @@ public class TheAnvil : MonoBehaviour, IDataPersistence
                 diamondPickaxeQuestionMark.SetActive(false); 
             }
         }
+        else
+        {
+            if(pickaxe14_equipped == false)
+            {
+                skinLeftBTN.SetActive(true);
+                skinRightBTN.SetActive(true);
+                skinText.gameObject.SetActive(true);
+                allSkinsFrame.transform.localPosition = new Vector2(0, -7);
+            }
+        }
 
         CheckPickaxes();
+
+        if (isDLC == false)
+        {
+            SetSkinsOff(false);
+        }
+    }
+    #endregion
+
+    #region Check pickaxe name
+    public void CheckPickaxeName()
+    {
+        if (pickaxe1_equipped) { equippedPickaxeName.text = LocalizationScript.pickaxe1_name; }
+        if (pickaxe2_equipped) { equippedPickaxeName.text = LocalizationScript.pickaxe2_name; }
+        if (pickaxe3_equipped) { equippedPickaxeName.text = LocalizationScript.pickaxe3_name; }
+        if (pickaxe4_equipped) { equippedPickaxeName.text = LocalizationScript.pickaxe4_name; }
+        if (pickaxe5_equipped) { equippedPickaxeName.text = LocalizationScript.pickaxe5_name; }
+        if (pickaxe6_equipped) { equippedPickaxeName.text = LocalizationScript.pickaxe6_name; }
+        if (pickaxe7_equipped) { equippedPickaxeName.text = LocalizationScript.pickaxe7_name; }
+        if (pickaxe8_equipped) { equippedPickaxeName.text = LocalizationScript.pickaxe8_name; }
+        if (pickaxe9_equipped) { equippedPickaxeName.text = LocalizationScript.pickaxe9_name; }
+        if (pickaxe10_equipped) { equippedPickaxeName.text = LocalizationScript.pickaxe10_name; }
+        if (pickaxe11_equipped) { equippedPickaxeName.text = LocalizationScript.pickaxe11_name; }
+        if (pickaxe12_equipped) { equippedPickaxeName.text = LocalizationScript.pickaxe12_name; }
+        if (pickaxe13_equipped) { equippedPickaxeName.text = LocalizationScript.pickaxe13_name; }
+        if (pickaxe14_equipped) { equippedPickaxeName.text = LocalizationScript.pickaxe14_name; }
+
+
     }
     #endregion
 
@@ -923,7 +1332,8 @@ public class TheAnvil : MonoBehaviour, IDataPersistence
         if(isPressToEquip == true)
         {
             darkPickaxeParent.SetActive(true);
-            holdToCraftText.text = "Click to equip";
+            holdToCraftText.text = LocalizationScript.clickToEquip;
+
             pickaxeStatsParent.SetActive(true);
             pickaxePriceParent.SetActive(false);
         }
@@ -990,7 +1400,7 @@ public class TheAnvil : MonoBehaviour, IDataPersistence
                 priceObject3.transform.localPosition = new Vector2(-11f, -102f);
             }
 
-            holdToCraftText.text = "Hold to craft";
+            holdToCraftText.text = LocalizationScript.holdToCraft;
             pickaxeStatsParent.SetActive(false);
             pickaxePriceParent.SetActive(true);
         }
@@ -1111,10 +1521,12 @@ public class TheAnvil : MonoBehaviour, IDataPersistence
         newDoubleChance = doubleChance * (SkillTree.improvedPickaxeStrength + SetRockScreen.potionPickaxeStats_increase);
         newMiningArea = miningErea * (SkillTree.improvedPickaxeStrength + SetRockScreen.potionPickaxeStats_increase + LevelMechanics.shapeShifterSizeIncrease);
 
+        newMiningArea *= SkillTree.miningAreaSize;
+
         mineTime_displayText.text = newMineTime.ToString("F2") + "s";
-        minePower_displayText.text = newMinePower.ToString("F1");
-        doublePowerChance_displayText.text = newDoubleChance.ToString("F1") + "%";
-        miningArea_displayText.text = newMiningArea.ToString("F1") + "";
+        minePower_displayText.text = newMinePower.ToString("F2");
+        doublePowerChance_displayText.text = newDoubleChance.ToString("F2") + "%";
+        miningArea_displayText.text = newMiningArea.ToString("F2") + "";
 
         bool setWhite = false;
 
@@ -1182,10 +1594,30 @@ public class TheAnvil : MonoBehaviour, IDataPersistence
     }
     #endregion
 
+    public void SetDiamondPickaxeWhite()
+    {
+        SetImageToWhite(pickaxe14_topImage); SetImageToWhite(pickaxe14_craftImage);
+    }
 
     #region Load Data
     public void LoadData(GameData data)
     {
+        totalPickaxesCrafted = data.totalPickaxesCrafted;
+
+        pickaxe1_skinsChosen = data.pickaxe1_skinsChosen;
+        pickaxe2_skinsChosen = data.pickaxe2_skinsChosen;
+        pickaxe3_skinsChosen = data.pickaxe3_skinsChosen;
+        pickaxe4_skinsChosen = data.pickaxe4_skinsChosen;
+        pickaxe5_skinsChosen = data.pickaxe5_skinsChosen;
+        pickaxe6_skinsChosen = data.pickaxe6_skinsChosen;
+        pickaxe7_skinsChosen = data.pickaxe7_skinsChosen;
+        pickaxe8_skinsChosen = data.pickaxe8_skinsChosen;
+        pickaxe9_skinsChosen = data.pickaxe9_skinsChosen;
+        pickaxe10_skinsChosen = data.pickaxe10_skinsChosen;
+        pickaxe11_skinsChosen = data.pickaxe11_skinsChosen;
+        pickaxe12_skinsChosen = data.pickaxe12_skinsChosen;
+        pickaxe13_skinsChosen = data.pickaxe13_skinsChosen;
+
         isTheAnvilUnlocked = data.isTheAnvilUnlocked;
 
         pickaxe1_crafted = data.pickaxe1_crafted;
@@ -1224,6 +1656,22 @@ public class TheAnvil : MonoBehaviour, IDataPersistence
     #region Save Data
     public void SaveData(ref GameData data)
     {
+        data.totalPickaxesCrafted = totalPickaxesCrafted;
+
+        data.pickaxe1_skinsChosen = pickaxe1_skinsChosen;
+        data.pickaxe2_skinsChosen = pickaxe2_skinsChosen;
+        data.pickaxe3_skinsChosen = pickaxe3_skinsChosen;
+        data.pickaxe4_skinsChosen = pickaxe4_skinsChosen;
+        data.pickaxe5_skinsChosen = pickaxe5_skinsChosen;
+        data.pickaxe6_skinsChosen = pickaxe6_skinsChosen;
+        data.pickaxe7_skinsChosen = pickaxe7_skinsChosen;
+        data.pickaxe8_skinsChosen = pickaxe8_skinsChosen;
+        data.pickaxe9_skinsChosen = pickaxe9_skinsChosen;
+        data.pickaxe10_skinsChosen = pickaxe10_skinsChosen;
+        data.pickaxe11_skinsChosen = pickaxe11_skinsChosen;
+        data.pickaxe12_skinsChosen = pickaxe12_skinsChosen;
+        data.pickaxe13_skinsChosen = pickaxe13_skinsChosen;
+
         data.isTheAnvilUnlocked = isTheAnvilUnlocked;
 
         data.pickaxe1_crafted = pickaxe1_crafted;
@@ -1260,6 +1708,36 @@ public class TheAnvil : MonoBehaviour, IDataPersistence
 
     public void ResetAnvil()
     {
+        totalPickaxesCrafted = 0;
+
+        pickaxe1_skins[0].SetActive(false); pickaxe1_skins[1].SetActive(false); pickaxe1_skins[2].SetActive(false);
+        pickaxe2_skins[0].SetActive(false); pickaxe2_skins[1].SetActive(false); pickaxe2_skins[2].SetActive(false);
+        pickaxe3_skins[0].SetActive(false); pickaxe3_skins[1].SetActive(false); pickaxe3_skins[2].SetActive(false);
+        pickaxe4_skins[0].SetActive(false); pickaxe4_skins[1].SetActive(false); pickaxe4_skins[2].SetActive(false);
+        pickaxe5_skins[0].SetActive(false); pickaxe5_skins[1].SetActive(false); pickaxe5_skins[2].SetActive(false);
+        pickaxe6_skins[0].SetActive(false); pickaxe6_skins[1].SetActive(false); pickaxe6_skins[2].SetActive(false);
+        pickaxe7_skins[0].SetActive(false); pickaxe7_skins[1].SetActive(false); pickaxe7_skins[2].SetActive(false);
+        pickaxe8_skins[0].SetActive(false); pickaxe8_skins[1].SetActive(false); pickaxe8_skins[2].SetActive(false);
+        pickaxe9_skins[0].SetActive(false); pickaxe9_skins[1].SetActive(false); pickaxe9_skins[2].SetActive(false);
+        pickaxe10_skins[0].SetActive(false); pickaxe10_skins[1].SetActive(false); pickaxe10_skins[2].SetActive(false);
+        pickaxe11_skins[0].SetActive(false); pickaxe11_skins[1].SetActive(false); pickaxe11_skins[2].SetActive(false);
+        pickaxe12_skins[0].SetActive(false); pickaxe12_skins[1].SetActive(false); pickaxe12_skins[2].SetActive(false);
+        pickaxe13_skins[0].SetActive(false); pickaxe13_skins[1].SetActive(false); pickaxe13_skins[2].SetActive(false);
+
+        pickaxe1_skinsChosen = 0;
+        pickaxe2_skinsChosen = 0;
+        pickaxe3_skinsChosen = 0;
+        pickaxe4_skinsChosen = 0;
+        pickaxe5_skinsChosen = 0;
+        pickaxe6_skinsChosen = 0;
+        pickaxe7_skinsChosen = 0;
+        pickaxe8_skinsChosen = 0;
+        pickaxe9_skinsChosen = 0;
+        pickaxe10_skinsChosen = 0;
+        pickaxe11_skinsChosen = 0;
+        pickaxe12_skinsChosen = 0;
+        pickaxe13_skinsChosen = 0;
+
         isTheAnvilUnlocked = false;
 
         pickaxe1_crafted = true;
@@ -1293,6 +1771,9 @@ public class TheAnvil : MonoBehaviour, IDataPersistence
         pickaxe14_equipped = false;
 
         playSound = false;
+
+        StopAllCoroutines();
+
         EquipPickaxe(0);
 
         SetImageToDark(pickaxe2_topImage); SetImageToDark(pickaxe2_craftImage);
@@ -1307,6 +1788,7 @@ public class TheAnvil : MonoBehaviour, IDataPersistence
         SetImageToDark(pickaxe11_topImage); SetImageToDark(pickaxe11_craftImage);
         SetImageToDark(pickaxe12_topImage); SetImageToDark(pickaxe12_craftImage);
         SetImageToDark(pickaxe13_topImage); SetImageToDark(pickaxe13_craftImage);
+        SetImageToDark(pickaxe14_topImage); SetImageToDark(pickaxe14_craftImage);
 
         CheckPickaxes();
 

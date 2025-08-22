@@ -88,7 +88,7 @@ public class HandCollider : MonoBehaviour
 
                     Vector2 randomDirection = Random.insideUnitCircle.normalized;
                     float speed = 4f;
-                    rb.velocity = randomDirection * speed;
+                    rb.linearVelocity = randomDirection * speed;
                 }
             }
         }

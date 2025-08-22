@@ -55,24 +55,25 @@ public class Artifacts : MonoBehaviour, IDataPersistence
     public static float cheeseChance;
     public static float clawChance;
     public static float runeIncrease_forDisplay;
+    public static float diceTime;
 
     private void Start()
     {
-        SetArtifactChances();
-
         runeImproveAll = 0f;
         wolfClawPickaxePowerIncrease = 0;
 
-        goldRingCraftChance = 1.2f;
+        goldRingCraftChance = 1.1f;
 
         hornRockDecrease = 0.03f;
         ancientDeviceTimeReduction = 0.05f;
-        bonePickaxeIncrease = 0.02f;
+        bonePickaxeIncrease = 0.04f;
         meteoriteRockSpawnIncrease = 0.03f;
         purpleRingChance = 4f;
         cheeseChance = 0.2f;
         clawChance = 0.06f;
         runeIncrease_forDisplay = 5f;
+
+        diceTime = 0.7f;
 
         StartCoroutine(Wait());
     }
@@ -80,6 +81,12 @@ public class Artifacts : MonoBehaviour, IDataPersistence
     IEnumerator Wait()
     {
         yield return new WaitForSeconds(0.1f);
+
+        if(MobileAndTesting.isMobile == true)
+        {
+            artifactTooltipAnim.enabled = false;
+        }
+
         if (horn_found == true) { horn_StageIcon.SetActive(true); horn_shadow.SetActive(true);  }
         if (ancientDevice_found == true) { ancientDevice_stageIcon.SetActive(true); ancientDevice_shadow.SetActive(true); }
         if (bone_found == true) { bone_stageIcon.SetActive(true);  bone_shadow.SetActive(true); }
@@ -92,78 +99,106 @@ public class Artifacts : MonoBehaviour, IDataPersistence
         if (cheese_found == true) { cheese_stageIcon.SetActive(true); cheese_shadow.SetActive(true); }
         if (wolfClaw_found == true) { wolfClaw_stageIcon.SetActive(true); wolfClaw_shadow.SetActive(true); }
         if (axe_found == true) { axe_stageIcon.SetActive(true); axe_shadow.SetActive(true); }
-        if (rune_found == true) { rune_stageIcon.SetActive(true); rune_shadow.SetActive(true); }
+        if (rune_found == true) { rune_stageIcon.SetActive(true); rune_shadow.SetActive(true); runeImproveAll = 0.05f; }
         if (skull_found == true) { skullStageIcon.SetActive(true); skull_shadow.SetActive(true); }
+
+        SetArtifactChances();
     }
 
     public void SetArtifactChances()
     {
         //Ranked based on how good they are
-        skull_spawnChance = 0.026f;
-        bone_spawnChance = 0.012f;
-        goldStack_spawnChance = 0.007f;
-        book_spawnChance = 0.0015f;
-        ancientDice_spawnChance = 0.0008f;
-        purpleRing_spawnChance = 0.00027f;
-        axe_spawnChance = 0.00003f;
-        wolfClaw_spawnChance = 0.0000076f;
-        ancientDevice_spawnChance = 0.0000043f;
-        horn_spawnChance = 0.000004f;
-        meteorieOre_spawnChance = 0.0000008f;
-        goldRing_spawnChance = 0.00000016f;
-        cheese_spawnChance = 0.00000016f;
-        rune_spawnChance = 0.00000016f;
+        skull_spawnChance = 0.0015f; // 1 in 454
+        bone_spawnChance = 0.0008f; // 1 in 1000
+        goldStack_spawnChance = 0.0037f; // 1 in 2000
+        book_spawnChance = 0.00016f; // 1 in 5000
+        ancientDice_spawnChance = 0.00011f; // 1 in 8333
+        purpleRing_spawnChance = 0.000088f; // 1 in 11111
+        axe_spawnChance = 0.000069f; // 1 in 14 925
+        wolfClaw_spawnChance = 0.000035f; // 1 in 28 571
+        ancientDevice_spawnChance = 0.000026f; // 1 in 40 000
+        horn_spawnChance = 0.000023f; // 1 in 45 454
+        meteorieOre_spawnChance = 0.000014f; // 1 in 58 823
+        goldRing_spawnChance = 0.000012f; // 1 in 100 000
+        cheese_spawnChance = 0.000011f; // 1 in 100 000
+        rune_spawnChance = 0.00001f; // 1 in 100 000
 
         #region x marks the spot increase
         if (LevelMechanics.xMarksTheSpor_chosen)
         {
-            horn_spawnChance *= 1.02f;
-            ancientDevice_spawnChance *= 1.02f;
-            bone_spawnChance *= 1.02f;
-            meteorieOre_spawnChance *= 1.02f;
-            book_spawnChance *= 1.02f;
-            goldStack_spawnChance *= 1.02f;
-            goldRing_spawnChance *= 1.02f; ;
-            purpleRing_spawnChance *= 1.02f;
-            ancientDice_spawnChance *= 1.02f;
-            cheese_spawnChance *= 1.02f;
-            wolfClaw_spawnChance *= 1.02f;
-            axe_spawnChance *= 1.02f;
-            rune_spawnChance *= 1.02f;
-            skull_spawnChance *= 1.02f;
+            float increase = 1.4f;
+
+            horn_spawnChance *= increase;
+            ancientDevice_spawnChance *= increase;
+            bone_spawnChance *= increase;
+            meteorieOre_spawnChance *= increase;
+            book_spawnChance *= increase;
+            goldStack_spawnChance *= increase;
+            goldRing_spawnChance *= increase; ;
+            purpleRing_spawnChance *= increase;
+            ancientDice_spawnChance *= increase;
+            cheese_spawnChance *= increase;
+            wolfClaw_spawnChance *= increase;
+            axe_spawnChance *= increase;
+            rune_spawnChance *= increase;
+            skull_spawnChance *= increase;
         }
         #endregion
 
         #region explorer increaser
         if (LevelMechanics.explorer_chosen)
         {
-            horn_spawnChance *= 1.02f;
-            ancientDevice_spawnChance *= 1.02f;
-            bone_spawnChance *= 1.02f;
-            meteorieOre_spawnChance *= 1.02f;
-            book_spawnChance *= 1.02f;
-            goldStack_spawnChance *= 1.02f;
-            goldRing_spawnChance *= 1.02f; ;
-            purpleRing_spawnChance *= 1.02f;
-            ancientDice_spawnChance *= 1.02f;
-            cheese_spawnChance *= 1.02f;
-            wolfClaw_spawnChance *= 1.02f;
-            axe_spawnChance *= 1.02f;
-            rune_spawnChance *= 1.02f;
-            skull_spawnChance *= 1.02f;
+            float increase = 1.5f;
+
+            horn_spawnChance *= increase;
+            ancientDevice_spawnChance *= increase;
+            bone_spawnChance *= increase;
+            meteorieOre_spawnChance *= increase;
+            book_spawnChance *= increase;
+            goldStack_spawnChance *= increase;
+            goldRing_spawnChance *= increase; ;
+            purpleRing_spawnChance *= increase;
+            ancientDice_spawnChance *= increase;
+            cheese_spawnChance *= increase;
+            wolfClaw_spawnChance *= increase;
+            axe_spawnChance *= increase;
+            rune_spawnChance *= increase;
+            skull_spawnChance *= increase;
         }
         #endregion
+
+        if(SkillTree.finalUpgrade_purchased == true)
+        {
+            float increase = 10000f;
+
+            horn_spawnChance *= increase;
+            ancientDevice_spawnChance *= increase;
+            bone_spawnChance *= increase;
+            meteorieOre_spawnChance *= increase;
+            book_spawnChance *= increase;
+            goldStack_spawnChance *= increase;
+            goldRing_spawnChance *= increase; ;
+            purpleRing_spawnChance *= increase;
+            ancientDice_spawnChance *= increase;
+            cheese_spawnChance *= increase;
+            wolfClaw_spawnChance *= increase;
+            axe_spawnChance *= increase;
+            rune_spawnChance *= increase;
+            skull_spawnChance *= increase;
+        }
     }
 
     public void ArtifactDropChances()
     {
+        if(Tutorial.pressedOkCraftingTurotialFrame == false) { return; }
+
         #region Horn spawn chance
         if (horn_found == false && oneArtifactSpawned == false)
         {
-            float randomHornChance = Random.Range(0f, 100f);
+            float randomHornChance = Random.Range(0f, 1f);
             if (randomHornChance < horn_spawnChance)
             {
-                Debug.Log("Horn");
+                //Debug.Log("Horn");
                 oneArtifactSpawned = true;
                 horn_spawned = true;
             }
@@ -173,10 +208,10 @@ public class Artifacts : MonoBehaviour, IDataPersistence
         #region Ancient Device spawn chance
         if (ancientDevice_found == false && oneArtifactSpawned == false)
         {
-            float randomChance = Random.Range(0f, 100f);
+            float randomChance = Random.Range(0f, 1f);
             if (randomChance < ancientDevice_spawnChance)
             {
-                Debug.Log("Ancient Device");
+                //Debug.Log("Ancient Device");
                 oneArtifactSpawned = true;
                 ancientDevice_spawned = true;
             }
@@ -186,10 +221,10 @@ public class Artifacts : MonoBehaviour, IDataPersistence
         #region Bone spawn chance
         if (bone_found == false && oneArtifactSpawned == false)
         {
-            float randomChance = Random.Range(0f, 100f);
+            float randomChance = Random.Range(0f, 1f);
             if (randomChance < bone_spawnChance)
             {
-                Debug.Log("Bone");
+                //Debug.Log("Bone");
                 oneArtifactSpawned = true;
                 bone_spawned = true;
             }
@@ -199,10 +234,10 @@ public class Artifacts : MonoBehaviour, IDataPersistence
         #region Meteorite Ore spawn chance
         if (meteorieOre_found == false && oneArtifactSpawned == false)
         {
-            float randomChance = Random.Range(0f, 100f);
+            float randomChance = Random.Range(0f, 1f);
             if (randomChance < meteorieOre_spawnChance)
             {
-                Debug.Log("Meteorite Ore");
+                //Debug.Log("Meteorite Ore");
                 oneArtifactSpawned = true;
                 meteorieOre_spawned = true;
             }
@@ -212,10 +247,10 @@ public class Artifacts : MonoBehaviour, IDataPersistence
         #region Book spawn chance
         if (book_found == false && oneArtifactSpawned == false)
         {
-            float randomChance = Random.Range(0f, 100f);
+            float randomChance = Random.Range(0f, 1f);
             if (randomChance < book_spawnChance)
             {
-                Debug.Log("Book");
+                //Debug.Log("Book");
                 oneArtifactSpawned = true;
                 book_spawned = true;
             }
@@ -225,10 +260,10 @@ public class Artifacts : MonoBehaviour, IDataPersistence
         #region Gold Stack spawn chance
         if (goldStack_found == false && oneArtifactSpawned == false)
         {
-            float randomChance = Random.Range(0f, 100f);
+            float randomChance = Random.Range(0f, 1f);
             if (randomChance < goldStack_spawnChance)
             {
-                Debug.Log("Gold Stack");
+                //Debug.Log("Gold Stack");
                 oneArtifactSpawned = true;
                 goldStack_spawned = true;
             }
@@ -238,10 +273,10 @@ public class Artifacts : MonoBehaviour, IDataPersistence
         #region Gold Ring spawn chance
         if (goldRing_found == false && oneArtifactSpawned == false)
         {
-            float randomChance = Random.Range(0f, 100f);
+            float randomChance = Random.Range(0f, 1f);
             if (randomChance < goldRing_spawnChance)
             {
-                Debug.Log("Gold Ring");
+                //Debug.Log("Gold Ring");
                 oneArtifactSpawned = true;
                 goldRing_spawned = true;
             }
@@ -251,10 +286,10 @@ public class Artifacts : MonoBehaviour, IDataPersistence
         #region Purple Ring spawn chance
         if (purpleRing_found == false && oneArtifactSpawned == false)
         {
-            float randomChance = Random.Range(0f, 100f);
+            float randomChance = Random.Range(0f, 1f);
             if (randomChance < purpleRing_spawnChance)
             {
-                Debug.Log("Purple Ring");
+                // Debug.Log("Purple Ring");
                 oneArtifactSpawned = true;
                 purpleRing_spawned = true;
             }
@@ -264,10 +299,10 @@ public class Artifacts : MonoBehaviour, IDataPersistence
         #region Ancient Dice spawn chance
         if (ancientDice_found == false && oneArtifactSpawned == false)
         {
-            float randomChance = Random.Range(0f, 100f);
+            float randomChance = Random.Range(0f, 1f);
             if (randomChance < ancientDice_spawnChance)
             {
-                Debug.Log("Ancient Dice");
+                //Debug.Log("Ancient Dice");
                 oneArtifactSpawned = true;
                 ancientDice_spawned = true;
             }
@@ -277,10 +312,10 @@ public class Artifacts : MonoBehaviour, IDataPersistence
         #region Cheese spawn chance
         if (cheese_found == false && oneArtifactSpawned == false)
         {
-            float randomChance = Random.Range(0f, 100f);
+            float randomChance = Random.Range(0f, 1f);
             if (randomChance < cheese_spawnChance)
             {
-                Debug.Log("Cheese");
+                //Debug.Log("Cheese");
                 oneArtifactSpawned = true;
                 cheese_spawned = true;
             }
@@ -290,10 +325,10 @@ public class Artifacts : MonoBehaviour, IDataPersistence
         #region Wolf Claw spawn chance
         if (wolfClaw_found == false && oneArtifactSpawned == false)
         {
-            float randomChance = Random.Range(0f, 100f);
+            float randomChance = Random.Range(0f, 1f);
             if (randomChance < wolfClaw_spawnChance)
             {
-                Debug.Log("Wolf Claw");
+                //Debug.Log("Wolf Claw");
                 oneArtifactSpawned = true;
                 wolfClaw_spawned = true;
             }
@@ -303,10 +338,10 @@ public class Artifacts : MonoBehaviour, IDataPersistence
         #region Axe spawn chance
         if (axe_found == false && oneArtifactSpawned == false)
         {
-            float randomChance = Random.Range(0f, 100f);
+            float randomChance = Random.Range(0f, 1f);
             if (randomChance < axe_spawnChance)
             {
-                Debug.Log("Axe");
+                //Debug.Log("Axe");
                 oneArtifactSpawned = true;
                 axe_spawned = true;
             }
@@ -316,10 +351,10 @@ public class Artifacts : MonoBehaviour, IDataPersistence
         #region Rune spawn chance
         if (rune_found == false && oneArtifactSpawned == false)
         {
-            float randomChance = Random.Range(0f, 100f);
+            float randomChance = Random.Range(0f, 1f);
             if (randomChance < rune_spawnChance)
             {
-                Debug.Log("Rune");
+                //Debug.Log("Rune");
                 oneArtifactSpawned = true;
                 rune_spawned = true;
             }
@@ -329,10 +364,10 @@ public class Artifacts : MonoBehaviour, IDataPersistence
         #region Skull spawn chance
         if (skull_found == false && oneArtifactSpawned == false)
         {
-            float randomChance = Random.Range(0f, 100f);
+            float randomChance = Random.Range(0f, 1f);
             if (randomChance < skull_spawnChance)
             {
-                Debug.Log("Skull");
+                //Debug.Log("Skull");
                 oneArtifactSpawned = true;
                 skull_spawned = true;
             }
@@ -394,7 +429,7 @@ public class Artifacts : MonoBehaviour, IDataPersistence
         rune_frameIcon.SetActive(false);
         skull_frameIcon.SetActive(false);
 
-        artifactFound = "Artifact found!\n";
+        artifactFound = $"<wave>{LocalizationScript.artifactFound}\n";
 
         //StartCoroutine(ArtiFactOkButton());
         artifactOkBtn.SetActive(true);
@@ -402,20 +437,22 @@ public class Artifacts : MonoBehaviour, IDataPersistence
 
         artifactParticle.Play();
 
-        if (artifactNumber == 1) { horn_frameIcon.SetActive(true); artifactName = "Ox Horn"; horn_shadow.SetActive(true); horn_Excl.SetActive(true); }
-        if (artifactNumber == 2) { ancientDevice_frameIcon.SetActive(true); artifactName = "Ancient Device"; ancientDevice_shadow.SetActive(true); ancientDevice_Excl.SetActive(true); }
-        if (artifactNumber == 3) { bone_frameIcon.SetActive(true); artifactName = "Fossilized Bone"; bone_shadow.SetActive(true); bone_Excl.SetActive(true); }
-        if (artifactNumber == 4) { meteorieOre_frameIcon.SetActive(true); artifactName = "Meteorite Ore"; meteorieOre_shadow.SetActive(true); meteorieOre_Excl.SetActive(true); }
-        if (artifactNumber == 5) { book_frameIcon.SetActive(true); artifactName = "Magic Book"; book_shadow.SetActive(true); book_Excl.SetActive(true); }
-        if (artifactNumber == 6) { goldStack_frameIcon.SetActive(true); artifactName = "Sack of Gold"; goldStack_shadow.SetActive(true); goldStack_Excl.SetActive(true); }
-        if (artifactNumber == 7) { goldRing_frameIcon.SetActive(true); artifactName = "Gold Ring"; goldRing_shadow.SetActive(true); goldRing_Excl.SetActive(true); }
-        if (artifactNumber == 8) { purpleRing_frameIcon.SetActive(true); artifactName = "Royal Ring"; purpleRing_shadow.SetActive(true); purpleRing_Excl.SetActive(true); }
-        if (artifactNumber == 9) { ancientDice_frameIcon.SetActive(true); artifactName = "Ancient Dice"; ancientDice_shadow.SetActive(true); ancientDice_Excl.SetActive(true); }
-        if (artifactNumber == 10) { cheese_frameIcon.SetActive(true); artifactName = "Cheese"; cheese_shadow.SetActive(true); cheese_Excl.SetActive(true); }
-        if (artifactNumber == 11) { wolfClaw_frameIcon.SetActive(true); artifactName = "Wolf Claw"; wolfClaw_shadow.SetActive(true); wolfClaw_Excl.SetActive(true); }
-        if (artifactNumber == 12) { axe_frameIcon.SetActive(true); artifactName = "Warrior's Axe"; axe_shadow.SetActive(true); axe_Excl.SetActive(true); }
-        if (artifactNumber == 13) { rune_frameIcon.SetActive(true); artifactName = "Runestone"; rune_shadow.SetActive(true); rune_Excl.SetActive(true); }
-        if (artifactNumber == 14) { skull_frameIcon.SetActive(true); artifactName = "Warrior's Skull"; skull_shadow.SetActive(true); skull_Excl.SetActive(true); }
+        string animThing = "</wave>";
+
+        if (artifactNumber == 1) { horn_frameIcon.SetActive(true); artifactName = $"{LocalizationScript.horn}</wave>"; horn_shadow.SetActive(true); horn_Excl.SetActive(true); }
+        if (artifactNumber == 2) { ancientDevice_frameIcon.SetActive(true); artifactName = $"{LocalizationScript.device}</wave>"; ancientDevice_shadow.SetActive(true); ancientDevice_Excl.SetActive(true); }
+        if (artifactNumber == 3) { bone_frameIcon.SetActive(true); artifactName = $"{LocalizationScript.bone}</wave>"; bone_shadow.SetActive(true); bone_Excl.SetActive(true); }
+        if (artifactNumber == 4) { meteorieOre_frameIcon.SetActive(true); artifactName = $"{LocalizationScript.meteorite}</wave>"; meteorieOre_shadow.SetActive(true); meteorieOre_Excl.SetActive(true); }
+        if (artifactNumber == 5) { book_frameIcon.SetActive(true); artifactName = $"{LocalizationScript.book}</wave>"; book_shadow.SetActive(true); book_Excl.SetActive(true); }
+        if (artifactNumber == 6) { goldStack_frameIcon.SetActive(true); artifactName = $"{LocalizationScript.sack}</wave>"; goldStack_shadow.SetActive(true); goldStack_Excl.SetActive(true); }
+        if (artifactNumber == 7) { goldRing_frameIcon.SetActive(true); artifactName = $"{LocalizationScript.goldRing}</wave>"; goldRing_shadow.SetActive(true); goldRing_Excl.SetActive(true); }
+        if (artifactNumber == 8) { purpleRing_frameIcon.SetActive(true); artifactName = $"{LocalizationScript.royalRing}</wave>"; purpleRing_shadow.SetActive(true); purpleRing_Excl.SetActive(true); }
+        if (artifactNumber == 9) { ancientDice_frameIcon.SetActive(true); artifactName = $"{LocalizationScript.dice}</wave>"; ancientDice_shadow.SetActive(true); ancientDice_Excl.SetActive(true); }
+        if (artifactNumber == 10) { cheese_frameIcon.SetActive(true); artifactName = $"{LocalizationScript.cheese}</wave>"; cheese_shadow.SetActive(true); cheese_Excl.SetActive(true); }
+        if (artifactNumber == 11) { wolfClaw_frameIcon.SetActive(true); artifactName = $"{LocalizationScript.wolf}</wave>"; wolfClaw_shadow.SetActive(true); wolfClaw_Excl.SetActive(true); }
+        if (artifactNumber == 12) { axe_frameIcon.SetActive(true); artifactName = $"{LocalizationScript.axe}</wave>"; axe_shadow.SetActive(true); axe_Excl.SetActive(true); }
+        if (artifactNumber == 13) { rune_frameIcon.SetActive(true); artifactName = $"{LocalizationScript.runestone}</wave>"; rune_shadow.SetActive(true); rune_Excl.SetActive(true); runeImproveAll = 0.05f; }
+        if (artifactNumber == 14) { skull_frameIcon.SetActive(true); artifactName = $"{LocalizationScript.skull}</wave>"; skull_shadow.SetActive(true); skull_Excl.SetActive(true); }
 
         artifactFoundText.text = artifactFound + artifactName;
     }
@@ -430,9 +467,39 @@ public class Artifacts : MonoBehaviour, IDataPersistence
     {
         audioManager.Play("UI_Click1");
 
+        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+
         artifactOkBtn.SetActive(false);
         artifactFoundFrame.SetActive(false);
     }
+
+    #region Open artifact tooltip
+    public GameObject artifactTooltip;
+    public GameObject closeArtifactBtn;
+    public GameObject artifactDARK;
+    public Animation artifactTooltipAnim;
+
+    public void OpenArtifactTooltip()
+    {
+        if(MobileAndTesting.isMobile == true)
+        {
+            audioManager.Play("UI_Click1");
+            artifactTooltip.transform.localScale = new Vector2(2.1f, 2.1f);
+            artifactTooltip.transform.localPosition = new Vector2(0f, 45f);
+
+            artifactDARK.SetActive(true);
+            artifactTooltip.SetActive(true);
+            closeArtifactBtn.SetActive(true);
+        }
+    }
+
+    public void CloseArtifactTooltip()
+    {
+        audioManager.Play("UI_Click1");
+        artifactTooltip.SetActive(false);
+        closeArtifactBtn.SetActive(false);
+    }
+    #endregion
 
     #region Load Data
     public void LoadData(GameData data)
@@ -511,5 +578,7 @@ public class Artifacts : MonoBehaviour, IDataPersistence
         axe_stageIcon.SetActive(false); axe_shadow.SetActive(false);
         rune_stageIcon.SetActive(false); rune_shadow.SetActive(false);
         skullStageIcon.SetActive(false); skull_shadow.SetActive(false);
+
+        SetArtifactChances();
     } 
 }

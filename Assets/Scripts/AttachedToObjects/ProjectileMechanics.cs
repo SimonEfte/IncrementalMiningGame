@@ -160,12 +160,12 @@ public class ProjectileMechanics : MonoBehaviour
             Vector2 currentPosition = transform.position;
 
             Vector2 direction = (targetPosition - currentPosition).normalized;
-            rb.velocity = direction * 0.6f;
+            rb.linearVelocity = direction * 0.6f;
         }
         else
         {
             Vector2 randomDirection = Random.insideUnitCircle.normalized;
-            rb.velocity = randomDirection * 0.35f;
+            rb.linearVelocity = randomDirection * 0.35f;
         }
     }
 
@@ -189,9 +189,13 @@ public class ProjectileMechanics : MonoBehaviour
                 float random = Random.Range(0, 100);
                 if (random < SkillTree.lightningSpawnExplosionChance)
                 {
-                    GameObject dynamite = ObjectPool.instance.GetDynamiteFromPool();
-                    dynamite.tag = "OnlyExplosion";
-                    dynamite.transform.position = gameObject.transform.position;
+                    if(SpawnProjectiles.totalDynamitesOnScreen < 35)
+                    {
+                        SpawnProjectiles.totalDynamitesOnScreen += 1;
+                        GameObject dynamite = ObjectPool.instance.GetDynamiteFromPool();
+                        dynamite.tag = "OnlyExplosion";
+                        dynamite.transform.position = gameObject.transform.position;
+                    }
                 }
             }
 
@@ -207,9 +211,10 @@ public class ProjectileMechanics : MonoBehaviour
 
             if (SkillTree.lightningBeamAddTime_purchased)
             {
-                float random = Random.Range(0,100);
+                float random = Random.Range(0f, 100f);
                 if(random < SkillTree.lightningAddTimeChance)
                 {
+                    //Debug.Log("Lightning beam +1 sec");
                     SetRockScreen.currentTime -= 1;
                 }
             }
@@ -275,10 +280,11 @@ public class ProjectileMechanics : MonoBehaviour
 
             if (SkillTree.dynamiteExplosionAddTimeChance_purchased)
             {
-                float randomRock = Random.Range(0, 100);
+                float randomRock = Random.Range(0f, 100f);
                 if (randomRock < SkillTree.explosionAdd1SecondChance)
                 {
                     SetRockScreen.currentTime -= 1;
+                    //Debug.Log("Dynamite +1 sec");
                 }
             }
 
@@ -316,6 +322,7 @@ public class ProjectileMechanics : MonoBehaviour
         if (isBeamOfLight)
         { 
             ObjectPool.instance.ReturnBeamOfLight(gameObject);
+            SpawnProjectiles.totalBeamsOnScreen -= 1;
         }
         else if (isPlazmaBall)
         {
@@ -328,6 +335,7 @@ public class ProjectileMechanics : MonoBehaviour
         else if (isDynamite)
         {
             ObjectPool.instance.ReturnDynamiteFromPool(gameObject);
+            SpawnProjectiles.totalDynamitesOnScreen -= 1;
         }
     }
 
@@ -356,9 +364,13 @@ public class ProjectileMechanics : MonoBehaviour
                 float random = Random.Range(0, 100);
                 if (random < SkillTree.plazmaballExplosionChance)
                 {
-                    GameObject dynamite = ObjectPool.instance.GetDynamiteFromPool();
-                    dynamite.tag = "OnlyExplosion";
-                    dynamite.transform.position = gameObject.transform.position;
+                    if (SpawnProjectiles.totalDynamitesOnScreen < 35)
+                    {
+                        SpawnProjectiles.totalDynamitesOnScreen += 1;
+                        GameObject dynamite = ObjectPool.instance.GetDynamiteFromPool();
+                        dynamite.tag = "OnlyExplosion";
+                        dynamite.transform.position = gameObject.transform.position;
+                    }
                 }
             }
 

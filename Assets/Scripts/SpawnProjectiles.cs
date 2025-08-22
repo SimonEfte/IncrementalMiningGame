@@ -14,6 +14,8 @@ public class SpawnProjectiles : MonoBehaviour
 
     public OverlappingSounds overlappingScript;
 
+    public static int totalDynamitesOnScreen, totalBeamsOnScreen;
+
     #region add rock array
     public static void AddRock(GameObject rock)
     {
@@ -76,6 +78,7 @@ public class SpawnProjectiles : MonoBehaviour
                 beam.transform.position = selectedRock.transform.position;
 
                 AllStats.lightningStrikes += 1;
+                totalBeamsOnScreen += 1;
             }
             else if(projectileType == 3 && SetRockScreen.isInMiningSession == true)
             {
@@ -118,6 +121,7 @@ public class SpawnProjectiles : MonoBehaviour
                 beam.tag = "Beam_PH";
                 beam.transform.position = RockMechanics.beamHitPos;
 
+                totalBeamsOnScreen += 1;
                 AllStats.lightningStrikes += 1;
             }
             else if(projectileType == 5 && SetRockScreen.isInMiningSession == true)
@@ -127,6 +131,7 @@ public class SpawnProjectiles : MonoBehaviour
                 dynamite.transform.position = RockMechanics.dynamiteHitPos;
 
                 AllStats.dynamiteExplosions += 1;
+                totalDynamitesOnScreen += 1;
             }
             else if (projectileType == 6 && SetRockScreen.isInMiningSession == true)
             {
@@ -143,6 +148,7 @@ public class SpawnProjectiles : MonoBehaviour
                 beam.transform.position = selectedRock.transform.position;
 
                 AllStats.lightningStrikes += 1;
+                totalBeamsOnScreen += 1;
             }
             else if (projectileType == 7)
             {
@@ -290,7 +296,7 @@ public class SpawnProjectiles : MonoBehaviour
 
             if (random < (SkillTree.lightningTriggerChanceS * chanceIncrease))
             {
-                if (SetRockScreen.isInMiningSession == true)
+                if (SetRockScreen.isInMiningSession == true || SetRockScreen.isInEnding)
                 {
                     SelectRandomActiveRock(2);
                 }
@@ -318,4 +324,9 @@ public class SpawnProjectiles : MonoBehaviour
         objectToScale.transform.localScale = endScale;
     }
     #endregion
+
+    public void ResetSpanwProjeciles()
+    {
+        StopAllCoroutines();
+    }
 }

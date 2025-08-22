@@ -346,7 +346,9 @@ public class RockMechanics : MonoBehaviour
 
     private void OnEnable()
     {
-        if(isBigRock == true)
+        SetRockScreen.totalRocksOnScreen += 1;
+
+        if (isBigRock == true)
         {
             bigRockFull.SetActive(true);
             bigRockBroken1.SetActive(false);
@@ -418,7 +420,8 @@ public class RockMechanics : MonoBehaviour
             xScaleTo = originalScale.x / 1.06f;
             yScaleTo = originalScale.y / 0.99f;
 
-            rockHp = 250;
+            rockHp = 3500;
+            //rockHp = 150;
 
             bigRock2ThirdHP = rockHp / 3;
             bigRock2ThirdHP *= 2;
@@ -732,11 +735,17 @@ public class RockMechanics : MonoBehaviour
         float posZ = gameObject.transform.localPosition.y;
         float posX = gameObject.transform.localPosition.x;
 
-        rendererObject.sortingOrder = -(int)posZ;
-
         if (isChunks)
         {
-            rendererObject.sortingOrder = -(int)posZ +1;
+           // Vector3 chunkPos = rendererObject.gameObject.transform.localPosition;
+           // rendererObject.sortingOrder = -(int)posZ;
+
+           // rendererObject.gameObject.transform.localPosition = new Vector3(chunkPos.x, chunkPos.y, gameObject.transform.localPosition.z + 1000);
+            rendererObject.sortingOrder = -(int)posZ + 1;
+        }
+        else
+        {
+            rendererObject.sortingOrder = -(int)posZ;
         }
     }
     #endregion
@@ -814,8 +823,11 @@ public class RockMechanics : MonoBehaviour
                 int randomBeamChance = Random.Range(0, 100);
                 if (randomBeamChance < (SkillTree.lightningTriggerChancePH * chanceIncrease))
                 {
-                    beamHitPos = collision.transform.position;
-                    spawnProjectileScript.SelectRandomActiveRock(4);
+                    if(SpawnProjectiles.totalBeamsOnScreen < 17)
+                    {
+                        beamHitPos = collision.transform.position;
+                        spawnProjectileScript.SelectRandomActiveRock(4);
+                    }
                 }
             }
             #endregion
@@ -826,9 +838,11 @@ public class RockMechanics : MonoBehaviour
                 int randomDynamite = Random.Range(0, 100);
                 if (randomDynamite < (SkillTree.dynamiteStickChance * chanceIncrease))
                 {
-                    //Debug.Log(randomDynamite);
-                    dynamiteHitPos = collision.transform.position;
-                    spawnProjectileScript.SelectRandomActiveRock(5);
+                    if (SpawnProjectiles.totalDynamitesOnScreen < 20)
+                    {
+                        dynamiteHitPos = collision.transform.position;
+                        spawnProjectileScript.SelectRandomActiveRock(5);
+                    }
                 }
             }
             #endregion
@@ -914,7 +928,7 @@ public class RockMechanics : MonoBehaviour
         {
             if (collision.gameObject.tag == "Beam_PH")
             {
-                float totalDamage = (TheAnvil.currentMinePower * 1.5f) * SkillTree.lightningDamage;
+                float totalDamage = (TheAnvil.currentMinePower * 2f) * SkillTree.lightningDamage;
 
                 float doubleDamageChance = Random.Range(0, 100);
                 if (isDouble) { if (doubleDamageChance < SkillTree.allProjectileDoubleDamageIncrease) { totalDamage *= 2; } }
@@ -923,7 +937,7 @@ public class RockMechanics : MonoBehaviour
             }
             else if (collision.gameObject.tag == "Beam_S")
             {
-                float totalDamage = (TheAnvil.currentMinePower * 2) * SkillTree.lightningDamage;
+                float totalDamage = (TheAnvil.currentMinePower * 3) * SkillTree.lightningDamage;
 
                 float doubleDamageChance = Random.Range(0, 100);
                 if (isDouble) { if (doubleDamageChance < SkillTree.allProjectileDoubleDamageIncrease) { totalDamage *= 2; } }
@@ -1013,9 +1027,12 @@ public class RockMechanics : MonoBehaviour
         {
             if(isRockBroken == false)
             {
-                AllStats.totalRockMined += 1;
+                Achievements.checkAch = true;
 
                 isRockBroken = true;
+                
+                AllStats.totalRockMined += 1;
+                SetRockScreen.totalRocksOnScreen -= 1;
 
                 float currentTime = Time.time;
                 overlappingScript.PlaySoundRockBreaking(1, currentTime);
@@ -1093,10 +1110,11 @@ public class RockMechanics : MonoBehaviour
                 {
                     if (SkillTree.chanceAdd1SecondEveryRockMined_purchased)
                     {
-                        float random = Random.Range(0, 100);
+                        float random = Random.Range(0f, 100f);
                         if (random < SkillTree.chanceToAdd1SecEveryRockMined)
                         {
                             SetRockScreen.currentTime -= 1;
+                            //Debug.Log("Rock mined +1 sec");
                         }
                     }
 
@@ -1143,7 +1161,14 @@ public class RockMechanics : MonoBehaviour
                         }
                     }
 
-                    ObjectPool.instance.ReturnRockFromPool(gameObject);
+                    if(isBigRock == false)
+                    {
+                        ObjectPool.instance.ReturnRockFromPool(gameObject);
+                    }
+                    else
+                    {
+                        gameObject.SetActive(false);
+                    }
                 }
                 else 
                 {
@@ -1212,7 +1237,10 @@ public class RockMechanics : MonoBehaviour
             text.gameObject.transform.position = new Vector2(gameObject.transform.position.x + randomOffSet, gameObject.transform.position.y + randomYOffset);
         }
 
-        ObjectPool.instance.ReturnRockFromPool(gameObject);
+        if (isBigRock == false)
+        {
+            ObjectPool.instance.ReturnRockFromPool(gameObject);
+        }
     }
     #endregion
 
@@ -1221,7 +1249,7 @@ public class RockMechanics : MonoBehaviour
     {
         for (int i = 0; i < count; i++)
         {
-            if (MineMaterialMechanics.totalTextsOnScreen < 750)
+            if (MineMaterialMechanics.totalTextsOnScreen < 430)
             {
                 GameObject text = ObjectPool.instance.GetTextFromPool();
 
@@ -1412,4 +1440,6 @@ public class RockMechanics : MonoBehaviour
         }
     }
     #endregion
+
+   
 }

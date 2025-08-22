@@ -45,11 +45,16 @@ public class HoverOverIncreaseSize : MonoBehaviour, IPointerEnterHandler, IPoint
     public void OnPointerEnter(PointerEventData eventData)
     {
         xPos = gameObject.transform.localPosition.x;
+
+        if (MobileAndTesting.isMobile == true) { return; }
+
         StartScale(originalScale * scaleMultiplier);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        if (MobileAndTesting.isMobile == true) { return; }
+
         StartScale(originalScale);
     }
 

@@ -32,7 +32,9 @@ public class UIHoverMove : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if(isMenuButtons == true)
+        if (MobileAndTesting.isMobile == true) { return; }
+
+        if (isMenuButtons == true)
         {
             if(isKeepOnMiningBtn == false)
             {
@@ -50,6 +52,8 @@ public class UIHoverMove : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        if (MobileAndTesting.isMobile == true) { return; }
+
         isHoveringBtn = false;
 
         if (isSkillTreeBtn == true) { isHoveringSkillTreeBtn = false; }

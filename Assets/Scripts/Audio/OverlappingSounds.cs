@@ -48,7 +48,7 @@ public class OverlappingSounds : MonoBehaviour
 
         if (soundNumber == 1)
         {
-            float randomPitch = Random.Range(0.82f, 1.08f);
+            float randomPitch = Random.Range(0.94f, 1.25f);
             float randomVolume = Random.Range(0.54f, 0.62f);
 
             pickaxeHitSource.pitch = randomPitch;

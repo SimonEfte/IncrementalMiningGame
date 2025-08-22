@@ -9,6 +9,7 @@ public class TheMine : MonoBehaviour, IDataPersistence
     public GoldAndOreMechanics goldScript;
     public LocalizationScript locScript;
     public AudioManager audioManager;
+    public Achievements achScript;
 
     public GameObject mineProgressBar, mineSpeedBtn, mineOreBtn, lockedMine, purchaseMineBtn;
 
@@ -24,21 +25,69 @@ public class TheMine : MonoBehaviour, IDataPersistence
     public static int barsMined;
     public static int bersMinedIncrease;
 
+    public GameObject tooltipSpeed, tooltipBars, speedBUTTON, barsBUTTON;
+    public Animation tooltip1Anim, tooltip2Anim;
+
+    public Outline btn1Outline, btn2Outline;
+
     private void Awake()
     {
-        mineTimeDecrase = miningTime / 25;
-
-        if (barsMined < 20) { bersMinedIncrease = 2; }
-        else { bersMinedIncrease = 1; }
-
         StartCoroutine(Wait());
     }
 
     IEnumerator Wait()
     {
         yield return new WaitForSeconds(0.1f);
-        
+
+        if(MobileAndTesting.isMobile == true)
+        {
+            btn1Outline.enabled = true;
+            btn2Outline.enabled = true;
+
+            infoTooltipAnim.enabled = false;
+
+            locScript.TheMineTexts(false);
+            locScript.TheMineTexts(true);
+
+            Transform t1 = tooltipSpeed.transform;
+            int currentIndex1 = t1.GetSiblingIndex();
+            if (currentIndex1 > 0)
+            {
+                t1.SetSiblingIndex(currentIndex1 - 2); // move up once
+            }
+
+            Transform t2 = tooltipBars.transform;
+            int currentIndex2 = t2.GetSiblingIndex();
+            if (currentIndex2 > 0)
+            {
+                t2.SetSiblingIndex(currentIndex2 - 2); // move up once
+            }
+
+            tooltip1Anim.enabled = false;
+            tooltip2Anim.enabled = false;
+
+            tooltipSpeed.transform.localScale = new Vector2(0.76f, 0.76f);
+            tooltipSpeed.transform.localPosition = new Vector2(-179, -337);
+
+            tooltipBars.transform.localScale = new Vector2(0.76f, 0.76f);
+            tooltipBars.transform.localPosition = new Vector2(207, -337);
+
+            speedBUTTON.transform.localScale = new Vector2(0.58f, 0.58f);
+            speedBUTTON.transform.localPosition = new Vector2(-178f, -447f);
+
+            barsBUTTON.transform.localScale = new Vector2(0.58f, 0.58f);
+            barsBUTTON.transform.localPosition = new Vector2(207, -447);
+        }
+        else
+        {
+            btn1Outline.enabled = false;
+            btn2Outline.enabled = false;
+        }
+
+        mineTimeDecrase = miningTime / 18f;
+
         UpdateChances();
+
         if (isTheMineUnlocked) { StartCoroutine(Mining()); }
     }
 
@@ -48,6 +97,7 @@ public class TheMine : MonoBehaviour, IDataPersistence
     {
         if (MainMenu.isInTheMine)
         {
+
             string colorName1 = "yo";
             string colorName2 = "yo";
             string colorName3 = "yo";
@@ -79,9 +129,10 @@ public class TheMine : MonoBehaviour, IDataPersistence
                 colorName3 = "<color=red>";
             }
 
-            mineTimePriceText.text = $"Price: {colorName1}{mineTimePrice.ToString("F0")}";
-            mineMaterialPriceText.text = $"Price: {colorName2}{mineMaterialsPrice.ToString("F0")}";
-            theMinePriceText.text = $"Price: {colorName3}{theMinePrice.ToString("F0")}";
+            mineTimePriceText.text = $"{LocalizationScript.price} {colorName1}{FormatNumbers.FormatPoints(mineTimePrice)}";
+            mineMaterialPriceText.text = $"{LocalizationScript.price} {colorName2}{FormatNumbers.FormatPoints(mineMaterialsPrice)}";
+
+            theMinePriceText.text = $"{LocalizationScript.price} {colorName3}{theMinePrice.ToString("F0")}";
         }
     }
 
@@ -183,12 +234,19 @@ public class TheMine : MonoBehaviour, IDataPersistence
     {
         if(GoldAndOreMechanics.totalGoldBars >= theMinePrice)
         {
+            if(MobileAndTesting.isMobile == true)
+            {
+                tooltipSpeed.SetActive(true);
+                tooltipBars.SetActive(true);
+            }
+
             GoldAndOreMechanics.totalGoldBars -= theMinePrice;
             goldScript.SetTotalResourcesText();
 
             audioManager.Play("Click_1");
 
             isTheMineUnlocked = true;
+            achScript.CheckAch();
 
             mineProgressBar.SetActive(true);
             mineSpeedBtn.SetActive(true);
@@ -197,6 +255,10 @@ public class TheMine : MonoBehaviour, IDataPersistence
             lockedMine.SetActive(false);
             purchaseMineBtn.SetActive(false);
             StartCoroutine(Mining());
+        }
+        else
+        {
+            audioManager.Play("CantAfford");
         }
     }
 
@@ -461,14 +523,18 @@ public class TheMine : MonoBehaviour, IDataPersistence
             GoldAndOreMechanics.totalGoldBars -= mineTimePrice;
             goldScript.SetTotalResourcesText();
 
-            mineTimePrice += 12;
+            mineTimePrice *= 1.42f;
 
-            mineTimeDecrase = miningTime / 25;
+            mineTimeDecrase = miningTime / 18f;
 
             miningTime -= mineTimeDecrase;
             audioManager.Play("Click_1");
 
             locScript.TheMineTexts(true);
+        }
+        else
+        {
+            audioManager.Play("CantAfford");
         }
     }
 
@@ -481,13 +547,17 @@ public class TheMine : MonoBehaviour, IDataPersistence
             GoldAndOreMechanics.totalGoldBars -= mineMaterialsPrice;
             goldScript.SetTotalResourcesText();
 
-            mineMaterialsPrice += 12;
+            mineMaterialsPrice *= 1.9f;
 
-            if (barsMined < 20) { bersMinedIncrease = 2; }
-            else { bersMinedIncrease = 1; }
+            bersMinedIncrease = 2;
+
             audioManager.Play("Click_1");
 
             locScript.TheMineTexts(false);
+        }
+        else
+        {
+            audioManager.Play("CantAfford");
         }
     }
 
@@ -521,6 +591,9 @@ public class TheMine : MonoBehaviour, IDataPersistence
 
     public void ResetTheMine()
     {
+        tooltipBars.SetActive(false);
+        tooltipSpeed.SetActive(false);
+
         mineProgressBar.SetActive(false);
         mineSpeedBtn.SetActive(false);
         mineOreBtn.SetActive(false);
@@ -529,15 +602,41 @@ public class TheMine : MonoBehaviour, IDataPersistence
         lockedMine.SetActive(true);
 
         isTheMineUnlocked = false;
-        theMinePrice = 1000;
+        theMinePrice = 500;
 
-        miningTime = 30f;
-        mineTimeDecrase = 1.2f;
-        mineTimePrice = 500;
+        miningTime = 15f;
+        mineTimeDecrase = miningTime / 18;
+        mineTimePrice = 300;
 
         mineMaterialsPrice = 750;
-        barsMined = 4;
+        barsMined = 2;
         bersMinedIncrease = 2;
         StopAllCoroutines();
+    }
+
+    public GameObject infoTooltip;
+    public GameObject closeInfoTooltip, infoTooltipDark;
+    public Animation infoTooltipAnim;
+
+    public void OpenTooltip()
+    {
+        if(MobileAndTesting.isMobile == true)
+        {
+            audioManager.Play("UI_Click1");
+            infoTooltip.transform.localScale = new Vector2(2.1f, 2.1f);
+            infoTooltip.transform.localPosition = new Vector2(0f, 45f);
+
+            infoTooltip.SetActive(true);
+            closeInfoTooltip.SetActive(true);
+            infoTooltipDark.SetActive(true);
+        }
+    }
+
+    public void CloseTooltip()
+    {
+        audioManager.Play("UI_Click1");
+        infoTooltip.SetActive(false);
+        closeInfoTooltip.SetActive(false);
+        infoTooltipDark.SetActive(false);
     }
 }

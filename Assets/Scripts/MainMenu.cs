@@ -13,6 +13,8 @@ public class MainMenu : MonoBehaviour
     public GoldAndOreMechanics goldAndOreScript;
     public Artifacts artifactScript;
     public LevelMechanics levelScript;
+    public TheEnding endingScript;
+    public SpawnProjectiles spawnProjcetilesScript;
 
     public AudioManager audioManager;
 
@@ -46,6 +48,24 @@ public class MainMenu : MonoBehaviour
     public GameObject talentTurotialFrame, theAnvilTutorialFrame, theMineTutorialFrame, artifactTutorialFrame;
     public GameObject allTalentCardsChosenBlockBtn;
 
+    public GameObject exitGameBtn, resetGameBtn, mainMenuBtn;
+
+    public GameObject hexagonColl, squareColl;
+
+    public GameObject totalFlowersObject;
+
+    public GameObject theMineInfoHover;
+
+    public static bool setTreeMiddle;
+
+    public GameObject skillTreeDrag, skillTreeContent;
+
+    public GameObject lockedTalent1, lockedTalent2, lockedTalent3;
+
+    public GameObject theMineTooltip1, theMineTooltip2;
+
+    public Slider zoomSliderMobile;
+
     private void Awake()
     {
         fadeTime = 0f;
@@ -54,9 +74,38 @@ public class MainMenu : MonoBehaviour
     #region Start screen - Press play
     public void PlayGame()
     {
+        SetSkillTree();
         StartCoroutine(ScaleCircleCoroutine(true, true));
     }
     #endregion
+
+    public void SetSkillTree()
+    {
+        if (SkillTree.totalSkillTreeUpgradesPurchased < 10) { SkillTreeDrag.defaultZoom = 2.1f; }
+        else if (SkillTree.totalSkillTreeUpgradesPurchased < 25) { SkillTreeDrag.defaultZoom = 2.1f; }
+        else if (SkillTree.totalSkillTreeUpgradesPurchased < 50) { SkillTreeDrag.defaultZoom = 2f; }
+        else if (SkillTree.totalSkillTreeUpgradesPurchased < 75) { SkillTreeDrag.defaultZoom = 1.95f; }
+        else if (SkillTree.totalSkillTreeUpgradesPurchased < 100) { SkillTreeDrag.defaultZoom = 1.9f; }
+        else if (SkillTree.totalSkillTreeUpgradesPurchased < 125) { SkillTreeDrag.defaultZoom = 1.85f; }
+        else if (SkillTree.totalSkillTreeUpgradesPurchased < 150) { SkillTreeDrag.defaultZoom = 1.8f; }
+        else if (SkillTree.totalSkillTreeUpgradesPurchased < 175) { SkillTreeDrag.defaultZoom = 1.75f; }
+        else if (SkillTree.totalSkillTreeUpgradesPurchased < 200) { SkillTreeDrag.defaultZoom = 1.7f; }
+        else
+        {
+            SkillTreeDrag.defaultZoom = 1.2f;
+        }
+
+        if(MobileAndTesting.isMobile == true)
+        {
+            zoomSliderMobile.value = SkillTreeDrag.defaultZoom;
+        }
+
+        skillTreeDrag.transform.localPosition = new Vector2(0, -53);
+        skillTreeContent.transform.localPosition = new Vector2(0, 0);
+
+        SkillTreeDrag.targetScale = Vector3.one * SkillTreeDrag.defaultZoom;
+        skillTreeDrag.transform.localScale = SkillTreeDrag.targetScale;
+    }
 
     #region Back to main menu
     public void BackToTheMainMenu()
@@ -89,6 +138,8 @@ public class MainMenu : MonoBehaviour
             if (currentScreen == 5) { return; }
         }
 
+        theMineInfoHover.SetActive(false);
+
         UIClickSound();
         CheckMinePopUps();
 
@@ -115,8 +166,23 @@ public class MainMenu : MonoBehaviour
         theMineBtn.sprite = notSelectedSprite;
         artifactsBtn.sprite = notSelectedSprite;
 
+        zoomSliderMobile.gameObject.SetActive(false);
+
+        if (MobileAndTesting.isMobile == true)
+        {
+            theMineTooltip1.SetActive(false);
+            theMineTooltip2.SetActive(false);
+        }
+
         if (screenName == "Upgrades")
         {
+            if(MobileAndTesting.isMobile == true)
+            {
+                zoomSliderMobile.gameObject.SetActive(true);
+            }
+
+            MainMenu.setTreeMiddle = false;
+
             blockRevealTalent.SetActive(false);
 
             dustParticleParent.SetActive(true);
@@ -133,7 +199,12 @@ public class MainMenu : MonoBehaviour
         }
         else if (screenName == "TalentsBtn")
         {
-            if(Tutorial.pressedOkTalent == false && LevelMechanics.level > 0) { talentTurotialFrame.SetActive(true); }
+          
+
+            SetRockScreen.potionPickaxeStats_increase = 0;
+
+            levelScript.SetTalentTexts();
+            if (Tutorial.pressedOkTalent == false && LevelMechanics.level > 0) { talentTurotialFrame.SetActive(true); }
 
             talentBtnExcl.SetActive(false);
 
@@ -158,6 +229,9 @@ public class MainMenu : MonoBehaviour
 
             talentsBtn.sprite = selectedYellowBtn;
             levelUpScreen.SetActive(true); isInTalents = true;
+            levelScript.SetTalentTexts();
+
+         
         }
         else if (screenName == "TheAnvilBtn")
         {
@@ -195,6 +269,8 @@ public class MainMenu : MonoBehaviour
                 theMineTutorialFrame.SetActive(true);
             }
 
+            theMineInfoHover.SetActive(true);
+
             mineBtnExcl.SetActive(false);
 
             blockRevealTalent.SetActive(false);
@@ -207,7 +283,13 @@ public class MainMenu : MonoBehaviour
             currentScreen = 4;
 
             if (TheMine.isTheMineUnlocked == true)
-            { 
+            {
+                if (MobileAndTesting.isMobile == true)
+                {
+                    theMineTooltip1.SetActive(true);
+                    theMineTooltip2.SetActive(true);
+                }
+
                 unlockTheMineBtn.SetActive(false);
                 theMineProgressBar.SetActive(true);
                 theMineMiningSpeedUpgrade.SetActive(true);
@@ -247,6 +329,19 @@ public class MainMenu : MonoBehaviour
         }
 
         theMineScript.UpdateChances();
+
+        if (LevelMechanics.isInChoose1 == false)
+        {
+            lockedTalent1.gameObject.SetActive(true);
+            lockedTalent1.transform.localScale = new Vector3(1, 1, 1);
+            lockedTalent1.transform.localPosition = new Vector3(0, 0, 0);
+            lockedTalent2.gameObject.SetActive(true);
+            lockedTalent2.transform.localScale = new Vector3(1, 1, 1);
+            lockedTalent2.transform.localPosition = new Vector3(0, 0, 0);
+            lockedTalent3.gameObject.SetActive(true);
+            lockedTalent3.transform.localScale = new Vector3(1, 1, 1);
+            lockedTalent3.transform.localPosition = new Vector3(0, 0, 0);
+        }
     }
     #endregion
 
@@ -428,6 +523,15 @@ public class MainMenu : MonoBehaviour
         if (creditsFrame.activeInHierarchy) { return; }
         if (isInTransition) { return; }
         if (pressedKeepOnMining) { return; }
+        if (SkillTree.isInEndlessPopUp) { return; }
+
+        if(MobileAndTesting.isMobile == false)
+        {
+            flags.transform.localScale = new Vector2(0.84f, 0.84f);
+            exitGameBtn.transform.localScale = new Vector2(1.55f, 1.55f);
+            mainMenuBtn.transform.localScale = new Vector2(0.59f, 0.59f);
+            resetGameBtn.transform.localScale = new Vector2(0.59f, 0.59f);
+        }
 
         UIClickSound();
         if (settingsFrame.activeInHierarchy == true) { settingsFrame.SetActive(false); Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto); }
@@ -466,9 +570,25 @@ public class MainMenu : MonoBehaviour
             yield return null;
         }
 
-        if(scaleUp == true && startGame == true)
+        if (SetRockScreen.isInEnding == false)
         {
-            flags.transform.localPosition = new Vector2(-414, -339);
+            if (scaleUp == false)
+            {
+                endingScript.SoundVolumeSet("MainMenuMusic", true, TheEnding.gameMusicFullVolume - 0.3f, TheEnding.gameMusicFullVolume, 0.1f, false);
+            }
+            else
+            {
+                endingScript.SoundVolumeSet("MainMenuMusic", true, TheEnding.gameMusicFullVolume, TheEnding.gameMusicFullVolume - 0.3f, 0.1f, false);
+            }
+        }
+
+        if (scaleUp == true && startGame == true)
+        {
+            if(MobileAndTesting.isMobile == false)
+            {
+                flags.transform.localPosition = new Vector2(-414, -339);
+            }
+
             backToMainMenuBtn.SetActive(true);
 
             startScreenCanvas.SetActive(false);
@@ -516,7 +636,11 @@ public class MainMenu : MonoBehaviour
 
             settingsFrame.SetActive(false);
 
-            flags.transform.localPosition = new Vector2(-426, -431);
+            if (MobileAndTesting.isMobile == false)
+            {
+                flags.transform.localPosition = new Vector2(-426, -431);
+            }
+
             backToMainMenuBtn.SetActive(false);
 
             startScreenCanvas.SetActive(true);
@@ -568,18 +692,27 @@ public class MainMenu : MonoBehaviour
 
     public void UIClickSound()
     {
-        audioManager.Play("UI_Click1");
+        if(isInTransition == false)
+        {
+            audioManager.Play("UI_Click1");
+        }
     }
 
     public GameObject resetFrame;
+
+    public GameObject resetYesBtn, resetNoBtn;
 
     public void ResetBtn(bool open)
     {
         UIClickSound();
 
+        resetYesBtn.transform.localScale = new Vector2(1,1);
+        resetNoBtn.transform.localScale = new Vector2(1, 1);
+
         if (open == true) 
         {
             resetFrame.SetActive(true);
+
         }
         else
         {
@@ -626,6 +759,9 @@ public class MainMenu : MonoBehaviour
             resetFrame.SetActive(false);
 
             //Reset everything
+
+            theMineInfoHover.SetActive(false);
+
             skillTreeScript.ResetSkillTree();
             statsScript.ResetStats();
             artifactScript.ResetArtifacts();
@@ -633,11 +769,14 @@ public class MainMenu : MonoBehaviour
             levelScript.ResetLevel();
             theMineScript.ResetTheMine();
             anvilScript.ResetAnvil();
+            spawnProjcetilesScript.ResetSpanwProjeciles();
+            skillTreeScript.SkillTreePrices();
 
-            talentsBtn.gameObject.SetActive(false);
-            theAnvilBtn.gameObject.SetActive(false);
-            theMineBtn.gameObject.SetActive(false);
-            artifactsBtn.gameObject.SetActive(false);
+            hexagonColl.SetActive(false);
+            squareColl.SetActive(false);
+            totalFlowersObject.gameObject.SetActive(false);
+
+            TheEnding.isEndingCompleted = false;
 
             levelUpScreen.SetActive(false); isInTalents = false;
             anvilScreen.SetActive(false); isInTheAnvil = false;

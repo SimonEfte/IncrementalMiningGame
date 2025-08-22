@@ -55,6 +55,17 @@ public class Tutorial : MonoBehaviour, IDataPersistence
         if (pressedOkAnvil) { theAnvilButton.SetActive(true); }
         if (pressedOkMine) { theMineButton.SetActive(true); }
         if (pressedOkArtifact) { arifactButton.SetActive(true); }
+
+        if(LevelMechanics.level > 1)
+        {
+            talentButton.SetActive(true);
+        }
+
+        if (SkillTree.spawnMoreRocks_3_purchased) { theAnvilButton.SetActive(true); }
+        if (SkillTree.fullGold_1_purchased) { theAnvilButton.SetActive(true); }
+        if (SkillTree.improvedPickaxe_1_purchased) { theAnvilButton.SetActive(true); }
+
+        if (SkillTree.spawnCopper_purchased) { theMineButton.SetActive(true); }
     }
 
     public void SetTutorial(int tutorialNumber)
@@ -91,7 +102,9 @@ public class Tutorial : MonoBehaviour, IDataPersistence
     {
         audioManager.Play("UI_Click1");
 
-        if(tutorialNumber == 0)
+        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+
+        if (tutorialNumber == 0)
         {
             miningSessionTutorialFrame.SetActive(false);
             pressedOkMiningSession = true;

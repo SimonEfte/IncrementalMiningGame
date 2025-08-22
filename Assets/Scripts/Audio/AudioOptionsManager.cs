@@ -15,13 +15,13 @@ public class AudioOptionsManager : MonoBehaviour
     {
         if (!PlayerPrefs.HasKey("saveAudio"))
         {
-            audioSlider.value = 0.6f;
+            audioSlider.value = 0.5f;
         }
         else { audioSlider.value = PlayerPrefs.GetFloat("saveAudio"); }
 
         if (!PlayerPrefs.HasKey("saveMusic"))
         {
-            musicSlider.value = 0.6f;
+            musicSlider.value = 0.5f;
         }
         else { musicSlider.value = PlayerPrefs.GetFloat("saveMusic"); }
 

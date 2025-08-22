@@ -33,13 +33,47 @@ public class GoldAndOreMechanics : MonoBehaviour, IDataPersistence
         StartCoroutine(Wait());
     }
 
+    bool checkUpdate;
+
     IEnumerator Wait()
     {
+        checkUpdate = false;
         yield return new WaitForSeconds(0.1f);
 
         //totalGoldBars = 10000;
 
         SetTotalResourcesText();
+
+        yield return new WaitForSeconds(1f);
+
+        //totalGoldBars = 1000000000;
+        //totalGoldBars = 93;
+        //totalIronBars = 1000000000;
+        //totalCopperBars = 1000000000;
+        // totalCobaltBars = 1000000000;
+        // totalUraniumBars = 1000000000;
+        // totalIsmiumBar = 1000000000;
+        // totalIridiumBars = 1000000000;
+        // totalPainiteBars = 1000000000;
+
+        //totalGoldBars += 0.494f;
+
+        checkUpdate = true;
+    }
+
+    private void Update()
+    {
+        if(checkUpdate == true)
+        {
+            if (totalGoldBars < 0) { totalGoldBars = 0; }
+            if (totalCopperBars < 0) { totalCopperBars = 0; }
+            if (totalIronBars < 0) { totalIronBars = 0; }
+            if (totalCobaltBars < 0) { totalCobaltBars = 0; }
+            if (totalUraniumBars < 0) { totalUraniumBars = 0; }
+            if (totalIsmiumBar < 0) { totalIsmiumBar = 0; }
+            if (totalIridiumBars < 0) { totalIridiumBars = 0; }
+            if (totalPainiteBars < 0) { totalPainiteBars = 0; }
+        }
     }
 
     public void GiveMaterialOre(int materialType, int materialAmount)
@@ -94,45 +128,45 @@ public class GoldAndOreMechanics : MonoBehaviour, IDataPersistence
         float totalIncrease = SkillTree.materialsTotalWorth + SetRockScreen.potionMaterialWorthMore_increase;
 
         switch (materialType)
-        { 
+        {
             case 1: // Gold
                 totalGoldore += materialAmount * totalIncrease;
-                goldText_MineScreen.text = totalGoldore.ToString("F0");
+                goldText_MineScreen.text = FormatNumbers.FormatPoints(totalGoldore);
                 break;
 
             case 2: // Copper
                 totalCopperOre += materialAmount * totalIncrease;
-                copperText_MineScreen.text = totalCopperOre.ToString("F0");
+                copperText_MineScreen.text = FormatNumbers.FormatPoints(totalCopperOre);
                 break;
 
             case 3: // Silver
                 totalIronOre += materialAmount * totalIncrease;
-                ironText_MineScreen.text = totalIronOre.ToString("F0");
+                ironText_MineScreen.text = FormatNumbers.FormatPoints(totalIronOre);
                 break;
 
             case 4: // Cobalt
                 totalCobaltOre += materialAmount * totalIncrease;
-                cobaltText_MineScreen.text = totalCobaltOre.ToString("F0");
+                cobaltText_MineScreen.text = FormatNumbers.FormatPoints(totalCobaltOre);
                 break;
 
             case 5: // Uranium
                 totalUraniumOre += materialAmount * totalIncrease;
-                uraniumText_MineScreen.text = totalUraniumOre.ToString("F0");
+                uraniumText_MineScreen.text = FormatNumbers.FormatPoints(totalUraniumOre);
                 break;
 
             case 6: // Ismium
                 totalIsmiumOre += materialAmount * totalIncrease;
-                ismiumText_MineScreen.text = totalIsmiumOre.ToString("F0");
+                ismiumText_MineScreen.text = FormatNumbers.FormatPoints(totalIsmiumOre);
                 break;
 
             case 7: // Iridium
                 totalIridiumOre += materialAmount * totalIncrease;
-                iridiumText_MineScreen.text = totalIridiumOre.ToString("F0");
+                iridiumText_MineScreen.text = FormatNumbers.FormatPoints(totalIridiumOre);
                 break;
 
             case 8: // Painite
                 totalPainiteOre += materialAmount * totalIncrease;
-                painiteText_MineScreen.text = totalPainiteOre.ToString("F0");
+                painiteText_MineScreen.text = FormatNumbers.FormatPoints(totalPainiteOre);
                 break;
         }
 
@@ -146,7 +180,7 @@ public class GoldAndOreMechanics : MonoBehaviour, IDataPersistence
         switch (materialType)
         {
             case 1: // Gold
-                totalGoldBars += materialAmount * totalIncrease;
+                totalGoldBars += materialAmount * totalIncrease; 
                 ScaleTotalGoldText(goldBarText_mainMenu);
                 break;
 
@@ -198,14 +232,14 @@ public class GoldAndOreMechanics : MonoBehaviour, IDataPersistence
 
     public void SetTotalResourcesText()
     {
-        goldBarText_mainMenu.text = totalGoldBars.ToString("F0");
-        copperBarText_mainMenu.text = totalCopperBars.ToString("F0");
-        ironBarText_mainMenu.text = totalIronBars.ToString("F0");
-        cobaltBarText_mainMenu.text = totalCobaltBars.ToString("F0");
-        uraniumBarText_mainMenu.text = totalUraniumBars.ToString("F0");
-        ismiumBarText_mainMenu.text = totalIsmiumBar.ToString("F0");
-        iridiumBarText_mainMenu.text = totalIridiumBars.ToString("F0");
-        painiteBarText_mainMenu.text = totalPainiteBars.ToString("F0");
+        goldBarText_mainMenu.text = FormatNumbers.FormatPoints(totalGoldBars);
+        copperBarText_mainMenu.text = FormatNumbers.FormatPoints(totalCopperBars);
+        ironBarText_mainMenu.text = FormatNumbers.FormatPoints(totalIronBars);
+        cobaltBarText_mainMenu.text = FormatNumbers.FormatPoints(totalCobaltBars);
+        uraniumBarText_mainMenu.text = FormatNumbers.FormatPoints(totalUraniumBars);
+        ismiumBarText_mainMenu.text = FormatNumbers.FormatPoints(totalIsmiumBar);
+        iridiumBarText_mainMenu.text = FormatNumbers.FormatPoints(totalIridiumBars);
+        painiteBarText_mainMenu.text = FormatNumbers.FormatPoints(totalPainiteBars);
     }
 
     #region Scale gold text an anim
@@ -336,15 +370,75 @@ public class GoldAndOreMechanics : MonoBehaviour, IDataPersistence
 
     public void ResetBars()
     {
-        totalGoldBars = 0;
-        totalCopperBars = 0;
-        totalIronBars = 0;
-        totalCobaltBars = 0;
-        totalUraniumBars = 0;
-        totalIsmiumBar = 0;
-        totalIridiumBars = 0;
-        totalPainiteBars = 0;
+        totalGoldBars = 0.494f;
+        totalCopperBars = 0.494f;
+        totalIronBars = 0.494f;
+        totalCobaltBars = 0.494f;
+        totalUraniumBars = 0.494f;
+        totalIsmiumBar = 0.494f;
+        totalIridiumBars = 0.494f;
+        totalPainiteBars = 0.494f;
 
         SetTotalResourcesText();
+    }
+
+    public void TestingButtons(int buttonType)
+    {
+        if(buttonType == 1)
+        {
+            totalGoldBars += 2000;
+        }
+        else if (buttonType == 2)
+        {
+            totalGoldBars += 100000;
+        }
+        else if (buttonType == 3)
+        {
+            totalGoldBars += 1000;
+            totalIronBars += 1000;
+            totalCopperBars += 1000;
+            totalCobaltBars += 1000;
+            totalUraniumBars += 1000;
+            totalIsmiumBar += 1000;
+            totalIridiumBars += 1000;
+            totalPainiteBars += 1000;
+        }
+        else if (buttonType == 4)
+        {
+            totalGoldBars += 100000;
+            totalIronBars += 100000;
+            totalCopperBars += 100000;
+            totalCobaltBars += 100000;
+            totalUraniumBars += 100000;
+            totalIsmiumBar += 100000;
+            totalIridiumBars += 100000;
+            totalPainiteBars += 100000;
+        }
+        else if (buttonType == 5)
+        {
+            totalGoldBars += 1000000;
+            totalIronBars += 1000000;
+            totalCopperBars += 1000000;
+            totalCobaltBars += 1000000;
+            totalUraniumBars += 1000000;
+            totalIsmiumBar += 1000000;
+            totalIridiumBars += 1000000;
+            totalPainiteBars += 1000000;
+        }
+        else if (buttonType == 6)
+        {
+            LevelMechanics.totalTalentPoints += 10;
+        }
+        else
+        {
+            totalGoldBars = 0;
+            totalIronBars = 0;
+            totalCopperBars = 0;
+            totalCobaltBars = 0;
+            totalUraniumBars = 0;
+            totalIsmiumBar = 0;
+            totalIridiumBars = 0;
+            totalPainiteBars = 0;
+        }
     }
 }

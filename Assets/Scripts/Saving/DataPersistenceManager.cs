@@ -35,6 +35,16 @@ public class DataPersistenceManager : MonoBehaviour
         instance = this;
 
         StartCoroutine(WaitForSaveStuff());
+        StartCoroutine(AutoSave());
+    }
+
+    IEnumerator AutoSave()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(5);
+            SaveGame();
+        }
     }
 
     bool saveForMobile;

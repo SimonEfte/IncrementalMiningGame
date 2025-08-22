@@ -41,6 +41,8 @@ public class SkillTreeUpgradeClick : MonoBehaviour, IPointerDownHandler, IPointe
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        if (MobileAndTesting.isMobile == true) { return; }
+
         if (btn.enabled == true) 
         {
             if (clickAnim.isPlaying)

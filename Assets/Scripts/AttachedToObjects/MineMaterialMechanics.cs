@@ -186,9 +186,9 @@ public class MineMaterialMechanics : MonoBehaviour
         //Scale from 0 to randomTexTSize
         while (Time.time < scaleEndTime)
         {
-            if (SetRockScreen.isInMiningSession == false && isMinePopUp == false)
+            if (SetRockScreen.isInMiningSession == false && isRocksMaterialPopUp == true)
             {
-                if (SetRockScreen.timeLeft < 5) { scaleEndTime = 0.1f; }
+                if (SetRockScreen.timeLeft < 5) { scaleEndTime = 0.02f; }
             }
 
             float t = (Time.time - scaleStartTime) / (scaleEndTime - scaleStartTime);
@@ -198,17 +198,21 @@ public class MineMaterialMechanics : MonoBehaviour
 
         float randomWait2 = 0;
 
-        if (SetRockScreen.timeLeft < 1f && isRocksMaterialPopUp == true) 
+        if (SetRockScreen.isInMiningSession == false && isRocksMaterialPopUp == true)
         {
-            randomWait2 = Random.Range(0.02f, 0.05f);
+            randomWait2 = Random.Range(0.005f, 0.007f);
         }
-        if (SetRockScreen.timeLeft < 2f && isRocksMaterialPopUp == true)
+        else if (SetRockScreen.timeLeft < 1f && isRocksMaterialPopUp == true) 
         {
-            randomWait2 = Random.Range(0.07f, 0.15f);
+            randomWait2 = Random.Range(0.01f, 0.02f);
+        }
+        else if (SetRockScreen.timeLeft < 2f && isRocksMaterialPopUp == true)
+        {
+            randomWait2 = Random.Range(0.09f, 0.15f);
         }
         else if (SetRockScreen.timeLeft < 3f && isRocksMaterialPopUp == true)
         {
-            randomWait2 = Random.Range(0.08f, 0.45f);
+            randomWait2 = Random.Range(0.1f, 0.45f);
         }
         else
         {
@@ -219,16 +223,20 @@ public class MineMaterialMechanics : MonoBehaviour
 
         // Move towards goldCountFrame
         float moveDuration = Random.Range(0.25f, 0.4f);
-        if (SetRockScreen.timeLeft < 3 && isRocksMaterialPopUp == true) { moveDuration = Random.Range(0.07f, 0.12f); }
+        if (SetRockScreen.timeLeft < 1 && isRocksMaterialPopUp == true) { moveDuration = Random.Range(0.02f, 0.03f); }
+        else if (SetRockScreen.timeLeft < 2 && isRocksMaterialPopUp == true) { moveDuration = Random.Range(0.1f, 0.16f); }
+        else if (SetRockScreen.timeLeft < 3 && isRocksMaterialPopUp == true) { moveDuration = Random.Range(0.14f, 0.2f); }
+
         if (SetRockScreen.isInMiningSession == false)
         {
-            moveDuration = 0.015f;
+            moveDuration = 0.006f;
 
             if (isMinePopUp == true) { moveDuration = Random.Range(0.25f, 0.4f); }
         }
 
         Vector3 startPosition = gameObject.transform.position;
         Vector3 endPosition = new Vector3(0,0,0);
+
         if(isMinePopUp == true)
         {
             if (isGoldBar) endPosition = totalGoldFrame.transform.position;
@@ -279,14 +287,17 @@ public class MineMaterialMechanics : MonoBehaviour
 
             if (isRocksMaterialPopUp == true)
             {
-                if (isGoldOre == true) { goldScript.GiveMaterialOre(1, 1); goldScript.ScaleGoldAnim(1); }
-                else if (isCopperOre == true) { goldScript.GiveMaterialOre(2, 1); goldScript.ScaleGoldAnim(2); }
-                else if (isIronOre == true) { goldScript.GiveMaterialOre(3, 1); goldScript.ScaleGoldAnim(3); }
-                else if (isCobaltOre == true) { goldScript.GiveMaterialOre(4, 1); goldScript.ScaleGoldAnim(4); }
-                else if (isUraniumOre == true) { goldScript.GiveMaterialOre(5, 1); goldScript.ScaleGoldAnim(5); }
-                else if (isIsmiumOre == true) { goldScript.GiveMaterialOre(6, 1); goldScript.ScaleGoldAnim(6); }
-                else if (isIridumOre == true) { goldScript.GiveMaterialOre(7, 1); goldScript.ScaleGoldAnim(7); }
-                else if (isPainiteOre == true) { goldScript.GiveMaterialOre(8, 1); goldScript.ScaleGoldAnim(8); }
+                if(SetRockScreen.oresPopedUp == false)
+                {
+                    if (isGoldOre == true) { goldScript.GiveMaterialOre(1, 1); goldScript.ScaleGoldAnim(1); }
+                    else if (isCopperOre == true) { goldScript.GiveMaterialOre(2, 1); goldScript.ScaleGoldAnim(2); }
+                    else if (isIronOre == true) { goldScript.GiveMaterialOre(3, 1); goldScript.ScaleGoldAnim(3); }
+                    else if (isCobaltOre == true) { goldScript.GiveMaterialOre(4, 1); goldScript.ScaleGoldAnim(4); }
+                    else if (isUraniumOre == true) { goldScript.GiveMaterialOre(5, 1); goldScript.ScaleGoldAnim(5); }
+                    else if (isIsmiumOre == true) { goldScript.GiveMaterialOre(6, 1); goldScript.ScaleGoldAnim(6); }
+                    else if (isIridumOre == true) { goldScript.GiveMaterialOre(7, 1); goldScript.ScaleGoldAnim(7); }
+                    else if (isPainiteOre == true) { goldScript.GiveMaterialOre(8, 1); goldScript.ScaleGoldAnim(8); }
+                }
 
                 totalTextsOnScreen -= 1;
 
@@ -314,14 +325,17 @@ public class MineMaterialMechanics : MonoBehaviour
     {
         if (isMinePopUp)
         {
-            if (isGoldBar == true) { goldScript.GiveGoldBar(1, 1); }
-            else if (isCopperBar == true) { goldScript.GiveGoldBar(1, 2); }
-            else if (isIronBar == true) { goldScript.GiveGoldBar(1, 3); }
-            else if (isCobaltBar == true) { goldScript.GiveGoldBar(1, 4); }
-            else if (isUraniumBar == true) { goldScript.GiveGoldBar(1, 5); }
-            else if (isIsmiumBar == true) { goldScript.GiveGoldBar(1, 6); }
-            else if (isIridumBar == true) { goldScript.GiveGoldBar(1, 7); }
-            else if (isPainiteBar == true) { goldScript.GiveGoldBar(1, 8); }
+            if(MainMenu.isInTheMine == false)
+            {
+                if (isGoldBar == true) { goldScript.GiveGoldBar(1, 1); }
+                else if (isCopperBar == true) { goldScript.GiveGoldBar(1, 2); }
+                else if (isIronBar == true) { goldScript.GiveGoldBar(1, 3); }
+                else if (isCobaltBar == true) { goldScript.GiveGoldBar(1, 4); }
+                else if (isUraniumBar == true) { goldScript.GiveGoldBar(1, 5); }
+                else if (isIsmiumBar == true) { goldScript.GiveGoldBar(1, 6); }
+                else if (isIridumBar == true) { goldScript.GiveGoldBar(1, 7); }
+                else if (isPainiteBar == true) { goldScript.GiveGoldBar(1, 8); }
+            }
         }
 
         if(isDisabled == false)

@@ -17,7 +17,7 @@ public class SteamIntgr : MonoBehaviour
         {
             try
             {
-                Steamworks.SteamClient.Init(3769130);
+                //Steamworks.SteamClient.Init(3769130);
             }
             catch (System.Exception e)
             {
@@ -30,7 +30,7 @@ public class SteamIntgr : MonoBehaviour
     {
         if (noSteamInt == false)
         {
-            Steamworks.SteamClient.RunCallbacks();
+            //Steamworks.SteamClient.RunCallbacks();
         }
     }
 
@@ -38,7 +38,7 @@ public class SteamIntgr : MonoBehaviour
     {
         if (noSteamInt == false)
         {
-            Steamworks.SteamClient.Shutdown();
+            //Steamworks.SteamClient.Shutdown();
         }
     }
 }

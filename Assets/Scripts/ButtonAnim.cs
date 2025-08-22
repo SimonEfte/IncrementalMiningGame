@@ -16,6 +16,7 @@ public class ButtonAnim : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        if (MobileAndTesting.isMobile == true) { return; }
         anim.Play();
     }
 

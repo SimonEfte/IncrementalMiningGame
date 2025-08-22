@@ -14,6 +14,8 @@ public class SetRockScreen : MonoBehaviour
     public TheAnvil anvilScript;
     public AudioManager audioManager;
     public Tutorial tutorialScript;
+    public TheEnding endingScript;
+    public Achievements achScript;
 
     public GameObject dustParticleParent;
     public GameObject goldenHand, normalCursorHand;
@@ -31,7 +33,7 @@ public class SetRockScreen : MonoBehaviour
 
     public static int tileWaveNumber;
 
-    public GameObject handCollider, handCollider_actualCollider;
+    public GameObject handCollider, handCollider_actualCollider, hexagonCollider_actualCollider, squareCollider_actualCollider;
 
     public static float rockZPos;
 
@@ -45,11 +47,22 @@ public class SetRockScreen : MonoBehaviour
 
     public static bool spawnedGoldenChest, doSpawnGoldenChest;
 
-    public GameObject circleColl, triangleColl, squareColl, hexagonColl;
+    public GameObject circleColl, squareColl, hexagonColl;
     public Camera mainCamera;
+
+    public static int totalRocksOnScreen;
+    public static int grassLayer;
+
+    public static bool oresPopedUp;
+
 
     private void Awake()
     {
+        circleObject.transform.localScale = new Vector2(24, 24);
+        circleObject.SetActive(true);
+
+        grassLayer = -346;
+
         mainCamera = Camera.main;
 
         rockZPos = 100;
@@ -68,20 +81,48 @@ public class SetRockScreen : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if(MobileAndTesting.isMobile == true)
         {
-            Debug.Log(MineMaterialMechanics.totalTextsOnScreen);
+            normalCursorHand.SetActive(false);
+                
         }
 
-        Vector3 mouseScreenPosition = Input.mousePosition;
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            //Debug.Log(SpawnProjectiles.totalDynamitesOnScreen);
+        }
+
         Vector3 worldPosition = Vector3.zero;
 
-        // Convert the screen position to world position
-        worldPosition = mainCamera.ScreenToWorldPoint(new Vector3(
-           mouseScreenPosition.x,
-           mouseScreenPosition.y,
-           mainCamera.nearClipPlane // Or a fixed distance from the camera
-       ));
+        if (MobileAndTesting.isMobile == false)
+        {
+            Vector3 mouseScreenPosition = Input.mousePosition;
+
+            // Convert the screen position to world position
+            worldPosition = mainCamera.ScreenToWorldPoint(new Vector3(
+               mouseScreenPosition.x,
+               mouseScreenPosition.y,
+               mainCamera.nearClipPlane // Or a fixed distance from the camera
+           ));
+        }
+        else
+        {
+            // Mobile input using touch
+            if (Input.touchCount > 0)
+            {
+                Touch touch = Input.GetTouch(0);
+                Vector3 touchScreenPosition = touch.position;
+                worldPosition = mainCamera.ScreenToWorldPoint(new Vector3(
+                    touchScreenPosition.x,
+                    touchScreenPosition.y,
+                    mainCamera.nearClipPlane + 10f
+                ));
+            }
+            else
+            {
+                return; // No touch input detected
+            }
+        }
 
         float scaleIncrease = 1 + LevelMechanics.inflationBurstIncrease;
 
@@ -89,15 +130,21 @@ public class SetRockScreen : MonoBehaviour
 
         if(LevelMechanics.isDoubleAreaSize == true && SkillTree.increaseAndDecreaseMinignErea_purchased == false)
         {
-            handCollider_actualCollider.transform.localScale = new Vector2(TheAnvil.currentMiningErea * scaleIncrease, TheAnvil.currentMiningErea * scaleIncrease);
+            handCollider_actualCollider.transform.localScale = new Vector2(TheAnvil.currentColliderSize * scaleIncrease, TheAnvil.currentColliderSize * scaleIncrease);
+            hexagonCollider_actualCollider.transform.localScale = new Vector2(TheAnvil.currentColliderSize * scaleIncrease, TheAnvil.currentColliderSize * scaleIncrease);
+            squareCollider_actualCollider.transform.localScale = new Vector2(TheAnvil.currentColliderSize * scaleIncrease, TheAnvil.currentColliderSize * scaleIncrease);
         }
         else if(LevelMechanics.isDoubleAreaSize == false && SkillTree.increaseAndDecreaseMinignErea_purchased == false)
         {
-            handCollider_actualCollider.transform.localScale = new Vector2(TheAnvil.currentMiningErea, TheAnvil.currentMiningErea);
+            handCollider_actualCollider.transform.localScale = new Vector2(TheAnvil.currentColliderSize, TheAnvil.currentColliderSize);
+            hexagonCollider_actualCollider.transform.localScale = new Vector2(TheAnvil.currentColliderSize, TheAnvil.currentColliderSize);
+            squareCollider_actualCollider.transform.localScale = new Vector2(TheAnvil.currentColliderSize, TheAnvil.currentColliderSize);
         }
         else if(LevelMechanics.isDoubleAreaSize == false && SkillTree.increaseAndDecreaseMinignErea_purchased == true)
         {
-            handCollider_actualCollider.transform.localScale = new Vector2(TheAnvil.currentMiningErea, TheAnvil.currentMiningErea);
+            handCollider_actualCollider.transform.localScale = new Vector2(TheAnvil.currentColliderSize, TheAnvil.currentColliderSize);
+            hexagonCollider_actualCollider.transform.localScale = new Vector2(TheAnvil.currentColliderSize, TheAnvil.currentColliderSize);
+            squareCollider_actualCollider.transform.localScale = new Vector2(TheAnvil.currentColliderSize, TheAnvil.currentColliderSize);
         }
         else
         {
@@ -132,7 +179,7 @@ public class SetRockScreen : MonoBehaviour
             GameObject tile = ObjectPool.instance.GetTileFromPool();
 
             tile.transform.SetParent(tileRow[parentFilled].transform);
-            tile.transform.localScale = new Vector2(60,60);
+            tile.transform.localScale = new Vector2(61.5f,61.5f);
 
             tileZPos -= 0.1f;
             Vector3 spawnPos = new Vector3(startPos.x, startPos.y, tileZPos);
@@ -153,11 +200,14 @@ public class SetRockScreen : MonoBehaviour
                 startPos = new Vector2(1160, 330);
             }
 
-            yield return null;
+            //yield return null;
         }
 
-        Debug.Log("All tiles spawned");
-        //StartCoroutine(SpawnRocks());
+        yield return new WaitForSeconds(0.1f);
+
+       // Debug.Log("All tiles spawned");
+       
+        StartCoroutine(ScaleCircleCoroutine(false));
 
         if(MobileAndTesting.isTesting == true) { StartCoroutine(TileWaveAnim()); }
     }
@@ -173,6 +223,10 @@ public class SetRockScreen : MonoBehaviour
 
     IEnumerator TileWaveAnim()
     {
+        oresPopedUp = false;
+        SpawnProjectiles.totalDynamitesOnScreen = 0;
+        SpawnProjectiles.totalBeamsOnScreen = 0;
+        totalRocksOnScreen = 0;
         LevelMechanics.xpThisRound = 0;
 
         spawnedGoldenChest = false;
@@ -181,7 +235,7 @@ public class SetRockScreen : MonoBehaviour
         if (LevelMechanics.goldenChests_chosen)
         {
             int random = Random.Range(0,2);
-            if(random == 0) { doSpawnGoldenChest = true; Debug.Log("Spawn"); }
+            if(random == 0) { doSpawnGoldenChest = true;  }
         }
 
         Artifacts.horn_spawned = false; Artifacts.ancientDevice_spawned = false; Artifacts.bone_spawned = false; Artifacts.meteorieOre_spawned = false; Artifacts.book_spawned = false; Artifacts.goldStack_spawned = false; Artifacts.goldRing_spawned = false; Artifacts.purpleRing_spawned = false; Artifacts.ancientDice_spawned = false; Artifacts.cheese_spawned = false; Artifacts.wolfClaw_spawned = false; Artifacts.axe_spawned = false; Artifacts.rune_spawned = false; Artifacts.skull_spawned = false;
@@ -288,6 +342,7 @@ public class SetRockScreen : MonoBehaviour
     public void SpawnRockCount(int count)
     {
         if(isInEnding == true) { return; }
+        if(totalRocksOnScreen > 450) { return; }
 
         for (int i = 0; i < count; i++)
         {
@@ -354,9 +409,15 @@ public class SetRockScreen : MonoBehaviour
       
         isInMiningSession = true;
         Cursor.visible = false;
+
         handCollider.SetActive(true);
 
-        if(SkillTree.lightningBeamChanceS_1_purchased || SkillTree.lightningBeamChanceS_2_purchased)
+        if (MobileAndTesting.isMobile == true)
+        {
+            handCollider.transform.localPosition = new Vector2(-1439, 900);
+        }
+
+        if (SkillTree.lightningBeamChanceS_1_purchased || SkillTree.lightningBeamChanceS_2_purchased)
         {
             spawnProjectilesScript.SpawnLightningS();
         }
@@ -471,12 +532,20 @@ public class SetRockScreen : MonoBehaviour
     {
         if (miningStarted == true)
         { 
-            textFrameText.text = "<bounce>START MINING!</bounce>";
-            audioManager.Play("StartMining"); 
+            textFrameText.text = $"<bounce>{LocalizationScript.startMining}</bounce>";
+            audioManager.Play("StartMining");
+
+            if (SkillTree.lightningBeamChanceS_1_purchased || SkillTree.lightningBeamChanceS_2_purchased)
+            {
+                if(isInEnding == true)
+                {
+                    spawnProjectilesScript.SpawnLightningS();
+                }
+            }
         }
         else 
         { 
-            textFrameText.text = "<wave>OUT OF TIME!</wave>"; handCollider.SetActive(false);
+            textFrameText.text = $"<wave>{LocalizationScript.outOfTime}</wave>"; handCollider.SetActive(false);
             audioManager.Play("OutOfTime");
         }
 
@@ -492,12 +561,18 @@ public class SetRockScreen : MonoBehaviour
             textFrameAnim.Play("TextFrameAnimDown");
         }
 
-        yield return new WaitForSeconds(0.25f);
+        if (miningStarted == true) { yield return new WaitForSeconds(0.25f); }
+        else { yield return new WaitForSeconds(0.37f); }
 
         textFrameAnim.gameObject.SetActive(false);
         textFrameText.gameObject.SetActive(false);
 
-        if(pressEnding == true) { handCollider.SetActive(true); isInMiningSession = true; }
+        if(pressEnding == true) 
+        { 
+            handCollider.SetActive(true); 
+            isInMiningSession = true; 
+            Cursor.visible = false;
+        }
 
         if (miningStarted == true) {}
         else { StartCoroutine(OpenTimeIsOutFrame()); }
@@ -516,6 +591,8 @@ public class SetRockScreen : MonoBehaviour
         StartCoroutine(ScaleCircleDownAgain(backToUpgrade));
         if(backToUpgrade == true)
         {
+            mainMenuScript.SetSkillTree();
+
             MainMenu.pressedKeepOnMining = false;
             MainMenu.currentScreen = 0;
             mainMenuScript.SelectScreen("Upgrades");
@@ -546,28 +623,89 @@ public class SetRockScreen : MonoBehaviour
             if (LevelMechanics.springSeason_chosen) { SetFlowers(); }
             if (LevelMechanics.camper_chosen)
             {
-                float random = Random.Range(0f, 100f);
-                if(random < 50) { SetCampfire(); }
+                SetCampfire();
+            }
+            else
+            {
+                campfire.SetActive(false);
             }
 
             if (LevelMechanics.goldenTouch_chosen)
             {
+                circleNormal.SetActive(true);
+                circleGold.SetActive(false);
+                hexagonNormal.SetActive(true);
+                hexagonGold.SetActive(false);
+                squareNormal.SetActive(true);
+                squareGold.SetActive(false);
+
                 float random = Random.Range(0f,100f);
                 if(random < LevelMechanics.midasTouchChance)
                 {
                     AllStats.midasTouchSessions += 1;
-                    goldenHand.SetActive(true);
-                    normalCursorHand.SetActive(false);
+
+                    if (MobileAndTesting.isMobile == true)
+                    {
+                        normalCursorHand.SetActive(false);
+                    }
+                    else
+                    {
+                        normalCursorHand.SetActive(true);
+                    }
+
                     isGoldenHand = true;
+
+                    if (MobileAndTesting.isMobile == true)
+                    {
+                        circleNormal.SetActive(false);
+                        circleGold.SetActive(true);
+                        hexagonNormal.SetActive(false);
+                        hexagonGold.SetActive(true);
+                        squareNormal.SetActive(false);
+                        squareGold.SetActive(true);
+                        goldenHand.SetActive(false);
+                    }
+                    else
+                    {
+                        goldenHand.SetActive(true);
+                    }
                 }
                 else
                 {
-                    normalCursorHand.SetActive(true);
-                    goldenHand.SetActive(false); isGoldenHand = false;
+                    if(MobileAndTesting.isMobile == true)
+                    {
+                        normalCursorHand.SetActive(false);
+                    }
+                    else
+                    {
+                        normalCursorHand.SetActive(true);
+                    }
+
+                    if (MobileAndTesting.isMobile == true)
+                    {
+                        goldenHand.SetActive(false);
+                    }
+                    else
+                    {
+                        goldenHand.SetActive(true);
+                    }
+
+                    isGoldenHand = false;
                 }
-              
             }
-            else { goldenHand.SetActive(false); isGoldenHand = false; }
+            else 
+            {
+                if (MobileAndTesting.isMobile == true)
+                {
+                    goldenHand.SetActive(false);
+                }
+                else
+                {
+                    goldenHand.SetActive(true);
+                }
+
+                isGoldenHand = false; 
+            }
 
             tileWaveNumber = 0;
 
@@ -621,9 +759,35 @@ public class SetRockScreen : MonoBehaviour
             yield return null;
         }
 
+        if(isInEnding == false)
+        {
+            if (scaleUp == false)
+            {
+                endingScript.SoundVolumeSet("MainMenuMusic", true, TheEnding.gameMusicFullVolume - 0.3f, TheEnding.gameMusicFullVolume, 0.1f, false);
+            }
+            else
+            {
+                endingScript.SoundVolumeSet("MainMenuMusic", true, TheEnding.gameMusicFullVolume, TheEnding.gameMusicFullVolume - 0.3f, 0.1f, false);
+            }
+        }
+
+        if(pressEnding == true)
+        {
+            audioManager.Play("CreditsMusic");
+            endingScript.SoundVolumeSet("CreditsMusic", false, 0, 0, 0.1f, false);
+        }
+
         if (scaleUp) 
         {
             ResetBetweenTransitions();
+
+            copperOreFrame.SetActive(false);
+            ironOreFrame.SetActive(false);
+            cobaltOreFrame.SetActive(false);
+            uraniumOre_frame.SetActive(false);
+            ismiumOre_frame.SetActive(false);
+            iridiumOre_frame.SetActive(false);
+            painiteOre_frame.SetActive(false);
 
             if (SkillTree.spawnCopper_purchased == true) { copperOreFrame.SetActive(true); }
             if (SkillTree.spawnIron_purchased == true) { ironOreFrame.SetActive(true); }
@@ -649,6 +813,10 @@ public class SetRockScreen : MonoBehaviour
             transitionBlock.SetActive(false);
             circleObject.SetActive(false);
             MainMenu.isInTransition = false;
+        }
+        else
+        {
+         
         }
     }
     #endregion
@@ -785,16 +953,16 @@ public class SetRockScreen : MonoBehaviour
             D100.SetActive(true);
             int random = Random.Range(1,101);
 
-            if(random == 100 || random == 1)
+            if(random == 100 || random == 1 || random == 10)
             {
                 AllStats.d100Rolls += 1;
 
-                D100text.text = $"Rolled: {random}" + "\nResources doubled!";
+                D100text.text = $"{LocalizationScript.rolled} {random}\n{LocalizationScript.oresTripled}";
                 doubleResources = true;
             }
             else
             {
-                D100text.text = "Rolled:" + random.ToString("F0");
+                D100text.text = $"{LocalizationScript.rolled} {random}";
             }
         }
         else
@@ -1066,24 +1234,26 @@ public class SetRockScreen : MonoBehaviour
 
         if (doubleResources == true)
         {
-            GoldAndOreMechanics.totalGoldore *= 2;
-            GoldAndOreMechanics.totalCopperOre *= 2;
-            GoldAndOreMechanics.totalIronOre *= 2;
-            GoldAndOreMechanics.totalCobaltOre *= 2;
-            GoldAndOreMechanics.totalUraniumOre *= 2;
-            GoldAndOreMechanics.totalIsmiumOre *= 2;
-            GoldAndOreMechanics.totalIridiumOre *= 2;
-            GoldAndOreMechanics.totalPainiteOre *= 2;
+            GoldAndOreMechanics.totalGoldore *= 5;
+            GoldAndOreMechanics.totalCopperOre *= 5;
+            GoldAndOreMechanics.totalIronOre *= 5;
+            GoldAndOreMechanics.totalCobaltOre *= 5;
+            GoldAndOreMechanics.totalUraniumOre *= 5;
+            GoldAndOreMechanics.totalIsmiumOre *= 5;
+            GoldAndOreMechanics.totalIridiumOre *= 5;
+            GoldAndOreMechanics.totalPainiteOre *= 5;
         }
 
-        chunks_mined.text = GoldAndOreMechanics.totalGoldore.ToString("F0");
-        chunksMined_Copper.text = GoldAndOreMechanics.totalCopperOre.ToString("F0");
-        chunksMined_Silver.text = GoldAndOreMechanics.totalIronOre.ToString("F0");
-        chunksMined_Cobalt.text = GoldAndOreMechanics.totalCobaltOre.ToString("F0");
-        chunksMined_Uranium.text = GoldAndOreMechanics.totalUraniumOre.ToString("F0");
-        chunksMined_Ismium.text = GoldAndOreMechanics.totalIsmiumOre.ToString("F0");
-        chunksMined_Iridium.text = GoldAndOreMechanics.totalIridiumOre.ToString("F0");
-        chunksMined_Painite.text = GoldAndOreMechanics.totalPainiteOre.ToString("F0");
+        oresPopedUp = true;
+
+        chunks_mined.text = FormatNumbers.FormatPoints(GoldAndOreMechanics.totalGoldore);
+        chunksMined_Copper.text = FormatNumbers.FormatPoints(GoldAndOreMechanics.totalCopperOre);
+        chunksMined_Silver.text = FormatNumbers.FormatPoints(GoldAndOreMechanics.totalIronOre);
+        chunksMined_Cobalt.text = FormatNumbers.FormatPoints(GoldAndOreMechanics.totalCobaltOre);
+        chunksMined_Uranium.text = FormatNumbers.FormatPoints(GoldAndOreMechanics.totalUraniumOre);
+        chunksMined_Ismium.text = FormatNumbers.FormatPoints(GoldAndOreMechanics.totalIsmiumOre);
+        chunksMined_Iridium.text = FormatNumbers.FormatPoints(GoldAndOreMechanics.totalIridiumOre);
+        chunksMined_Painite.text = FormatNumbers.FormatPoints(GoldAndOreMechanics.totalPainiteOre);
 
         CraftOres(GoldAndOreMechanics.totalGoldore, goldBar_crafted, 1);
         if (SkillTree.spawnCopper_purchased) { CraftOres(GoldAndOreMechanics.totalCopperOre, goldBarsCrafted_Copper, 2); }
@@ -1094,14 +1264,14 @@ public class SetRockScreen : MonoBehaviour
         if (SkillTree.iridiumSpawn_purchased) { CraftOres(GoldAndOreMechanics.totalIridiumOre, goldBarsCrafted_Iridium, 7); }
         if (SkillTree.painiteSpawn_purchased) { CraftOres(GoldAndOreMechanics.totalPainiteOre, goldBarsCrafted_Painite, 8); }
 
-        totalGoldBars.text = GoldAndOreMechanics.totalGoldBars.ToString("F0");
-        totalGoldBars_Copper.text = GoldAndOreMechanics.totalCopperBars.ToString("F0"); 
-        totalGoldBars_Silver.text = GoldAndOreMechanics.totalIronBars.ToString("F0");
-        totalGoldBars_Cobalt.text = GoldAndOreMechanics.totalCobaltBars.ToString("F0");
-        totalGoldBars_Uranium.text = GoldAndOreMechanics.totalUraniumBars.ToString("F0");
-        totalGoldBars_Ismium.text = GoldAndOreMechanics.totalIsmiumBar.ToString("F0");
-        totalGoldBars_Iridium.text = GoldAndOreMechanics.totalIridiumBars.ToString("F0");
-        totalGoldBars_Painite.text = GoldAndOreMechanics.totalPainiteBars.ToString("F0");
+        totalGoldBars.text = FormatNumbers.FormatPoints(GoldAndOreMechanics.totalGoldBars);
+        totalGoldBars_Copper.text = FormatNumbers.FormatPoints(GoldAndOreMechanics.totalCopperBars);
+        totalGoldBars_Silver.text = FormatNumbers.FormatPoints(GoldAndOreMechanics.totalIronBars);
+        totalGoldBars_Cobalt.text = FormatNumbers.FormatPoints(GoldAndOreMechanics.totalCobaltBars);
+        totalGoldBars_Uranium.text = FormatNumbers.FormatPoints(GoldAndOreMechanics.totalUraniumBars);
+        totalGoldBars_Ismium.text = FormatNumbers.FormatPoints(GoldAndOreMechanics.totalIsmiumBar);
+        totalGoldBars_Iridium.text = FormatNumbers.FormatPoints(GoldAndOreMechanics.totalIridiumBars);
+        totalGoldBars_Painite.text = FormatNumbers.FormatPoints(GoldAndOreMechanics.totalPainiteBars);
 
         goldAndOreScript.SetTotalResourcesText();
 
@@ -1190,8 +1360,8 @@ public class SetRockScreen : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
 
         xpGainedThisRound_text.text = "+0XP";
-
-        xpGainedThisRound_text.text = "+" + (LevelMechanics.xpThisRound * 100).ToString("F0") + "XP";
+        
+        xpGainedThisRound_text.text = "+" + FormatNumbers.FormatPoints(LevelMechanics.xpThisRound * 100) + "XP";
 
         xpGathereredText.SetActive(true);
 
@@ -1217,6 +1387,8 @@ public class SetRockScreen : MonoBehaviour
         }
 
         upgradeButton.SetActive(true); keepMiningButton.SetActive(true);
+
+        achScript.CheckAch();
     }
     #endregion
 
@@ -1234,27 +1406,26 @@ public class SetRockScreen : MonoBehaviour
             totalBarsCrafted += 1;
         }
 
+        if (Artifacts.goldRing_found)
+        {
+            float random = Random.Range(1.025f, 1.035f);
+
+            if (SkillTree.craft2Material_purchased == true)
+            {
+                random = Random.Range(1.018f, 1.023f);
+            }
+
+            totalBarsCrafted *= random;
+        }
+
         if (totalBarsCrafted % 1 != 0)
         {
             totalBarsCrafted -= totalBarsCrafted % 1;
         }
 
-        if (Artifacts.goldRing_found)
-        {
-            for (int i = 0; i < totalOre; i++)
-            {
-                float randomCraft1 = Random.Range(0f, 100f);
-
-                if (randomCraft1 < Artifacts.goldRingCraftChance * (1 + Artifacts.runeImproveAll + LevelMechanics.archeologistIncrease))
-                {
-                    totalBarsCrafted += 1;
-                }
-            }
-        }
-
         //check if totalBarsCrafted (it is a double variable) has any decimal points, if it has, remove them. Example, if the totalBarsCrafted is equal o 650.533, it should just be 650
 
-        craftedText.text = totalBarsCrafted.ToString("F0");
+        craftedText.text = FormatNumbers.FormatPoints(totalBarsCrafted);
 
         if (materialToAdd == 1) { GoldAndOreMechanics.totalGoldBars += totalBarsCrafted; }
         if (materialToAdd == 2)
@@ -1351,19 +1522,28 @@ public class SetRockScreen : MonoBehaviour
     }
     #endregion
 
+    public GameObject circleNormal, circleGold, hexagonNormal, hexagonGold, squareNormal, squareGold;
 
     #region Reset between transitions
     public void ResetBetweenTransitions()
     {
         if (LevelMechanics.shapeShifter_chosen)
         {
-            circleColl.SetActive(false); triangleColl.SetActive(false); squareColl.SetActive(false); hexagonColl.SetActive(false);
+            circleColl.SetActive(false); squareColl.SetActive(false); hexagonColl.SetActive(false);
 
-            int randomShape = Random.Range(1,5);
-            if(randomShape == 1) { circleColl.SetActive(true); }
-            if (randomShape == 2) { triangleColl.SetActive(true); }
-            if (randomShape == 3) { squareColl.SetActive(true); }
-            if (randomShape == 4) { hexagonColl.SetActive(true); }
+            int randomShape = Random.Range(1,4);
+            if(randomShape == 1) 
+            { 
+                circleColl.SetActive(true);
+            }
+            if (randomShape == 2) 
+            { 
+                squareColl.SetActive(true); 
+            }
+            if (randomShape == 3) 
+            { 
+                hexagonColl.SetActive(true); 
+            }
         }
         else
         {
@@ -1400,33 +1580,37 @@ public class SetRockScreen : MonoBehaviour
         if (isPotionMaterialWorthMore)
         {
             if (SkillTree.materialsTotalWorth < 7) { potionMaterialWorthMore_increase = 1; }
-            else if (SkillTree.materialsTotalWorth < 13) { potionMaterialWorthMore_increase = 2; }
-            else if (SkillTree.materialsTotalWorth < 25) { potionMaterialWorthMore_increase = 3; }
-            else if (SkillTree.materialsTotalWorth < 50) { potionMaterialWorthMore_increase = 4; }
-            else { potionMaterialWorthMore_increase = 5; }
+            else if (SkillTree.materialsTotalWorth < 12) { potionMaterialWorthMore_increase = 2; }
+            else if (SkillTree.materialsTotalWorth < 20) { potionMaterialWorthMore_increase = 3; }
+            else if (SkillTree.materialsTotalWorth < 30) { potionMaterialWorthMore_increase = 4; }
+            else if (SkillTree.materialsTotalWorth < 50) { potionMaterialWorthMore_increase = 5; }
+            else if (SkillTree.materialsTotalWorth < 70) { potionMaterialWorthMore_increase = 6; }
+            else if (SkillTree.materialsTotalWorth < 100) { potionMaterialWorthMore_increase = 7; }
+            else { potionMaterialWorthMore_increase = 8; }
         }
         else { potionMaterialWorthMore_increase = 0; }
 
         if (isPotionXp)
         {
-            float random = Random.Range(0.2f, 0.25f);
+            float random = Random.Range(0.13f, 0.21f);
             potionXp_increase = random;
         }
         else { potionXp_increase = 0; }
 
         if (isPotionPickaxeStats)
         {
-            if (SkillTree.improvedPickaxeStrength < 1.08f) { potionPickaxeStats_increase = 0.02f; }
-            else if (SkillTree.improvedPickaxeStrength < 1.2f) { potionPickaxeStats_increase = 0.03f; }
-            else if (SkillTree.improvedPickaxeStrength < 1.4f) { potionPickaxeStats_increase = 0.04f; }
-            else if (SkillTree.improvedPickaxeStrength < 1.8f) { potionPickaxeStats_increase = 0.08f; }
+            if (SkillTree.improvedPickaxeStrength < 1.06f) { potionPickaxeStats_increase = 0.02f; }
+            else if (SkillTree.improvedPickaxeStrength < 1.13f) { potionPickaxeStats_increase = 0.03f; }
+            else if (SkillTree.improvedPickaxeStrength < 1.3f) { potionPickaxeStats_increase = 0.04f; }
+            else if (SkillTree.improvedPickaxeStrength < 1.4f) { potionPickaxeStats_increase = 0.05f; }
+            else if (SkillTree.improvedPickaxeStrength < 1.6f) { potionPickaxeStats_increase = 0.08f; }
             else { potionPickaxeStats_increase = 0.1f; }
         }
         else { potionPickaxeStats_increase = 0; }
 
         if (isPotionDoubleMaterialAndXPChance)
         {
-            if (SkillTree.doubleXpAndGoldChance < 6) { potionDoubleChance_increase = 1; }
+            if (SkillTree.doubleXpAndGoldChance < 6) { potionDoubleChance_increase = 2; }
             else if (SkillTree.doubleXpAndGoldChance < 11) { potionDoubleChance_increase = 2; }
             else if (SkillTree.doubleXpAndGoldChance < 20) { potionDoubleChance_increase = 3; }
             else if (SkillTree.doubleXpAndGoldChance < 50) { potionDoubleChance_increase = 4f; }
@@ -1567,6 +1751,13 @@ public class SetRockScreen : MonoBehaviour
 
     public void PressEndingBtn()
     {
+        MainMenu.isInTheMine = false;
+        MainMenu.isInArtifacts = false;
+        MainMenu.isInTalents = false;
+        MainMenu.isInTheAnvil = false;
+
+        endingScript.SoundVolumeSet("MainMenuMusic", true, TheEnding.gameMusicFullVolume, 0f, 1f, true);
+
         bigRock.SetActive(true);
         bigRockTiles.SetActive(true);
 
@@ -1590,6 +1781,8 @@ public class SetRockScreen : MonoBehaviour
 
     public void SetUiStuff()
     {
+        oresPopedUp = false;
+
         bigRock.SetActive(false);
         bigRockTiles.SetActive(false);
 
