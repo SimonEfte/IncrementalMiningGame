@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class SettingsOptions : MonoBehaviour
+public class SettingsOptions : MonoBehaviour, IDataPersistence
 {
     private List<Resolution> resolutions = new List<Resolution>();
     public TMP_Dropdown resolutionDropdown;
@@ -69,6 +69,7 @@ public class SettingsOptions : MonoBehaviour
     }
 
     public GameObject fullscreenBtn, flags, mainMenuBTN, settingsFrame;
+    public GameObject googlePlayBtn, appStoreBTN;
 
     IEnumerator Wait()
     {
@@ -76,6 +77,10 @@ public class SettingsOptions : MonoBehaviour
 
         if(MobileAndTesting.isMobile == true)
         {
+            tooltipAnimToogle.SetActive(false);
+            googlePlayBtn.SetActive(false);
+            appStoreBTN.SetActive(false);
+
             settingsFrame.transform.localScale = new Vector2(1.43f, 1.43f);
 
             flags.transform.localPosition = new Vector2(0, -33);
@@ -86,6 +91,19 @@ public class SettingsOptions : MonoBehaviour
 
             resolutionDropdown.gameObject.SetActive(false);
             fullscreenBtn.gameObject.SetActive(false);
+        }
+        else
+        {
+            if (isTooltipAnimOn == true)
+            {
+                toogleOffCircle.SetActive(true); toggleOnCircle.SetActive(false);
+            }
+            else
+            {
+                toogleOffCircle.SetActive(false); toggleOnCircle.SetActive(true);
+            }
+
+            //SetTooltipsAnims();
         }
 
         triggerResolution = false;
@@ -330,4 +348,79 @@ public class SettingsOptions : MonoBehaviour
     {
         Application.OpenURL("https://store.steampowered.com/curator/43674917");
     }
+
+    public void OpenGooglePlay()
+    {
+        Application.OpenURL("https://play.google.com/store/apps/details?id=com.EagleEyeGames.KeeponMining");
+    }
+
+    public void OpenAppStore()
+    {
+        Application.OpenURL("https://apps.apple.com/us/app/keep-on-mining/id6751413449");
+    }
+
+    public GameObject tooltipAnimToogle;
+    public GameObject toogleOffCircle, toggleOnCircle;
+    public static bool isTooltipAnimOn;
+
+    public void ToggleTooltipAnim()
+    {
+        audioManager.Play("UI_Click1");
+        if (isTooltipAnimOn == false)
+        {
+            toogleOffCircle.SetActive(true); toggleOnCircle.SetActive(false);
+            isTooltipAnimOn = true;
+        }
+        else
+        {
+            toogleOffCircle.SetActive(false); toggleOnCircle.SetActive(true);
+            isTooltipAnimOn = false;
+        }
+
+        //SetTooltipsAnims();
+    }
+
+    public Animation skillTreeTooltip, talentLeftTooltip, talentLevelTooltip, theMineInfoTooltip, artifactTooltipAnim, potionTooltip, flowerTooltip, theMineSpeedtooltip, theMineBarsTooltip;
+
+    public void SetTooltipsAnims()
+    {
+        if(isTooltipAnimOn == true)
+        {
+            theMineSpeedtooltip.enabled = true;
+            theMineBarsTooltip.enabled = true;
+            skillTreeTooltip.enabled = true;
+            talentLeftTooltip.enabled = true;
+            talentLevelTooltip.enabled = true;
+            theMineInfoTooltip.enabled = true;
+            artifactTooltipAnim.enabled = true;
+            potionTooltip.enabled = true;
+            flowerTooltip.enabled = true;
+        }
+        else
+        {
+            theMineSpeedtooltip.enabled = false;
+            theMineBarsTooltip.enabled = false;
+            skillTreeTooltip.enabled = false;
+            talentLeftTooltip.enabled = false;
+            talentLevelTooltip.enabled = false;
+            theMineInfoTooltip.enabled = false;
+            artifactTooltipAnim.enabled = false;
+            potionTooltip.enabled = false;
+            flowerTooltip.enabled = false;
+        }
+    }
+
+    #region Load Data
+    public void LoadData(GameData data)
+    {
+        isTooltipAnimOn = data.isTooltipAnimOn;
+    }
+    #endregion
+
+    #region Save Data
+    public void SaveData(ref GameData data)
+    {
+        data.isTooltipAnimOn = isTooltipAnimOn;
+    }
+    #endregion
 }

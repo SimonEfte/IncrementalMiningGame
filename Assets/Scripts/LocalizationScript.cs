@@ -159,6 +159,14 @@ public class LocalizationScript : MonoBehaviour
         theAnvilScript.CheckSkin();
         theAnvilScript.CheckPickaxes();
         theAnvilScript.CheckPickaxeName();
+
+        StartCoroutine(Waititn());
+    }
+
+    IEnumerator Waititn()
+    {
+        yield return new WaitForSeconds(1);
+        TutText();
     }
 
     public static double currentHoverPrice;
@@ -201,11 +209,17 @@ public class LocalizationScript : MonoBehaviour
     public static string closeString;
     public TextMeshProUGUI purchaseText, skillTreeClose, talentClose, talentLevelClose, theMineInfoClose, artifactClose;
 
+    public TextMeshProUGUI tooltipAnim, off, on;
+
     public void NoChangeStrings()
     {
         #region English
         if(isEnglish == true)
         {
+            tooltipAnim.text = "Tooltip Animation";
+            off.text = "OFF";
+            on.text = "ON";
+
             closeString = "CLOSE";
             purchaseText.text = "PURCHASE";
 
@@ -261,6 +275,10 @@ public class LocalizationScript : MonoBehaviour
         #region French
         if (isFrench == true)
         {
+            tooltipAnim.text = "Animation des info-bulles";
+            off.text = "DÉSACTIVÉ";
+            on.text = "ACTIVÉ";
+
             closeString = "FERMER";
             purchaseText.text = "ACHETER";
 
@@ -317,6 +335,11 @@ public class LocalizationScript : MonoBehaviour
         #region Italian
         if (isItalian == true)
         {
+            tooltipAnim.text = "Animazione tooltip";
+            off.text = "SPENTO";
+            on.text = "ACCESO";
+
+
             closeString = "CHIUDI";
             purchaseText.text = "ACQUISTA";
 
@@ -372,6 +395,10 @@ public class LocalizationScript : MonoBehaviour
         #region German
         if (isGerman == true)
         {
+            tooltipAnim.text = "Tooltip-Animation";
+            off.text = "AUS";
+            on.text = "AN";
+
             closeString = "SCHLIESSEN";
             purchaseText.text = "KAUFEN";
 
@@ -427,6 +454,10 @@ public class LocalizationScript : MonoBehaviour
         #region Spanish
         if (isSpanish == true)
         {
+            tooltipAnim.text = "Animación de tooltip";
+            off.text = "APAGADO";
+            on.text = "ENCENDIDO";
+
             closeString = "CERRAR";
             purchaseText.text = "COMPRAR";
 
@@ -482,6 +513,10 @@ public class LocalizationScript : MonoBehaviour
         #region Japanese
         if (isJapanese == true)
         {
+            tooltipAnim.text = "ツールチップアニメーション";
+            off.text = "オフ";
+            on.text = "オン";
+
             closeString = "閉じる";
             purchaseText.text = "購入";
 
@@ -537,6 +572,10 @@ public class LocalizationScript : MonoBehaviour
         #region Korean
         if (isKorean == true)
         {
+            tooltipAnim.text = "툴팁 애니메이션";
+            off.text = "꺼짐";
+            on.text = "켜짐";
+
             closeString = "닫기";
             purchaseText.text = "구매";
 
@@ -592,6 +631,10 @@ public class LocalizationScript : MonoBehaviour
         #region Polish
         if (isPolish == true)
         {
+            tooltipAnim.text = "Animacja podpowiedzi";
+            off.text = "WYŁ.";
+            on.text = "WŁ.";
+
             closeString = "ZAMKNIJ";
             purchaseText.text = "KUP";
 
@@ -647,6 +690,10 @@ public class LocalizationScript : MonoBehaviour
         #region Portuguese (Brazil)
         if (isPortugese == true)
         {
+            tooltipAnim.text = "Animação de tooltip";
+            off.text = "DESLIGADO";
+            on.text = "LIGADO";
+
             closeString = "FECHAR";
             purchaseText.text = "COMPRAR";
 
@@ -702,6 +749,10 @@ public class LocalizationScript : MonoBehaviour
         #region Russian
         if (isRussian == true)
         {
+            tooltipAnim.text = "Анимация подсказок";
+            off.text = "ВЫКЛ.";
+            on.text = "ВКЛ.";
+
             closeString = "ЗАКРЫТЬ";
             purchaseText.text = "КУПИТЬ";
 
@@ -757,6 +808,10 @@ public class LocalizationScript : MonoBehaviour
         #region Simplified Chinese
         if (isSimplefiedChinese == true)
         {
+            tooltipAnim.text = "提示动画";
+            off.text = "关";
+            on.text = "开";
+
             closeString = "关闭";
             purchaseText.text = "购买";
 

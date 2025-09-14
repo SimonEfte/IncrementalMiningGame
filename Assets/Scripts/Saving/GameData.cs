@@ -16,6 +16,7 @@ public class GameData
         TheMineSaves();
         SkillTreeSaves();
         SetEndingSaves();
+        SettigsSaves();
     }
 
     #region Tutorial saves
@@ -906,4 +907,11 @@ public class GameData
         instaMineChance = 0f;
     }
     #endregion
+
+    public bool isTooltipAnimOn;
+
+    public void SettigsSaves()
+    {
+        isTooltipAnimOn = true;
+    }
 }

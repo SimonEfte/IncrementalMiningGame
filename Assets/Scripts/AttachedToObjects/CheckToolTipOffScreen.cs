@@ -22,11 +22,11 @@ public class CheckToolTipOffScreen : MonoBehaviour
         parentRectTransform = gameObject.GetComponent<RectTransform>();
         rectTransform = GetComponent<RectTransform>();
 
-        tooltipAnimFrame = transform.Find("tooltipAnim");
+        tooltipAnimFrame = transform.Find("tooltipAnim_");
         tooltipAnimFrameAnim = tooltipAnimFrame.GetComponent<Animation>();
         tooltipRectTransform = tooltipAnimFrame.GetComponent<RectTransform>();
 
-        Transform upgradeDescTextObject = transform.Find("tooltipAnim/UpgradeDesc_text");
+        Transform upgradeDescTextObject = transform.Find("tooltipAnim_/UpgradeDesc_text");
         upgradeDescText = upgradeDescTextObject.GetComponent<TextMeshProUGUI>();
     }
 

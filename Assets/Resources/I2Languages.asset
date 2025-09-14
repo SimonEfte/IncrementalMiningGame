@@ -27,11 +27,11 @@ MonoBehaviour:
       - AfacadFlux-ExtraBold SDF
       - AfacadFlux-ExtraBold SDF
       - JapaneseFont_7
-      - KoreanFont_8
+      - KoreanFont_9
       - Fonts & Materials/Roboto-Bold SDF
       - AfacadFlux-ExtraBold SDF
       - Fonts & Materials/Roboto-Bold SDF
-      - ChineseFont_7
+      - ChineseFont_8
       Flags: 0000000000000000000000
       Languages_Touch: []
     - Term: FredokaOne-Regular SDF
@@ -44,11 +44,11 @@ MonoBehaviour:
       - FredokaOne-Regular SDF
       - FredokaOne-Regular SDF
       - JapaneseFont_7
-      - KoreanFont_8
+      - KoreanFont_9
       - Fonts & Materials/Roboto-Bold SDF
       - FredokaOne-Regular SDF
       - Fonts & Materials/Roboto-Bold SDF
-      - ChineseFont_7
+      - ChineseFont_8
       Flags: 0000000000000000000000
       Languages_Touch: []
     - Term: MenuFonts
@@ -140,6 +140,8 @@ MonoBehaviour:
     - {fileID: 11400000, guid: d23814709ab1f4c46b25d182f9795ea0, type: 2}
     - {fileID: 11400000, guid: 021935bdad7ee4c4cba11ccded678dca, type: 2}
     - {fileID: 11400000, guid: 4a0dfa3db68ac714385dbee396985c4e, type: 2}
+    - {fileID: 11400000, guid: f220bebd1ae0d144da052b1617150f16, type: 2}
+    - {fileID: 11400000, guid: 4c4b1aa336df116468e6cbc13f8f00e1, type: 2}
     Spreadsheet_LocalFileName: 
     Spreadsheet_LocalCSVSeparator: ','
     Spreadsheet_LocalCSVEncoding: utf-8

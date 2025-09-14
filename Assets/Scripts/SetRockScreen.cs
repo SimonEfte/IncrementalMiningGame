@@ -630,6 +630,10 @@ public class SetRockScreen : MonoBehaviour
                 campfire.SetActive(false);
             }
 
+            circleGold.SetActive(false);
+            hexagonGold.SetActive(false);
+            squareGold.SetActive(false);
+
             if (LevelMechanics.goldenTouch_chosen)
             {
                 circleNormal.SetActive(true);
@@ -647,10 +651,7 @@ public class SetRockScreen : MonoBehaviour
                     if (MobileAndTesting.isMobile == true)
                     {
                         normalCursorHand.SetActive(false);
-                    }
-                    else
-                    {
-                        normalCursorHand.SetActive(true);
+                        goldenHand.SetActive(false);
                     }
 
                     isGoldenHand = true;
@@ -668,6 +669,11 @@ public class SetRockScreen : MonoBehaviour
                     else
                     {
                         goldenHand.SetActive(true);
+                        normalCursorHand.SetActive(false);
+
+                        circleGold.SetActive(false);
+                        hexagonGold.SetActive(false);
+                        squareGold.SetActive(false);
                     }
                 }
                 else
@@ -675,19 +681,12 @@ public class SetRockScreen : MonoBehaviour
                     if(MobileAndTesting.isMobile == true)
                     {
                         normalCursorHand.SetActive(false);
-                    }
-                    else
-                    {
-                        normalCursorHand.SetActive(true);
-                    }
-
-                    if (MobileAndTesting.isMobile == true)
-                    {
                         goldenHand.SetActive(false);
                     }
                     else
                     {
-                        goldenHand.SetActive(true);
+                        normalCursorHand.SetActive(true);
+                        goldenHand.SetActive(false);
                     }
 
                     isGoldenHand = false;
@@ -698,10 +697,11 @@ public class SetRockScreen : MonoBehaviour
                 if (MobileAndTesting.isMobile == true)
                 {
                     goldenHand.SetActive(false);
+                    normalCursorHand.SetActive(false);
                 }
                 else
                 {
-                    goldenHand.SetActive(true);
+                    normalCursorHand.SetActive(true);
                 }
 
                 isGoldenHand = false; 

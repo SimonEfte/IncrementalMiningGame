@@ -21,7 +21,7 @@ public class SteamIntgr : MonoBehaviour
             }
             catch (System.Exception e)
             {
-                //Debug.Log(e);
+                // Debug.Log(e);
             }
         }
     }
@@ -38,7 +38,7 @@ public class SteamIntgr : MonoBehaviour
     {
         if (noSteamInt == false)
         {
-            //Steamworks.SteamClient.Shutdown();
+            //  Steamworks.SteamClient.Shutdown();
         }
     }
 }

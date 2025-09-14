@@ -64,6 +64,7 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+
         hoveringEndless = 0;
         upgradeType = upgradeTypeSet;
 
