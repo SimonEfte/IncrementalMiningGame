@@ -225,8 +225,8 @@ public class PickaxeMechanics : MonoBehaviour
 
     public void CheckPickaxe()
     {
-        rightCollider.gameObject.layer = 6;
-        leftCollider.gameObject.layer = 6;
+        //rightCollider.gameObject.layer = 6;
+        //leftCollider.gameObject.layer = 6;
 
         hammer.gameObject.SetActive(false);
 

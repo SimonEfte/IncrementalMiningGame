@@ -14,8 +14,8 @@ public class MobileAndTesting : MonoBehaviour
     {
         isMobile = true;
         isTesting = false;
-        isThisIos = true;
-        isThisAndroid = false;
+        isThisIos = false;
+        isThisAndroid = true;
     }
 
     private void Start()
