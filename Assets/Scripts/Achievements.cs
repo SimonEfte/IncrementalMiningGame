@@ -336,17 +336,17 @@ public class Achievements : MonoBehaviour
         if (MobileAndTesting.isMobile == true) { return; }
         if (SteamIntgr.noSteamInt == true) { return; }
 
-        //  var ach = new Steamworks.Data.Achievement(achNAME);
-        //if (ach.State == false)
-        //{
-        //    ach.Trigger();
-        // }
+          var ach = new Steamworks.Data.Achievement(achNAME);
+        if (ach.State == false)
+        {
+            ach.Trigger();
+         }
     }
     #endregion
 
     public void AchClear(string achNAME)
     {
-        // var ach = new Steamworks.Data.Achievement(achNAME);
-        // ach.Clear();
+         var ach = new Steamworks.Data.Achievement(achNAME);
+         ach.Clear();
     }
 }

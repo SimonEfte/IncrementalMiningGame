@@ -506,6 +506,7 @@ MonoBehaviour:
   totalIsmiumFrame: {fileID: 0}
   totalIridiumFrame: {fileID: 0}
   totalPainiteFrame: {fileID: 0}
+  overlappingScript: {fileID: 0}
 --- !u!1 &7138530528067394137
 GameObject:
   m_ObjectHideFlags: 0

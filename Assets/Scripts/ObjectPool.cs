@@ -54,6 +54,15 @@ public class ObjectPool : MonoBehaviour
     public Transform pickaxeParent, rockParent, tileParent, rockParticleParent, textParent, theMineMaterialParent, circleParent;
     public Transform projectileParent;
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            //Debug.Log(rockPool.Count);
+            Debug.Log(pickaxePool.Count);
+        }
+    }
+
     private void Awake()
     {
         if (instance == null)
@@ -253,6 +262,8 @@ public class ObjectPool : MonoBehaviour
     {
         rockPool.Enqueue(rock);
         rock.SetActive(false);
+
+      
     }
     #endregion
 

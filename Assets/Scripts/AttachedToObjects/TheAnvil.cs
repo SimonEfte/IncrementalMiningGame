@@ -76,7 +76,7 @@ public class TheAnvil : MonoBehaviour, IDataPersistence
 
     private void Awake()
     {
-        isDLC = true;
+        isDLC = false;
 
         if(isDLC == true)
         {

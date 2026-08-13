@@ -7508,7 +7508,7 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 endlessCobalt_purchaseCount += 1;
 
-                endlessCobalt_price *= 1.3f;
+                endlessCobalt_price *= 1.35f;
 
                 LocalizationScript.currentPurchaseCount = endlessCobalt_purchaseCount;
             }
@@ -7532,7 +7532,7 @@ public class SkillTree : MonoBehaviour, IDataPersistence
 
                 endlessUranium_purchaseCount += 1;
 
-                endlessUranium_price *= 1.3f;
+                endlessUranium_price *= 1.35f;
 
                 LocalizationScript.currentPurchaseCount = endlessUranium_purchaseCount;
             }

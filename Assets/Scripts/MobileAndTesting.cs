@@ -12,10 +12,10 @@ public class MobileAndTesting : MonoBehaviour
 
     private void Awake()
     {
-        isMobile = true;
+        isMobile = false;
         isTesting = false;
         isThisIos = false;
-        isThisAndroid = true;
+        isThisAndroid = false;
     }
 
     private void Start()

@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class RockMechanics : MonoBehaviour
 {
+    public bool isTestRock;
+
     public ScreenShake screenShakeScript;
     public LevelMechanics levelScript;
     public SpawnProjectiles spawnProjectileScript;
@@ -789,131 +791,26 @@ public class RockMechanics : MonoBehaviour
             isDouble = true;
         }
 
-        float chanceIncrease = 1;
-        bool isIncreaseChance = false;
-        if (SkillTree.allProjectileTriggerChance_purchased)
+        if(collision.gameObject.layer == 6)
         {
-            isIncreaseChance = true;
+            PickaxeHit(collision);
         }
-        if(isIncreaseChance == true) { chanceIncrease = 1 + (SkillTree.allProjcetileTriggerChance / 100); }
-
-        if(collision.gameObject.layer == 6 || collision.gameObject.layer == 11) //Pickaxe
+        if (collision.gameObject.layer == 11)
         {
-            AllStats.pickaxeHits += 1;
+            PickaxeHit(collision);
+        }
+        if (collision.gameObject.layer == 12)
+        {
+            PickaxeHit(collision);
+        }
+        if (collision.gameObject.layer == 13)
+        {
+            PickaxeHit(collision);
+        }
 
-            float currentTime = Time.time;
-
-            if (spawnChest || spawnGoldenChest) { overlappingScript.PlaySound(3, currentTime); }
-            else { overlappingScript.PlaySound(1, currentTime); }
-
-            #region Chance to mine random rock
-            if (SkillTree.chanceToMineRandomRock_1_purchased || SkillTree.chanceToMineRandomRock_2_purchased || SkillTree.chanceToMineRandomRock_3_purchased || SkillTree.chanceToMineRandomRock_4_purchased)
-            {
-                float randomSpawnPickaxe = Random.Range(0, 100);
-                if (randomSpawnPickaxe < SkillTree.chanceToMineRandomRock)
-                {
-                    spawnProjectileScript.SelectRandomActiveRock(3);
-                }
-            }
-            #endregion
-
-            #region Lightning beam chance PH
-            if (SkillTree.lightningBeamChancePH_1_purchased || SkillTree.lightningBeamChancePH_2_purchased)
-            {
-                int randomBeamChance = Random.Range(0, 100);
-                if (randomBeamChance < (SkillTree.lightningTriggerChancePH * chanceIncrease))
-                {
-                    if(SpawnProjectiles.totalBeamsOnScreen < 17)
-                    {
-                        beamHitPos = collision.transform.position;
-                        spawnProjectileScript.SelectRandomActiveRock(4);
-                    }
-                }
-            }
-            #endregion
-
-            #region Dynamite chance
-            if (SkillTree.dynamiteChance_1_purchased || SkillTree.dynamiteChance_2_purchased)
-            {
-                int randomDynamite = Random.Range(0, 100);
-                if (randomDynamite < (SkillTree.dynamiteStickChance * chanceIncrease))
-                {
-                    if (SpawnProjectiles.totalDynamitesOnScreen < 20)
-                    {
-                        dynamiteHitPos = collision.transform.position;
-                        spawnProjectileScript.SelectRandomActiveRock(5);
-                    }
-                }
-            }
-            #endregion
-
-            if (Artifacts.cheese_found)
-            {
-                float random = Random.Range(0f, 100f);
-
-                float increase = 1 + (LevelMechanics.archeologistIncrease + Artifacts.runeImproveAll);
-
-                if (random < Artifacts.cheeseChance * increase) 
-                {
-                    if (SetRockScreen.isInMiningSession == true)
-                    {
-                        if (isBigRock == false) { SpawnMaterialPopUp(1); }
-                    }
-                }
-            }
-
-            if (LevelMechanics.goldenTouch_chosen)
-            {
-                if (SetRockScreen.isGoldenHand)
-                {
-                    int random = Random.Range(0,100);
-                    if(random < LevelMechanics.midasTouchSpawnChance)
-                    {
-                        if(isBigRock == false) { if (SetRockScreen.isInMiningSession == true) { SpawnMaterialPopUp(1); } }
-                    }
-                }
-            }
-
-            float random2X = Random.Range(0, 100);
-
-            float instaMineChance = 100 - SkillTree.instaMineChance;
-
-            if (random2X < TheAnvil.current2XPowerChance + SkillTree.doubleDamageChance)
-            {
-                AllStats.doublePickaxePowerHits += 1;
-                DamageRock(TheAnvil.currentMinePower * 2); 
-            }
-            else if (random2X > instaMineChance)
-            {
-                if (isBigRock == false)
-                {
-                    DamageRock(TheAnvil.currentMinePower * 10000); AllStats.instaMinePickaxeHits += 1;
-                }
-            }
-            else
-            {
-                if (Artifacts.axe_found)
-                {
-                    float randomAxe = Random.Range(0f, 100f);
-
-                    float doubleChanceIncrease = 1f + (Artifacts.runeImproveAll + LevelMechanics.archeologistIncrease);
-                    float instaDecrese = 99f - (Artifacts.runeImproveAll + LevelMechanics.archeologistIncrease);
-
-                    if (randomAxe < 2 * doubleChanceIncrease) { DamageRock(TheAnvil.currentMinePower * 2); AllStats.doublePickaxePowerHits += 1; }
-                    else if (randomAxe > instaDecrese)
-                    {
-                        if(isBigRock == false)
-                        {
-                            DamageRock(TheAnvil.currentMinePower * 10000); AllStats.instaMinePickaxeHits += 1;
-                        }
-                    }
-                    else { DamageRock(TheAnvil.currentMinePower); }
-                }
-                else
-                {
-                    DamageRock(TheAnvil.currentMinePower);
-                }
-            }
+        if (collision.gameObject.layer == 6 || collision.gameObject.layer == 11|| collision.gameObject.layer == 12 || collision.gameObject.layer == 13 ) 
+        {
+         
         }
         else if (collision.gameObject.layer == 7) //Hammer
         {
@@ -986,6 +883,141 @@ public class RockMechanics : MonoBehaviour
         }
     }
     #endregion
+
+    #region Pickaxe hit
+    public void PickaxeHit(Collider2D collision)
+    {
+        if (isTestRock)
+        {
+            Debug.Log("Hit with picaxe!");
+        }
+
+        float chanceIncrease = 1;
+        bool isIncreaseChance = false;
+        if (SkillTree.allProjectileTriggerChance_purchased)
+        {
+            isIncreaseChance = true;
+        }
+        if (isIncreaseChance == true) { chanceIncrease = 1 + (SkillTree.allProjcetileTriggerChance / 100); }
+
+        AllStats.pickaxeHits += 1;
+
+        float currentTime = Time.time;
+
+        if (spawnChest || spawnGoldenChest) { overlappingScript.PlaySound(3, currentTime); }
+        else { overlappingScript.PlaySound(1, currentTime); }
+
+        #region Chance to mine random rock
+        if (SkillTree.chanceToMineRandomRock_1_purchased || SkillTree.chanceToMineRandomRock_2_purchased || SkillTree.chanceToMineRandomRock_3_purchased || SkillTree.chanceToMineRandomRock_4_purchased)
+        {
+            float randomSpawnPickaxe = Random.Range(0, 100);
+            if (randomSpawnPickaxe < SkillTree.chanceToMineRandomRock)
+            {
+                spawnProjectileScript.SelectRandomActiveRock(3);
+            }
+        }
+        #endregion
+
+        #region Lightning beam chance PH
+        if (SkillTree.lightningBeamChancePH_1_purchased || SkillTree.lightningBeamChancePH_2_purchased)
+        {
+            int randomBeamChance = Random.Range(0, 100);
+            if (randomBeamChance < (SkillTree.lightningTriggerChancePH * chanceIncrease))
+            {
+                if (SpawnProjectiles.totalBeamsOnScreen < 17)
+                {
+                    beamHitPos = collision.transform.position;
+                    spawnProjectileScript.SelectRandomActiveRock(4);
+                }
+            }
+        }
+        #endregion
+
+        #region Dynamite chance
+        if (SkillTree.dynamiteChance_1_purchased || SkillTree.dynamiteChance_2_purchased)
+        {
+            int randomDynamite = Random.Range(0, 100);
+            if (randomDynamite < (SkillTree.dynamiteStickChance * chanceIncrease))
+            {
+                if (SpawnProjectiles.totalDynamitesOnScreen < 20)
+                {
+                    dynamiteHitPos = collision.transform.position;
+                    spawnProjectileScript.SelectRandomActiveRock(5);
+                }
+            }
+        }
+        #endregion
+
+        if (Artifacts.cheese_found)
+        {
+            float random = Random.Range(0f, 100f);
+
+            float increase = 1 + (LevelMechanics.archeologistIncrease + Artifacts.runeImproveAll);
+
+            if (random < Artifacts.cheeseChance * increase)
+            {
+                if (SetRockScreen.isInMiningSession == true)
+                {
+                    if (isBigRock == false) { SpawnMaterialPopUp(1); }
+                }
+            }
+        }
+
+        if (LevelMechanics.goldenTouch_chosen)
+        {
+            if (SetRockScreen.isGoldenHand)
+            {
+                int random = Random.Range(0, 100);
+                if (random < LevelMechanics.midasTouchSpawnChance)
+                {
+                    if (isBigRock == false) { if (SetRockScreen.isInMiningSession == true) { SpawnMaterialPopUp(1); } }
+                }
+            }
+        }
+
+        float random2X = Random.Range(0, 100);
+
+        float instaMineChance = 100 - SkillTree.instaMineChance;
+
+        if (random2X < TheAnvil.current2XPowerChance + SkillTree.doubleDamageChance)
+        {
+            AllStats.doublePickaxePowerHits += 1;
+            DamageRock(TheAnvil.currentMinePower * 2);
+        }
+        else if (random2X > instaMineChance)
+        {
+            if (isBigRock == false)
+            {
+                DamageRock(TheAnvil.currentMinePower * 10000); AllStats.instaMinePickaxeHits += 1;
+            }
+        }
+        else
+        {
+            if (Artifacts.axe_found)
+            {
+                float randomAxe = Random.Range(0f, 100f);
+
+                float doubleChanceIncrease = 1f + (Artifacts.runeImproveAll + LevelMechanics.archeologistIncrease);
+                float instaDecrese = 99f - (Artifacts.runeImproveAll + LevelMechanics.archeologistIncrease);
+
+                if (randomAxe < 2 * doubleChanceIncrease) { DamageRock(TheAnvil.currentMinePower * 2); AllStats.doublePickaxePowerHits += 1; }
+                else if (randomAxe > instaDecrese)
+                {
+                    if (isBigRock == false)
+                    {
+                        DamageRock(TheAnvil.currentMinePower * 10000); AllStats.instaMinePickaxeHits += 1;
+                    }
+                }
+                else { DamageRock(TheAnvil.currentMinePower); }
+            }
+            else
+            {
+                DamageRock(TheAnvil.currentMinePower);
+            }
+        }
+    }
+    #endregion
+
 
     bool hitByFire;
 
@@ -1441,5 +1473,4 @@ public class RockMechanics : MonoBehaviour
     }
     #endregion
 
-   
 }

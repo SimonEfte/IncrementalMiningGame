@@ -6,7 +6,7 @@ public class PickaxeMechanics : MonoBehaviour
 {
     public Animation swingAnim;
 
-    public Transform rightCollider, leftCollider;
+    public Transform rightCollider, rightCollider2, leftCollider, leftCollider2;
     public SpriteRenderer pickAxeIconSprite;
 
     public Transform pickaxe1, pickaxe2, pickaxe3, pickaxe4, pickaxe5, pickaxe6, pickaxe7, pickaxe8, pickaxe9, pickaxe10, pickaxe11, pickaxe12, pickaxe13, pickaxe14;
@@ -68,8 +68,9 @@ public class PickaxeMechanics : MonoBehaviour
         hammer = transform.Find("hammer");
 
         rightCollider = transform.Find("right");
+        rightCollider2 = transform.Find("right2");
         leftCollider = transform.Find("left");
-
+        leftCollider2 = transform.Find("left2");
         pickAxeIconSprite = pickaxe1.GetComponent<SpriteRenderer>();
 
         swingAnim = gameObject.GetComponent<Animation>();
@@ -195,7 +196,9 @@ public class PickaxeMechanics : MonoBehaviour
         pickAxeIconSprite.color = c;
 
         rightCollider.gameObject.SetActive(false);
+        rightCollider2.gameObject.SetActive(false);
         leftCollider.gameObject.SetActive(false);
+        leftCollider2.gameObject.SetActive(false);
 
         StartCoroutine(SpawnAndSwing());
 
@@ -211,9 +214,13 @@ public class PickaxeMechanics : MonoBehaviour
 
                 rightCollider.gameObject.layer = 7;
                 leftCollider.gameObject.layer = 7;
+
+                rightCollider2.gameObject.layer = 7;
+                leftCollider2.gameObject.layer = 7;
             }
             else
             {
+              
                 CheckPickaxe();
             }
         }
@@ -225,8 +232,10 @@ public class PickaxeMechanics : MonoBehaviour
 
     public void CheckPickaxe()
     {
-        //rightCollider.gameObject.layer = 6;
-        //leftCollider.gameObject.layer = 6;
+        rightCollider.gameObject.layer = 6;
+        leftCollider.gameObject.layer = 6;
+        rightCollider2.gameObject.layer = 6;
+        leftCollider2.gameObject.layer = 6;
 
         hammer.gameObject.SetActive(false);
 
@@ -252,11 +261,21 @@ public class PickaxeMechanics : MonoBehaviour
         }
 
         yield return new WaitForSeconds(0.25f);
-        
-        if(isRight == true) { rightCollider.gameObject.SetActive(true); }
-        else { leftCollider.gameObject.SetActive(true); }
 
-        yield return new WaitForSeconds(0.03f);
+        int random = Random.Range(0,2);
+
+        if(isRight == true) 
+        { 
+            if(random == 0) { rightCollider.gameObject.SetActive(true); }
+            if (random == 1) { rightCollider2.gameObject.SetActive(true); }
+        }
+        else
+        {
+            if (random == 0) { leftCollider.gameObject.SetActive(true); }
+            if (random == 1) { leftCollider2.gameObject.SetActive(true); }
+        }
+
+        yield return new WaitForSeconds(0.035f);
 
         SetIconAlpha(0f);
 

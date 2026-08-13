@@ -346,7 +346,7 @@ public class SettingsOptions : MonoBehaviour, IDataPersistence
 
     public void OpenSteam()
     {
-        Application.OpenURL("https://store.steampowered.com/curator/43674917");
+        Application.OpenURL("https://store.steampowered.com/curator/45970014");
     }
 
     public void OpenGooglePlay()

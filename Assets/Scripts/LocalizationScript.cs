@@ -10874,11 +10874,11 @@ public class LocalizationScript : MonoBehaviour
 
             if (upgradeName == "ImprovedPickaxe1")
             {
-                improvedPickaxeIncrease = 0.032f;
+                improvedPickaxeIncrease = 0.031f;
             }
             else if (upgradeName == "ImprovedPickaxe2")
             {
-                improvedPickaxeIncrease = 0.035f;
+                improvedPickaxeIncrease = 0.034f;
             }
             else if (upgradeName == "ImprovedPickaxe3")
             {
@@ -10886,25 +10886,25 @@ public class LocalizationScript : MonoBehaviour
             }
             else if (upgradeName == "ImprovedPickaxe4")
             {
-                improvedPickaxeIncrease = 0.047f;
+                improvedPickaxeIncrease = 0.045f;
             }
             else if (upgradeName == "ImprovedPickaxe5")
             {
-                improvedPickaxeIncrease = 0.062f;
+                improvedPickaxeIncrease = 0.054f;
             }
             else if (upgradeName == "ImprovedPickaxe6")
             {
-                improvedPickaxeIncrease = 0.07f;
+                improvedPickaxeIncrease = 0.063f;
             }
             else if (upgradeName == "EndlessPickaxe1")
             {
                 isF1 = true;
-                improvedPickaxeIncrease = 0.002f;
+                improvedPickaxeIncrease = 0.001f;
             }
             else if (upgradeName == "EndlessPickaxe2")
             {
                 isF1 = true;
-                improvedPickaxeIncrease = 0.002f;
+                improvedPickaxeIncrease = 0.001f;
             }
 
             #region Name texts
